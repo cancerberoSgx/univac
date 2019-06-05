@@ -1,11 +1,11 @@
-import { GetAstOptions, Node } from './types';
-import { Ctx, CtxPosition } from './antlr4Types';
+import { Ctx, CtxPosition } from './antlr4Types'
+import { GetAstOptions, Node } from './types'
 
 let n: Partial<Node> = {
   children: []
-};
+}
 
-export function getVisitorResult(){
+export function getVisitorResult() {
   return n.children![0]
 }
 
@@ -14,27 +14,27 @@ export class Visitor {
   }
   visitChildren(ctx: Ctx) {
     if (!ctx) {
-      return;
+      return
     }
-    let node = this.getNode(ctx);
-    n.children!.push(node);
+    let node = this.getNode(ctx)
+    n.children!.push(node)
     if (ctx.children) {
-      let previous = n;
-      n = node;
+      let previous = n
+      n = node
       const result = ctx.children.map(child => {
         if (child.children && child.children.length != 0) {
-          let c = this.getNode(child);
-          const result = child.accept(this);
-          return result;
+          let c = this.getNode(child)
+          const result = child.accept(this)
+          return result
         }
         else {
-          return child.getText();
+          return child.getText()
         }
-      });
-      n = previous;
-      return result;
+      })
+      n = previous
+      return result
     }
-    return node;
+    return node
   }
   getNode(ctx: Ctx) {
     return {
@@ -44,10 +44,10 @@ export class Visitor {
       // exception: ctx.exception,
       // invokingState: ctx.invokingState,
       children: []
-    };
+    }
   }
   getLocation(start: CtxPosition) {
-    const source = start.source.find(e => typeof e.strdata === 'string');
+    const source = start.source.find(e => typeof e.strdata === 'string')
     return {
       // token: start.getTokenSource().text,
       type: start.type,
@@ -59,6 +59,6 @@ export class Visitor {
       column: start.column,
       text: start.text,
       source: this.options.includeSource && source && source.strdata as string
-    };
+    }
   }
 }
