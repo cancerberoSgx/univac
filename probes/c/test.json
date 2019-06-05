@@ -1,0 +1,669 @@
+{
+  "type": "compilationUnit",
+  "start": {
+    "type": 32,
+    "start": 1,
+    "stop": 3,
+    "line": 2,
+    "column": 0,
+    "text": "int"
+  },
+  "stop": {
+    "type": 64,
+    "start": 26,
+    "stop": 26,
+    "line": 5,
+    "column": 0,
+    "text": "}"
+  },
+  "children": [
+    {
+      "type": "translationUnit",
+      "start": {
+        "type": 32,
+        "start": 1,
+        "stop": 3,
+        "line": 2,
+        "column": 0,
+        "text": "int"
+      },
+      "stop": {
+        "type": 64,
+        "start": 26,
+        "stop": 26,
+        "line": 5,
+        "column": 0,
+        "text": "}"
+      },
+      "children": [
+        {
+          "type": "externalDeclaration",
+          "start": {
+            "type": 32,
+            "start": 1,
+            "stop": 3,
+            "line": 2,
+            "column": 0,
+            "text": "int"
+          },
+          "stop": {
+            "type": 64,
+            "start": 26,
+            "stop": 26,
+            "line": 5,
+            "column": 0,
+            "text": "}"
+          },
+          "children": [
+            {
+              "type": "functionDefinition",
+              "start": {
+                "type": 32,
+                "start": 1,
+                "stop": 3,
+                "line": 2,
+                "column": 0,
+                "text": "int"
+              },
+              "stop": {
+                "type": 64,
+                "start": 26,
+                "stop": 26,
+                "line": 5,
+                "column": 0,
+                "text": "}"
+              },
+              "children": [
+                {
+                  "type": "declarationSpecifiers",
+                  "start": {
+                    "type": 32,
+                    "start": 1,
+                    "stop": 3,
+                    "line": 2,
+                    "column": 0,
+                    "text": "int"
+                  },
+                  "stop": {
+                    "type": 32,
+                    "start": 1,
+                    "stop": 3,
+                    "line": 2,
+                    "column": 0,
+                    "text": "int"
+                  },
+                  "children": [
+                    {
+                      "type": "declarationSpecifier",
+                      "start": {
+                        "type": 32,
+                        "start": 1,
+                        "stop": 3,
+                        "line": 2,
+                        "column": 0,
+                        "text": "int"
+                      },
+                      "stop": {
+                        "type": 32,
+                        "start": 1,
+                        "stop": 3,
+                        "line": 2,
+                        "column": 0,
+                        "text": "int"
+                      },
+                      "children": [
+                        {
+                          "type": "typeSpecifier",
+                          "start": {
+                            "type": 32,
+                            "start": 1,
+                            "stop": 3,
+                            "line": 2,
+                            "column": 0,
+                            "text": "int"
+                          },
+                          "stop": {
+                            "type": 32,
+                            "start": 1,
+                            "stop": 3,
+                            "line": 2,
+                            "column": 0,
+                            "text": "int"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "declarator",
+                  "start": {
+                    "type": 105,
+                    "start": 5,
+                    "stop": 8,
+                    "line": 2,
+                    "column": 4,
+                    "text": "main"
+                  },
+                  "stop": {
+                    "type": 60,
+                    "start": 10,
+                    "stop": 10,
+                    "line": 2,
+                    "column": 9,
+                    "text": ")"
+                  },
+                  "children": [
+                    {
+                      "type": "directDeclarator",
+                      "start": {
+                        "type": 105,
+                        "start": 5,
+                        "stop": 8,
+                        "line": 2,
+                        "column": 4,
+                        "text": "main"
+                      },
+                      "stop": {
+                        "type": 60,
+                        "start": 10,
+                        "stop": 10,
+                        "line": 2,
+                        "column": 9,
+                        "text": ")"
+                      },
+                      "children": [
+                        {
+                          "type": "directDeclarator",
+                          "start": {
+                            "type": 105,
+                            "start": 5,
+                            "stop": 8,
+                            "line": 2,
+                            "column": 4,
+                            "text": "main"
+                          },
+                          "stop": {
+                            "type": 105,
+                            "start": 5,
+                            "stop": 8,
+                            "line": 2,
+                            "column": 4,
+                            "text": "main"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "compoundStatement",
+                  "start": {
+                    "type": 63,
+                    "start": 12,
+                    "stop": 12,
+                    "line": 3,
+                    "column": 0,
+                    "text": "{"
+                  },
+                  "stop": {
+                    "type": 64,
+                    "start": 26,
+                    "stop": 26,
+                    "line": 5,
+                    "column": 0,
+                    "text": "}"
+                  },
+                  "children": [
+                    {
+                      "type": "blockItemList",
+                      "start": {
+                        "type": 36,
+                        "start": 16,
+                        "stop": 21,
+                        "line": 4,
+                        "column": 2,
+                        "text": "return"
+                      },
+                      "stop": {
+                        "type": 87,
+                        "start": 24,
+                        "stop": 24,
+                        "line": 4,
+                        "column": 10,
+                        "text": ";"
+                      },
+                      "children": [
+                        {
+                          "type": "blockItem",
+                          "start": {
+                            "type": 36,
+                            "start": 16,
+                            "stop": 21,
+                            "line": 4,
+                            "column": 2,
+                            "text": "return"
+                          },
+                          "stop": {
+                            "type": 87,
+                            "start": 24,
+                            "stop": 24,
+                            "line": 4,
+                            "column": 10,
+                            "text": ";"
+                          },
+                          "children": [
+                            {
+                              "type": "statement",
+                              "start": {
+                                "type": 36,
+                                "start": 16,
+                                "stop": 21,
+                                "line": 4,
+                                "column": 2,
+                                "text": "return"
+                              },
+                              "stop": {
+                                "type": 87,
+                                "start": 24,
+                                "stop": 24,
+                                "line": 4,
+                                "column": 10,
+                                "text": ";"
+                              },
+                              "children": [
+                                {
+                                  "type": "jumpStatement",
+                                  "start": {
+                                    "type": 36,
+                                    "start": 16,
+                                    "stop": 21,
+                                    "line": 4,
+                                    "column": 2,
+                                    "text": "return"
+                                  },
+                                  "stop": {
+                                    "type": 87,
+                                    "start": 24,
+                                    "stop": 24,
+                                    "line": 4,
+                                    "column": 10,
+                                    "text": ";"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "expression",
+                                      "start": {
+                                        "type": 106,
+                                        "start": 23,
+                                        "stop": 23,
+                                        "line": 4,
+                                        "column": 9,
+                                        "text": "0"
+                                      },
+                                      "stop": {
+                                        "type": 106,
+                                        "start": 23,
+                                        "stop": 23,
+                                        "line": 4,
+                                        "column": 9,
+                                        "text": "0"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "assignmentExpression",
+                                          "start": {
+                                            "type": 106,
+                                            "start": 23,
+                                            "stop": 23,
+                                            "line": 4,
+                                            "column": 9,
+                                            "text": "0"
+                                          },
+                                          "stop": {
+                                            "type": 106,
+                                            "start": 23,
+                                            "stop": 23,
+                                            "line": 4,
+                                            "column": 9,
+                                            "text": "0"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "conditionalExpression",
+                                              "start": {
+                                                "type": 106,
+                                                "start": 23,
+                                                "stop": 23,
+                                                "line": 4,
+                                                "column": 9,
+                                                "text": "0"
+                                              },
+                                              "stop": {
+                                                "type": 106,
+                                                "start": 23,
+                                                "stop": 23,
+                                                "line": 4,
+                                                "column": 9,
+                                                "text": "0"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "logicalOrExpression",
+                                                  "start": {
+                                                    "type": 106,
+                                                    "start": 23,
+                                                    "stop": 23,
+                                                    "line": 4,
+                                                    "column": 9,
+                                                    "text": "0"
+                                                  },
+                                                  "stop": {
+                                                    "type": 106,
+                                                    "start": 23,
+                                                    "stop": 23,
+                                                    "line": 4,
+                                                    "column": 9,
+                                                    "text": "0"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "logicalAndExpression",
+                                                      "start": {
+                                                        "type": 106,
+                                                        "start": 23,
+                                                        "stop": 23,
+                                                        "line": 4,
+                                                        "column": 9,
+                                                        "text": "0"
+                                                      },
+                                                      "stop": {
+                                                        "type": 106,
+                                                        "start": 23,
+                                                        "stop": 23,
+                                                        "line": 4,
+                                                        "column": 9,
+                                                        "text": "0"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "type": "inclusiveOrExpression",
+                                                          "start": {
+                                                            "type": 106,
+                                                            "start": 23,
+                                                            "stop": 23,
+                                                            "line": 4,
+                                                            "column": 9,
+                                                            "text": "0"
+                                                          },
+                                                          "stop": {
+                                                            "type": 106,
+                                                            "start": 23,
+                                                            "stop": 23,
+                                                            "line": 4,
+                                                            "column": 9,
+                                                            "text": "0"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "type": "exclusiveOrExpression",
+                                                              "start": {
+                                                                "type": 106,
+                                                                "start": 23,
+                                                                "stop": 23,
+                                                                "line": 4,
+                                                                "column": 9,
+                                                                "text": "0"
+                                                              },
+                                                              "stop": {
+                                                                "type": 106,
+                                                                "start": 23,
+                                                                "stop": 23,
+                                                                "line": 4,
+                                                                "column": 9,
+                                                                "text": "0"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "type": "andExpression",
+                                                                  "start": {
+                                                                    "type": 106,
+                                                                    "start": 23,
+                                                                    "stop": 23,
+                                                                    "line": 4,
+                                                                    "column": 9,
+                                                                    "text": "0"
+                                                                  },
+                                                                  "stop": {
+                                                                    "type": 106,
+                                                                    "start": 23,
+                                                                    "stop": 23,
+                                                                    "line": 4,
+                                                                    "column": 9,
+                                                                    "text": "0"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "equalityExpression",
+                                                                      "start": {
+                                                                        "type": 106,
+                                                                        "start": 23,
+                                                                        "stop": 23,
+                                                                        "line": 4,
+                                                                        "column": 9,
+                                                                        "text": "0"
+                                                                      },
+                                                                      "stop": {
+                                                                        "type": 106,
+                                                                        "start": 23,
+                                                                        "stop": 23,
+                                                                        "line": 4,
+                                                                        "column": 9,
+                                                                        "text": "0"
+                                                                      },
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "relationalExpression",
+                                                                          "start": {
+                                                                            "type": 106,
+                                                                            "start": 23,
+                                                                            "stop": 23,
+                                                                            "line": 4,
+                                                                            "column": 9,
+                                                                            "text": "0"
+                                                                          },
+                                                                          "stop": {
+                                                                            "type": 106,
+                                                                            "start": 23,
+                                                                            "stop": 23,
+                                                                            "line": 4,
+                                                                            "column": 9,
+                                                                            "text": "0"
+                                                                          },
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "shiftExpression",
+                                                                              "start": {
+                                                                                "type": 106,
+                                                                                "start": 23,
+                                                                                "stop": 23,
+                                                                                "line": 4,
+                                                                                "column": 9,
+                                                                                "text": "0"
+                                                                              },
+                                                                              "stop": {
+                                                                                "type": 106,
+                                                                                "start": 23,
+                                                                                "stop": 23,
+                                                                                "line": 4,
+                                                                                "column": 9,
+                                                                                "text": "0"
+                                                                              },
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "additiveExpression",
+                                                                                  "start": {
+                                                                                    "type": 106,
+                                                                                    "start": 23,
+                                                                                    "stop": 23,
+                                                                                    "line": 4,
+                                                                                    "column": 9,
+                                                                                    "text": "0"
+                                                                                  },
+                                                                                  "stop": {
+                                                                                    "type": 106,
+                                                                                    "start": 23,
+                                                                                    "stop": 23,
+                                                                                    "line": 4,
+                                                                                    "column": 9,
+                                                                                    "text": "0"
+                                                                                  },
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "type": "multiplicativeExpression",
+                                                                                      "start": {
+                                                                                        "type": 106,
+                                                                                        "start": 23,
+                                                                                        "stop": 23,
+                                                                                        "line": 4,
+                                                                                        "column": 9,
+                                                                                        "text": "0"
+                                                                                      },
+                                                                                      "stop": {
+                                                                                        "type": 106,
+                                                                                        "start": 23,
+                                                                                        "stop": 23,
+                                                                                        "line": 4,
+                                                                                        "column": 9,
+                                                                                        "text": "0"
+                                                                                      },
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "type": "castExpression",
+                                                                                          "start": {
+                                                                                            "type": 106,
+                                                                                            "start": 23,
+                                                                                            "stop": 23,
+                                                                                            "line": 4,
+                                                                                            "column": 9,
+                                                                                            "text": "0"
+                                                                                          },
+                                                                                          "stop": {
+                                                                                            "type": 106,
+                                                                                            "start": 23,
+                                                                                            "stop": 23,
+                                                                                            "line": 4,
+                                                                                            "column": 9,
+                                                                                            "text": "0"
+                                                                                          },
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "type": "unaryExpression",
+                                                                                              "start": {
+                                                                                                "type": 106,
+                                                                                                "start": 23,
+                                                                                                "stop": 23,
+                                                                                                "line": 4,
+                                                                                                "column": 9,
+                                                                                                "text": "0"
+                                                                                              },
+                                                                                              "stop": {
+                                                                                                "type": 106,
+                                                                                                "start": 23,
+                                                                                                "stop": 23,
+                                                                                                "line": 4,
+                                                                                                "column": 9,
+                                                                                                "text": "0"
+                                                                                              },
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "type": "postfixExpression",
+                                                                                                  "start": {
+                                                                                                    "type": 106,
+                                                                                                    "start": 23,
+                                                                                                    "stop": 23,
+                                                                                                    "line": 4,
+                                                                                                    "column": 9,
+                                                                                                    "text": "0"
+                                                                                                  },
+                                                                                                  "stop": {
+                                                                                                    "type": 106,
+                                                                                                    "start": 23,
+                                                                                                    "stop": 23,
+                                                                                                    "line": 4,
+                                                                                                    "column": 9,
+                                                                                                    "text": "0"
+                                                                                                  },
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "type": "primaryExpression",
+                                                                                                      "start": {
+                                                                                                        "type": 106,
+                                                                                                        "start": 23,
+                                                                                                        "stop": 23,
+                                                                                                        "line": 4,
+                                                                                                        "column": 9,
+                                                                                                        "text": "0"
+                                                                                                      },
+                                                                                                      "stop": {
+                                                                                                        "type": 106,
+                                                                                                        "start": 23,
+                                                                                                        "stop": 23,
+                                                                                                        "line": 4,
+                                                                                                        "column": 9,
+                                                                                                        "text": "0"
+                                                                                                      },
+                                                                                                      "children": []
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
