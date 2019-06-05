@@ -1,7 +1,7 @@
 {
   "name": "univac",
   "version": "0.0.2",
-  "description": "generate AST of lots of programming languages using antlr4",
+  "description": "Generate AST of lots of common programming languages using antlr4. JavaScript API and CLI tool.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
@@ -22,8 +22,12 @@
   },
   "keywords": [
     "typescript",
+    "javascript",
+    "antlr4",
+    "grammars",
     "ast",
-    "query",
+    "parser",
+    "C parser",
     "astq"
   ],
   "author": "Sebastián Gurin",
