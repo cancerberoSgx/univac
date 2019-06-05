@@ -1,6 +1,6 @@
 {
   "name": "univac",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "generate AST of lots of programming languages using antlr4",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -17,7 +17,7 @@
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
-    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run test-browser" ,
+    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run test-browser",
     "all-publish": "npm run all && git commit -a -m \"version patch\" && npm version patch && npm publish"
   },
   "keywords": [
