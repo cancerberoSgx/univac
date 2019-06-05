@@ -6,17 +6,18 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "test": "ava",
+    "test-browser": "npx ava test-browser/*Test.ts",
     "test-js": " npx ava ./dist/test/*Test.js",
     "test-watch": "ava -w",
     "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
-    "clean": "rm -rf dist docs",
+    "clean": "rm -rf dist docs test-browser-outdir",
     "build": "npm run clean && npx tsc && npm run copy",
     "copy": "rm -rf dist/src/grammar && mkdir -p dist/src/grammar && cp -r src/grammar/* dist/src/grammar",
     "prepare": "npm run build",
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
-    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js",
+    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run test-browser" ,
     "all-publish": "npm run all && git commit -a -m \"version patch\" && npm version patch && npm publish"
   },
   "keywords": [

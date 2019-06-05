@@ -4,20 +4,13 @@ import puppeteer from 'puppeteer'
 
 test('parseAst', async t => {
   execSync('npm run build')
-  execSync("parcel build test-browser/testBrowser.html --public-url './'")
+  execSync("parcel build test-browser/testBrowser.html --public-url './' -d test-browser-outdir")
 
-
-// (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  const url = `file://${process.cwd()}/dist/testBrowser.html`
-  // console.log(url)  
+  const url = `file://${process.cwd()}/test-browser-outdir/testBrowser.html`
   await page.goto(url);
-  // await page.screenshot({path: 'example.png'});
   t.true((await page.evaluate(()=>document.body.innerHTML)).includes(`"type": "compilationUnit"`))
   await browser.close();
-// })();
-  // installJSDOM()
-
 })
 

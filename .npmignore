@@ -16,8 +16,11 @@ formatCodeSettings.json
 .nyc_output
 cannabis-cli
 coverage
+test-browser-outdir
 guitarra
 test
+.cache
+.travis
 zangano
 zangano-demo
 astq-query*
@@ -27,3 +30,5 @@ TODO.md
 ts-ast
 .vscode
 guides-probes-backups
+test-browser
+.travis.yml
