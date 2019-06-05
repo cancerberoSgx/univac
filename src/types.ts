@@ -1,45 +1,27 @@
-interface GetAstOptions {
-  includeSource: any;
-  input: string;
+interface BaseOptions {
+  language: Language
+  input: string
 }
-interface Ctx {
-  children: Ctx[];
-  parser: {
-    ruleNames: {
-      [x: string]: any;
-    };
-  };
-  ruleIndex: string | number;
-  constructor: {
-    name: any;
-  };
-  // children: any[];
-  accept(arg0: any): any;
-  getText(): any;
-  start: any;
-  stop: any;
+
+export interface GetAstOptions extends BaseOptions {
+  includeSource?: boolean;
 }
-interface CtxPosition {
-  source: any[]
-  getTokenSource: () => {
-    text: any;
-  };
-  type: any;
-  channel: any;
-  start: any;
-  stop: any;
-  tokenIndex: any;
-  line: any;
-  column: any;
-  text: any;
-} 
-interface Node {
+
+export type Language = 'c'
+
+export interface Options extends BaseOptions {
+  output?: string
+  outputStyle?: 'json'
+}
+
+export interface Node {
   type: string;
   start: NodePosition;
   stop: NodePosition;
   children: Node[];
 }
-interface NodePosition {
+
+export interface NodePosition {
   // token: any;
   type: string;
   // channel: any;
@@ -51,3 +33,6 @@ interface NodePosition {
   text: string;
   source?: string;
 }
+
+
+

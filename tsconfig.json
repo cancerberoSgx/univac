@@ -15,6 +15,6 @@
     "src", "test"
   ],
   "exclude": [
-    "node_modules",  "coverage", ".nyc_output", "test/assets/project1"
+    "node_modules", "probes"
   ]
 }

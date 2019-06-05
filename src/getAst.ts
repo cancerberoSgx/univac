@@ -1,53 +1,56 @@
+import { GetAstOptions, Node } from './types'
+
+var antlr4 = require('antlr4')
+
 function getAst(options: GetAstOptions) {
-  const input = options.input;
-  var antlr4 = require('antlr4');
-  var MyGrammarLexer = require('./grammar/CLexer').CLexer;
-  var MyGrammarParser = require('./grammar/CParser').CParser;
+  const input = options.input
+  var MyGrammarLexer = require('./grammar/CLexer').CLexer
+  var MyGrammarParser = require('./grammar/CParser').CParser
   // var MyGrammarListener = require('./grammar/CListener').CListener;
-  var chars = new antlr4.InputStream(input);
-  var lexer = new MyGrammarLexer(chars);
-  var tokens = new antlr4.CommonTokenStream(lexer);
-  var parser = new MyGrammarParser(tokens);
+  var chars = new antlr4.InputStream(input)
+  var lexer = new MyGrammarLexer(chars)
+  var tokens = new antlr4.CommonTokenStream(lexer)
+  var parser = new MyGrammarParser(tokens)
   //  parser.buildParseTrees = true;
   // //  parser.query()
-  var tree = parser.compilationUnit();
+  var tree = parser.compilationUnit()
   let n: Partial<Node> = {
     children: []
-  };
+  }
   class Visitor {
     visitChildren(ctx: Ctx) {
       if (!ctx) {
-        return;
+        return
       }
-      let node = this.getNode(ctx);
-      n.children!.push(node);
+      let node = this.getNode(ctx)
+      n.children!.push(node)
       // n = mode
       // this.parentNode = node
       // console.log('seba')
       // debugger
       if (ctx.children) {
-        let previous = n;
-        n = node;
+        let previous = n
+        n = node
         const result = ctx.children.map(child => {
           if (child.children && child.children.length != 0) {
-            let c = this.getNode(child);
+            let c = this.getNode(child)
             // n.children.push(c)
-            const result = child.accept(this);
+            const result = child.accept(this)
             // node = parent
-            return result;
+            return result
           }
           else {
-            return child.getText();
+            return child.getText()
           }
-        });
-        n = previous;
-        return result;
+        })
+        n = previous
+        return result
         // return node.children
       }
       // console.log(node);
-      return node;
+      return node
     }
-    getNode(ctx:Ctx) {
+    getNode(ctx: Ctx) {
       // debugger
       return {
         type: ctx.parser.ruleNames[ctx.ruleIndex] || ctx.constructor.name,
@@ -56,11 +59,11 @@ function getAst(options: GetAstOptions) {
         // exception: ctx.exception,
         // invokingState: ctx.invokingState,
         children: []
-      };
+      }
     }
   }
   function getLocation(start: CtxPosition) {
-    const source = start.source.find(e => typeof e.strdata === 'string');
+    const source = start.source.find(e => typeof e.strdata === 'string')
     return {
       // token: start.getTokenSource().text,
       type: start.type,
@@ -72,8 +75,41 @@ function getAst(options: GetAstOptions) {
       column: start.column,
       text: start.text,
       source: options.includeSource && source && source.strdata as string
-    };
+    }
   }
-  const a = tree.accept(new Visitor());
-  return n.children![0];
+  const a = tree.accept(new Visitor())
+  return n.children![0]
+}
+
+
+interface Ctx {
+  children: Ctx[];
+  parser: {
+    ruleNames: {
+      [x: string]: any;
+    };
+  };
+  ruleIndex: string | number;
+  constructor: {
+    name: any;
+  };
+  // children: any[];
+  accept(arg0: any): any;
+  getText(): any;
+  start: any;
+  stop: any;
+}
+interface CtxPosition {
+  source: any[]
+  getTokenSource: () => {
+    text: any;
+  };
+  type: any;
+  channel: any;
+  start: any;
+  stop: any;
+  tokenIndex: any;
+  line: any;
+  column: any;
+  text: any;
 }

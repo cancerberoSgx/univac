@@ -1,12 +1,7 @@
+import { Options } from './types'
 
-export interface  Options {
-  language: 'c'
-  input: string
-  output?: string
-  outputStyle?: 'json'
-}
 
-export function main(options: Options){
+export function main(options: Options) {
 
 }
 
