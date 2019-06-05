@@ -15,6 +15,6 @@
     "src", "test"
   ],
   "exclude": [
-    "node_modules", "probes"
+    "node_modules","src/grammar", "probes"
   ]
 }
