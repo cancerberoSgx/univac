@@ -165,12 +165,12 @@ Python3Listener.prototype.exitTestlist_star_expr = function(ctx) {
 };
 
 
-// Enter a parse tree produced by Python3Parser#augassign.
-Python3Listener.prototype.enterAugassign = function(ctx) {
+// Enter a parse tree produced by Python3Parser#assign.
+Python3Listener.prototype.enterAssign = function(ctx) {
 };
 
-// Exit a parse tree produced by Python3Parser#augassign.
-Python3Listener.prototype.exitAugassign = function(ctx) {
+// Exit a parse tree produced by Python3Parser#assign.
+Python3Listener.prototype.exitAssign = function(ctx) {
 };
 
 

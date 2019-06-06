@@ -16,7 +16,8 @@ func main() {
   fmt.Println(person)  // {<nil> Michał 29}
 }
   `,
-  language: Language.golang
+  language: Language.golang,
+  text: true
 })
 
 test('should parse', t => {

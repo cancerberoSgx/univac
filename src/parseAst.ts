@@ -9,7 +9,7 @@ export function parseAst(options: GetAstOptions) {
   var lexer = new Lexer(chars)
   var tokens = new antlr4.CommonTokenStream(lexer)
   var parser = new Parser(tokens)
-  //  parser.buildParseTrees = true;
+   parser.buildParseTrees = true;
   var tree = parser[mainRule]()
 
   if (tree.exception) {

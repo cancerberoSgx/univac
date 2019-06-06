@@ -1,7 +1,29 @@
 import { printNode, parseAst, Language } from '../src';
+import { readFileSync } from 'fs';
+
+// console.log(printNode({node: parseAst({
+//   input: 'x = 1',
+//   language: Language.python3,
+//   text: true
+// })}))
+
+// console.log(printNode({node: parseAst({
+//   input: readFileSync('test/assets/python1.py').toString(),
+//   language: Language.python3,
+//   text: true
+// })}))
+
+
+
 
 console.log(printNode({node: parseAst({
-  input: 'a=1',
-  language: Language.python3,
+  input: `
+class Test {
+  public int i;
+}
+  `,
+  language: Language.java9,
   text: true
-})}))
+})}));
+
+``

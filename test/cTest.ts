@@ -35,12 +35,12 @@ test('ast compare', t => {
             <typeSpecifier text="int">
             </typeSpecifier>
           </declarationSpecifier>
-        </declarationSpecifiers><declarator text="main()">
+        </declarationSpecifiers> <declarator text="main()">
           <directDeclarator text="main()">
             <directDeclarator text="main">
             </directDeclarator>
           </directDeclarator>
-        </declarator><compoundStatement text="{}">
+        </declarator> <compoundStatement text="{}">
         </compoundStatement>
       </functionDefinition>
     </externalDeclaration>
