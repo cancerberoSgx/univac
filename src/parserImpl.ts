@@ -109,7 +109,8 @@ export function getParserImpl(language: Language): ParserImpl {
     return {
       Lexer: require('./grammar/fortran77/Fortran77Lexer').Fortran77Lexer,
       Parser: require('./grammar/fortran77/Fortran77Parser').Fortran77Parser,
-      mainRule: 'program'
+      mainRule: 'program',
+      redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => node.type.startsWith('lexpr') || node.type.startsWith('aexpr'))
     }
   }
   else if (language === 'smalltalk') {
@@ -117,6 +118,13 @@ export function getParserImpl(language: Language): ParserImpl {
       Lexer: require('./grammar/smalltalk/SmalltalkLexer').SmalltalkLexer,
       Parser: require('./grammar/smalltalk/SmalltalkParser').SmalltalkParser,
       mainRule: 'script'
+    }
+  }  
+  else if (language === 'visualbasic6') {
+    return {
+      Lexer: require('./grammar/visualbasic6/VisualBasic6Lexer').VisualBasic6Lexer,
+      Parser: require('./grammar/visualbasic6/VisualBasic6Parser').VisualBasic6Parser,
+      mainRule: 'startRule'
     }
   }
   else {

@@ -1,7 +1,7 @@
+import { Token } from 'antlr4'
 import { Language, Node } from 'univac'
 import { getAst } from './dispatchers'
 import { Example, examples } from "./examples"
-import { Token } from 'antlr4';
 
 export interface State {
   example: Example
@@ -13,20 +13,24 @@ export interface State {
   astAutoUpdate: boolean;
   astShowText: boolean
   logs: string[];
-  error?: Error | ParserError| undefined;
+  error?: Error | ParserError | ParserError[] | undefined;
   examples: Example[];
   sidebarVisibility: boolean;
   currentTab: number
 }
-interface ParserError{
-  offendingSymbol: Token, line: number, column: number, msg: string, e: any
+export interface ParserError {
+  offendingSymbol: Token
+  line: number
+  column: number
+  msg: string
+  e: any
 }
 export async function getInitialState(): Promise<State> {
   const example = examples[0]
-  const {ast, error} = await getAst(example.code, example.language)
+  const { ast, error } = await getAst(example.code, example.language)
   return {
-      example,
-      expandNegated: true,
+    example,
+    expandNegated: true,
     language: example.language,
     ast: ast!,
     error,

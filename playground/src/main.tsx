@@ -4,14 +4,13 @@ import { getInitialState } from './app/state'
 import { _setStore } from './app/store'
 import { initMonacoWorkers } from "./editor/initMonacoWorkers"
 import { App } from './ui/app'
-import { sleep } from 'misc-utils-of-mine-generic';
 
 async function main() {
   initMonacoWorkers()
   const s = await getInitialState()
   _setStore(s)
   // setTimeout(() => {
-    render(<App />, document.getElementById('main'))
+  render(<App />, document.getElementById('main'))
   // }, 100)
 }
 

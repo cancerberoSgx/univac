@@ -34,7 +34,8 @@ export enum Language {
   'kotlin' = 'kotlin',
   'r' = 'r',
   'fortran77' = 'fortran77',
-  'smalltalk' = 'smalltalk'
+  'smalltalk' = 'smalltalk',
+  'visualbasic6'='visualbasic6'
 }
 
 export interface Options extends BaseOptions {

@@ -222,20 +222,55 @@ bdeff <- function(blocks, varieties) {
     name: 'HelloWorld.for',
     language: Language.fortran77,
     code: `
-    program main
+program main
 
-    c*********************************************************************72
-    c 
-          implicit none
-    
-          write ( *, '(a)' ) '  Hello, world!'
-    
-          stop
-          end
-  
+c*********************************************************************72
+c 
+      implicit none
+
+      write ( *, '(a)' ) '  Hello, world!'
+
+      stop
+      end
+
 `.trimLeft(),
     description: '',
   },
+
+  {
+    name: 'triArea.for',
+    language: Language.fortran77,
+    code: `
+C AREA OF A TRIANGLE WITH A STANDARD SQUARE ROOT FUNCTION
+C INPUT - TAPE READER UNIT 5, INTEGER INPUT
+C OUTPUT - LINE PRINTER UNIT 6, REAL OUTPUT
+C INPUT ERROR DISPLAY ERROR OUTPUT CODE 1 IN JOB CONTROL LISTING
+      READ INPUT TAPE 5, 501, IA, IB, IC
+  501 FORMAT (3I5)
+C IA, IB, AND IC MAY NOT BE NEGATIVE OR ZERO
+C FURTHERMORE, THE SUM OF TWO SIDES OF A TRIANGLE
+C MUST BE GREATER THAN THE THIRD SIDE, SO WE CHECK FOR THAT, TOO
+      IF (IA) 777, 777, 701
+  701 IF (IB) 777, 777, 702
+  702 IF (IC) 777, 777, 703
+  703 IF (IA+IB-IC) 777, 777, 704
+  704 IF (IA+IC-IB) 777, 777, 705
+  705 IF (IB+IC-IA) 777, 777, 799
+  777 STOP 1
+C USING HERON'S FORMULA WE CALCULATE THE
+C AREA OF THE TRIANGLE
+  799 S = FLOATF (IA + IB + IC) / 2.0
+      AREA = SQRTF( S * (S - FLOATF(IA)) * (S - FLOATF(IB)) *
+      +     (S - FLOATF(IC)))
+      WRITE OUTPUT TAPE 6, 601, IA, IB, IC, AREA
+  601 FORMAT (4H A= ,I5,5H  B= ,I5,5H  C= ,I5,8H  AREA= ,F10.2,
+      +        13H SQUARE UNITS)
+      STOP
+      END
+`.trimLeft(),
+    description: '',
+  },
+
 
   {
     name: 'randomStuff.st',
@@ -268,4 +303,68 @@ girlInBar phoneNumber
 `.trimLeft(),
     description: '',
   },
+  {
+    name: 'module1.cls',
+    language: Language.visualbasic6,
+    code: `
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+  Persistable = 0  'NotPersistable
+  DataBindingBehavior = 0  'vbNone
+  DataSourceBehavior  = 0  'vbNone
+  MTSTransactionMode  = 0  'NotAnMTSObject
+END
+Attribute VB_Name = "Module1"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = False
+Public SomeVariable
+Public SomeModule As New Module1
+
+Public Enum Enum1
+	EnumConst1=1
+	EnumConst2 = 2
+	EnumConst3 = -1
+	EnumConst4 = &H123ABC&
+End Enum
+
+Function Function1()
+  For I=0 To K.Value
+    For J=1 To 20 Step 2
+      Beep
+    Next
+  Next
+End Function
+
+Function Function2(I, J)
+End Function
+
+Sub Sub1()
+End Sub
+
+Sub Sub2(I, J)
+End Sub
+
+Function GetModule() As Module1
+    Dim Module As New Module1
+    Set GetModule = Module
+End Function
+
+Private Declare Sub subName1 Lib "MyLib" Alias "alias1" (arg1, arg2, ParamArray arg3)
+
+Begin VB.Form Form
+Begin TabDlg.SSTab Tab1
+   TabCaption(0)   =   "Tab 1"
+   Tab(0).ControlEnabled = 0   'False
+   Tab(0).Control(1).Enabled=   0   'False
+End
+End
+`.trimLeft(),
+    description: '',
+  },
+
+
+
 ]

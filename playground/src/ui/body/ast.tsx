@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Button, Checkbox, List, Popup } from 'semantic-ui-react'
 import { Node, printNodeText } from 'univac'
-import { highlightNodesInEditor, getEditorTextAtNode } from '../../editor/codeEditor'
+import { State } from '../../app/state'
+import { getEditorTextAtNode, highlightNodesInEditor } from '../../editor/codeEditor'
 import { Space } from '../common/uiUtil'
 import { AbstractComponent } from '../component'
-import { State } from '../../app/state';
 
 export class Ast extends AbstractComponent {
   // componentWillMount() {
@@ -28,10 +28,10 @@ export class Ast extends AbstractComponent {
       }}></Checkbox>
       <Space />
       {this.state.astAutoUpdate ? '' : <Button size="small" onClick={e => this.forceUpdate()}>Update</Button>}
-      <Checkbox defaultChecked={this.state.expandNegated} label={this.state.expandNegated?'Collapse':'Expand'} onChange={(e, props) => {
+      <Checkbox defaultChecked={this.state.expandNegated} label={this.state.expandNegated ? 'Collapse' : 'Expand'} onChange={(e, props) => {
         this.setState({ expandNegated: !!props.checked })
       }}></Checkbox>
-        <Checkbox defaultChecked={this.state.astShowText} label={`${this.state.astShowText?'Hide':'Show'} Text`} onChange={(e, props) => {
+      <Checkbox defaultChecked={this.state.astShowText} label={`${this.state.astShowText ? 'Hide' : 'Show'} Text`} onChange={(e, props) => {
         this.setState({ astShowText: !!props.checked })
       }}></Checkbox>
       <List className="astTree">
@@ -41,7 +41,7 @@ export class Ast extends AbstractComponent {
   }
 
   renderNode(node?: Node) {
-    if(!node){
+    if (!node) {
       return
     }
     const children = node.children
@@ -55,7 +55,7 @@ export class Ast extends AbstractComponent {
         <List.Header as="a">
           <span onClick={e => {
             e.stopPropagation()
-            if (expanded&&!this.state.expandNegated||!expanded&&this.state.expandNegated) {
+            if (expanded && !this.state.expandNegated || !expanded && this.state.expandNegated) {
               this.setState({ expandedNodes: this.state.expandedNodes.filter(n => n !== node) })
             } else {
               this.setState({ expandedNodes: [...this.state.expandedNodes, node] })
@@ -67,8 +67,8 @@ export class Ast extends AbstractComponent {
         </List.Header>
         <List.Description>
           {this.state.astShowText ?
-          <><Space/>"<code>{printNodeText(node.text||'', 20, false)}</code>"</>
-          : <></>}
+            <><Space />"<code>{printNodeText(node.text || '', 20, false)}</code>"</>
+            : <></>}
         </List.Description>
         {expanded ?
           <List.List>{children.map(c => this.renderNode(c))}</List.List>

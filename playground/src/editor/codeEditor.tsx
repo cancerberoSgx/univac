@@ -1,10 +1,10 @@
+import { throttle } from 'misc-utils-of-mine-generic'
 import * as monaco from 'monaco-editor'
 import { ISelection } from 'monaco-editor'
 import { getNodeAtPosition, Node } from 'univac'
+import { selectExample } from '../app/dispatchers'
 import { examples } from '../app/examples'
 import { getStore } from '../app/store'
-import { selectExample } from '../app/dispatchers';
-import { throttle } from 'misc-utils-of-mine-generic';
 
 export function installCodeEditor(editorContainer: HTMLElement) {
   if (editor) {
@@ -34,12 +34,22 @@ export function installCodeEditor(editorContainer: HTMLElement) {
   })
 
   editor.getModel()!.onDidChangeContent(throttle(e => {
-    selectExample({...getStore().getState().example, code: getCodeEditorText()}, false)
-  }, 5000, {trailing: true}))
-  
-  return editor
-} 
+    selectExample({ ...getStore().getState().example, code: getCodeEditorText() }, false)
+  }, 5000, { trailing: true }))
 
+  //   getStore().add(s=>{
+  //     if(s.partial.ast){
+  // setTimeout(() => {
+  //   needsUpdateLanguage=false
+  //   selectExample({...getStore().getState().example, code: getCodeEditorText()}, false)
+
+  //     }, 2200);
+
+  //     }
+  //   })
+  return editor
+}
+// let needsUpdateLanguage=false
 export function highlightNodesInEditor(result: Node[]): any {
   const selections: ISelection[] = result.map(node => {
     return { selectionStartLineNumber: node.start!.line, selectionStartColumn: node.start!.column, positionLineNumber: node.stop!.line, positionColumn: node.stop!.column }
@@ -55,31 +65,42 @@ export function select(selections: monaco.ISelection[]) {
 }
 
 export function getCodeEditorText() {
-  const model = editor&&editor.getModel()
-  return model && model.getValue()||''
+  const model = editor && editor.getModel()
+  return model && model.getValue() || ''
 }
 
-const models: {[name:string]:monaco.editor.ITextModel} = {}
+const models: { [name: string]: monaco.editor.ITextModel } = {}
 
+const languageMapping: any = {
+  scala: 'java',
+  dart2: 'java',
+  erlang: 'javascript',
+  fortran77: 'javascript'
+}
 export function setCodeEditorText(s: string) {
-  if(!editor){
+  if (!editor) {
     return
   }
   const fileName = getStore().getState().example.name
   let model = models[fileName]
-  if(!model){
-    model = monaco.editor.createModel(examples[0].code, undefined,  monaco.Uri.parse(`file:///${fileName}`))
+  if (!model) {
+    model = monaco.editor.createModel(examples[0].code, languageMapping[getStore().getState().example.language], monaco.Uri.parse(`file:///${fileName}`))
     models[fileName] = model
   }
-  if(editor.getModel()!==model){
+
+  if (editor.getModel() !== model) {
     editor.setModel(model)
+    // needsUpdateLanguage=true
+    // // editor.updateOptions({})
+
   }
+
   editor.getModel()!.setValue(s)
 }
 
-export function getEditorTextAtNode(n:Node){
+export function getEditorTextAtNode(n: Node) {
   const text = getCodeEditorText()
-  return text.substring(n.start!.start, n.stop!.stop)||''
+  return text.substring(n.start!.start, n.stop!.stop) || ''
 }
 
 let editor: monaco.editor.IStandaloneCodeEditor
