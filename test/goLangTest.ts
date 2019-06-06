@@ -40,11 +40,11 @@ test.skip('should throw on invalid input', async t => {
 
 test.skip('should report syntax errors to given listener', async t => {
   await parseAst({
-    input:  'func 8',
+    input: 'func 8',
     language: Language.golang,
     errorListener: {
-      syntaxError(a,b,c,d,msg){
-        t.true(msg.includes(`mismatched input`)||msg.includes(`extraneous input`), msg)
+      syntaxError(a, b, c, d, msg) {
+        t.true(msg.includes(`mismatched input`) || msg.includes(`extraneous input`), msg)
       }
     }
   })

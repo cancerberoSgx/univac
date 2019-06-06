@@ -30,7 +30,7 @@ test('should serialize', async t => {
 })
 
 test.skip('should throw on invalid input', async t => {
- await  t.throwsAsync(() => parseAst({
+  await t.throwsAsync(() => parseAst({
     input: 'fac -> -> -> -> 11 f Ñ un c 8',
     language: Language.erlang
   }))

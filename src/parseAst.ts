@@ -1,8 +1,8 @@
 import * as antlr4 from 'antlr4'
+import { ErrorListener } from 'antlr4/error'
 import { getParserImpl, ParserImpl } from './parserImpl'
 import { GetAstOptions, Node } from './types'
 import { Visitor } from './visitor'
-import { ErrorListener } from 'antlr4/error';
 
 export async function parseAst(options: GetAstOptions) {
   const input = options.input
@@ -18,7 +18,7 @@ export async function parseAst(options: GetAstOptions) {
     tokens.reset()
   }
   var parser = new info.Parser(tokens)
-  options.errorListener && parser.addErrorListener({...defaultErrorListener, ...options.errorListener||{}} as any)
+  options.errorListener && parser.addErrorListener({ ...defaultErrorListener, ...options.errorListener || {} } as any)
   parser.buildParseTrees = true
   //@ts-ignore
   var tree = parser[info.mainRule]()
@@ -31,14 +31,14 @@ export async function parseAst(options: GetAstOptions) {
   return removeRedundantNode(ast, info)
 }
 
-const  defaultErrorListener: ErrorListener ={
-  syntaxError(recognizer , offendingSymbol , line , column , msg, e): void{
+const defaultErrorListener: ErrorListener = {
+  syntaxError(recognizer, offendingSymbol, line, column, msg, e): void {
   },
-  reportAmbiguity(recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs): void{
+  reportAmbiguity(recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs): void {
   },
-  reportAttemptingFullContext(recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs): void{
+  reportAttemptingFullContext(recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs): void {
   },
-  reportContextSensitivity(recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs): void{
+  reportContextSensitivity(recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs): void {
   }
 }
 

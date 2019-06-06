@@ -36,11 +36,11 @@ test.skip('should throw on invalid input', async t => {
 })
 test.skip('should report syntax errors to given listener', async t => {
   await parseAst({
-    input:  '-- ',
+    input: '-- ',
     language: Language.ruby,
     errorListener: {
-      syntaxError(a,b,c,d,msg){
-        t.true(msg.includes(`mismatched input`)||msg.includes(`extraneous input`), msg)
+      syntaxError(a, b, c, d, msg) {
+        t.true(msg.includes(`mismatched input`) || msg.includes(`extraneous input`), msg)
       }
     }
   })

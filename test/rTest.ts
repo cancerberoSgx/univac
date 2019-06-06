@@ -32,7 +32,7 @@ test('should report syntax errors to given listener', async t => {
     input: '$) djdj',
     language: Language.r,
     errorListener: {
-      syntaxError(a,b,c,d,msg){
+      syntaxError(a, b, c, d, msg) {
         t.true(msg.includes(`mismatched input`), msg)
       }
     }

@@ -7,7 +7,7 @@ import { Language, Node } from '../src/types'
 let result: Node
 test.before(async t => {
   result = await parseAst({
-    input:  `
+    input: `
 |myArray|
 
 myArray := #('a' 'b' 'c' ).
@@ -48,8 +48,8 @@ test('should serialize', async t => {
 })
 
 test.skip('should throw on invalid input', async t => {
- await  t.throwsAsync(() => parseAst({
-  input: '.#[ })#{"',
+  await t.throwsAsync(() => parseAst({
+    input: '.#[ })#{"',
     language: Language.smalltalk
   }))
 })
@@ -59,7 +59,7 @@ test('should report syntax errors to given listener', async t => {
     input: '.',
     language: Language.smalltalk,
     errorListener: {
-      syntaxError(a,b,c,d,msg){
+      syntaxError(a, b, c, d, msg) {
         t.true(msg.includes(`mismatched input`), msg)
       }
     }

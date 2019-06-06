@@ -37,7 +37,7 @@ test('should report syntax errors to given listener', async t => {
     input: 'a',
     language: Language.fortran77,
     errorListener: {
-      syntaxError(a,b,c,d,msg){
+      syntaxError(a, b, c, d, msg) {
         t.true(msg.includes(`no viable alternative at input`), msg)
       }
     }

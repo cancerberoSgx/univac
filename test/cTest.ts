@@ -33,7 +33,7 @@ test('should report syntax errors to given listener', async t => {
     input: 'jo jo jo',
     language: Language.fortran77,
     errorListener: {
-      syntaxError(a,b,c,d,msg){
+      syntaxError(a, b, c, d, msg) {
         t.true(msg.includes(`missing EOL at`), msg)
       }
     }

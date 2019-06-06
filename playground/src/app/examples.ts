@@ -218,5 +218,54 @@ bdeff <- function(blocks, varieties) {
   },
 
 
+  {
+    name: 'HelloWorld.for',
+    language: Language.fortran77,
+    code: `
+    program main
 
+    c*********************************************************************72
+    c 
+          implicit none
+    
+          write ( *, '(a)' ) '  Hello, world!'
+    
+          stop
+          end
+  
+`.trimLeft(),
+    description: '',
+  },
+
+  {
+    name: 'randomStuff.st',
+    language: Language.smalltalk,
+    code: `
+|myArray|
+
+myArray := #('a' 'b' 'c' ).
+
+#('hello' 'Javascript') at: 2 put: 'Smalltalk'; yourself.
+
+Object subclass: #Customer
+  instanceVariableNames: ''
+  classVariableNames: ''
+  poolDictionaries: ''
+  category: ''.
+  
+Customer methodAt: #sayHello put: [
+  Transcript show: 'Hello World.'; cr.
+].
+
+girlInBar phoneNumber 
+  jerk say: 'Get lost' 
+  jerk throwAt: drink.
+
+10 timesRepeat: [
+  Transcript show:'hello'.
+  Transcript cr.
+].
+`.trimLeft(),
+    description: '',
+  },
 ]

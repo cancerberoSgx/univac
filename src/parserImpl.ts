@@ -111,7 +111,7 @@ export function getParserImpl(language: Language): ParserImpl {
       Parser: require('./grammar/fortran77/Fortran77Parser').Fortran77Parser,
       mainRule: 'program'
     }
-  } 
+  }
   else if (language === 'smalltalk') {
     return {
       Lexer: require('./grammar/smalltalk/SmalltalkLexer').SmalltalkLexer,

@@ -32,7 +32,7 @@ test('should serialize', async t => {
 })
 
 test.skip('should throw on invalid input', async t => {
- await  t.throwsAsync(() => parseAst({
+  await t.throwsAsync(() => parseAst({
     input: 'fac -> -> -> -> 11 f Ñ un c 8',
     language: Language.dart2
   }))
@@ -43,7 +43,7 @@ test('should report syntax errors to given listener', async t => {
     input: 'class A h {}',
     language: Language.dart2,
     errorListener: {
-      syntaxError(a,b,c,d,msg){
+      syntaxError(a, b, c, d, msg) {
         t.true(msg.includes(`no viable alternative at input`), msg)
       }
     }

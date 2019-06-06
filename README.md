@@ -1,6 +1,7 @@
 # Univac
 
-API and CLI to generate Abstract Syntax Trees (AST) of several well-known programming languages using [antlr4 grammars](https://github.com/antlr/grammars-v4)
+API and CLI to generate Abstract Syntax Trees (AST) of several well-known programming languages using [antlr4
+grammars](https://github.com/antlr/grammars-v4)
 
 ## Playground - Demo
 
@@ -11,7 +12,8 @@ API and CLI to generate Abstract Syntax Trees (AST) of several well-known progra
  * JavaScript API for node.js and browser. 
  * Command line tool
  * TypeScript
- * ASTs for C, golang, ruby, java, python, scala, erlang, lua, dart2, kotlin, smalltalk, fortran77, and more... 
+ * ASTs for C, golang, ruby, java, python, scala, erlang, lua, dart2, kotlin, smalltalk, fortran77, and
+   more... 
 
 
 ## A word of caution
@@ -21,7 +23,8 @@ A word of caution regarding generated ASTs:
  * Not guaranteed to support 100% of Language's features
  * Not guaranteed to render 100% of given source code semantics
  * AST structure is not official
-   * Was built using [antlr4](https://github.com/antlr/grammars-v4) which is not a tool oriented to generate AST
+   * Was built using [antlr4](https://github.com/antlr/grammars-v4) which is not a tool oriented to generate
+     AST
       * So some grammars needed to be post-processed to remove redundant nodes.
 
 
@@ -72,30 +75,35 @@ THis is a very new project, WIP, this is the current status:
  * erlang
  * dart2
  * kotlin
+ * Fortran77
+ * Smalltalk
  * java9 (very slow)
  * CLI
  * Basic Playground
 
 ## Language grammars notes
 
+### Smalltalk
+
+Grammar taken from official readline-smalltalk project: https://github.com/redline-smalltalk/redline-smalltalk
+
 ### Ruby
 
-Limited support. only expressions. Don't support OO features. 
+Is not Ruby, is Ruby-like. Doesn't support Object Oriented features. 
 
-These are some notes of the author of the Ruby grammar:
+TODO: rename it or remove it. Notes from the author:
 
-`
-Ruby-like language (Corundum) grammar written in ANTLR v4. Was developed just for fun
-to use with Parrot VM (basically it compiles into PIR - parrot intermediate
-representation)
-
-It has some specific stuff like inline pir and for loop :) And won't ever have
-OOP features, sorry.
-`
+> Ruby-like language (Corundum) grammar written in ANTLR v4. Was developed just for fun to use with Parrot VM
+> (basically it compiles into PIR - parrot intermediate representation)
+>
+> It has some specific stuff like inline pir and for loop :) And won't ever have OOP features, sorry.
 
 ### Java9
 
-> A Java 8 grammar for ANTLR 4 derived from the Java Language Specification chapter 19.
+It's very very slow, just use the java one. notes form the author:
 
-> NOTE: This grammar results in a generated parser that is much slower than the Java 7 grammar in the grammars-v4/java directory. This one is, however, extremely close to the spec.
+> A Java 8 grammar for ANTLR 4 derived from the Java Language Specification chapter 19.
+>
+> NOTE: This grammar results in a generated parser that is much slower than the Java 7 grammar in the
+> grammars-v4/java directory. This one is, however, extremely close to the spec.
 

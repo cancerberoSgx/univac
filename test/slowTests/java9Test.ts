@@ -35,7 +35,7 @@ test('should serialize', async t => {
 })
 
 test('should throw on invalid input', async t => {
- await  t.throwsAsync(() => parseAst({
+  await t.throwsAsync(() => parseAst({
     input: '--  -- `` [[ ``  ^ j + + o j+ o . Ñ  jo . 123 ( % ) . .',
     language: Language.java9
   }))
