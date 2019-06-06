@@ -35,6 +35,20 @@ function getParserForLanguage(language: Language) {
       mainRule: 'sourceFile'
     }
   }
+  else if (language === 'scala') {
+    return {
+      Lexer: require('./grammar/scala/ScalaLexer').ScalaLexer,
+      Parser: require('./grammar/scala/ScalaParser').ScalaParser,
+      mainRule: 'compilationUnit'
+    }
+  }
+  else if (language === 'ruby') {
+    return {
+      Lexer: require('./grammar/ruby/RubyLexer').RubyLexer,
+      Parser: require('./grammar/ruby/RubyParser').RubyParser,
+      mainRule: 'prog'
+    }
+  }
   else {
     throw new Error('Language unknown: ' + language)
   }

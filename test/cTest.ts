@@ -14,7 +14,7 @@ test('JSON stringify', t => {
     input: 'int main() {}',
     language: 'c'
   })
-  t.notThrows(()=>JSON.stringify(result))
+  t.notThrows(() => JSON.stringify(result))
 })
 
 test('should throw on invalid input', t => {

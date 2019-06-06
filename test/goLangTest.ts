@@ -1,6 +1,6 @@
 import test from 'ava'
 import { parseAst } from '../src/parseAst'
- 
+
 const result = parseAst({
   input: `
 package main
@@ -18,11 +18,17 @@ func main() {
   language: 'golang'
 })
 
-test('should parse', t => {  
+test('should parse', t => {
   t.is(result.children.length, 5)
 })
-test('should serialize', t => {  
-  console.log(JSON.stringify(result, null, 2));
-  
-  t.notThrows(()=>JSON.stringify(result))
+
+test('should serialize', t => {
+  t.notThrows(() => JSON.stringify(result))
+})
+
+test('should throw on invalid input', t => {
+  t.throws(() => JSON.stringify(parseAst({
+    input: 'func 8',
+    language: 'golang'
+  }), null, 2))
 })
