@@ -1,6 +1,6 @@
 {
   "name": "univac",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generate AST of lots of common programming languages using antlr4. JavaScript API and CLI tool.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
