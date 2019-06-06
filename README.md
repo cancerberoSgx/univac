@@ -1,7 +1,30 @@
-API and CLI to generate Abstract Syntax Trees (AST) of many programming languages using [antlr4 grammars](https://github.com/antlr/grammars-v4)
+# Univac
 
- * supports node.js and browser
+API and CLI to generate Abstract Syntax Trees (AST) of several well-known programming languages using [antlr4 grammars](https://github.com/antlr/grammars-v4)
+
+## Playground - Demo
+
+[https://cancerberosgx.github.io/demos/univac/playground](Playground) (WIP)
+
+## Features
+
+ * JavaScript API both for node.js and browser. 
  * Command line tool
+ * TypeScript
+ * ASTs for C, golang, ruby, java, python, scala, erlang, lua, and more... 
+
+
+## A word of caution
+
+A word of caution regarding generated ASTs:
+
+ * Not guaranteed to support 100% of Language's features
+ * Not guaranteed to render 100% of given source code semantics
+ * AST structure is not official
+   * Was built using [antlr4](https://github.com/antlr/grammars-v4) which is not a tool oriented to generate AST
+      * So some grammars needed to be post-processed to remove redundant nodes.
+
+
 
 ## Install
 
@@ -25,7 +48,7 @@ console.log(JSON.stringify(ast, null, 2))
 ```
 univac --input src/file.py --language python3 --output file-ast.json
 univac --listLanguages
-univac --input "int main() {}" --language c
+univac --input "int main() {}" --language c > ast.json
 ```
 
 ## Supported Languages
@@ -36,8 +59,8 @@ The idea is to support all languages in [antlr4 grammars](https://github.com/ant
 
 THis is a very new project, WIP, this is the current status:
 
- * test for Node.js API
- * test to make sure it runs in the browser
+ * tests for Node.js API
+ * tests to make sure it runs in the browser
  * C language
  * Golang
  * scala
@@ -47,8 +70,9 @@ THis is a very new project, WIP, this is the current status:
  * python3
  * erlang
  * CLI
+ * Basic Playground
 
-## Language grammar notes
+## Language grammars notes
 
 ### Ruby
 

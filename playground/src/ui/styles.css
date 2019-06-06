@@ -1,0 +1,70 @@
+.logsList {
+  max-width: 70vw; 
+  overflow: scroll;
+  display: block;
+}
+
+input[type="checkbox"]{
+  cursor: pointer;    
+  line-height: 22px;  
+  font-size: 22px;
+  border-radius: 5px;
+  transition: color 0.2s ease;
+  background-color: #CCE2FF;
+  color: rgba(0, 0, 0, 0.87);
+  z-index: 3;
+  zoom: 1.2;
+  width: 22px;
+  height: 22px;
+}
+.astTree.ui.list ul, ol.ui.list ol, .ui.list .list {
+  clear: both;
+}
+ul.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item, 
+
+.astTree.ui.list .list > .item > .image + .content, .ui.list .list > .item > .icon + .content, 
+.ui.list > .item > .image + .content, .ui.list > .item > .icon + .content ,
+.astTree.ui.list .list > .item > i.icon, .ui.list > .item > i.icon,
+.astTree.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item,
+.astTree.ui.list ul, ol.ui.list ol, .ui.list .list
+{
+
+  margin: 0;
+  padding: 0;
+  padding-left: 0.8em;
+}
+.astTree {
+  padding: 0!important;
+  margin: 0!important;
+}
+
+.appBody .ui.grid > .column:not(.row) {
+  padding: 0!important;
+  margin: 0!important;
+}
+/* 
+.headerContainer.ui.segment, .headerContainer * {
+  margin: 0; 
+  padding: 0
+}
+
+.ui.grid > .column:not(.row) {
+  padding: 0; 
+  margin: 0;
+}
+h3.sub.header {
+  padding: 1em;
+} */
+
+
+.editor-container {
+  border-bottom: 2px solid gray;
+  border-top: 2px solid gray;
+}
+
+.ui.list .list > .item .description, .ui.list > .item .description {
+  display: inline
+}
+.ui.list .list > .item a.header, .ui.list > .item a.header {
+  display: inline
+}
