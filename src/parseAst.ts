@@ -112,7 +112,10 @@ function getParserForLanguage(language: Language): LanguageParserInfo {
       Lexer: require('./grammar/erlang/ErlangLexer').ErlangLexer,
       Parser: require('./grammar/erlang/ErlangParser').ErlangParser,
       mainRule: 'forms',
-      redundantTypes: node => node.children.length === 1 && !!node.type.match(/expr[0-9]+/)
+      redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => !!node.type.match(/expr[0-9]+/) || ['exprMax', 'expr'].includes(node.type))
+      // node.children.length === 1 && !!node.type.match(/expr[0-9]+/)
+      //       exprMax
+      // expr
     }
   }
   else if (language === 'java') {
@@ -127,10 +130,16 @@ function getParserForLanguage(language: Language): LanguageParserInfo {
       Lexer: require('./grammar/kotlin/KotlinLexer').KotlinLexer,
       Parser: require('./grammar/kotlin/KotlinParser').KotlinParser,
       mainRule: 'kotlinFile',
-      redundantTypes: (node, parent) =>  ['disjunction', 'conjunction','conditionalExpression', 'equalityComparison', 'comparison', 'namedInfix', 'elvisExpression', 'infixFunctionCall', 'rangeExpression', 'additiveExpression', 'multiplicativeExpression', 'typeRHS', 'prefixUnaryExpression', 'postfixUnaryExpression'].includes(node.type) && (node.children.length === 1 ? (node.children[0].text === node.text) : node.children.length === 0) && !(!!parent && parent.text !== node.text)
+      redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => ['disjunction', 'conjunction', 'conditionalExpression', 'equalityComparison', 'comparison', 'namedInfix', 'elvisExpression', 'infixFunctionCall', 'rangeExpression', 'additiveExpression', 'multiplicativeExpression', 'typeRHS', 'prefixUnaryExpression', 'postfixUnaryExpression'].includes(node.type))
     }
-  }  
+  }
   else {
     throw new Error('Language unknown: ' + language)
   }
 }
+function preventRedundantTypeNames(node: Node, parent: Node | undefined, predicate: (node: Node, parent: Node | undefined) => boolean): boolean {
+  const textSameAsParent = parent && parent.text === node.text
+  const textSameAsChild = node.children.length === 1 && node.children[0].text === node.text
+  return predicate(node, parent) && node.children.length < 2 && (textSameAsParent || textSameAsChild)
+}
+

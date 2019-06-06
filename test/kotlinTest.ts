@@ -1,9 +1,9 @@
 import test from 'ava'
+import { writeFileSync } from 'fs'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
 import { parseAst } from '../src/parseAst'
 import { Language } from '../src/types'
-import { writeFileSync } from 'fs';
 
 const result = parseAst({
   input: `
@@ -24,7 +24,7 @@ enum class Color(val rgb : Int) {
   text: true
 })
 
-writeFileSync('tmp.json', printNode({node: result}));
+writeFileSync('tmp.json', printNode({ node: result }))
 
 test('should parse', t => {
   t.is(result.children.length, 7)

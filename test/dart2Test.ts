@@ -20,8 +20,6 @@ class MyClass<T> {
   text: true
 })
 
-// console.log(printNode({node: result}));
-
 test('should parse', t => {
   t.is(result.children.length, 1)
 })
@@ -41,9 +39,6 @@ test('generate correct ast', t => {
   const o = printNode({
     node: result
   })
-
-  // console.log(o);
-
   const expected = [`<identifier text="MyClass"> </identifier> <typeParameters text="<T>"> <typeParameter text="T"> <identifier text="T">`,
     `<fieldFormalParameter text="@requiredthis.a"> <metadata text="@required"> <qualified text="required"> <identifier text="required">`]
   expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))

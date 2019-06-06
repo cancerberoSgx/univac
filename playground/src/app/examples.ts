@@ -123,4 +123,67 @@ enum class Color(val rgb : Int) {
     description: '',
   },
  
+  {
+    name: 'factorial.erl',
+    language: Language.erlang,
+    code: `
+-module(tut1).
+-export([fac/1]).
+fac(1) ->
+    1;
+fac(N) ->
+    N * fac(N - 1).
+      `.trim(),
+    description: '',
+  },
+ 
+  {
+    name: 'myClass.dart',
+    language: Language.dart2,
+    code: `
+class MyClass<T> {
+  final T a;
+  final String b;
+
+  const MyClass({@required this.a, @required this.b});
+
+  @override
+  String toString() => "$runtimeType(a: $a, b: \\"$b\\")";
+}
+      `.trim(),
+    description: '',
+  },
+ 
+
+  {
+    name: 'looping.rb',
+    language: Language.ruby,
+    code: `
+for(i = 1; i < length - 1; i+=1)
+  for(j = 0; j < length - i; j+=1)
+    if(mas[j] > mas[j+1])
+      buf = mas[j]
+      mas[j] = mas[j+1]
+      mas[j+1] = buf
+    end
+  end
+end
+      `.trim(),
+    description: '',
+  },
+ 
+  {
+    name: 'HelloWorld.scala',
+    language: Language.scala,
+    code: `
+object HelloWorld {
+  def main(args: Array[String]): Unit = {
+    println("Hello, world!")
+  }
+}
+      `.trim(),
+    description: '',
+  },
+
+
 ]
