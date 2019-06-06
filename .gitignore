@@ -12,3 +12,4 @@ log2.txt
 .vscode
 test-browser-outdir
 tmp.?*
+.antlr

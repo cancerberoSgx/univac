@@ -2,6 +2,12 @@ import { Ctx, CtxPosition } from './antlr4Types'
 import { GetAstOptions, Node, NodePosition } from './types'
 
 export class Visitor {
+ 
+  protected currentParent: Node | undefined
+
+  constructor(protected options: GetAstOptions) {
+  }
+  
   getAst() {
     if (!this.currentParent) {
       throw new Error('tree.accept(visitor) not called. ')
@@ -10,9 +16,7 @@ export class Visitor {
       return this.currentParent
     }
   }
-  protected currentParent: Node | undefined
-  constructor(protected options: GetAstOptions) {
-  }
+
   visitChildren(ctx: Ctx) {
     if (!ctx) {
       return
@@ -43,6 +47,7 @@ export class Visitor {
     }
     return node
   }
+
   getNode(ctx: Ctx): Node {
     return {
       type: ctx.parser.ruleNames[ctx.ruleIndex] || ctx.constructor.name,
@@ -52,6 +57,7 @@ export class Visitor {
       children: []
     }
   }
+
   getPosition(start: CtxPosition): NodePosition {
     const source = start.source.find(e => typeof e.strdata === 'string')
     return {

@@ -29,7 +29,8 @@ export enum Language {
   'erlang' = 'erlang',
   'dart2' = 'dart2',
   'java' = 'java',
-  'kotlin' = 'kotlin'
+  'kotlin' = 'kotlin',
+  'r' = 'r'
 }
 
 export interface Options extends BaseOptions {

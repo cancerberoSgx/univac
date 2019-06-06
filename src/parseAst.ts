@@ -8,6 +8,11 @@ export function parseAst(options: GetAstOptions) {
   var chars = new antlr4.InputStream(input)
   var lexer = new info.Lexer(chars)
   var tokens = new antlr4.CommonTokenStream(lexer)
+  if(info.Filter){
+      var filter = new info.Filter(tokens);
+    filter.stream(); // call start rule: stream
+    tokens.reset();
+  }
   var parser = new info.Parser(tokens)
   parser.buildParseTrees = true
   var tree = parser[info.mainRule]()
@@ -20,11 +25,30 @@ export function parseAst(options: GetAstOptions) {
   const ast = visitor.getAst()
   return removeRedundantNode(ast, info)
 }
+
+// var antlr4 = require('antlr4');
+// var MyGrammarLexer = require('./RLexer').RLexer;
+// var MyGrammarParser = require('./RParser').RParser;
+// var RFilter = require('./RFilter').RFilter;
+// var chars = new antlr4.InputStream(input);
+// var lexer = new MyGrammarLexer(chars);
+// var tokens  = new antlr4.CommonTokenStream(lexer);
+// var tokens = new antlr4.CommonTokenStream(lexer);
+// var filter = new RFilter(tokens);
+// filter.stream(); // call start rule: stream
+// tokens.reset();
+// var parser = new MyGrammarParser(tokens);
+// parser.buildParseTrees = true;
+// // //  parser.query()
+// var tree = parser.prog();
+
+
 function removeRedundantNode(node: Node, info: LanguageParserInfo) {
   do {
   } while (removeRedundantNode_(node, info) > 0)
   return node
 }
+
 function removeRedundantNode_(node: Node, info: LanguageParserInfo, parent?: Node, count: { n: number } = { n: 0 }) {
   if (parent && info.redundantTypes && info.redundantTypes(node, parent)) {
     const i = parent.children.findIndex(c => c === node)
@@ -36,11 +60,15 @@ function removeRedundantNode_(node: Node, info: LanguageParserInfo, parent?: Nod
   node.children.forEach(c => removeRedundantNode_(c, info, node, count))
   return count.n
 }
+
 interface LanguageParserInfo {
-  Lexer: any, Parser: any
-  mainRule: string,
+  Lexer: any 
+  Parser: any 
+  Filter?: any
+  mainRule: string
   redundantTypes?(node: Node, parent?: Node): boolean
 }
+
 function getParserForLanguage(language: Language): LanguageParserInfo {
   if (language === 'c') {
     return {
@@ -113,9 +141,6 @@ function getParserForLanguage(language: Language): LanguageParserInfo {
       Parser: require('./grammar/erlang/ErlangParser').ErlangParser,
       mainRule: 'forms',
       redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => !!node.type.match(/expr[0-9]+/) || ['exprMax', 'expr'].includes(node.type))
-      // node.children.length === 1 && !!node.type.match(/expr[0-9]+/)
-      //       exprMax
-      // expr
     }
   }
   else if (language === 'java') {
@@ -131,6 +156,14 @@ function getParserForLanguage(language: Language): LanguageParserInfo {
       Parser: require('./grammar/kotlin/KotlinParser').KotlinParser,
       mainRule: 'kotlinFile',
       redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => ['disjunction', 'conjunction', 'conditionalExpression', 'equalityComparison', 'comparison', 'namedInfix', 'elvisExpression', 'infixFunctionCall', 'rangeExpression', 'additiveExpression', 'multiplicativeExpression', 'typeRHS', 'prefixUnaryExpression', 'postfixUnaryExpression'].includes(node.type))
+    }
+  }
+  else if (language === 'r') {
+    return {
+      Lexer: require('./grammar/r/RLexer').RLexer,
+      Parser: require('./grammar/r/RParser').RParser,
+      Filter: require('./grammar/r/RFilter').RFilter,
+      mainRule: 'prog'
     }
   }
   else {

@@ -185,5 +185,19 @@ object HelloWorld {
     description: '',
   },
 
+  {
+    name: 'HelloWorld.r',
+    language: Language.r,
+    code: `
+myString <- "Hello, World!"
+print ( myString)
+bdeff <- function(blocks, varieties) {
+  blocks <- as.factor(blocks)
+}
+      `.trim(),
+    description: '',
+  },
+
+
 
 ]

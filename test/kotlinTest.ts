@@ -24,8 +24,6 @@ enum class Color(val rgb : Int) {
   text: true
 })
 
-writeFileSync('tmp.json', printNode({ node: result }))
-
 test('should parse', t => {
   t.is(result.children.length, 7)
 })
