@@ -62,7 +62,7 @@ function getParserForLanguage(language: Language) {
       Parser: require('./grammar/lua/LuaParser').LuaParser,
       mainRule: 'chunk'
     }
-  } 
+  }
   else if (language === 'python3') {
     return {
       Lexer: require('./grammar/python3/Python3Lexer').Python3Lexer,

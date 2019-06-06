@@ -22,7 +22,11 @@ console.log(JSON.stringify(ast, null, 2))
 
 ## Command line
 
-TODO
+```
+univac --input src/file.py --language python3 --output file-ast.json
+univac --listLanguages
+univac --input "int main() {}" --language c
+```
 
 ## Supported Languages
 
@@ -41,6 +45,7 @@ THis is a very new project, WIP, this is the current status:
  * java9
  * lua
  * python3
+ * CLI
 
 ## Language grammar notes
 

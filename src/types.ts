@@ -1,4 +1,4 @@
-import { enumKeys } from './util';
+import { enumKeys } from './util'
 
 interface BaseOptions {
   language: Language
@@ -16,7 +16,7 @@ export enum Language {
   'ruby' = 'ruby',
   'java9' = 'java9',
   'lua' = 'lua',
-  'python3'='python3'
+  'python3' = 'python3'
 }
 
 export interface Options extends BaseOptions {

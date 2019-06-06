@@ -32,3 +32,4 @@ ts-ast
 guides-probes-backups
 test-browser
 .travis.yml
+playground

@@ -1,3 +1,3 @@
-import { main } from '../main';
- 
-main(require('minimist')(process.argv.slice(2)))
+import { cliMain } from './cli'
+
+cliMain(require('minimist')(process.argv.slice(2)))
