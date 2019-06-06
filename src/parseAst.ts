@@ -56,6 +56,13 @@ function getParserForLanguage(language: Language) {
       mainRule: 'compilationUnit'
     }
   }
+  else if (language === 'lua') {
+    return {
+      Lexer: require('./grammar/Lua/LuaLexer').LuaLexer,
+      Parser: require('./grammar/Lua/LuaParser').LuaParser,
+      mainRule: 'chunk'
+    }
+  }
   else {
     throw new Error('Language unknown: ' + language)
   }

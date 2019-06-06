@@ -39,6 +39,7 @@ THis is a very new project, WIP, this is the current status:
  * scala
  * ruby
  * java9
+ * lua
 
 ## Language grammar notes
 

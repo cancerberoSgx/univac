@@ -8,11 +8,12 @@ export interface GetAstOptions extends BaseOptions {
 }
 
 export enum Language {
-  'c' = 'c'
-  , 'golang' = 'golang'
-  , 'scala' = 'scala'
-  , 'ruby' = 'ruby'
-  , 'java9' = 'java9'
+  'c' = 'c',
+  'golang' = 'golang',
+  'scala' = 'scala',
+  'ruby' = 'ruby',
+  'java9' = 'java9',
+  'lua' = 'lua'
 }
 
 export interface Options extends BaseOptions {
