@@ -25,7 +25,8 @@ export enum Language {
   'ruby' = 'ruby',
   'java9' = 'java9',
   'lua' = 'lua',
-  'python3' = 'python3'
+  'python3' = 'python3',
+  'erlang' = 'erlang'
 }
 
 export interface Options extends BaseOptions {

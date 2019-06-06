@@ -19,8 +19,12 @@ export function parseAst(options: GetAstOptions) {
   tree.accept(visitor)
   return visitor.getAst()
 }
-
-function getParserForLanguage(language: Language) {
+interface LanguageParseInfo {
+  Lexer: any, Parser: any
+  mainRule: string,
+  redundantTypes?(type:string):boolean
+}
+function getParserForLanguage(language: Language): LanguageParseInfo {
   if (language === 'c') {
     return {
       Lexer: require('./grammar/c/CLexer').CLexer,
@@ -68,6 +72,14 @@ function getParserForLanguage(language: Language) {
       Lexer: require('./grammar/python3/Python3Lexer').Python3Lexer,
       Parser: require('./grammar/python3/Python3Parser').Python3Parser,
       mainRule: 'file_input'
+    }
+  }
+  else if (language === 'erlang') {
+    return {
+      Lexer: require('./grammar/erlang/ErlangLexer').ErlangLexer,
+      Parser: require('./grammar/erlang/ErlangParser').ErlangParser,
+      mainRule: 'forms',
+      redundantTypes: type=>!!type.match(/expr[0-9]+/)
     }
   }
   else {
