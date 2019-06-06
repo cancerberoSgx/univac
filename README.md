@@ -36,6 +36,7 @@ npm i univac
 
 ```js
 import { parseAst } from 'univac'
+
 const ast = await parseAst({
   input: 'int main() {}',
   language: 'c'

@@ -8,7 +8,7 @@ export function debug(...args: any[]) {
   getStore().getState().logs.push(args.map(a => inspect(a)).join(' '))
 }
 
-export function getAst(input: string, language: Language) {
+export async function getAst(input: string, language: Language) {
   const result = await parseAst({ input, language, parents: true })
   return result
 }
