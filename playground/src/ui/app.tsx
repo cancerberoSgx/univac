@@ -10,7 +10,6 @@ import { Header } from './header/header'
 import './styles.css'
 
 export class App extends AbstractComponent {
-
   componentDidMount() {
     const editorContainer = document.getElementById("editor-container")!
     installCodeEditor(editorContainer)

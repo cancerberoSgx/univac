@@ -1,11 +1,18 @@
 import * as React from 'react'
 import { render } from 'react-dom'
+import { getInitialState } from './app/state'
+import { _setStore } from './app/store'
 import { initMonacoWorkers } from "./editor/initMonacoWorkers"
 import { App } from './ui/app'
+import { sleep } from 'misc-utils-of-mine-generic';
 
-function main() {
+async function main() {
   initMonacoWorkers()
-  render(<App />, document.getElementById('main'))
+  const s = await getInitialState()
+  _setStore(s)
+  // setTimeout(() => {
+    render(<App />, document.getElementById('main'))
+  // }, 100)
 }
 
 main()

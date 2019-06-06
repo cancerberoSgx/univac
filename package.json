@@ -35,6 +35,7 @@
   "author": "Sebastián Gurin",
   "license": "MIT",
   "devDependencies": {
+    "@types/antlr4": "^4.7.0",
     "@types/node": "^12.0.4",
     "@types/puppeteer": "^1.12.4",
     "ava": "^2.0.0",

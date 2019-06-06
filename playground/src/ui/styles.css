@@ -68,3 +68,6 @@ h3.sub.header {
 .ui.list .list > .item a.header, .ui.list > .item a.header {
   display: inline
 }
+.ui.list .list > .item > .content, .ui.list > .item > .content {
+  border-left: 1px dotted rgb(113, 130, 147);
+}

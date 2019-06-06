@@ -1,22 +1,24 @@
 import * as React from 'react'
-import { Button, Checkbox, List } from 'semantic-ui-react'
-import { Node } from 'univac'
-import { highlightNodesInEditor } from '../../editor/codeEditor'
+import { Button, Checkbox, List, Popup } from 'semantic-ui-react'
+import { Node, printNodeText } from 'univac'
+import { highlightNodesInEditor, getEditorTextAtNode } from '../../editor/codeEditor'
 import { Space } from '../common/uiUtil'
 import { AbstractComponent } from '../component'
+import { State } from '../../app/state';
 
 export class Ast extends AbstractComponent {
   // componentWillMount() {
   //   this.forceUpdate()
   // }
 
-  // shouldComponentUpdate(nextProps: any, nextState: Readonly<State>, nextContext: any) {
-  //   return nextState.currentEditorAst !== this.state.currentEditorAst && this.state.astAutoUpdate ||
-  //     nextState.astAutoUpdate !== this.state.astAutoUpdate ||
-  //     nextState.getChildren !== this.state.getChildren ||
-  //     nextState.astShowText !== this.state.astShowText ||
-  //     nextState.currentEditorAstCollapsedNodes.length !== this.state.currentEditorAstCollapsedNodes.length
-  // }
+  shouldComponentUpdate(nextProps: any, nextState: Readonly<State>, nextContext: any) {
+    return nextState.ast !== this.state.ast && this.state.astAutoUpdate ||
+      nextState.astAutoUpdate !== this.state.astAutoUpdate ||
+      nextState.expandNegated !== this.state.expandNegated ||
+      nextState.astShowText !== this.state.astShowText ||
+      nextState.example.name !== this.state.example.name ||
+      nextState.expandedNodes.length !== this.state.expandedNodes.length
+  }
 
   render() {
     let node = this.state.ast
@@ -26,25 +28,34 @@ export class Ast extends AbstractComponent {
       }}></Checkbox>
       <Space />
       {this.state.astAutoUpdate ? '' : <Button size="small" onClick={e => this.forceUpdate()}>Update</Button>}
+      <Checkbox defaultChecked={this.state.expandNegated} label={this.state.expandNegated?'Collapse':'Expand'} onChange={(e, props) => {
+        this.setState({ expandNegated: !!props.checked })
+      }}></Checkbox>
+        <Checkbox defaultChecked={this.state.astShowText} label={`${this.state.astShowText?'Hide':'Show'} Text`} onChange={(e, props) => {
+        this.setState({ astShowText: !!props.checked })
+      }}></Checkbox>
       <List className="astTree">
         {this.renderNode(node)}
       </List>
     </>
   }
 
-  renderNode(node: Node) {
+  renderNode(node?: Node) {
+    if(!node){
+      return
+    }
     const children = node.children
-    const expanded = children.length && this.state.expandedNodes.includes(node)
+    let expanded = children.length && this.state.expandedNodes.includes(node)
+    expanded = this.state.expandNegated ? !expanded : expanded
     return (<List.Item onClick={e => {
       e.stopPropagation()
       highlightNodesInEditor([node])
     }}>
-
       <List.Content>
         <List.Header as="a">
           <span onClick={e => {
             e.stopPropagation()
-            if (expanded) {
+            if (expanded&&!this.state.expandNegated||!expanded&&this.state.expandNegated) {
               this.setState({ expandedNodes: this.state.expandedNodes.filter(n => n !== node) })
             } else {
               this.setState({ expandedNodes: [...this.state.expandedNodes, node] })
@@ -52,8 +63,13 @@ export class Ast extends AbstractComponent {
           }}>
             <List.Icon name={expanded ? 'minus' : 'plus'} />
           </span>
-          {node.type}
+          <Popup trigger={<span>{node.type}</span>}><pre>{getEditorTextAtNode(node)}</pre></Popup>
         </List.Header>
+        <List.Description>
+          {this.state.astShowText ?
+          <><Space/>"<code>{printNodeText(node.text||'', 20, false)}</code>"</>
+          : <></>}
+        </List.Description>
         {expanded ?
           <List.List>{children.map(c => this.renderNode(c))}</List.List>
           : <></>

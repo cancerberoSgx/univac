@@ -33,3 +33,5 @@ guides-probes-backups
 test-browser
 .travis.yml
 playground
+tmp.json
+.DS_Store

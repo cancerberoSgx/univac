@@ -1,9 +1,10 @@
 import { Language, Node } from './types'
+import { Parser, Lexer } from 'antlr4';
 
 export interface ParserImpl {
-  Lexer: any;
-  Parser: any;
-  Filter?: any;
+  Lexer: typeof Lexer;
+  Parser: typeof  Parser;
+  Filter?: typeof Parser;
   mainRule: string;
   redundantTypes?(node: Node, parent?: Node): boolean;
 }

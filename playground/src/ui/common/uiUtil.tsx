@@ -57,5 +57,7 @@ export function loadUrl() {
     const d = window.location.hash.split('state=')[1]
     const state = JSON.parse(atob(d))
     setCodeEditorText(state.code)
+  }else {
+    
   }
 }

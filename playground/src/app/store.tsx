@@ -1,18 +1,17 @@
-import { Emitter, objectKeys } from 'misc-utils-of-mine-generic'
-import { debug } from './dispatchers'
-import { getInitialState, State } from './state'
+import { Emitter } from 'misc-utils-of-mine-generic'
+import { State } from './state'
 
 class Store extends Emitter<void> {
-  protected state: State
-  constructor() {
+
+  constructor(protected state: State) {
     super()
-    this.state = getInitialState()
   }
+
   setState(state: Partial<State>) {
-    debug('Store setState', objectKeys(state))
     this.state = { ...this.state, ...state }
     this.emit()
   }
+
   getState() {
     return this.state
   }
@@ -20,10 +19,9 @@ class Store extends Emitter<void> {
 
 let store: Store
 export function getStore() {
-  if (!store) {
-    store = new Store()
-  }
   return store
 }
 
-
+export function _setStore(s: State) {
+  store = new Store(s)
+}

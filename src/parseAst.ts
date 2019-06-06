@@ -1,21 +1,26 @@
 import { getParserImpl, ParserImpl } from './parserImpl'
 import { GetAstOptions, Node } from './types'
 import { Visitor } from './visitor'
-var antlr4 = require('antlr4')
+// var antlr4 = require('antlr4')
+import * as antlr4 from 'antlr4'
 
 export async function parseAst(options: GetAstOptions) {
   const input = options.input
   var info = await getParserImpl(options.language)
   var chars = new antlr4.InputStream(input)
+  //@ts-ignore
   var lexer = new info.Lexer(chars)
   var tokens = new antlr4.CommonTokenStream(lexer)
   if (info.Filter) {
     var filter = new info.Filter(tokens)
+  //@ts-ignore
     filter.stream() // call start rule: stream
     tokens.reset()
   }
   var parser = new info.Parser(tokens)
+  options.errorListener &&parser.addErrorListener(options.errorListener)
   parser.buildParseTrees = true
+  //@ts-ignore
   var tree = parser[info.mainRule]()
   if (tree.exception) {
     throw new Error('Parser exception: ' + tree.exception)
