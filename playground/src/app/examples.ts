@@ -122,7 +122,7 @@ enum class Color(val rgb : Int) {
       `.trim(),
     description: '',
   },
- 
+
   {
     name: 'factorial.erl',
     language: Language.erlang,
@@ -136,7 +136,7 @@ fac(N) ->
       `.trim(),
     description: '',
   },
- 
+
   {
     name: 'myClass.dart',
     language: Language.dart2,
@@ -153,7 +153,7 @@ class MyClass<T> {
       `.trim(),
     description: '',
   },
- 
+
 
   {
     name: 'looping.rb',
@@ -171,7 +171,7 @@ end
       `.trim(),
     description: '',
   },
- 
+
   {
     name: 'HelloWorld.scala',
     language: Language.scala,

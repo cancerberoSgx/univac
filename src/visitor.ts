@@ -2,12 +2,12 @@ import { Ctx, CtxPosition } from './antlr4Types'
 import { GetAstOptions, Node, NodePosition } from './types'
 
 export class Visitor {
- 
+
   protected currentParent: Node | undefined
 
   constructor(protected options: GetAstOptions) {
   }
-  
+
   getAst() {
     if (!this.currentParent) {
       throw new Error('tree.accept(visitor) not called. ')

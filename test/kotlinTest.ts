@@ -1,5 +1,4 @@
 import test from 'ava'
-import { writeFileSync } from 'fs'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
 import { parseAst } from '../src/parseAst'

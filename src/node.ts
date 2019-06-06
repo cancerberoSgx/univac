@@ -1,6 +1,6 @@
 import { indent } from 'misc-utils-of-mine-generic'
 import { Node, NodePositionLineColumn } from './types'
-import { truncAndEscape } from './util';
+import { truncAndEscape } from './util'
 
 export function visitDescendants({ node: n, visitor: v, childrenFirst = true, parent, level = 0 }: { node: Node, visitor: (n: Node, parent?: Node | undefined, level?: number | undefined) => boolean, childrenFirst?: boolean, parent?: Node, level?: number }): boolean {
   if (!n) {

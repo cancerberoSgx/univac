@@ -53,9 +53,9 @@ test('generate correct ast', t => {
       <argumentList text="(1)">
         <exprs text="1">
           <atomic text="1">
-            <tokInteger text="1">`, 
-            
-            `
+            <tokInteger text="1">`,
+
+    `
             <clauseBody text="->N*fac(N-1)">
           <exprs text="N*fac(N-1)">
             <expr500 text="N*fac(N-1)">

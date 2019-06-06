@@ -1,6 +1,6 @@
 import { Language, Node } from 'univac'
+import { getAst } from './dispatchers'
 import { Example, examples } from "./examples"
-import { getAst } from './dispatchers';
 
 export interface State {
   selectedExample: Example

@@ -1,8 +1,8 @@
+import { Language, parseAst } from 'univac'
 import { inspect } from 'util'
 import { setCodeEditorText } from '../editor/codeEditor'
 import { Example } from './examples'
 import { getStore } from './store'
-import { parseAst, Language } from 'univac';
 
 export function debug(...args: any[]) {
   getStore().getState().logs.push(args.map(a => inspect(a)).join(' '))

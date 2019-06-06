@@ -8,10 +8,10 @@ export function parseAst(options: GetAstOptions) {
   var chars = new antlr4.InputStream(input)
   var lexer = new info.Lexer(chars)
   var tokens = new antlr4.CommonTokenStream(lexer)
-  if(info.Filter){
-      var filter = new info.Filter(tokens);
-    filter.stream(); // call start rule: stream
-    tokens.reset();
+  if (info.Filter) {
+    var filter = new info.Filter(tokens)
+    filter.stream() // call start rule: stream
+    tokens.reset()
   }
   var parser = new info.Parser(tokens)
   parser.buildParseTrees = true
@@ -62,8 +62,8 @@ function removeRedundantNode_(node: Node, info: LanguageParserInfo, parent?: Nod
 }
 
 interface LanguageParserInfo {
-  Lexer: any 
-  Parser: any 
+  Lexer: any
+  Parser: any
   Filter?: any
   mainRule: string
   redundantTypes?(node: Node, parent?: Node): boolean
