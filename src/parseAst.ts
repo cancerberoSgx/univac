@@ -18,38 +18,30 @@ export function parseAst(options: GetAstOptions) {
   const visitor = new Visitor(options)
   tree.accept(visitor)
   const ast = visitor.getAst()
-  // removeRedundantNode(ast, info)
-  // removeRedundantNode(ast, info)
   return removeRedundantNode(ast, info)
 }
-function removeRedundantNode(node: Node, info: LanguageParseInfo) {
-  // let complete = false
+function removeRedundantNode(node: Node, info: LanguageParserInfo) {
   do {
   } while (removeRedundantNode_(node, info) > 0)
   return node
 }
-function removeRedundantNode_(node: Node, info: LanguageParseInfo, parent?: Node, count: { n: number } = { n: 0 }) {
+function removeRedundantNode_(node: Node, info: LanguageParserInfo, parent?: Node, count: { n: number } = { n: 0 }) {
   if (parent && info.redundantTypes && info.redundantTypes(node, parent)) {
-    // console.log('before: ', node.children.map(n=>n.type))
     const i = parent.children.findIndex(c => c === node)
     if (i !== -1) {
       count.n++
       parent.children.splice(i, 1, ...node.children)
     }
-    // node.children.forEach(c=>removeRedundantNode_(c, info, node, count))
-    // console.log('after: ', node.children.map(n=>n.type))
   }
-  // else {
   node.children.forEach(c => removeRedundantNode_(c, info, node, count))
-  // } 
   return count.n
 }
-interface LanguageParseInfo {
+interface LanguageParserInfo {
   Lexer: any, Parser: any
   mainRule: string,
   redundantTypes?(node: Node, parent?: Node): boolean
 }
-function getParserForLanguage(language: Language): LanguageParseInfo {
+function getParserForLanguage(language: Language): LanguageParserInfo {
   if (language === 'c') {
     return {
       Lexer: require('./grammar/c/CLexer').CLexer,
@@ -82,7 +74,11 @@ function getParserForLanguage(language: Language): LanguageParseInfo {
     return {
       Lexer: require('./grammar/java9/Java9Lexer').Java9Lexer,
       Parser: require('./grammar/java9/Java9Parser').Java9Parser,
-      mainRule: 'compilationUnit'
+      mainRule: 'compilationUnit',
+      redundantTypes: (node, parent) =>  [
+        'primaryNoNewArray_lfno_primary', 'assignmentExpression','conditionalExpression','conditionalOrExpression','conditionalAndExpression','inclusiveOrExpression','exclusiveOrExpression','andExpression','equalityExpression','relationalExpression','shiftExpression','additiveExpression','multiplicativeExpression','unaryExpression','unaryExpressionNotPlusMinus', 'unannClassType_lfno_unannClassOrInterfaceType', 
+      ].includes(node.type) 
+       && (node.children.length === 1 ? node.children[0].text === node.text : node.children.length === 0) && !(!!parent && parent.text !== node.text)
     }
   }
   else if (language === 'lua') {
@@ -90,6 +86,14 @@ function getParserForLanguage(language: Language): LanguageParseInfo {
       Lexer: require('./grammar/lua/LuaLexer').LuaLexer,
       Parser: require('./grammar/lua/LuaParser').LuaParser,
       mainRule: 'chunk'
+    }
+  }
+  else if (language === 'dart2') {
+    return {
+      Lexer: require('./grammar/dart2/Dart2Lexer').Dart2Lexer,
+      Parser: require('./grammar/dart2/Dart2Parser').Dart2Parser,
+      mainRule: 'compilationUnit',
+      redundantTypes: node => node.children.length === 1 && node.type.endsWith('Expression')
     }
   }
   else if (language === 'python3') {

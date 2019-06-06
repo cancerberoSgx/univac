@@ -88,3 +88,9 @@ representation)
 It has some specific stuff like inline pir and for loop :) And won't ever have
 OOP features, sorry.
 `
+
+### Java9
+
+> A Java 8 grammar for ANTLR 4 derived from the Java Language Specification chapter 19.
+
+> NOTE: This grammar results in a generated parser that is much slower than the Java 7 grammar in the grammars-v4/java directory. This one is, however, extremely close to the spec.
