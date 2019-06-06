@@ -31,11 +31,23 @@ test('should serialize', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
 
-test('should throw on invalid input', async t => {
+test.skip('should throw on invalid input', async t => {
   await t.throwsAsync(() => parseAst({
     input: 'func 8',
     language: Language.golang
   }))
+})
+
+test.skip('should report syntax errors to given listener', async t => {
+  await parseAst({
+    input:  'func 8',
+    language: Language.golang,
+    errorListener: {
+      syntaxError(a,b,c,d,msg){
+        t.true(msg.includes(`mismatched input`)||msg.includes(`extraneous input`), msg)
+      }
+    }
+  })
 })
 
 test.skip('ast is correct', async t => { })

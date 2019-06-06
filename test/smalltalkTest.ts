@@ -7,18 +7,34 @@ import { Language, Node } from '../src/types'
 let result: Node
 test.before(async t => {
   result = await parseAst({
-    input: `
-class MyClass<T> {
-  final T a;
-  final String b;
+    input:  `
+|myArray|
 
-  const MyClass({@required this.a, @required this.b});
+myArray := #('a' 'b' 'c' ).
 
-  @override
-  String toString() => "$runtimeType(a: $a, b: \\"$b\\")";
-}
-  `.trim(),
-    language: Language.dart2,
+#('hello' 'Javascript') at: 2 put: 'Smalltalk'; yourself.
+
+Object subclass: #Customer
+  instanceVariableNames: ''
+  classVariableNames: ''
+  poolDictionaries: ''
+  category: ''.
+  
+Customer methodAt: #sayHello put: [
+  Transcript show: 'Hello World.'; cr.
+].
+
+girlInBar phoneNumber 
+  jerk say: 'Get lost' 
+  jerk throwAt: drink.
+
+10 timesRepeat: [
+  Transcript show:'hello'.
+  Transcript cr.
+].
+    
+    ` .trim(),
+    language: Language.smalltalk,
     text: true
   })
 })
@@ -33,28 +49,26 @@ test('should serialize', async t => {
 
 test.skip('should throw on invalid input', async t => {
  await  t.throwsAsync(() => parseAst({
-    input: 'fac -> -> -> -> 11 f Ñ un c 8',
-    language: Language.dart2
+  input: '.#[ })#{"',
+    language: Language.smalltalk
   }))
 })
 
 test('should report syntax errors to given listener', async t => {
   await parseAst({
-    input: 'class A h {}',
-    language: Language.dart2,
+    input: '.',
+    language: Language.smalltalk,
     errorListener: {
       syntaxError(a,b,c,d,msg){
-        t.true(msg.includes(`no viable alternative at input`), msg)
+        t.true(msg.includes(`mismatched input`), msg)
       }
     }
   })
 })
-
-test('generate correct ast', async t => {
+test.skip('generate correct ast', async t => {
   const o = printNode({
     node: result
   })
-  const expected = [`<identifier text="MyClass"> </identifier> <typeParameters text="<T>"> <typeParameter text="T"> <identifier text="T">`,
-    `<fieldFormalParameter text="@requiredthis.a"> <metadata text="@required"> <qualified text="required"> <identifier text="required">`]
+  const expected = [``]
   expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))
 })

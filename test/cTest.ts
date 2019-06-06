@@ -21,11 +21,23 @@ test('JSON stringify', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
 
-test('should throw on invalid input', async t => {
+test.skip('should throw on invalid input', async t => {
   await t.throwsAsync(() => parseAst({
     input: 'jo jo jo 123',
     language: Language.c
   }))
+})
+
+test('should report syntax errors to given listener', async t => {
+  await parseAst({
+    input: 'jo jo jo',
+    language: Language.fortran77,
+    errorListener: {
+      syntaxError(a,b,c,d,msg){
+        t.true(msg.includes(`missing EOL at`), msg)
+      }
+    }
+  })
 })
 
 test('ast compare', async t => {

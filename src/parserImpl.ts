@@ -1,9 +1,9 @@
+import { Lexer, Parser } from 'antlr4'
 import { Language, Node } from './types'
-import { Parser, Lexer } from 'antlr4';
 
 export interface ParserImpl {
   Lexer: typeof Lexer;
-  Parser: typeof  Parser;
+  Parser: typeof Parser;
   Filter?: typeof Parser;
   mainRule: string;
   redundantTypes?(node: Node, parent?: Node): boolean;
@@ -103,6 +103,20 @@ export function getParserImpl(language: Language): ParserImpl {
       Parser: require('./grammar/r/RParser').RParser,
       Filter: require('./grammar/r/RFilter').RFilter,
       mainRule: 'prog'
+    }
+  }
+  else if (language === 'fortran77') {
+    return {
+      Lexer: require('./grammar/fortran77/Fortran77Lexer').Fortran77Lexer,
+      Parser: require('./grammar/fortran77/Fortran77Parser').Fortran77Parser,
+      mainRule: 'program'
+    }
+  } 
+  else if (language === 'smalltalk') {
+    return {
+      Lexer: require('./grammar/smalltalk/SmalltalkLexer').SmalltalkLexer,
+      Parser: require('./grammar/smalltalk/SmalltalkParser').SmalltalkParser,
+      mainRule: 'script'
     }
   }
   else {

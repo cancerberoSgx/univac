@@ -51,8 +51,8 @@ export class Visitor {
   getNode(ctx: Ctx): Node {
     return {
       type: ctx.parser.ruleNames[ctx.ruleIndex] || ctx.constructor.name,
-      start: !this.options.omitPosition ? this.getPosition(ctx.start) : undefined,
-      stop: !this.options.omitPosition ? this.getPosition(ctx.stop) : undefined,
+      start: !this.options.omitPosition && ctx.start ? this.getPosition(ctx.start) : undefined,
+      stop: !this.options.omitPosition && ctx.stop ? this.getPosition(ctx.stop) : undefined,
       text: this.options.text ? ctx.getText() : undefined,
       children: []
     }

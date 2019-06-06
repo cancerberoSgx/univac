@@ -1,5 +1,5 @@
+import { ErrorListener } from 'antlr4/error'
 import { enumKeys } from './util'
-import { ErrorListener } from 'antlr4/error';
 
 interface BaseOptions {
   language: Language
@@ -7,7 +7,7 @@ interface BaseOptions {
 }
 
 export interface GetAstOptions extends BaseOptions {
-  errorListener?: ErrorListener;
+  errorListener?: Partial<ErrorListener>;
   text?: boolean
   omitPosition?: boolean
   /**
@@ -32,7 +32,9 @@ export enum Language {
   'dart2' = 'dart2',
   'java' = 'java',
   'kotlin' = 'kotlin',
-  'r' = 'r'
+  'r' = 'r',
+  'fortran77' = 'fortran77',
+  'smalltalk'='smalltalk'
 }
 
 export interface Options extends BaseOptions {

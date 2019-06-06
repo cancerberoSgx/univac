@@ -1,8 +1,8 @@
 import { indent } from 'misc-utils-of-mine-generic'
 import { Node, NodePositionLineColumn } from './types'
 
-export function printNodeText(text: string, maxLength=160, escape=true) {
-  const s =  text.substring(0, Math.min(text.length, maxLength))
+export function printNodeText(text: string, maxLength = 160, escape = true) {
+  const s = text.substring(0, Math.min(text.length, maxLength))
   return escape ? s.replace(/"/gm, '\\"').replace(/[\n]+/gm, '\\n') : s
 }
 

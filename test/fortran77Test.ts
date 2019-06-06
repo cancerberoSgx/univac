@@ -8,17 +8,18 @@ let result: Node
 test.before(async t => {
   result = await parseAst({
     input: `
-class MyClass<T> {
-  final T a;
-  final String b;
+program main
 
-  const MyClass({@required this.a, @required this.b});
+c*********************************************************************72
+c 
+      implicit none
 
-  @override
-  String toString() => "$runtimeType(a: $a, b: \\"$b\\")";
-}
-  `.trim(),
-    language: Language.dart2,
+      write ( *, '(a)' ) '  Hello, world!'
+
+      stop
+      end
+      `.trim(),
+    language: Language.fortran77,
     text: true
   })
 })
@@ -31,17 +32,10 @@ test('should serialize', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
 
-test.skip('should throw on invalid input', async t => {
- await  t.throwsAsync(() => parseAst({
-    input: 'fac -> -> -> -> 11 f Ñ un c 8',
-    language: Language.dart2
-  }))
-})
-
 test('should report syntax errors to given listener', async t => {
   await parseAst({
-    input: 'class A h {}',
-    language: Language.dart2,
+    input: 'a',
+    language: Language.fortran77,
     errorListener: {
       syntaxError(a,b,c,d,msg){
         t.true(msg.includes(`no viable alternative at input`), msg)
@@ -50,11 +44,10 @@ test('should report syntax errors to given listener', async t => {
   })
 })
 
-test('generate correct ast', async t => {
+test.skip('generate correct ast', async t => {
   const o = printNode({
     node: result
   })
-  const expected = [`<identifier text="MyClass"> </identifier> <typeParameters text="<T>"> <typeParameter text="T"> <identifier text="T">`,
-    `<fieldFormalParameter text="@requiredthis.a"> <metadata text="@required"> <qualified text="required"> <identifier text="required">`]
+  const expected = [``]
   expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))
 })

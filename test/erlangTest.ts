@@ -30,11 +30,23 @@ test('should serialize', async t => {
 })
 
 test.skip('should throw on invalid input', async t => {
-  t.throws(() => parseAst({
+ await  t.throwsAsync(() => parseAst({
     input: 'fac -> -> -> -> 11 f Ñ un c 8',
     language: Language.erlang
   }))
 })
+
+// test('should report syntax errors to given listener', async t => {
+//   await parseAst({
+//     input: 'jo jo jo',
+//     language: Language.fortran77,
+//     errorListener: {
+//       syntaxError(a,b,c,d,msg){
+//         t.true(msg.includes(`missing EOL at`), msg)
+//       }
+//     }
+//   })
+// })
 
 test('generate correct ast', async t => {
   const o = printNode({
