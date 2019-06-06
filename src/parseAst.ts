@@ -1,28 +1,53 @@
-import { GetAstOptions, Language } from './types'
-import {  Visitor } from './visitor'
+import { GetAstOptions, Language, Node } from './types'
+import { Visitor } from './visitor'
 var antlr4 = require('antlr4')
 
 export function parseAst(options: GetAstOptions) {
   const input = options.input
-  var { Lexer, Parser, mainRule } = getParserForLanguage(options.language)
+  var info = getParserForLanguage(options.language)
   var chars = new antlr4.InputStream(input)
-  var lexer = new Lexer(chars)
+  var lexer = new info.Lexer(chars)
   var tokens = new antlr4.CommonTokenStream(lexer)
-  var parser = new Parser(tokens)
-   parser.buildParseTrees = true;
-  var tree = parser[mainRule]()
+  var parser = new info.Parser(tokens)
+  parser.buildParseTrees = true
+  var tree = parser[info.mainRule]()
 
   if (tree.exception) {
     throw new Error('Parser exception: ' + tree.exception)
   }
   const visitor = new Visitor(options)
   tree.accept(visitor)
-  return visitor.getAst()
+  const ast = visitor.getAst()
+  // removeRedundantNode(ast, info)
+  // removeRedundantNode(ast, info)
+  return removeRedundantNode(ast, info)
+}
+function removeRedundantNode(node: Node, info: LanguageParseInfo) {
+  // let complete = false
+  do {
+  } while (removeRedundantNode_(node, info) > 0)
+  return node
+}
+function removeRedundantNode_(node: Node, info: LanguageParseInfo, parent?: Node, count: { n: number } = { n: 0 }) {
+  if (parent && info.redundantTypes && info.redundantTypes(node, parent)) {
+    // console.log('before: ', node.children.map(n=>n.type))
+    const i = parent.children.findIndex(c => c === node)
+    if (i !== -1) {
+      count.n++
+      parent.children.splice(i, 1, ...node.children)
+    }
+    // node.children.forEach(c=>removeRedundantNode_(c, info, node, count))
+    // console.log('after: ', node.children.map(n=>n.type))
+  }
+  // else {
+  node.children.forEach(c => removeRedundantNode_(c, info, node, count))
+  // } 
+  return count.n
 }
 interface LanguageParseInfo {
   Lexer: any, Parser: any
   mainRule: string,
-  redundantTypes?(type:string):boolean
+  redundantTypes?(node: Node, parent?: Node): boolean
 }
 function getParserForLanguage(language: Language): LanguageParseInfo {
   if (language === 'c') {
@@ -71,7 +96,11 @@ function getParserForLanguage(language: Language): LanguageParseInfo {
     return {
       Lexer: require('./grammar/python3/Python3Lexer').Python3Lexer,
       Parser: require('./grammar/python3/Python3Parser').Python3Parser,
-      mainRule: 'file_input'
+      mainRule: 'file_input',
+      redundantTypes: (node, parent) => (node.type.endsWith('expr') || node.type.endsWith('test')
+        || ['term', 'factor', 'power', 'small_stmt', 'simple_stmt', 'compound_stmt', 'suite', 'number'].includes(node.type)
+      )
+        && (node.children.length === 1 ? (node.children[0].text === node.text) : node.children.length === 0) && !(!!parent && parent.text !== node.text)
     }
   }
   else if (language === 'erlang') {
@@ -79,7 +108,7 @@ function getParserForLanguage(language: Language): LanguageParseInfo {
       Lexer: require('./grammar/erlang/ErlangLexer').ErlangLexer,
       Parser: require('./grammar/erlang/ErlangParser').ErlangParser,
       mainRule: 'forms',
-      redundantTypes: type=>!!type.match(/expr[0-9]+/)
+      redundantTypes: node => node.children.length === 1 && !!node.type.match(/expr[0-9]+/)
     }
   }
   else {

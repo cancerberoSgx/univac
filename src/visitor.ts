@@ -3,14 +3,14 @@ import { GetAstOptions, Node, NodePosition } from './types'
 
 export class Visitor {
   getAst() {
-    if(!this.currentParent){
+    if (!this.currentParent) {
       throw new Error('tree.accept(visitor) not called. ')
     }
     else {
       return this.currentParent
     }
   }
-  protected currentParent: Node|undefined
+  protected currentParent: Node | undefined
   constructor(protected options: GetAstOptions) {
   }
   visitChildren(ctx: Ctx) {
@@ -18,12 +18,12 @@ export class Visitor {
       return
     }
     let node = this.getNode(ctx)
-    if(!this.currentParent){
+    if (!this.currentParent) {
       this.currentParent = node
     }
     else {
       this.currentParent.children!.push(node)
-      if(this.options.parents){
+      if (this.options.parents) {
         node.parent = this.currentParent
       }
     }
@@ -46,8 +46,8 @@ export class Visitor {
   getNode(ctx: Ctx): Node {
     return {
       type: ctx.parser.ruleNames[ctx.ruleIndex] || ctx.constructor.name,
-      start: !this.options.omitPosition ? this.getPosition(ctx.start): undefined,
-      stop: !this.options.omitPosition ?this.getPosition(ctx.stop): undefined,
+      start: !this.options.omitPosition ? this.getPosition(ctx.start) : undefined,
+      stop: !this.options.omitPosition ? this.getPosition(ctx.stop) : undefined,
       text: this.options.text ? ctx.getText() : undefined,
       children: []
     }

@@ -1,5 +1,3 @@
-import { printNode, parseAst, Language } from '../src';
-import { readFileSync } from 'fs';
 
 // console.log(printNode({node: parseAst({
 //   input: 'x = 1',
@@ -16,14 +14,16 @@ import { readFileSync } from 'fs';
 
 
 
-console.log(printNode({node: parseAst({
-  input: `
-class Test {
-  public int i;
-}
-  `,
-  language: Language.java9,
-  text: true
-})}));
+// console.log(printNode({  
+// node: parseAst({
+//     input: `
+// class Test {
+//   public int i;
+// }
+//   `,
+//     language: Language.java9,
+//     text: true
+//   })
+// }))
 
-``
+// ``

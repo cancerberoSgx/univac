@@ -1,7 +1,7 @@
 import test from 'ava'
+import { printNode } from '../src'
 import { parseAst } from '../src/parseAst'
-import { Language, Node } from '../src/types'
-import { printNode } from '../src';
+import { Language } from '../src/types'
 
 const result = parseAst({
   input: 'int main() {}',
@@ -26,7 +26,7 @@ test('should throw on invalid input', t => {
 })
 
 test('ast compare', t => {
-  t.is(printNode({node: result}), `<compilationUnit text="intmain(){}<EOF>">
+  t.is(printNode({ node: result }), `<compilationUnit text="intmain(){}<EOF>">
   <translationUnit text="intmain(){}">
     <externalDeclaration text="intmain(){}">
       <functionDefinition text="intmain(){}">

@@ -1,7 +1,6 @@
 import test from 'ava'
 import { parseAst } from '../src/parseAst'
 import { Language } from '../src/types'
-import { printNode } from '../src';
 
 const result = parseAst({
   input: `

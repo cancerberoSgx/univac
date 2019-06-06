@@ -1,7 +1,7 @@
 import test from 'ava'
+import { printNode } from '../src'
 import { parseAst } from '../src/parseAst'
 import { Language } from '../src/types'
-import { printNode } from '../src';
 
 const result = parseAst({
   input: `
@@ -38,15 +38,17 @@ test('should throw on invalid input', t => {
 })
 
 test('should get correct ast', t => {
-  t.deepEqual(printNode({node: parseAst({
-    input: `
+  t.deepEqual(printNode({
+    node: parseAst({
+      input: `
   class Test {
     public int i;
   }
     `,
-    language: Language.java9,
-    text: true
-  })}).trim(), `<compilationUnit text="classTest{publicinti;}<EOF>">
+      language: Language.java9,
+      text: true
+    })
+  }).trim(), `<compilationUnit text="classTest{publicinti;}<EOF>">
   <ordinaryCompilation text="classTest{publicinti;}<EOF>">
     <typeDeclaration text="classTest{publicinti;}">
       <classDeclaration text="classTest{publicinti;}">

@@ -11,7 +11,7 @@ export interface GetAstOptions extends BaseOptions {
   /**
    * Adds [[parent]] property to each node referencing node¡'s parent. Notice that the AST won't be serializable with JSON.stringify anymore because of cycles. By default is false.  
    */
-  parents? : boolean
+  parents?: boolean
   /**
    * Adds [[source]] property to [[start]] and [[stop]] positions. By default is false. 
    */
@@ -42,7 +42,7 @@ export interface Node {
   children: Node[];
   parent?: Node
 }
-export interface NodePositionLineColumn{
+export interface NodePositionLineColumn {
 
   line: number;
   column: number;

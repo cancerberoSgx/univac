@@ -45,6 +45,7 @@ THis is a very new project, WIP, this is the current status:
  * java9
  * lua
  * python3
+ * erlang
  * CLI
 
 ## Language grammar notes
