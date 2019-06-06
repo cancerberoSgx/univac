@@ -1,3 +1,5 @@
+import { enumKeys } from './util';
+
 interface BaseOptions {
   language: Language
   input: string
@@ -43,4 +45,4 @@ export interface NodePosition {
 }
 
 
-
+export const languages = enumKeys(Language)

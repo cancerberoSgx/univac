@@ -74,4 +74,3 @@ function getParserForLanguage(language: Language) {
     throw new Error('Language unknown: ' + language)
   }
 }
-
