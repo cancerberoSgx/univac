@@ -51,16 +51,23 @@ function getParserForLanguage(language: Language) {
   }
   else if (language === 'java9') {
     return {
-      Lexer: require('./grammar/Java9/Java9Lexer').Java9Lexer,
-      Parser: require('./grammar/Java9/Java9Parser').Java9Parser,
+      Lexer: require('./grammar/java9/Java9Lexer').Java9Lexer,
+      Parser: require('./grammar/java9/Java9Parser').Java9Parser,
       mainRule: 'compilationUnit'
     }
   }
   else if (language === 'lua') {
     return {
-      Lexer: require('./grammar/Lua/LuaLexer').LuaLexer,
-      Parser: require('./grammar/Lua/LuaParser').LuaParser,
+      Lexer: require('./grammar/lua/LuaLexer').LuaLexer,
+      Parser: require('./grammar/lua/LuaParser').LuaParser,
       mainRule: 'chunk'
+    }
+  } 
+  else if (language === 'python3') {
+    return {
+      Lexer: require('./grammar/python3/Python3Lexer').Python3Lexer,
+      Parser: require('./grammar/python3/Python3Parser').Python3Parser,
+      mainRule: 'file_input'
     }
   }
   else {

@@ -40,6 +40,7 @@ THis is a very new project, WIP, this is the current status:
  * ruby
  * java9
  * lua
+ * python3
 
 ## Language grammar notes
 
