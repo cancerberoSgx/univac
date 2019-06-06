@@ -2,10 +2,12 @@ import test from 'ava'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
 import { parseAst } from '../src/parseAst'
-import { Language } from '../src/types'
+import { Language, Node } from '../src/types'
 
-const result = parseAst({
-  input: `
+let result: Node
+test.before(async t => {
+  result = await parseAst({
+    input: `
 -module(tut1).
 -export([fac/1]).
 fac(1) ->
@@ -14,29 +16,27 @@ fac(N) ->
     N * fac(N - 1).
   
   `.trim(),
-  language: Language.erlang,
-  text: true
+    language: Language.erlang,
+    text: true
+  })
 })
 
-
-// console.log(printNode({node: result}));
-
-test('should parse', t => {
+test('should parse', async t => {
   t.is(result.children.length, 3)
 })
 
-test('should serialize', t => {
+test('should serialize', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
 
-test.skip('should throw on invalid input', t => {
-  t.throws(() => JSON.stringify(parseAst({
+test.skip('should throw on invalid input', async t => {
+  t.throws(() => parseAst({
     input: 'fac -> -> -> -> 11 f Ñ un c 8',
     language: Language.erlang
-  }), null, 2))
+  }))
 })
 
-test('generate correct ast', t => {
+test('generate correct ast', async t => {
   const o = printNode({
     node: result
   })

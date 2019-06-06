@@ -9,7 +9,7 @@ export function debug(...args: any[]) {
 }
 
 export function getAst(input: string, language: Language) {
-  const result = parseAst({ input, language, parents: true })
+  const result = await parseAst({ input, language, parents: true })
   return result
 }
 

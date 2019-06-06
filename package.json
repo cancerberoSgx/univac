@@ -6,7 +6,7 @@
   "types": "dist/src/index.d.ts",
   "bin": "bin/univac.js",
   "scripts": {
-    "test": "ava",
+    "test": "npm run build && ava",
     "test-browser": "npx ava test-browser/*Test.ts",
     "test-slow": "npx ava test/slowTests/*Test.ts",
     "test-js": " npx ava ./dist/test/*Test.js",

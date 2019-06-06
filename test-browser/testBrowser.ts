@@ -1,9 +1,11 @@
 
 import { parseAst } from '../src/parseAst'
-
-const result = parseAst({
-  input: 'int main() {}',
-  language: 'c'
-})
-
-document.write(`<pre>${JSON.stringify(result, null, 2)}</pre>`)
+import { Language } from '../src/types';
+async function main(){
+  const result = await parseAst({
+    input: 'int main() {}',
+    language: Language.c
+  })
+  document.write(`<pre>${JSON.stringify(result, null, 2)}</pre>`)
+}
+main()

@@ -2,45 +2,48 @@ import test from 'ava'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../../src'
 import { parseAst } from '../../src/parseAst'
-import { Language } from '../../src/types'
+import { Language, Node } from '../../src/types'
 
-const result = parseAst({
-  input: `
-import java.io.File;
-class Test {
-  public static boolean profile = false;
-  public static class Worker implements Runnable {
-    public long parserStart;
-    public long parserStop;
-    List<String> files;
+let result: Node
+test.before(async t => {
+  result = await parseAst({
+    input: `
+  import java.io.File;
+  class Test {
+    public static boolean profile = false;
+    public static class Worker implements Runnable {
+      public long parserStart;
+      public long parserStop;
+      List<String> files;
+    }
+    int m(String s){return s;}
   }
-  int m(String s){return s;}
-}
-  `,
-  language: Language.java9,
-  text: true
+    `,
+    language: Language.java9,
+    text: true
+  })
 })
 
 // console.log(printNode({node: result}));
 
-test('should parse', t => {
+test('should parse', async t => {
   t.is(result.children.length, 1)
 })
 
-test('should serialize', t => {
+test('should serialize', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
 
-test('should throw on invalid input', t => {
+test('should throw on invalid input', async t => {
   t.throws(() => parseAst({
     input: '--  -- `` [[ ``  ^ j + + o j+ o . Ñ  jo . 123 ( % ) . .',
     language: Language.java9
   }))
 })
 
-test('should get correct ast', t => {
+test('should get correct ast', async t => {
   t.deepEqual(printNode({
-    node: parseAst({
+    node: await parseAst({
       input: `
   class Test {
     public int i;
@@ -86,9 +89,9 @@ test('should get correct ast', t => {
 </compilationUnit>`.trim())
 })
 
-test('should get correct ast 2', t => {
+test('should get correct ast 2', async t => {
   const r = printNode({
-    node: parseAst({
+    node: await parseAst({
       input: `
 class Test<T> {
   public static boolean profile = false;

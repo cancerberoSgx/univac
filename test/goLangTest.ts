@@ -1,9 +1,11 @@
 import test from 'ava'
 import { parseAst } from '../src/parseAst'
-import { Language } from '../src/types'
+import { Language, Node } from '../src/types'
 
-const result = parseAst({
-  input: `
+let result: Node
+test.before(async t => {
+  result = await parseAst({
+    input: `
 package main
 import "fmt"
 type Person struct {
@@ -16,21 +18,24 @@ func main() {
   fmt.Println(person)  // {<nil> Michał 29}
 }
   `,
-  language: Language.golang,
-  text: true
+    language: Language.golang,
+    text: true
+  })
 })
 
-test('should parse', t => {
+test('should parse', async t => {
   t.is(result.children.length, 5)
 })
 
-test('should serialize', t => {
+test('should serialize', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
 
-test('should throw on invalid input', t => {
-  t.throws(() => JSON.stringify(parseAst({
+test('should throw on invalid input', async t => {
+  await t.throwsAsync(() => parseAst({
     input: 'func 8',
     language: Language.golang
-  }), null, 2))
+  }))
 })
+
+test.skip('ast is correct', async t => { })

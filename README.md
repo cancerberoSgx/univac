@@ -4,11 +4,11 @@ API and CLI to generate Abstract Syntax Trees (AST) of several well-known progra
 
 ## Playground - Demo
 
-[https://cancerberosgx.github.io/demos/univac/playground](Playground) (WIP)
+[Playground](https://cancerberosgx.github.io/demos/univac/playground/) (WIP)
 
 ## Features
 
- * JavaScript API both for node.js and browser. 
+ * JavaScript API for node.js and browser. 
  * Command line tool
  * TypeScript
  * ASTs for C, golang, ruby, java, python, scala, erlang, lua, dar2, kotlin, and more... 
@@ -36,7 +36,7 @@ npm i univac
 
 ```js
 import { parseAst } from 'univac'
-const ast = parseAst({
+const ast = await parseAst({
   input: 'int main() {}',
   language: 'c'
 })

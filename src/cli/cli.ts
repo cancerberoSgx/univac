@@ -7,10 +7,10 @@ interface CliOptions extends Options {
   listLanguages?: boolean
 }
 
-export function cliMain(o: Options) {
+export async function cliMain(o: Options) {
   preconditions(o)
   let input = existsSync(o.input) ? readFileSync(o.input).toString() : o.input
-  const result = parseAst({ ...o, input })
+  const result = await parseAst({ ...o, input })
   const text = o.outputStyle === 'json' ? JSON.stringify(result, null, 2) : JSON.stringify(result)
   if (o.output) {
     writeFileSync(o.output, text)

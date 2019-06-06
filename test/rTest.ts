@@ -2,36 +2,39 @@ import test from 'ava'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
 import { parseAst } from '../src/parseAst'
-import { Language } from '../src/types'
+import { Language, Node } from '../src/types'
 
-const result = parseAst({
-  input: `
+let result: Node
+test.before(async t => {
+  result = await parseAst({
+    input: `
 myString <- "Hello, World!"
 print ( myString)
 bdeff <- function(blocks, varieties) {
   blocks <- as.factor(blocks)
 }
   `,
-  language: Language.r,
-  text: true
+    language: Language.r,
+    text: true
+  })
 })
 
-test('should parse', t => {
+test('should parse', async t => {
   t.is(result.children.length, 3)
 })
 
-test('should serialize', t => {
+test('should serialize', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
 
-test('should throw on invalid input', t => {
-  t.throws(() => parseAst({
+test('should throw on invalid input', async t => {
+  await t.throwsAsync(() => parseAst({
     input: '--  -- `` [[ ``  ^ j + + o j+ o . Ñ  jo . 123 ( % ) . .',
     language: Language.kotlin
   }))
 })
 
-test('should get correct ast 2', t => {
+test('should get correct ast 2', async t => {
   const r = printNode({
     node: result
   })
