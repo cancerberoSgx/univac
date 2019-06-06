@@ -11,7 +11,7 @@ API and CLI to generate Abstract Syntax Trees (AST) of several well-known progra
  * JavaScript API both for node.js and browser. 
  * Command line tool
  * TypeScript
- * ASTs for C, golang, ruby, java, python, scala, erlang, lua, dar2, erlang, and more... 
+ * ASTs for C, golang, ruby, java, python, scala, erlang, lua, dar2, kotlin, and more... 
 
 
 ## A word of caution
@@ -70,6 +70,7 @@ THis is a very new project, WIP, this is the current status:
  * python3
  * erlang
  * dart2
+ * kotlin
  * java9 (very slow)
  * CLI
  * Basic Playground
@@ -96,3 +97,4 @@ OOP features, sorry.
 > A Java 8 grammar for ANTLR 4 derived from the Java Language Specification chapter 19.
 
 > NOTE: This grammar results in a generated parser that is much slower than the Java 7 grammar in the grammars-v4/java directory. This one is, however, extremely close to the spec.
+

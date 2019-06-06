@@ -120,10 +120,16 @@ function getParserForLanguage(language: Language): LanguageParserInfo {
       Lexer: require('./grammar/java/JavaLexer').JavaLexer,
       Parser: require('./grammar/java/JavaParser').JavaParser,
       mainRule: 'compilationUnit'
-      // ,
-      // redundantTypes: node => node.children.length === 1 && !!node.type.match(/expr[0-9]+/)
     }
   }
+  else if (language === 'kotlin') {
+    return {
+      Lexer: require('./grammar/kotlin/KotlinLexer').KotlinLexer,
+      Parser: require('./grammar/kotlin/KotlinParser').KotlinParser,
+      mainRule: 'kotlinFile',
+      redundantTypes: (node, parent) =>  ['disjunction', 'conjunction','conditionalExpression', 'equalityComparison', 'comparison', 'namedInfix', 'elvisExpression', 'infixFunctionCall', 'rangeExpression', 'additiveExpression', 'multiplicativeExpression', 'typeRHS', 'prefixUnaryExpression', 'postfixUnaryExpression'].includes(node.type) && (node.children.length === 1 ? (node.children[0].text === node.text) : node.children.length === 0) && !(!!parent && parent.text !== node.text)
+    }
+  }  
   else {
     throw new Error('Language unknown: ' + language)
   }

@@ -103,4 +103,24 @@ func main() {
     description: '',
   },
 
+  {
+    name: 'test.kt',
+    language: Language.kotlin,
+    code: `
+class Runnable<a,a>(a : doo = 0) : foo(d=0), bar by x, bar {
+}
+fun foo() {
+  when (a) {
+    a.foo<T>(a, d) -> a
+  }
+}
+enum class Color(val rgb : Int) {
+  RED(0xFF000) {
+      override fun foo(): Int { return 1 }
+  }
+}
+      `.trim(),
+    description: '',
+  },
+ 
 ]

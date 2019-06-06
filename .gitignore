@@ -11,3 +11,4 @@ log2.txt
 /package
 .vscode
 test-browser-outdir
+tmp.?*
