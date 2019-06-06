@@ -49,6 +49,13 @@ function getParserForLanguage(language: Language) {
       mainRule: 'prog'
     }
   }
+  else if (language === 'java9') {
+    return {
+      Lexer: require('./grammar/Java9/Java9Lexer').Java9Lexer,
+      Parser: require('./grammar/Java9/Java9Parser').Java9Parser,
+      mainRule: 'compilationUnit'
+    }
+  }
   else {
     throw new Error('Language unknown: ' + language)
   }

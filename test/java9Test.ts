@@ -4,10 +4,15 @@ import { Language } from '../src/types'
 
 const result = parseAst({
   input: `
-object HelloWorld {
-  def main(args: Array[String]): Unit = {
-    println("Hello, world!")
+import java.io.File;
+class Test {
+  public static boolean profile = false;
+  public static class Worker implements Runnable {
+    public long parserStart;
+    public long parserStop;
+    List<String> files;
   }
+  int m(String s){return s;}
 }
   `,
   language: Language.scala

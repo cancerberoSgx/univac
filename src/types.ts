@@ -7,7 +7,13 @@ export interface GetAstOptions extends BaseOptions {
   includeSource?: boolean;
 }
 
-export type Language = 'c' | 'golang' | 'scala' | 'ruby'
+export enum Language {
+  'c' = 'c'
+  , 'golang' = 'golang'
+  , 'scala' = 'scala'
+  , 'ruby' = 'ruby'
+  , 'java9' = 'java9'
+}
 
 export interface Options extends BaseOptions {
   output?: string

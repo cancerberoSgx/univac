@@ -1,5 +1,6 @@
 import test from 'ava'
 import { parseAst } from '../src/parseAst'
+import { Language } from '../src/types'
 
 const result = parseAst({
   input: `
@@ -15,7 +16,7 @@ func main() {
   fmt.Println(person)  // {<nil> Michał 29}
 }
   `,
-  language: 'golang'
+  language: Language.golang
 })
 
 test('should parse', t => {
@@ -29,6 +30,6 @@ test('should serialize', t => {
 test('should throw on invalid input', t => {
   t.throws(() => JSON.stringify(parseAst({
     input: 'func 8',
-    language: 'golang'
+    language: Language.golang
   }), null, 2))
 })

@@ -1,5 +1,6 @@
 import test from 'ava'
 import { parseAst } from '../src/parseAst'
+import { Language } from '../src/types'
 
 const result = parseAst({
   input: `
@@ -13,7 +14,7 @@ for(i = 1; i < length - 1; i+=1)
   end
 end
   `,
-  language: 'ruby'
+  language: Language.ruby
 })
 
 test('should parse', t => {
@@ -27,6 +28,6 @@ test('should serialize', t => {
 test.skip('should throw on invalid input', t => {
   t.throws(() => parseAst({
     input: `/&%$·@ def && 1 h 7 6 ¿Ñ`,
-    language: 'ruby'
+    language: Language.ruby
   }))
 })
