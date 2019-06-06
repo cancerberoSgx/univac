@@ -6,7 +6,16 @@ interface BaseOptions {
 }
 
 export interface GetAstOptions extends BaseOptions {
-  includeSource?: boolean;
+  text?: boolean
+  omitPosition?: boolean
+  /**
+   * Adds [[parent]] property to each node referencing node¡'s parent. Notice that the AST won't be serializable with JSON.stringify anymore because of cycles. By default is false.  
+   */
+  parents? : boolean
+  /**
+   * Adds [[source]] property to [[start]] and [[stop]] positions. By default is false. 
+   */
+  positionSource?: boolean;
 }
 
 export enum Language {
@@ -26,21 +35,21 @@ export interface Options extends BaseOptions {
 
 export interface Node {
   type: string;
-  start: NodePosition;
-  stop: NodePosition;
+  text?: string
+  start?: NodePosition;
+  stop?: NodePosition;
   children: Node[];
+  parent?: Node
 }
+export interface NodePositionLineColumn{
 
-export interface NodePosition {
-  // token: any;
-  type: string;
-  // channel: any;
-  start: number;
-  stop: number;
-  // tokenIndex: number;
   line: number;
   column: number;
-  text: string;
+}
+export interface NodePosition extends NodePositionLineColumn {
+  start: number;
+  stop: number;
+  text?: string;
   source?: string;
 }
 

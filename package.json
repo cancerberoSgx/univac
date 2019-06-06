@@ -45,7 +45,8 @@
   },
   "dependencies": {
     "antlr4": "^4.7.2",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "misc-utils-of-mine-generic": "^0.2.8"
   },
   "repository": {
     "type": "git",

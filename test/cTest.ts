@@ -1,10 +1,13 @@
 import test from 'ava'
 import { parseAst } from '../src/parseAst'
-import { Language } from '../src/types'
+import { Language, Node } from '../src/types'
+import { printNode } from '../src';
 
 const result = parseAst({
   input: 'int main() {}',
-  language: Language.c
+  language: Language.c,
+  omitPosition: true,
+  text: true
 })
 
 test('should parse', t => {
@@ -20,4 +23,27 @@ test('should throw on invalid input', t => {
     input: 'jo jo jo 123',
     language: Language.c
   }))
+})
+
+test('ast compare', t => {
+  t.is(printNode({node: result}), `<compilationUnit text="intmain(){}<EOF>">
+  <translationUnit text="intmain(){}">
+    <externalDeclaration text="intmain(){}">
+      <functionDefinition text="intmain(){}">
+        <declarationSpecifiers text="int">
+          <declarationSpecifier text="int">
+            <typeSpecifier text="int">
+            </typeSpecifier>
+          </declarationSpecifier>
+        </declarationSpecifiers><declarator text="main()">
+          <directDeclarator text="main()">
+            <directDeclarator text="main">
+            </directDeclarator>
+          </directDeclarator>
+        </declarator><compoundStatement text="{}">
+        </compoundStatement>
+      </functionDefinition>
+    </externalDeclaration>
+  </translationUnit>
+</compilationUnit>`)
 })

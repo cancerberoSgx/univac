@@ -1,5 +1,5 @@
 import { GetAstOptions, Language } from './types'
-import { getVisitorResult, Visitor } from './visitor'
+import {  Visitor } from './visitor'
 var antlr4 = require('antlr4')
 
 export function parseAst(options: GetAstOptions) {
@@ -17,7 +17,7 @@ export function parseAst(options: GetAstOptions) {
   }
   const visitor = new Visitor(options)
   tree.accept(visitor)
-  return getVisitorResult()
+  return visitor.getAst()
 }
 
 function getParserForLanguage(language: Language) {

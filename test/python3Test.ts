@@ -1,6 +1,7 @@
 import test from 'ava'
 import { parseAst } from '../src/parseAst'
 import { Language } from '../src/types'
+import { printNode } from '../src';
 
 const result = parseAst({
   input: `
@@ -40,3 +41,11 @@ test('should throw on invalid input', t => {
     language: Language.python3
   }))
 })
+
+// test('generate correct ast', t => {
+//   // t.throws(() => ))
+//   console.log(printNode({node: parseAst({
+//     input: 'a=1',
+//     language: Language.python3
+//   })}))
+// })
