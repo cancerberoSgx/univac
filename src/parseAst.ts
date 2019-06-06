@@ -4,13 +4,13 @@ var antlr4 = require('antlr4')
 
 export function parseAst(options: GetAstOptions) {
   const input = options.input
-  var { Laxer, Parser } = getParserForLanguage(options.language)
+  var { Lexer, Parser, mainRule } = getParserForLanguage(options.language)
   var chars = new antlr4.InputStream(input)
-  var lexer = new Laxer(chars)
+  var lexer = new Lexer(chars)
   var tokens = new antlr4.CommonTokenStream(lexer)
   var parser = new Parser(tokens)
   //  parser.buildParseTrees = true;
-  var tree = parser.compilationUnit()
+  var tree = parser[mainRule]()
 
   if (tree.exception) {
     throw new Error('Parser exception: ' + tree.exception)
@@ -23,8 +23,16 @@ export function parseAst(options: GetAstOptions) {
 function getParserForLanguage(language: Language) {
   if (language === 'c') {
     return {
-      Laxer: require('./grammar/c/CLexer').CLexer,
-      Parser: require('./grammar/c/CParser').CParser
+      Lexer: require('./grammar/c/CLexer').CLexer,
+      Parser: require('./grammar/c/CParser').CParser,
+      mainRule: 'compilationUnit'
+    }
+  }
+  else if (language === 'golang') {
+    return {
+      Lexer: require('./grammar/golang/GolangLexer').GolangLexer,
+      Parser: require('./grammar/golang/GolangParser').GolangParser,
+      mainRule: 'sourceFile'
     }
   }
   else {

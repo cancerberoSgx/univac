@@ -7,7 +7,7 @@ export interface GetAstOptions extends BaseOptions {
   includeSource?: boolean;
 }
 
-export type Language = 'c'
+export type Language = 'c'|'golang'
 
 export interface Options extends BaseOptions {
   output?: string
