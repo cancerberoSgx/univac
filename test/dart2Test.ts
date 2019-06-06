@@ -1,8 +1,8 @@
 import test from 'ava'
+import { removeWhites } from 'misc-utils-of-mine-generic'
+import { printNode } from '../src'
 import { parseAst } from '../src/parseAst'
 import { Language } from '../src/types'
-import { printNode } from '../src';
-import { removeWhites } from 'misc-utils-of-mine-generic';
 
 const result = parseAst({
   input: `
@@ -39,11 +39,12 @@ test.skip('should throw on invalid input', t => {
 
 test('generate correct ast', t => {
   const o = printNode({
-    node: result})
+    node: result
+  })
 
   // console.log(o);
 
-  const expected = [`<identifier text="MyClass"> </identifier> <typeParameters text="<T>"> <typeParameter text="T"> <identifier text="T">`, 
-`<fieldFormalParameter text="@requiredthis.a"> <metadata text="@required"> <qualified text="required"> <identifier text="required">`]
+  const expected = [`<identifier text="MyClass"> </identifier> <typeParameters text="<T>"> <typeParameter text="T"> <identifier text="T">`,
+    `<fieldFormalParameter text="@requiredthis.a"> <metadata text="@required"> <qualified text="required"> <identifier text="required">`]
   expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))
 })

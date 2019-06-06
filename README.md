@@ -11,7 +11,7 @@ API and CLI to generate Abstract Syntax Trees (AST) of several well-known progra
  * JavaScript API both for node.js and browser. 
  * Command line tool
  * TypeScript
- * ASTs for C, golang, ruby, java, python, scala, erlang, lua, and more... 
+ * ASTs for C, golang, ruby, java, python, scala, erlang, lua, dar2, erlang, and more... 
 
 
 ## A word of caution
@@ -65,10 +65,12 @@ THis is a very new project, WIP, this is the current status:
  * Golang
  * scala
  * ruby
- * java9
+ * java
  * lua
  * python3
  * erlang
+ * dart2
+ * java9 (very slow)
  * CLI
  * Basic Playground
 

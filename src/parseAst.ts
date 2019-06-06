@@ -75,10 +75,10 @@ function getParserForLanguage(language: Language): LanguageParserInfo {
       Lexer: require('./grammar/java9/Java9Lexer').Java9Lexer,
       Parser: require('./grammar/java9/Java9Parser').Java9Parser,
       mainRule: 'compilationUnit',
-      redundantTypes: (node, parent) =>  [
-        'primaryNoNewArray_lfno_primary', 'assignmentExpression','conditionalExpression','conditionalOrExpression','conditionalAndExpression','inclusiveOrExpression','exclusiveOrExpression','andExpression','equalityExpression','relationalExpression','shiftExpression','additiveExpression','multiplicativeExpression','unaryExpression','unaryExpressionNotPlusMinus', 'unannClassType_lfno_unannClassOrInterfaceType', 
-      ].includes(node.type) 
-       && (node.children.length === 1 ? node.children[0].text === node.text : node.children.length === 0) && !(!!parent && parent.text !== node.text)
+      redundantTypes: (node, parent) => [
+        'primaryNoNewArray_lfno_primary', 'assignmentExpression', 'conditionalExpression', 'conditionalOrExpression', 'conditionalAndExpression', 'inclusiveOrExpression', 'exclusiveOrExpression', 'andExpression', 'equalityExpression', 'relationalExpression', 'shiftExpression', 'additiveExpression', 'multiplicativeExpression', 'unaryExpression', 'unaryExpressionNotPlusMinus', 'unannClassType_lfno_unannClassOrInterfaceType',
+      ].includes(node.type)
+        && (node.children.length === 1 ? node.children[0].text === node.text : node.children.length === 0) && !(!!parent && parent.text !== node.text)
     }
   }
   else if (language === 'lua') {
@@ -113,6 +113,15 @@ function getParserForLanguage(language: Language): LanguageParserInfo {
       Parser: require('./grammar/erlang/ErlangParser').ErlangParser,
       mainRule: 'forms',
       redundantTypes: node => node.children.length === 1 && !!node.type.match(/expr[0-9]+/)
+    }
+  }
+  else if (language === 'java') {
+    return {
+      Lexer: require('./grammar/java/JavaLexer').JavaLexer,
+      Parser: require('./grammar/java/JavaParser').JavaParser,
+      mainRule: 'compilationUnit'
+      // ,
+      // redundantTypes: node => node.children.length === 1 && !!node.type.match(/expr[0-9]+/)
     }
   }
   else {

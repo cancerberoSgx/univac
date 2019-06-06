@@ -68,7 +68,7 @@ end
 
   {
     name: 'probe.java',
-    language: Language.java9,
+    language: Language.java,
     code: `
 import java.io.File;
 class Test {

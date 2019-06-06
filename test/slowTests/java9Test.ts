@@ -1,8 +1,8 @@
 import test from 'ava'
+import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../../src'
 import { parseAst } from '../../src/parseAst'
 import { Language } from '../../src/types'
-import { removeWhites } from 'misc-utils-of-mine-generic';
 
 const result = parseAst({
   input: `
@@ -101,7 +101,6 @@ class Test<T> {
       text: true
     })
   }).trim()
-
   const expected = [`<typeParameter text="T"> <identifier text="T">`,
     `<variableInitializer text="false"> <expression text="false">`,
     `<conditionalOrExpression text="1+1>0"> <relationalExpression text="1+1>0"> <relationalExpression text="1+1"> <additiveExpression text="1+1"> <additiveExpression text="1"> <postfixExpression text="1"> <primary text="1"> <literal text="1">`,
@@ -109,7 +108,7 @@ class Test<T> {
     `<classMemberDeclaration text="publicintm(String[]a){return(1+1>0||!true)?1:2<missing ';'>}"> <methodDeclaration text="publicintm(String[]a){return(1+1>0||!true)?1:2<missing ';'>}"> <methodModifier text="public">  </methodModifier> <methodHeader text="intm(String[]a)"> <result text="int"> <unannType text="int"> <unannPrimitiveType text="int"> <numericType text="int"> <integralType text="int">  </integralType>  </numericType>  </unannPrimitiveType>  </unannType>  </result> <methodDeclarator text="m(String[]a)"> <identifier text="m">  </identifier> <formalParameterList text="String[]a"> <lastFormalParameter text="String[]a"> <formalParameter text="String[]a"> <unannType text="String[]"> <unannReferenceType text="String[]"> <unannArrayType text="String[]"> <unannClassOrInterfaceType text="String"> <identifier text="String">`]
 
   expected.forEach(e => {
-    t.deepEqual(removeWhites(r), removeWhites(e))
+    t.true(removeWhites(r).includes(removeWhites(e)))
   })
 
 })

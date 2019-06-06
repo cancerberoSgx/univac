@@ -27,7 +27,8 @@ export enum Language {
   'lua' = 'lua',
   'python3' = 'python3',
   'erlang' = 'erlang',
-  'dart2' = 'dart2'
+  'dart2' = 'dart2',
+  'java' = 'java',
 }
 
 export interface Options extends BaseOptions {
