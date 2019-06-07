@@ -3,7 +3,6 @@ import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
 import { parseAst } from '../src/parseAst'
 import { Language, Node } from '../src/types'
-import { writeFileSync } from 'fs';
 
 let result: Node
 test.before(async t => {
@@ -39,7 +38,7 @@ test('should report syntax errors to given listener', async t => {
       syntaxError(a, b, c, d, msg) {
         t.true(msg.includes(`no viable alternative at input`), msg)
       }
-    } 
+    }
   })
 })
 
@@ -49,8 +48,8 @@ test('generate correct ast', async t => {
   })
   // writeFileSync('tmp.json', o)
   const expected = [`<expression text="@color">  <variableName text="@color">`,
-   `<statement text="h3{color:@color;}"> <ruleset text="h3{color:@color;}">  <selectors text="h3">`,
-  `statement text="@primarycolor:#FF7F50;"> <variableDeclaration text="@primarycolor:#FF7F50"> <variableName text="@primarycolor">  </variableName> <values text="#FF7F50"> <commandStatement text="#FF7F50"> <expression text="#FF7F50">`,
-]
+    `<statement text="h3{color:@color;}"> <ruleset text="h3{color:@color;}">  <selectors text="h3">`,
+    `statement text="@primarycolor:#FF7F50;"> <variableDeclaration text="@primarycolor:#FF7F50"> <variableName text="@primarycolor">  </variableName> <values text="#FF7F50"> <commandStatement text="#FF7F50"> <expression text="#FF7F50">`,
+  ]
   expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))
 })

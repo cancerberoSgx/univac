@@ -4,10 +4,11 @@ import { Language, Node } from './types'
 export interface ParserImpl {
   Lexer: typeof Lexer;
   Parser: typeof Parser;
+  /** some implementations require two-steps, like R or ObjectiveC. The later has a preprocessor that removes directives / spaces for its output to be compiled by the real parser. */
   Filter?: typeof Parser;
   mainRule: string;
   redundantTypes?(node: Node, parent?: Node): boolean;
-}
+} 
 
 export function getParserImpl(language: Language): ParserImpl {
   if (language === 'c') {
@@ -126,7 +127,7 @@ export function getParserImpl(language: Language): ParserImpl {
       Parser: require('./grammar/visualbasic6/VisualBasic6Parser').VisualBasic6Parser,
       mainRule: 'startRule'
     }
-  }  
+  }
   else if (language === 'less') {
     return {
       Lexer: require('./grammar/less/LessLexer').LessLexer,

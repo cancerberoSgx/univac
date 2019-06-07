@@ -12,7 +12,7 @@ grammars](https://github.com/antlr/grammars-v4)
  * JavaScript API for node.js and browser. 
  * Command line tool
  * TypeScript
- * ASTs for C, golang, ruby, java, python, scala, erlang, lua, dart2, kotlin, smalltalk, fortran77, VisualBasic6, and
+ * ASTs for C, golang, ruby, java, python, scala, erlang, lua, dart2, kotlin, smalltalk, fortran77, VisualBasic6, less wat, and
    more... 
 
 
@@ -78,6 +78,8 @@ THis is a very new project, WIP, this is the current status:
  * Fortran77
  * Smalltalk
  * VisualBasic6
+ * wat
+ * less
  * java9 (very slow)
  * CLI
  * Basic Playground

@@ -14,7 +14,7 @@ export async function parseAst(options: GetAstOptions) {
   if (info.Filter) {
     var filter = new info.Filter(tokens)
     //@ts-ignore
-    filter.stream() // call start rule: stream
+    filter.stream()
     tokens.reset()
   }
   var parser = new info.Parser(tokens)
@@ -22,24 +22,10 @@ export async function parseAst(options: GetAstOptions) {
   parser.buildParseTrees = true
   //@ts-ignore
   var tree = parser[info.mainRule]()
-  // if (tree.exception) {
-  //   throw new Error('Parser exception: ' + tree.exception)
-  // }
   const visitor = new Visitor(options)
   tree.accept(visitor)
   const ast = visitor.getAst()
   return removeRedundantNode(ast, info)
-}
-
-const defaultErrorListener: ErrorListener = {
-  syntaxError(recognizer, offendingSymbol, line, column, msg, e): void {
-  },
-  reportAmbiguity(recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs): void {
-  },
-  reportAttemptingFullContext(recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs): void {
-  },
-  reportContextSensitivity(recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs): void {
-  }
 }
 
 function removeRedundantNode(node: Node, info: ParserImpl) {
@@ -60,4 +46,13 @@ function removeRedundantNode_(node: Node, info: ParserImpl, parent?: Node, count
   return count.n
 }
 
-
+const defaultErrorListener: ErrorListener = {
+  syntaxError(recognizer, offendingSymbol, line, column, msg, e): void {
+  },
+  reportAmbiguity(recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs): void {
+  },
+  reportAttemptingFullContext(recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs): void {
+  },
+  reportContextSensitivity(recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs): void {
+  }
+}

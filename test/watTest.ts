@@ -1,9 +1,9 @@
 import test from 'ava'
+import { writeFileSync } from 'fs'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
 import { parseAst } from '../src/parseAst'
 import { Language, Node } from '../src/types'
-import { writeFileSync } from 'fs';
 
 let result: Node
 test.before(async t => {
@@ -55,7 +55,7 @@ test('should report syntax errors to given listener', async t => {
       syntaxError(a, b, c, d, msg) {
         t.true(msg.includes(`extraneous input`), msg)
       }
-    } 
+    }
   })
 })
 
@@ -68,8 +68,8 @@ test('generate correct ast', async t => {
   <memory text="(memory1)">
     <memory_fields text="1">
       <memory_type text="1">`,
-      
-      `<module_field text="(func$dummy)">
+
+    `<module_field text="(func$dummy)">
       <func text="(func$dummy)">
         <bind_var text="$dummy">
         </bind_var> <func_fields>
@@ -77,33 +77,33 @@ test('generate correct ast', async t => {
             <func_result_body>
               <func_body>
               </func_body>`,
-      
-      `<inline_export text="(export\\"empty\\")">
+
+    `<inline_export text="(export\\"empty\\")">
       <name text="\\"empty\\"">
       </name>
     </inline_export>`,
-      
-      `<instr text="(block$l)">
+
+    `<instr text="(block$l)">
       <expr text="(block$l)">
         <expr1 text="block$l">
           <bind_var text="$l">
           </bind_var>`,
-      
-      ` <plain_instr text="f64.add">
+
+    ` <plain_instr text="f64.add">
       </plain_instr> <expr text="(local.get$x)">
         <expr1 text="local.get$x">
           <plain_instr text="local.get$x">
             <var text="$x">
             </var>
           </plain_instr>`,
-      
-      `<instr_list text="(i32.const1)">
+
+    `<instr_list text="(i32.const1)">
       <instr text="(i32.const1)">
         <expr text="(i32.const1)">
           <expr1 text="i32.const1">
             <plain_instr text="i32.const1">
               <literal text="1">
               </literal>`
-]
+  ]
   expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))
 })
