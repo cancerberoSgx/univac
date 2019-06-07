@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Segment } from 'semantic-ui-react'
 import { AbstractComponent } from '../component'
 export class About extends AbstractComponent {
 

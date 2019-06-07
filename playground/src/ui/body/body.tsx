@@ -1,13 +1,13 @@
 import { asArray, notUndefined } from 'misc-utils-of-mine-generic'
 import * as React from 'react'
 import { Grid, Segment } from 'semantic-ui-react'
+import { isArray } from 'util'
 import { ParserError } from '../../app/state'
 import { select } from '../../editor/codeEditor'
+import { AstGraph } from '../astGraph/astGraph'
 import { AbstractComponent } from '../component'
 import { Ast } from './ast'
 import { CursorBreadcrumb } from './cursorBreadcrumb'
-import { AstGraph } from '../astGraph/astGraph';
-import { isArray } from 'util';
 
 export class Body extends AbstractComponent<{ activeIndex: number }> {
   render() {
@@ -20,7 +20,7 @@ export class Body extends AbstractComponent<{ activeIndex: number }> {
             <CursorBreadcrumb />
             <div id="editor-container" className="editor-container" style={{ height: '100vh', maxHeight: '60vh', margin: 0, padding: 0 }}></div>
 
-            {this.state.error && !(isArray(this.state.error ) && !this.state.error.length) ?
+            {this.state.error && !(isArray(this.state.error) && !this.state.error.length) ?
               <Segment>
                 <strong>Error! </strong><br />
                 {this.state.error instanceof Error ? <pre>
@@ -53,8 +53,8 @@ export class Body extends AbstractComponent<{ activeIndex: number }> {
 
           </Grid.Column>
           <Grid.Column floated='right' width={8}>
-          {this.state.astViewer==='default' ? <Ast /> : <AstGraph />}
-            
+            {this.state.astViewer === 'default' ? <Ast /> : <AstGraph />}
+
           </Grid.Column>
         </Grid>
       </Segment>)

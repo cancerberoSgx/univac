@@ -1,5 +1,5 @@
 
-import  * as React from 'react';
+import * as React from 'react'
 
 interface S {
   onClient?: boolean
@@ -7,7 +7,7 @@ interface S {
 interface P {
   placeholder: JSX.Element
   html: string
-  afterRender():void
+  afterRender(): void
 }
 /**
  * Placeholder when needing to prevent react to update/remove child nodes (for rich components like monaco-editor , d3 graphs, etc) that cannnot be updated / recreated each time the state changes. Sage example: 
@@ -40,22 +40,22 @@ export class GraphViewCanvas extends React.Component<P, S> {
   shouldComponentUpdate() {
     return !this.state.onClient
   }
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.props.afterRender()
   }
   componentDidMount() {
     this.setState({
       onClient: true
-    } )
+    })
   }
   state = {
     onClient: false
   }
-  render() {  
+  render() {
     if (!this.state.onClient) {
-      return this.props.placeholder;
+      return this.props.placeholder
     }
-    return <div dangerouslySetInnerHTML={{ __html: this.props.html }} />;
+    return <div dangerouslySetInnerHTML={{ __html: this.props.html }} />
   }
 
 }

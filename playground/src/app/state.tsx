@@ -1,8 +1,8 @@
 import { Token } from 'antlr4'
 import { Language, Node } from 'univac'
+import { AstGraphViewOptions, defaultAstGraphViewOptions } from '../ui/astGraph/graphViewControls'
 import { getAst } from './dispatchers'
 import { Example, examples } from "./examples"
-import { AstGraphViewOptions, defaultAstGraphViewOptions } from '../ui/astGraph/graphViewControls';
 
 export interface State {
   example: Example
@@ -18,7 +18,7 @@ export interface State {
   examples: Example[];
   sidebarVisibility: boolean;
   currentTab: number
-  astViewer: 'default'|'graph',
+  astViewer: 'default' | 'graph',
   argGraphViewOptions: AstGraphViewOptions
 }
 

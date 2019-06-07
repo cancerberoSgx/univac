@@ -33,7 +33,7 @@
 //          data: {  id: n.id ,}
 //           //  parent: p.id
 //           // }, ...p?[{
-       
+
 //           // }]:[])
 //         })
 //         if(p){
@@ -184,7 +184,7 @@
 //     ...nodes.filter(n=>n&&n.data), 
 //   // ])).flat(),
 
-  
+
 //   ],
 //   style: [ // the stylesheet for the graph
 //     {
@@ -208,7 +208,7 @@
 //     // name: 'random',
 //     // rows: 10
 //     // layout: {
-   
+
 //    ...defaultLayoutOptions
 //     // },
 //   } as any
