@@ -4,11 +4,13 @@ import * as React from 'react'
 interface S {
   onClient?: boolean
 }
+
 interface P {
   placeholder: JSX.Element
   html: string
   afterRender(): void
 }
+
 /**
  * Placeholder when needing to prevent react to update/remove child nodes (for rich components like monaco-editor , d3 graphs, etc) that cannnot be updated / recreated each time the state changes. Sage example: 
  * 
@@ -35,22 +37,27 @@ interface P {
   />
   }
  * ```
- * */
+ */
 export class GraphViewCanvas extends React.Component<P, S> {
+
   shouldComponentUpdate() {
     return !this.state.onClient
   }
+
   componentDidUpdate() {
     this.props.afterRender()
   }
+
   componentDidMount() {
     this.setState({
       onClient: true
     })
   }
+
   state = {
     onClient: false
   }
+
   render() {
     if (!this.state.onClient) {
       return this.props.placeholder

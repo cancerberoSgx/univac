@@ -5,13 +5,10 @@ import './astGraph.css'
 import { getGraphNodesFor } from './buildGraphNodes'
 import { GraphViewCanvas } from './graphViewCanvas'
 import { AstGraphViewOptions, Controls, defaultAstGraphViewOptions } from './graphViewControls'
+import { Node } from 'univac';
+import { highlightNodesInEditor } from '../../editor/codeEditor';
 var navigator = require('cytoscape-navigator')
-
 cytoscape.use(navigator)
-
-// interface P{
-// containerEl: HTMLElement
-// }
 
 var navigatorDefaults = {
   container: null//document.getElementById('minimap') // can be a HTML or jQuery element or jQuery selector
@@ -23,48 +20,10 @@ var navigatorDefaults = {
   , rerenderDelay: 100 // ms to throttle rerender updates to the panzoom for performance
 }
 
-
 export class AstGraph extends AbstractComponent {
   cy: cytoscape.Core | undefined
 
-  // shouldComponentUpdate(nextProps: any, nextState: Readonly<State>, nextContext: any) {
-  //   return false
-  // //   return nextState.ast !== this.state.ast && this.state.astAutoUpdate ||
-  // //     nextState.astAutoUpdate !== this.state.astAutoUpdate ||
-  // //     nextState.expandNegated !== this.state.expandNegated ||
-  // //     nextState.astShowText !== this.state.astShowText ||
-  // //     nextState.example.name !== this.state.example.name ||
-  // //     nextState.expandedNodes.length !== this.state.expandedNodes.length
-  // }
-
-  // componentDidMount(){
-
-  // }
-
-  // state = {
-  //   onClient: false
-  // };
-  // constructor(p:any,s:S){
-  //   super(s,p)
-  //   this.state={...this.state, onClient: false }
-  // }
-
-  // componentDidUpdate(){
-  //   debugger
-  //   const canvasContainer = document.querySelector<HTMLDivElement>('.astGraphCanvasContainer')
-  //   const minimapContainer = document.querySelector<HTMLDivElement>('.astGraphMinimapContainer')
-  //  this.canvasContainerReady(canvasContainer)
-  //  this.navigatorContainerReady (minimapContainer)
-  // }
-  // render() {
-
-  // }
-
   render() {
-    // if(!this.cy){
-    //   // debugger
-    //   return <p>Loading...</p>
-    // }
     return <>
       <Controls setOptions={o => this.setControlOptions(o)} />
       <GraphViewCanvas
@@ -74,8 +33,8 @@ export class AstGraph extends AbstractComponent {
       </div>
         }
         html={`
-<div class="astGraphCanvasContainer">HHHOOOLA</div>
-<div class="astGraphMinimapContainer"  ></div>
+<div class="astGraphCanvasContainer"></div> 
+<div class="astGraphMinimapContainer"></div>
     `} // this won't re-render
         afterRender={() => {
           const canvasContainer = document.querySelector<HTMLDivElement>('.astGraphCanvasContainer')
@@ -94,7 +53,6 @@ export class AstGraph extends AbstractComponent {
   }
 
   navigatorContainerReady(container: HTMLDivElement | null): void {
-    debugger
     if (!container) {
       return
     }
@@ -102,12 +60,15 @@ export class AstGraph extends AbstractComponent {
   }
 
   canvasContainerReady(container: HTMLDivElement | null): void {
-    debugger
     if (!container) {
       return
     }
     let node = this.state.ast
-    const elements = getGraphNodesFor(node)
+    const elements = getGraphNodesFor(node).map(e=>({
+      ...e,
+      grabbable: true, // whether the node can be grabbed and moved by the user
+      pannable: false, // whether dragging the node causes panning instead of grabbing
+    }))
     this.cy = cytoscape({
       container,
       elements,
@@ -115,7 +76,7 @@ export class AstGraph extends AbstractComponent {
         {
           selector: 'node',
           style: {
-            'background-color': '#666',
+            'background-color': '#955a9',
             'label': 'data(id)'
           }
         },
@@ -123,7 +84,7 @@ export class AstGraph extends AbstractComponent {
           selector: 'edge',
           style: {
             'width': 3,
-            'line-color': '#ccc',
+            'line-color': '#66bb11',
             'target-arrow-color': '#ccc',
             'target-arrow-shape': 'triangle'
           }
@@ -133,6 +94,13 @@ export class AstGraph extends AbstractComponent {
         ...defaultAstGraphViewOptions, container
       } as any
     })
+    this.cy.on('click', e=>{
+      const node = e.target.data().__astNode as Node      
+      if(!node){
+        return
+      }
+      highlightNodesInEditor([node])
+    } )
 
   }
 }

@@ -11,12 +11,10 @@ import { CursorBreadcrumb } from './cursorBreadcrumb'
 
 export class Body extends AbstractComponent<{ activeIndex: number }> {
   render() {
-    // console.log(this.state.error)
-
     return (
       <Segment basic className="appBody">
         <Grid>
-          <Grid.Column floated='left' width={8}>
+          <Grid.Column floated='left' width={this.state.astViewer==='graph' ? 6 : 8}>          
             <CursorBreadcrumb />
             <div id="editor-container" className="editor-container" style={{ height: '100vh', maxHeight: '60vh', margin: 0, padding: 0 }}></div>
 
@@ -29,14 +27,9 @@ export class Body extends AbstractComponent<{ activeIndex: number }> {
                 </pre> :
                   <ul>
                     {
-
-                      // this.state.error instanceof Error? '':
-
                       asArray(this.state.error!).filter(notUndefined).map(error =>
-                        // if( this.state.error&& this.state.error instanceof Error){return}
                         <li><a href="#" onClick={e => {
                           if (this.state.error && this.state.error instanceof Error) { return }
-                          // if(  this.state.error instanceof Error){return}
                           const sel = asArray(this.state.error!).filter(notUndefined).map((error: ParserError) => ({
                             selectionStartColumn: Math.max(0, error.column - 5),
                             selectionStartLineNumber: error.line,
@@ -52,9 +45,9 @@ export class Body extends AbstractComponent<{ activeIndex: number }> {
               : <></>}
 
           </Grid.Column>
-          <Grid.Column floated='right' width={8}>
+          <Grid.Column floated='right' width={this.state.astViewer==='graph' ? 10 : 8}>
             {this.state.astViewer === 'default' ? <Ast /> : <AstGraph />}
-
+                
           </Grid.Column>
         </Grid>
       </Segment>)

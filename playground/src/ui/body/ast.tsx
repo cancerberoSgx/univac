@@ -7,9 +7,6 @@ import { Space } from '../common/uiUtil'
 import { AbstractComponent } from '../component'
 
 export class Ast extends AbstractComponent {
-  // componentWillMount() {
-  //   this.forceUpdate()
-  // }
 
   shouldComponentUpdate(nextProps: any, nextState: Readonly<State>, nextContext: any) {
     return nextState.ast !== this.state.ast && this.state.astAutoUpdate ||

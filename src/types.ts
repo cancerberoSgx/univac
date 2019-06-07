@@ -35,7 +35,9 @@ export enum Language {
   'r' = 'r',
   'fortran77' = 'fortran77',
   'smalltalk' = 'smalltalk',
-  'visualbasic6' = 'visualbasic6'
+  'visualbasic6' = 'visualbasic6',
+  'less' = 'less',
+  'wat' = 'wat',
 }
 
 export interface Options extends BaseOptions {

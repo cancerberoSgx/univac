@@ -126,6 +126,20 @@ export function getParserImpl(language: Language): ParserImpl {
       Parser: require('./grammar/visualbasic6/VisualBasic6Parser').VisualBasic6Parser,
       mainRule: 'startRule'
     }
+  }  
+  else if (language === 'less') {
+    return {
+      Lexer: require('./grammar/less/LessLexer').LessLexer,
+      Parser: require('./grammar/less/LessParser').LessParser,
+      mainRule: 'stylesheet'
+    }
+  }
+  else if (language === 'wat') {
+    return {
+      Lexer: require('./grammar/wat/WatLexer').WatLexer,
+      Parser: require('./grammar/wat/WatParser').WatParser,
+      mainRule: 'module'
+    }
   }
   else {
     throw new Error('Language unknown: ' + language)

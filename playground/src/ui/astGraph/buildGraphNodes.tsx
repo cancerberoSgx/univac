@@ -15,7 +15,7 @@ export function getGraphNodesFor(node: Node) {
       }
       n.id = unique(n.type || 'ROOT')
       nodes.push({
-        data: { id: n.id, }
+        data: { id: n.id, __astNode: n }
       })
       if (p) {
         nodes.push({ data: { id: p.id + n.id, source: p.id, target: n.id } })
