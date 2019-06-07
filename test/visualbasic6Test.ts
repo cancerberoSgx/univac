@@ -75,7 +75,7 @@ test('should parse', async t => {
 test('should serialize', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
- 
+
 test('should report syntax errors to given listener', async t => {
   await parseAst({
     input: '.',

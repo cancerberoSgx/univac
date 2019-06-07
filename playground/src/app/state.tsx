@@ -2,6 +2,7 @@ import { Token } from 'antlr4'
 import { Language, Node } from 'univac'
 import { getAst } from './dispatchers'
 import { Example, examples } from "./examples"
+import { AstGraphViewOptions, defaultAstGraphViewOptions } from '../ui/astGraph/graphViewControls';
 
 export interface State {
   example: Example
@@ -17,7 +18,10 @@ export interface State {
   examples: Example[];
   sidebarVisibility: boolean;
   currentTab: number
+  astViewer: 'default'|'graph',
+  argGraphViewOptions: AstGraphViewOptions
 }
+
 export interface ParserError {
   offendingSymbol: Token
   line: number
@@ -25,6 +29,7 @@ export interface ParserError {
   msg: string
   e: any
 }
+
 export async function getInitialState(): Promise<State> {
   const example = examples[0]
   const { ast, error } = await getAst(example.code, example.language)
@@ -41,6 +46,8 @@ export async function getInitialState(): Promise<State> {
     logs: [],
     sidebarVisibility: false,
     examples: [],
-    currentTab: 0
+    currentTab: 0,
+    astViewer: 'default',
+    argGraphViewOptions: defaultAstGraphViewOptions
   }
 }

@@ -6,10 +6,12 @@ import { select } from '../../editor/codeEditor'
 import { AbstractComponent } from '../component'
 import { Ast } from './ast'
 import { CursorBreadcrumb } from './cursorBreadcrumb'
+import { AstGraph } from '../astGraph/astGraph';
+import { isArray } from 'util';
 
 export class Body extends AbstractComponent<{ activeIndex: number }> {
   render() {
-    console.log(this.state.error)
+    // console.log(this.state.error)
 
     return (
       <Segment basic className="appBody">
@@ -18,7 +20,7 @@ export class Body extends AbstractComponent<{ activeIndex: number }> {
             <CursorBreadcrumb />
             <div id="editor-container" className="editor-container" style={{ height: '100vh', maxHeight: '60vh', margin: 0, padding: 0 }}></div>
 
-            {this.state.error ?
+            {this.state.error && !(isArray(this.state.error ) && !this.state.error.length) ?
               <Segment>
                 <strong>Error! </strong><br />
                 {this.state.error instanceof Error ? <pre>
@@ -26,7 +28,6 @@ export class Body extends AbstractComponent<{ activeIndex: number }> {
                   {this.state.error.stack || + ''}
                 </pre> :
                   <ul>
-
                     {
 
                       // this.state.error instanceof Error? '':
@@ -52,7 +53,8 @@ export class Body extends AbstractComponent<{ activeIndex: number }> {
 
           </Grid.Column>
           <Grid.Column floated='right' width={8}>
-            <Ast />
+          {this.state.astViewer==='default' ? <Ast /> : <AstGraph />}
+            
           </Grid.Column>
         </Grid>
       </Segment>)

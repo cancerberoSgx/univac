@@ -119,7 +119,7 @@ export function getParserImpl(language: Language): ParserImpl {
       Parser: require('./grammar/smalltalk/SmalltalkParser').SmalltalkParser,
       mainRule: 'script'
     }
-  }  
+  }
   else if (language === 'visualbasic6') {
     return {
       Lexer: require('./grammar/visualbasic6/VisualBasic6Lexer').VisualBasic6Lexer,
