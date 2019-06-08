@@ -1,6 +1,6 @@
 {
   "name": "render-dot",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Render Graphviz .dot files to svg, png, dotx, json, using several graph engines, for browser, node and command line",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",

@@ -1,6 +1,6 @@
 export interface Options {
   /**
-   * .dot code to render.
+   * .dot code to render. For Command line, it can also be path to .dot files or glob pattern to many .dot files, relative to current dir.
    */
   input: string;
 
@@ -10,7 +10,7 @@ export interface Options {
   width?: number;
 
   /**
-   * 
+   * Output image height. 
    */
   height?: number;
 
