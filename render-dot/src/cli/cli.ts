@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { sync as glob } from 'glob'
 import { serial } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
@@ -13,30 +13,53 @@ interface CliOptions extends Options {
   output?: string
 
   help?: boolean
+
+  debug?: boolean
 }
 
 export async function cliMain(o: CliOptions) {
-  preconditions(o)
-  const files = glob(o.input).filter(existsSync)
+  try {
 
-  let input = files.length ? files.map(f => ({
-    name: basename(f),
-    content: readFileSync(f).toString()
-  })) : [{
-    name: 'input.dot',
-    content: o.input
-  }]
+    preconditions(o)
 
-  const results = await serial(input.map(input => async () => ({ name: input.name + '.svg', content: await renderDot({ ...o, input: input.content }) })))
+    const files = glob(o.input).filter(existsSync)
 
-  // const result = await renderDot({ ...o, input })
-  if (o.output) {
-    results.forEach(result => writeFileSync(join(o.output || '.', result.name), result.content))
+    const input = files.length ? files.map(f => ({
+      name: f,
+      content: readFileSync(f).toString()
+    })) : [{
+      name: 'input.dot',
+      content: o.input
+    }]
+
+    if (o.output && !existsSync(o.output)) {
+      mkdirSync(o.output, { recursive: true })
+    }
+
+    await serial(input.map(input => async () => {
+      try {
+        o.debug && console.log('Rendering ' + input.name)
+        const result = ({ name: input.name + '.svg', content: await renderDot({ ...o, input: input.content }) })
+        if (o.output) {
+          const file = join(o.output, basename(result.name))
+          o.debug && console.log('Writing ' + file)
+          writeFileSync(file, result.content)
+        }
+        else {
+          process.stdout.write(result.content)
+        }
+        return result
+      } catch (error) {
+        console.error('ERROR while rendering file ' + input.name)
+        console.error(error)
+      }
+    }))
+
+    terminateLibrary()
+
+  } catch (error) {
+    fail(error)
   }
-  else {
-    results.forEach(result => process.stdout.write(result.content))
-  }
-  terminateLibrary()
 }
 
 function preconditions(options: CliOptions) {
@@ -50,7 +73,7 @@ function preconditions(options: CliOptions) {
   }
 }
 
-function fail(s: string) {
+function fail(s: string | Error) {
   console.error(s)
   terminateLibrary()
   process.exit(1)
@@ -60,8 +83,7 @@ function printHelp() {
   console.log(`
 Usage: 
 
-univac --language python3 --input src/main.py --output main.py.ast
-
-Options:
-  `)
+render-dot --input "**/*go*/*.dot" --output ../svgs
+render-dot --input graph1.dot > graph1.svg
+`)
 }

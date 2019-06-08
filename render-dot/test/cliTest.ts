@@ -10,7 +10,7 @@ test('should output to stdout if no --output', async t => {
 
 test('should accept globs and output folder', async t => {
   const result = execSync('rm -rf tmp; mkdir -p tmp; node bin/render-dot.js --input "test/**/*.dot" --output tmp', { stdio: 'pipe' })
-  console.log(readdirSync('tmp'))
+  // console.log(readdirSync('tmp'))
   t.deepEqual(readdirSync('tmp'), ['C.blockItem.dot.svg', 'JavaParser.classCreatorRest.dot.svg'])
 })
 
