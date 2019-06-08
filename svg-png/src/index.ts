@@ -1,2 +1,2 @@
 export {Options} from './types'
-export * from './rasterizeSVG'
+export * from './svg2png'

@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { sync as glob } from 'glob'
 import { serial } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
-import { rasterizeSVG } from '../rasterizeSVG'
+import { svg2png } from '../svg2png'
 import { Options } from '../types';
 
 export async function cliMain(o: Options) {
@@ -27,7 +27,7 @@ export async function cliMain(o: Options) {
     await serial(input.map(input => async () => {
       try {
         o.debug && console.log('Rendering ' + input.name)
-        const result = ({ name: input.name + '.svg', content: await rasterizeSVG({ ...o, input: input.content }) })
+        const result = ({ name: input.name + '.svg', content: await svg2png({ ...o, input: input.content }) })
         if (o.output) {
           const file = join(o.output, basename(result.name))
           o.debug && console.log('Writing ' + file)

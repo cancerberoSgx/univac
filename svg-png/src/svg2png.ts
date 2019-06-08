@@ -3,7 +3,7 @@ import {fabric, } from 'fabric'
 import { fabricImageFromData } from "./fabric";
 import { Base64 } from 'js-base64';
 
-export async function rasterizeSVG(options: Options) {
+export async function svg2png(options: Options) {
   var canvas = new fabric.Canvas('c');
   canvas.add(await fabricImageFromData(options.input, 'svg'));
   const s =  canvas.toDataURL({ format: options.format||'png'})

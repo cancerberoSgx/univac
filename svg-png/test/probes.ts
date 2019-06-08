@@ -1,9 +1,9 @@
 import { writeFileSync, readFile, readFileSync } from 'fs';
 import { fabricImageFromUrl, fabricImageFromData } from "../src/fabric";
 import { potraceTrace, potracePosterize } from "../src/potrace";
-import { rasterizeSVG } from '../src/rasterizeSVG';
+import { svg2png } from '../src/svg2png';
 import {fabric, } from 'fabric'
-import { svg } from './code';
+import { svg } from './assets/code';
 
 function fabricTest() {
  var canvas = new fabric.Canvas('c');
@@ -13,25 +13,18 @@ function fabricTest() {
   radius: 50,
   fill: 'red'
 }));
-// console.log(JSON.stringify(canvas.toDataURL('png')))
-
 let s = canvas.toDataURL({format: 'png'})
 var base64Data = s.substring(s.indexOf(';base64,')+';base64,'.length)
 writeFileSync("tmp.png", base64Data, 'base64')
-
 s = canvas.toDataURL({format: 'jpeg'})
 var base64Data = s.substring(s.indexOf(';base64,')+';base64,'.length)
 writeFileSync("tmp.jpeg", base64Data, 'base64')
-
 writeFileSync("tmp.svg", canvas.toSVG())
 }
 
 // fabricTest()
 
-
-
 async function fabricTest2() {
-
   var canvas = new fabric.Canvas('c')
   canvas.add( await fabricImageFromData(svg, 'svg'))
   let s = ''
@@ -43,9 +36,9 @@ writeFileSync("tmp2.png", base64Data, 'base64')
 
 
 async function fabricTest22() {
-  let s = await rasterizeSVG({input: svg.trim(), encoding: 'raw' });
+  let s = await svg2png({input: svg.trim(), encoding: 'raw' });
 writeFileSync("tmp22.png", Buffer.from(s, 'binary') )
-writeFileSync("tmp22.jpeg", Buffer.from( await rasterizeSVG({input: svg.trim(), encoding: 'raw' , format: 'jpeg'}), 'binary'))
+writeFileSync("tmp22.jpeg", Buffer.from( await svg2png({input: svg.trim(), encoding: 'raw' , format: 'jpeg'}), 'binary'))
 }
 fabricTest22()
 

@@ -12,11 +12,13 @@ export interface PotracePosterizeOptions extends PotraceTraceOptions {
    *  a long time
    */
   steps?: number;
+
   /**
    *  How to select fill color for color ranges - equally spread or dominant. (default:
    *  PotraceFillPolicy.FILL_DOMINANT).
    */
   fill?: PotraceFillPolicy;
+
   /**
    * How to choose thresholds in-between - after equal intervals or automatically balanced. (default:
    * PotraceRangeDistributionPolicy.RANGES_AUTO).
@@ -29,38 +31,47 @@ export interface PotraceTraceOptions {
    * how to resolve ambiguities in path decomposition (default PotraceTurnPolicy.TURNPOLICY_MINORITY).
    */
   turnPolicy?: PotraceTurnPolicy;
+  
   /**
    * suppress speckles of up to this size (default 2).
    */
   turdSize?: number;
+  
   /**
    * corner threshold parameter (default 1).
    */
   alphaMax?: number;
+  
   /**
    * curve optimization (default true).
    */
   optCurve?: boolean;
+  
   /**
    * curve optimization tolerance (default 0.2).
    */
   optTolerance?: number;
+  
   /**
    * threshold below which color is considered black (0..255, default Potrace.THRESHOLD_AUTO).
    */
   threshold?: number;
+  
   /**
    * specifies colors by which side from threshold should be traced (default true).
    */
   blackOnWhite?: boolean;
+  
   /**
    * foreground color (default: 'auto' (black or white)) Will be ignored when exporting as <symbol>.
    */
   color?: string;
+  
   /**
    * background color (default: 'transparent') Will be ignored when exporting as <symbol>.
    */
   background?: string;
+  
 }
 
 export enum Potrace {
