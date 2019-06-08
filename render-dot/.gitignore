@@ -15,4 +15,4 @@ tmp.?*
 .antlr
 grammar-graph
 render-dot
-/tmp
+/tmp*

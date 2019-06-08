@@ -4,20 +4,9 @@ import { serial } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
 import { terminateLibrary } from '../library'
 import { renderDot } from '../renderDot'
-import { Options } from '../types'
+import { Options } from '../types';
 
-interface CliOptions extends Options {
-  /**
-   * Folder for output files. If none output will be written to stdout.
-   */
-  output?: string
-
-  help?: boolean
-
-  debug?: boolean
-}
-
-export async function cliMain(o: CliOptions) {
+export async function cliMain(o: Options) {
   try {
 
     preconditions(o)
@@ -62,7 +51,7 @@ export async function cliMain(o: CliOptions) {
   }
 }
 
-function preconditions(options: CliOptions) {
+function preconditions(options: Options) {
   if (options.help) {
     printHelp()
     terminateLibrary()

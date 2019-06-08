@@ -22,9 +22,12 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/fabric": "^2.6.14",
     "@types/glob": "^7.1.1",
+    "@types/jsdom": "^12.2.3",
     "@types/node": "^12.0.7",
     "ava": "^2.0.0",
+    "fabric": "^3.1.0",
     "ts-node": "^8.2.0",
     "ts-refactor": "0.0.6",
     "typescript": "^3.5.1"
@@ -34,6 +37,7 @@
     "minimist": "^1.2.0",
     "misc-utils-of-mine-generic": "^0.2.8",
     "tiny-worker": "^2.2.0",
+    "universal-base64": "^2.1.0",
     "viz.js": "^2.1.2"
   },
   "keywords": [
