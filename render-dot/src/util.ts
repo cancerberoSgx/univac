@@ -1,18 +1,18 @@
-import { join } from 'path';
-import { existsSync } from 'fs';
+import { existsSync } from 'fs'
+import { join } from 'path'
 
-let packageJsonFolder: string | undefined;
+let packageJsonFolder: string | undefined
 export function getPackageJsonFolder(f = process.cwd()): string | undefined {
   if (!packageJsonFolder) {
     if (existsSync(join(f, 'package.json')) && existsSync(join(f, 'node_modules'))) {
-      packageJsonFolder = f;
+      packageJsonFolder = f
     }
     else {
-      const p = join(f, '..');
+      const p = join(f, '..')
       if (p && p !== '/') {
-        packageJsonFolder = getPackageJsonFolder(p);
+        packageJsonFolder = getPackageJsonFolder(p)
       }
     }
   }
-  return packageJsonFolder;
+  return packageJsonFolder
 }

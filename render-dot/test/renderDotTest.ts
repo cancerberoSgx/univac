@@ -1,6 +1,6 @@
 import test from 'ava'
-import { renderDot } from '../src/renderDot';
-import { terminateLibrary } from '../src/library';
+import { terminateLibrary } from '../src/library'
+import { renderDot } from '../src/renderDot'
 
 test.after(async t => {
   await terminateLibrary()
