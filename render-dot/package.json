@@ -1,26 +1,22 @@
 {
-  "name": "univac",
+  "name": "render-dot",
   "version": "0.0.1",
-  "description": "Generate AST of lots of common programming languages using antlr4. JavaScript API and CLI tool.",
+  "description": "Render Graphviz dot files to svg, png using several graph engines, for browser and node",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "bin": "bin/univac.js",
   "scripts": {
     "test": "npm run build && ava",
     "test-browser": "npx ava test-browser/*Test.ts",
-    "test-slow": "npx ava test/slowTests/*Test.ts",
     "test-js": " npx ava ./dist/test/*Test.js",
     "test-watch": "ava -w",
     "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
     "clean": "rm -rf dist docs test-browser-outdir",
-    "build": "npm run clean && npx tsc && npm run copy",
-    "copy": "rm -rf dist/src/grammar && mkdir -p dist/src/grammar && cp -r src/grammar/* dist/src/grammar",
-    "prepare": "npm run build",
+    "build": "npm run clean && npx tsc",
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
     "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run test-browser",
-    "all-apps": "npm run all && cd playground && npm run all",
     "all-publish": "npm run all && git commit -a -m \"version patch\" && npm version patch && npm publish"
   },
   "license": "MIT",
@@ -33,22 +29,15 @@
     "puppeteer": "^1.17.0",
     "ts-node": "^8.2.0",
     "ts-refactor": "0.0.6",
+    "viz.js": "^2.1.2",
     "typescript": "^3.5.1"
   },
-  "dependencies": {
-    "antlr4": "^4.7.2",
-    "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.8"
-  },
   "keywords": [
-    "typescript",
-    "javascript",
-    "antlr4",
-    "grammars",
-    "ast",
-    "parser",
-    "C parser",
-    "astq"
+    "Graphviz",
+    "dot",
+    "dot format",
+    "graph",
+    "svg", "render"
   ],
   "author": {
     "name": "Sebastian Gurin",
