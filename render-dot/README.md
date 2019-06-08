@@ -29,7 +29,7 @@ const svgCode = await renderDot({
 ### Command Line
 
 ```sh
-render-dot --input a/dot/file.dot --output tmp.svg
+render-dot --input "some/**/*.dot" --output outputFolder
 render-dot --input "digraph { a -> b; }" > tmp.svg
 ```
 
@@ -47,7 +47,7 @@ See [types.ts](src/types.ts). Options apply both to JavaScript API and CLI.
 
 ## Road map
 
- [ ] CLI
+ [x] CLI
  [ ] Browser
  [ ] browser tests
  [ ] keep investigating if it's possible to input several .dot files and render them all together biding common elements.

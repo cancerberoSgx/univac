@@ -1,22 +1,40 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { sync as glob } from 'glob'
+import { serial } from 'misc-utils-of-mine-generic'
+import { basename, join } from 'path'
 import { terminateLibrary } from '../library'
 import { renderDot } from '../renderDot'
 import { Options } from '../types'
 
 interface CliOptions extends Options {
-  help?: boolean
+  /**
+   * Folder for output files. If none output will be written to stdout.
+   */
   output?: string
+
+  help?: boolean
 }
 
 export async function cliMain(o: CliOptions) {
   preconditions(o)
-  let input = existsSync(o.input) ? readFileSync(o.input).toString() : o.input
-  const result = await renderDot({ ...o, input })
+  const files = glob(o.input).filter(existsSync)
+
+  let input = files.length ? files.map(f => ({
+    name: basename(f),
+    content: readFileSync(f).toString()
+  })) : [{
+    name: 'input.dot',
+    content: o.input
+  }]
+
+  const results = await serial(input.map(input => async () => ({ name: input.name + '.svg', content: await renderDot({ ...o, input: input.content }) })))
+
+  // const result = await renderDot({ ...o, input })
   if (o.output) {
-    writeFileSync(o.output, result)
+    results.forEach(result => writeFileSync(join(o.output || '.', result.name), result.content))
   }
   else {
-    process.stdout.write(result)
+    results.forEach(result => process.stdout.write(result.content))
   }
   terminateLibrary()
 }
