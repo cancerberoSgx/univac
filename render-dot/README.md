@@ -22,13 +22,16 @@ npm install render-dot
 import {renderDot} from 'render-dot'
 
 const svgCode = await renderDot({
-  code: 'digraph { a -> b; }'
+  input: 'digraph { a -> b; }'
 })
 ```
 
 ### Command Line
 
-TODO
+```sh
+render-dot --input a/dot/file.dot --output tmp.svg
+render-dot --input "digraph { a -> b; }" > tmp.svg
+```
 
 ## Options
 

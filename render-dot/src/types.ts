@@ -2,7 +2,7 @@ export interface Options {
   /**
    * .dot code to render.
    */
-  code: string;
+  input: string;
 
   /**
    * Output image width. 
@@ -28,6 +28,7 @@ export interface Options {
    * Format of output image.
    */
   mimeType?: 'image/jpeg' | 'image/png';
+
   /** 
    * Quality of output image.
    */

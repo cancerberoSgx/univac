@@ -4,6 +4,7 @@
   "description": "Render Graphviz .dot files to svg, png, dotx, json, using several graph engines, for browser, node and command line",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
+  "bin": "bin/render-dot.js",
   "scripts": {
     "test": "npm run build && ava",
     "test-browser": "exit 0; npx ava test-browser/*Test.ts",
