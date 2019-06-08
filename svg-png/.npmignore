@@ -37,4 +37,6 @@ grammar-graph
 tmp.json
 .DS_Store
 render-dot
+svg-png
 /tmp*
+.cache
