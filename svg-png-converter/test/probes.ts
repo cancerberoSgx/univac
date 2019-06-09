@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'fs'
 import { svg2png } from '../src/svg2png'
 
 async function base55() {
-  writeFileSync('tmp.txt', readFileSync('/Users/sebastiangurin/Downloads/chart2.pngw').toString('base64'))
+  writeFileSync('tmp.txt', readFileSync('/Users/sebastiangurin/Downloads/photo.jpg').toString('base64'))
 }
 base55()
 

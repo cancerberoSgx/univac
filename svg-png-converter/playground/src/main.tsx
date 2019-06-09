@@ -5,15 +5,15 @@
 
 // import { isNode } from 'misc-utils-of-mine-generic';
 // if(!isNode()){
-  // debugger
-  
-  // (window as any).Buffer = (self as any).Buffer = require('buffer/').Buffer  ;
-  // (window as any).Jimp = (self as any).Jimp = require('jimp/index')
+// debugger
 
-  // var Jimp = require('jimp')  as any
-  // (window as any).Jimp = (self as any).Jimp = Jimp
+// (window as any).Buffer = (self as any).Buffer = require('buffer/').Buffer  ;
+// (window as any).Jimp = (self as any).Jimp = require('jimp/index')
 
-  // debugger
+// var Jimp = require('jimp')  as any
+// (window as any).Jimp = (self as any).Jimp = Jimp
+
+// debugger
 // }
 
 

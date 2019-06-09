@@ -1,13 +1,15 @@
-import {SVG2PNGOptions, PNG2SVGOptions} from 'svg-png-converter'
-import {RemoveProperties} from 'misc-utils-of-mine-generic'
-import { something_png } from './files/something_jpg';
-import { graph1_svg } from './files/graph1_svg';
-import { yao_jpg } from './files/yao_jpg';
-import { panda_png } from './files/panda_png';
-import { shade_blur_and_gradients43 } from './files/shade_blur_and_gradients43';
-import { hierarchy1_svg } from './files/hierarchy1_svg';
-import { hierarchy2_svg } from './files/hierarchy2_svg';
-import { hierarchy2_png } from './files/hierarchy2_png';
+import { RemoveProperties } from 'misc-utils-of-mine-generic'
+import { PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
+import { graph1_svg } from './files/graph1_svg'
+import { hierarchy1_svg } from './files/hierarchy1_svg'
+import { hierarchy2_png } from './files/hierarchy2_png'
+import { hierarchy2_svg } from './files/hierarchy2_svg'
+import { panda_png } from './files/panda_png'
+import { photo1_jpg } from './files/photo1_jpg'
+import { shade_blur_and_gradients43 } from './files/shade_blur_and_gradients43'
+import { something_png } from './files/something_jpg'
+import { tiger_svg } from './files/tiger_svg'
+import { yao_jpg } from './files/yao_jpg'
 
 export interface Example {
   code: string;
@@ -43,7 +45,7 @@ export const examples: Example[] = [
     code: something_png.trim(),
     description: ' ',
   },
-  
+
   {
     name: 'yao.jpg',
     outputName: 'yao.svg',
@@ -52,7 +54,7 @@ export const examples: Example[] = [
     code: yao_jpg.trim(),
     description: ' ',
   },
-   
+
   {
     name: 'panda.png',
     outputName: 'panda.svg',
@@ -90,14 +92,32 @@ export const examples: Example[] = [
     code: hierarchy2_svg.trim(),
     description: ' ',
   },
-  
+
   {
     name: 'hierarchy2.png',
     outputName: 'hierarchy2.svg',
     png2svg: {
     },
-    code: hierarchy2_png.trim
-    (),
+    code: hierarchy2_png.trim(),
+    description: ' ',
+  },
+
+  {
+    name: 'tiger.svg',
+    outputName: 'tiger.jpg',
+    svg2png: {
+      format: 'jpeg'
+    },
+    code: tiger_svg.trim(),
+    description: ' ',
+  },
+
+  {
+    name: 'photo1.jpg',
+    outputName: 'photo1.svg',
+    png2svg: {
+    },
+    code: photo1_jpg.trim(),
     description: ' ',
   },
 

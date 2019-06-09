@@ -61,12 +61,12 @@
     "email": "sebastigurin@gmail.com",
     "url": "http://sgurin.com"
   },
-  "homepage": "https://github.com/cancerberoSgx/univac/svg-png-converter",
+  "homepage": "https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter",
   "repository": {
     "type": "git",
     "url": "https://github.com/cancerberoSgx/univac.git"
   },
   "bugs": {
-    "url": "https://github.com/cancerberoSgx/univac/svg-png-converter"
+    "url": "https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter"
   }
 }

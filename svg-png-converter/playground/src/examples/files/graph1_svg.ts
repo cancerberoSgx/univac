@@ -98,4 +98,4 @@ export const graph1_svg = `
 </g>
 </g>
 </svg>
-`;
+`

@@ -1,5 +1,5 @@
 {
-  "name": "univac-playground",
+  "name": "svg-png-converter-playground",
   "version": "0.0.3",
   "description": "TypeScript AST viewer and Advance Query editor",
   "main": "index.js",
@@ -13,8 +13,8 @@
     "start": " npx parcel serve  src/index.html -d docs   --no-source-maps",
     "build-dev-no-maps": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-content-hash  --no-source-maps",
     "build-dev": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-source-maps --no-content-hash",
-    "build": "npm run clean && npx tsc && npm run build-only && rm -rf ../../demos/docs/univac/playground/* && mv docs/* ../../demos/docs/univac/playground/",
-    "build-only": "export NODE_ENV=production && sh build-workers.sh && node --max-old-space-size=5000 node_modules/parcel/bin/cli.js build src/index.html -d docs --no-content-hash --detailed-report  --no-source-maps --public-url './'",
+    "build": "npm run clean && npx tsc && npm run build-only && rm -rf ../../../demos/docs/svg-png-converter/playground/* && mv docs/* ../../../demos/docs/svg-png-converter/playground/",
+    "build-only": "export NODE_ENV=production && node --max-old-space-size=5000 node_modules/parcel/bin/cli.js build src/index.html -d docs --no-content-hash --detailed-report  --no-source-maps --public-url './'",
     "all": "npm run clean && npm run lint && npm run build"
   },
   "keywords": [
@@ -29,6 +29,7 @@
     "@types/node": "^12.0.4",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
+    "@types/react-jsonschema-form": "^1.3.2",
     "babel-polyfill": "^6.26.0",
     "http-server": "^0.11.1",
     "parcel": "^1.12.3",
@@ -40,6 +41,7 @@
     "misc-utils-of-mine-generic": "^0.2.8",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-jsonschema-form": "^1.6.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.1",
     "svg-png-converter": "file:.."
@@ -49,6 +51,6 @@
     "url": "https://github.com/cancerberoSgx/univac.git"
   },
   "bugs": {
-    "url": "https://github.com/cancerberoSgx/univac"
+    "url": "https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter"
   }
 }

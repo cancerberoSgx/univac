@@ -1,11 +1,11 @@
+import { RemoveProperties } from 'misc-utils-of-mine-generic'
+import { PNG2SVGOptions, SVG2PNGOptions } from '../../../dist/src'
 import { Example, examples } from "../examples/examples"
-import { RemoveProperties } from 'misc-utils-of-mine-generic';
-import { SVG2PNGOptions, PNG2SVGOptions, png2svg } from '../../../dist/src';
-import { convert } from './dispatchers';
+import { convert } from './dispatchers'
 
 export interface State {
   example: Example
-  error?: Error |  undefined;
+  error?: Error | undefined;
   examples: Example[];
   svg2png: RemoveProperties<SVG2PNGOptions, 'input'>
   png2svg: RemoveProperties<PNG2SVGOptions, 'input'>
@@ -14,7 +14,7 @@ export interface State {
 
 export async function getInitialState(): Promise<State> {
   return {
-    example:  examples[0],
+    example: examples[0],
     error: undefined,
     examples,
     svg2png: {},

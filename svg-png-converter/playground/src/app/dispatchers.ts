@@ -1,6 +1,5 @@
-import { Example } from '../examples/examples';
-import { svg2png, png2svg, urlToBase64, urlToData } from 'svg-png-converter';
-import { getStore } from './store';
+import { png2svg, svg2png, urlToData } from 'svg-png-converter'
+import { Example } from '../examples/examples'
 
 export async function convert(e: Example) {
   let output: string | undefined
@@ -18,5 +17,5 @@ export async function convert(e: Example) {
   }
   e.inputSize = e.code.length
   e.outputSize = (output || '').length
-  return output||''
+  return output || ''
 }
