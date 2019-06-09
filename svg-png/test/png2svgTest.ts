@@ -1,6 +1,6 @@
 import test from 'ava'
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'fs'
-import { sleep, tryTo } from 'misc-utils-of-mine-generic'
+import { tryTo } from 'misc-utils-of-mine-generic'
 import { base64ToUrl } from "../src/base64"
 import { png2svg } from '../src/png2svg'
 
@@ -53,7 +53,7 @@ test('should render svg from png and jpeg data URL', async t => {
   // writeFileSync("tmp61.svg", await png2svg ({ input: dataToUrl(readFileSync('test/assets/tmp2.png').toString('base64'), 'image/png')}))
   writeFileSync("tmp62.svg", await png2svg({ input: base64ToUrl(readFileSync('test/assets/tmp2.jpeg').toString('base64'), 'image/jpeg') }))
 
-  await sleep(100)
+  // await sleep(100)
   // t.true(existsSync('tmp61.svg'))
   t.true(existsSync('tmp62.svg'))
 })

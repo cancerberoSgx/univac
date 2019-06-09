@@ -11,36 +11,17 @@
 ### Install
 
 ```sh
-npm install render-dot
+npm install svg-png-converter
 ```
 
-### JavaScript
+### JavaScript API Examples
 
 #### svg2png
 
 
-##### From literal SVG string
+##### From Buffer to Buffer
 
-```ts
-import {svg2png} from 'svg-png-converter'
-
-let s = await svg2png({ 
-  input: `<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="632pt" height="91pt" viewBox="0.00 0.00 631.61 91.30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
-  <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-112 58,-112 58,4 -4,4"/>
-  <ellipse fill="none" stroke="#000000" cx="27" cy="-90" rx="27" ry="18"/>
-  <text text-anchor="middle" x="27" y="-85.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
-</svg>`, 
-  encoding: 'dataURL', 
-  format: 'jpeg',
-  output: 'outputFolder'
-})
-```
-
-##### From Buffer
-
-(node.js only)
+(In the browser buffer are instances of UInt8Array, supported thanks to https://www.npmjs.com/package/buffer)
 
 ```ts
 import {svg2png} from 'svg-png-converter'
@@ -51,15 +32,58 @@ let s = await svg2png({
   format: 'jpeg',
   output: 'outputFolder'
 })
+writeFileSync("tmp25.png", s)
 ```
 
 
-### Command Line
+##### From literal SVG string to DataUrl, custom size and quality jpeg
+
+```ts
+import {svg2png} from 'svg-png-converter'
+
+let s = await svg2png({ 
+  input: `
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="632pt" height="91pt" viewBox="0.00 0.00 631.61 91.30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+    <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-112 58,-112 58,4 -4,4"/>
+    <ellipse fill="none" stroke="#000000" cx="27" cy="-90" rx="27" ry="18"/>
+    <text text-anchor="middle" x="27" y="-85.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+  </g>
+</svg>
+`.trim(), 
+  encoding: 'dataURL', 
+  format: 'jpeg',
+  width: 100,
+  height: 100,
+  multiplier: .7,
+  quality: .5
+})
+// data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ
+```
+
+
+#### svg2png
+
+TODO
+
+
+### Command Line examples
+
+#### svg2png
 
 ```sh
-svg-png-converter --input "some/**/*.dot" --output outputFolder
-svg-png-converter --input "digraph { a -> b; }" > tmp.svg
+svg2png --input "some/**/*.svg" --output ../assets/jpeg --format jpeg
+svg-png-converter --input " > tmp.svg
 ```
+
+#### png2svg
+```sh
+png2svg --input "some/**/*.png" --output vectors 
+png2svg --input foo.jpeg > tmp.svg
+```
+
 
 ## Options
 
