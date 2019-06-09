@@ -1,4 +1,4 @@
-# svg-png
+# svg-png-converter
 
  * Convert SVG to PNG or JPEG.
  * Convert PNG/JPEG to SVG. produced SVG is one path, that resembles the original image relatiely well and ,
@@ -22,7 +22,7 @@ npm install render-dot
 ##### From literal SVG string
 
 ```ts
-import {svg2png} from 'svg-png'
+import {svg2png} from 'svg-png-converter'
 
 let s = await svg2png({ 
   input: `<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -43,7 +43,7 @@ let s = await svg2png({
 (node.js only)
 
 ```ts
-import {svg2png} from 'svg-png'
+import {svg2png} from 'svg-png-converter'
 
 let s = await svg2png({ 
   input: readFileSync('./ss/foo.svg'), 
@@ -57,8 +57,8 @@ let s = await svg2png({
 ### Command Line
 
 ```sh
-svg-png --input "some/**/*.dot" --output outputFolder
-svg-png --input "digraph { a -> b; }" > tmp.svg
+svg-png-converter --input "some/**/*.dot" --output outputFolder
+svg-png-converter --input "digraph { a -> b; }" > tmp.svg
 ```
 
 ## Options

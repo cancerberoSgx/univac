@@ -1,7 +1,7 @@
 {
-  "name": "svg-png",
-  "version": "0.0.1",
-  "description": "Convert SVG to PNG or JPEG, both in browser and node.js. JavaScript API and Command Line",
+  "name": "svg-png-converter",
+  "version": "0.0.2",
+  "description": "Convert SVG/PNG and back, both in browser and node.js. JavaScript API and Command Line",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "bin": {
@@ -61,12 +61,12 @@
     "email": "sebastigurin@gmail.com",
     "url": "http://sgurin.com"
   },
-  "homepage": "https://github.com/cancerberoSgx/univac/svg-png",
+  "homepage": "https://github.com/cancerberoSgx/univac/svg-png-converter",
   "repository": {
     "type": "git",
     "url": "https://github.com/cancerberoSgx/univac.git"
   },
   "bugs": {
-    "url": "https://github.com/cancerberoSgx/univac/svg-png"
+    "url": "https://github.com/cancerberoSgx/univac/svg-png-converter"
   }
 }
