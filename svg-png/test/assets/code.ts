@@ -97,5 +97,4 @@ export const svg = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <text text-anchor="middle" x="415.1401" y="-55.2" font-family="Times,serif" font-style="italic" font-size="14.00" fill="#000000">ε</text>
 </g>
 </g>
-</svg>
-`
+</svg>`

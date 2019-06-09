@@ -1,16 +1,27 @@
 import test from 'ava'
+import { execSync } from 'child_process';
+import { readdirSync } from 'fs';
 
-test('should output to stdout if no --output', async t => {
-  // const result = execSync('node bin/universal-svg-rasterizer.js --input test/assets/C.blockItem.dot', { stdio: 'pipe' }).toString()
-  // const expected = [`<polygon`, `<svg`]
-  // expected.forEach(e => t.true(result.includes(e)))
+test('--help', async t => {
+  const result = execSync('node bin/svg2png.js --help', { stdio: 'pipe' }).toString()
+  const expected = [`Usage:`, `svg2png --input`]
+  expected.forEach(e => t.true(result.includes(e)))
   t.true(true)
 })
 
-// test('should accept globs and output folder', async t => {
-//   const result = execSync('rm -rf tmp; mkdir -p tmp; node bin/universal-svg-rasterizer.js --input "test/**/*.dot" --output tmp', { stdio: 'pipe' }).toString()
-//   t.deepEqual(readdirSync('tmp'), ['C.blockItem.dot.svg', 'JavaParser.classCreatorRest.dot.svg'])
-// })
+test('error on no --input', async t => {
+  t.throws(()=>execSync('node bin/svg2png.js --debug --format jpeg --output foo', { stdio: 'pipe' }))
+})
+
+test('should accept globs and output folder', async t => {
+  const result = execSync('rm -rf tmp; mkdir -p tmp; node bin/svg2png.js --input "test/**/*2.svg" --output tmp', { stdio: 'pipe' }).toString()
+  t.deepEqual(readdirSync('tmp'), ['tmp2.svg.png'])
+})
+
+test('should write given format', async t => {
+  const result = execSync('rm -rf tmp; mkdir -p tmp; node bin/svg2png.js --input "test/**/*2.svg" --output tmp --format jpeg', { stdio: 'pipe' }).toString()
+  t.deepEqual(readdirSync('tmp'), ['tmp2.svg.jpeg'])
+})
 
 // test('should get code from --input', async t => {
 //   const result = execSync('node bin/universal-svg-rasterizer.js --input "digraph { a -> b; }"', { stdio: 'pipe' }).toString()

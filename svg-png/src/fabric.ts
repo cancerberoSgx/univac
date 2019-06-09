@@ -11,8 +11,10 @@ export const fabricImageFromUrl = promisify(function(url: string, imgOptions: II
   }, imgOptions)
 })
 
-export async function fabricImageFromData(data: any, format: Format): Promise<Image> {
-  return await fabricImageFromUrl(dataToUrl(data, mimeTypes[format]), {})
+export async function fabricImageFromData(data: string, format: Format, options: IImageOptions = {}): Promise<Image> {
+  const f = dataToUrl(data, mimeTypes[format])
+  // debugger
+  return await fabricImageFromUrl(f, options)
 }
 
 

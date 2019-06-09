@@ -43,8 +43,8 @@ stop`.trim()]
   expected.forEach(e => t.true(result.includes(e)))
 })
 
-test('--format png', async t => {
-  const result = execSync('node bin/render-dot.js --input "digraph { a -> b; }" --format png', { stdio: 'pipe' }).toString()
-  t.truthy(result);
+// test('--format png', async t => {
+//   const result = execSync('node bin/render-dot.js --input "digraph { a -> b; }" --format png', { stdio: 'pipe' }).toString()
+//   t.truthy(result);
   
-})
+// })

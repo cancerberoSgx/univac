@@ -9,6 +9,7 @@ export async function png2svgCli(o: PNG2SVGOptions) {
   try {
 
     preconditions(o)
+    o.debug && console.log(`CLI Options: ${JSON.stringify({ ...o, input: null })}`)
 
     const input = (typeof o.input === 'string' ? glob(o.input).filter(existsSync) : [])
       .map(f => ({

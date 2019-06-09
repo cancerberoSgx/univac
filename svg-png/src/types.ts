@@ -2,13 +2,13 @@ import { IDataURLOptions } from 'fabric/fabric-impl'
 import { RemoveProperties } from 'misc-utils-of-mine-generic'
 import { PotracePosterizeOptions } from './potrace'
 
-export interface SVG2PNGOptions extends BaseOptions, IDataURLOptions {
+export interface SVG2PNGOptions<E = 'raw'> extends BaseOptions, IDataURLOptions {
   /**
    * SVG code to render as plain text.
    * 
    * For CLi or Node.js, it can also be path or glob file pattern to .svg files, relative to current dir.
    */
-  input: string;
+  input: string | Buffer
 
   /**
    * Output format. One of: `png, jpeg`. By default: `png`.
@@ -18,7 +18,7 @@ export interface SVG2PNGOptions extends BaseOptions, IDataURLOptions {
   /**
    * Output image encoding. One of: `base64, dataURL, raw, buffer`. By default: `raw`.
    */
-  encoding?: Encoding
+  encoding?: E
 
   // /** 
   //  * Quality of output image.
@@ -78,4 +78,4 @@ export type Format = 'svg' | OutputFormat
 
 export type OutputFormat = 'png' | 'jpeg'
 
-type Encoding = 'base64' | 'dataURL' | 'raw' | 'buffer'
+export type Encoding = 'base64' | 'dataURL' | 'raw' | 'buffer'
