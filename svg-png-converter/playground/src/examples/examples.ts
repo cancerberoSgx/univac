@@ -1,17 +1,19 @@
 import { RemoveProperties } from 'misc-utils-of-mine-generic'
 import { PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
+import { PNG2SVGOptionsSchema } from '../options/PNG2SVGOptions.schema'
+import { SVG2PNGOptionsSchema } from '../options/SVG2PNGOptionsSchema'
 import { graph1_svg } from './files/graph1_svg'
 import { hierarchy1_svg } from './files/hierarchy1_svg'
 import { hierarchy2_png } from './files/hierarchy2_png'
 import { hierarchy2_svg } from './files/hierarchy2_svg'
+import { hindenburg_jpg } from './files/hindenburg_jpg'
+import { oldpic_jpg } from './files/oldpic'
 import { panda_png } from './files/panda_png'
 import { photo1_jpg } from './files/photo1_jpg'
 import { shade_blur_and_gradients43 } from './files/shade_blur_and_gradients43'
 import { something_png } from './files/something_jpg'
 import { tiger_svg } from './files/tiger_svg'
 import { yao_jpg } from './files/yao_jpg'
-import { oldpic_jpg } from './files/oldpic';
-import { hindenburg_jpg } from './files/hindenburg_jpg';
 
 export interface Example {
   code: string;
@@ -24,7 +26,7 @@ export interface Example {
   png2svg?: RemoveProperties<PNG2SVGOptions, 'input'>
 }
 
-export const examples: Example[] = [
+export const examples: Example[] = ([
 
   {
     name: 'graph1.svg',
@@ -32,7 +34,6 @@ export const examples: Example[] = [
     svg2png: {
       format: 'png'
     },
-
     code: graph1_svg.trim(),
     description: ' ',
   },
@@ -40,8 +41,6 @@ export const examples: Example[] = [
   {
     name: 'oldpic.jpg',
     outputName: 'oldpic.svg',
-    png2svg: {
-    },
     code: oldpic_jpg.trim(),
     description: ' ',
   },
@@ -49,8 +48,6 @@ export const examples: Example[] = [
   {
     name: 'hindenburg.jpg',
     outputName: 'hindenburg.svg',
-    png2svg: {
-    },
     code: hindenburg_jpg.trim(),
     description: ' ',
   },
@@ -58,9 +55,6 @@ export const examples: Example[] = [
   {
     name: 'something.jpg',
     outputName: 'something.svg',
-    png2svg: {
-    },
-
     code: something_png.trim(),
     description: ' ',
   },
@@ -68,8 +62,6 @@ export const examples: Example[] = [
   {
     name: 'yao.jpg',
     outputName: 'yao.svg',
-    png2svg: {
-    },
     code: yao_jpg.trim(),
     description: ' ',
   },
@@ -77,8 +69,6 @@ export const examples: Example[] = [
   {
     name: 'panda.png',
     outputName: 'panda.svg',
-    png2svg: {
-    },
     code: panda_png.trim(),
     description: ' ',
   },
@@ -115,8 +105,6 @@ export const examples: Example[] = [
   {
     name: 'hierarchy2.png',
     outputName: 'hierarchy2.svg',
-    png2svg: {
-    },
     code: hierarchy2_png.trim(),
     description: ' ',
   },
@@ -134,10 +122,8 @@ export const examples: Example[] = [
   {
     name: 'photo1.jpg',
     outputName: 'photo1.svg',
-    png2svg: {
-    },
     code: photo1_jpg.trim(),
     description: ' ',
   },
 
-]
+] as Example[]).map(f => f.svg2png ? { ...f, ...{ svg2png: { ...SVG2PNGOptionsSchema, ...f.svg2png } } } : { ...f, png2svg: { ...PNG2SVGOptionsSchema, ...f.png2svg } } as any)

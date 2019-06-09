@@ -1,5 +1,5 @@
 import { promisify } from 'util'
-import { PotraceTraceOptions, PotracePosterizeOptions } from './types';
+import { PotracePosterizeOptions, PotraceTraceOptions } from './types'
 var potrace = require('potrace')
 
 export const potraceTrace = promisify(potrace.trace.bind(potrace) as (url: string, o: PotraceTraceOptions, callback: (err: NodeJS.ErrnoException | null, svg: string) => void) => void)

@@ -231,9 +231,9 @@ export type Encoding = 'base64' | 'dataURL' | 'raw' | 'buffer'
 
 
 
-import { RemoveProperties } from 'misc-utils-of-mine-generic';
-import { IDataURLOptions } from 'fabric/fabric-impl';
-export {IDataURLOptions}
+import { IDataURLOptions } from 'fabric/fabric-impl'
+import { RemoveProperties } from 'misc-utils-of-mine-generic'
+export { IDataURLOptions }
 // declare type Buffer=any
 // declare type Blob=any
 // declare type Uint8Array = any

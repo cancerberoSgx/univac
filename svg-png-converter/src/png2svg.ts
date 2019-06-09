@@ -1,7 +1,6 @@
 import { isNode } from 'misc-utils-of-mine-generic'
-import { urlToBase64 } from "./base64"
+import { isBase64, urlToBase64 } from "./base64"
 import { blobToBuffer, BufferClass, typedArrayToBuffer } from './buffer'
-import { isBase64 } from './base64'
 import { potracePosterize } from './potrace'
 import { PNG2SVGOptions, PotraceTraceOptions } from './types'
 
@@ -18,8 +17,10 @@ export async function png2svg(options: PNG2SVGOptions) {
     console.log((options.steps as any).split(','), (options.steps as string).split(',').map(e => parseInt(e)))
     options.steps = (options.steps as string).split(',').map(e => parseInt(e))
   }
-  options.blackOnWhite = options.blackOnWhite !== true;
+
+  // options.blackOnWhite = options.blackOnWhite !== true;
   (options as PotraceTraceOptions).optCurve = options.noCurveOptimization !== false
+
   options.debug && console.log(`Options: ${JSON.stringify({ ...options, input: null })}`)
 
   let buffer: Buffer | undefined

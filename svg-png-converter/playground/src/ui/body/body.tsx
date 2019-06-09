@@ -2,8 +2,8 @@ import * as React from 'react'
 import { Grid, Segment } from 'semantic-ui-react'
 import { AbstractComponent } from '../component'
 import { Input } from './input'
+import { Options } from './options'
 import { Output } from './output'
-import { Options } from './options';
 
 export class Body extends AbstractComponent {
   render() {

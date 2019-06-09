@@ -1,5 +1,4 @@
 import { JSONSchema6 } from 'json-schema'
-import { base64ToUrl } from '../../../dist/src'
 import { graph1_svg } from '../examples/files/graph1_svg'
 
 export const SVG2PNGOptionsSchema: JSONSchema6 = {
@@ -19,7 +18,7 @@ export const SVG2PNGOptionsSchema: JSONSchema6 = {
         }
       ],
       "description": "SVG code to render as plain text.\n\nFor CLi or Node.js, it can also be path or glob file pattern to .svg files, relative to current dir.",
-      default: base64ToUrl(graph1_svg, 'image/svg+xml')
+      default: graph1_svg.trim()
     },
     "encoding": {
       "description": "Output image encoding. One of: `base64, dataURL, raw, buffer`. By default: `raw`.",
