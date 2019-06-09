@@ -24,8 +24,6 @@ export class Options extends AbstractComponent {
   render() {
     let schema: JSONSchema6 = this.state.example.svg2png ? SVG2PNGOptionsSchema : PNG2SVGOptionsSchema
     let uiSchema: UiSchema = this.state.example.svg2png ? {} : png2svgUISchema
-    // console.log(this.state.example)
-
     return (
       <Form<SVG2PNGOptions | PNG2SVGOptions>
         schema={schema}
@@ -37,9 +35,7 @@ export class Options extends AbstractComponent {
         onError={e => console.log("errors", e)} />)
   }
   async change(e: IChangeEvent<SVG2PNGOptions | PNG2SVGOptions>) {
-    // debugger
     if(e.formData.input && typeof e.formData.input  === 'string' && e.formData.input !== this.state.example.code) {
-      // debugger
       const name = getDataUrlFileName(e.formData.input)
       if(name!==this.state.example.name){
         const ext = getFileExtension(name)
@@ -61,24 +57,14 @@ export class Options extends AbstractComponent {
 
   protected async submit(e: IChangeEvent<SVG2PNGOptions | PNG2SVGOptions>) {
     let example: Example
-    // if (e.formData.input) {
-
-    // this.setState({ example, output: await convert(example) })
-    // }
-    // debugger
-    // if(isSVT2PNGOptions(e.formData)){
     if (this.state.example.svg2png) {
       example = { ...this.state.example, code: (e.formData.input || this.state.example.code) as any, svg2png: { ...this.state.example.svg2png, ...e.formData } }
     }
     else {
       example = { ...this.state.example, code: (e.formData.input || this.state.example.code) as any, png2svg: { ...this.state.example.png2svg, ...e.formData } }
     }
-    // console.log(example)
     this.setState({ example})
     this.setState({ example,  output: await convert(example) })
   }
 }
 
-// function isSVT2PNGOptions(o: any): o is SVG2PNGOptions {
-//   return !!o && !!o.input && !o.format && !o.encoding && !!o.steps & !o.quality
-// }
