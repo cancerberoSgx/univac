@@ -6,13 +6,6 @@ import { SVG2PNGOptionsSchema } from '../../options/SVG2PNGOptionsSchema'
 import { AbstractComponent } from '../component'
 
 const png2svgUISchema = {
-  // "string": {
-  //   "textarea": {
-  //     "ui:widget": "textarea",
-  //     "ui:options": {
-  //       "rows": 5
-  //     }
-  //   },
   "color": {
     "ui:widget": "color"
   }
@@ -21,17 +14,17 @@ const png2svgUISchema = {
     "ui:widget": "color"
   }
 }
-export class FormTest extends AbstractComponent {
+export class Options extends AbstractComponent {
   render() {
     let schema: JSONSchema6 = this.state.example.svg2png ? SVG2PNGOptionsSchema : PNG2SVGOptionsSchema
     let uiSchema: UiSchema = this.state.example.svg2png ? {} : png2svgUISchema
 
     return (
       <Form schema={schema}
-        onChange={e => console.log("changed")}
-        onSubmit={e => console.log("submitted")}
+        onChange={e => console.log("changed", e)}
+        onSubmit={e => console.log("submitted", e)}
         uiSchema={uiSchema}
-        onError={e => console.log("errors")} />)
+        onError={e => console.log("errors", e)} />)
   }
 }
 

@@ -10,6 +10,8 @@ import { shade_blur_and_gradients43 } from './files/shade_blur_and_gradients43'
 import { something_png } from './files/something_jpg'
 import { tiger_svg } from './files/tiger_svg'
 import { yao_jpg } from './files/yao_jpg'
+import { oldpic_jpg } from './files/oldpic';
+import { hindenburg_jpg } from './files/hindenburg_jpg';
 
 export interface Example {
   code: string;
@@ -35,6 +37,23 @@ export const examples: Example[] = [
     description: ' ',
   },
 
+  {
+    name: 'oldpic.jpg',
+    outputName: 'oldpic.svg',
+    png2svg: {
+    },
+    code: oldpic_jpg.trim(),
+    description: ' ',
+  },
+
+  {
+    name: 'hindenburg.jpg',
+    outputName: 'hindenburg.svg',
+    png2svg: {
+    },
+    code: hindenburg_jpg.trim(),
+    description: ' ',
+  },
 
   {
     name: 'something.jpg',

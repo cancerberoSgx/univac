@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Header, Select } from 'semantic-ui-react'
+import { Header, Select, Icon, Segment } from 'semantic-ui-react'
 import { convert } from '../../app/dispatchers'
 import { examples } from '../../examples/examples'
 import { AbstractComponent } from '../component'
@@ -8,9 +8,14 @@ export class Examples extends AbstractComponent {
   render() {
     return (
       <>
-        <Header>Explore available <strong>Examples:</strong></Header>
-        <Select search
+        <Header  as="h1" className="header-main">SVG <Icon name="arrows alternate horizontal"/> PNG Converter </Header>
+        <Segment basic  floated="right">
+        <Header as="h3"  className="header-examples">
+        Examples:
+        </Header>
+        <Select className="select-examples" search
           selectedLabel={this.state.example.name} value={this.state.example.name}
+        
           onChange={async (e, props) => {
             const example = examples.find(e => e.name === props.value)
             if (example) {
@@ -24,6 +29,7 @@ export class Examples extends AbstractComponent {
           }))}
         >
         </Select>
+        </Segment>
       </>)
   }
 }

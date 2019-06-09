@@ -20,7 +20,7 @@ export const PNG2SVGOptionsSchema: JSONSchema6 = {
           "title": "Source Code",
         }
       ],
-      //     "description": "PNG/JPEG file content encoded as dataURL. \n\nFor CLi and Node.js, it can also be a path or glob file pattern to .png / .jpg files, relative to current dir."
+          "description": "PNG/JPEG file content encoded as dataURL.",
       default: yao_jpg
     },
 
@@ -83,12 +83,14 @@ export const PNG2SVGOptionsSchema: JSONSchema6 = {
       "anyOf": [
         {
           "items": {
-            "type": "number"
+            "type": "number",
           },
-          "type": "array"
+          "type": "array",
+          "title": "Array"
         },
         {
-          "type": "number"
+          "type": "number",
+          "title": "Number"
         }
       ],
       "description": "Number of samples that needs to be taken (and number of layers in SVG). (default: Posterizer.STEPS_AUTO,\nwhich most likely willresult in 3, sometimes 4). Threshold computation for more than 5 levels may take\na long time. \n\nSpecifies desired number of layers in resulting image. Ifa number provided - thresholds for each layer\nwill be automatically calculated according to `rangeDistribution` parameter. \n\nIf an array provided it expected to be an array with pre computed thresholds for each layer (in range\n0..255)  \n\n(default: `STEPS_AUTO` which will result in `3` or `4`, depending on `threshold` value)",

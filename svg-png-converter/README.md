@@ -1,10 +1,18 @@
 # svg-png-converter
 
+## Playground
+
+Checkout [Project Playground](https://cancerberosgx.github.io/demos/svg-png-converter/playground/) to  test converting SVG images to PNG and back again using different configurations. 
+
+## Summary
+
  * Convert SVG to PNG or JPEG.
- * Convert PNG/JPEG to SVG. produced SVG is one path, that resembles the original image relatiely well and ,
+ * Convert PNG/JPEG to SVG. produced SVG is one path, that resembles the original image relatively well and ,
    and in a relative small output length.
  * Supports browsers and node.js (Same JavaScript API). 
  * Command Line interface.
+ * Uses [fabricjs](http://fabricjs.com/) to rasterize SVG documents into PNG/JPEG,.
+ * Uses []
 
 ## Usage
 
