@@ -8,7 +8,6 @@ export class Examples extends AbstractComponent {
   render() {
     return (
       <>
-        <Header as="h1" className="header-main">SVG <Icon name="arrows alternate horizontal" /> PNG Converter </Header>
         <Segment basic floated="right">
           <Header as="h3" className="header-examples">
             Examples:

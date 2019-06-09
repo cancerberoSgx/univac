@@ -9,15 +9,17 @@ export class Body extends AbstractComponent {
   render() {
     return (
       <Segment basic className="appBody">
-        <Grid>
-          <Grid.Column floated='left' width={6}>
-            <Options />
-          </Grid.Column>
-          <Grid.Column floated='right' width={10}>
+        {/* <Grid> */}
+          {/* <Grid.Column floated='left' width={6}> */}
+          {/* </Grid.Column> */}
+          {/* <Grid.Column floated='right' width={10}> */}
+      <Options />
+           <div style={{display:'absolute'}}>
             <Input />
             <Output />
-          </Grid.Column>
-        </Grid>
+            </div>
+          {/* </Grid.Column> */}
+        {/* </Grid> */}
       </Segment>)
   }
 }

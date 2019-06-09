@@ -2,6 +2,7 @@ import { RemoveProperties } from 'misc-utils-of-mine-generic'
 import { PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
 import { PNG2SVGOptionsSchema } from '../options/PNG2SVGOptions.schema'
 import { SVG2PNGOptionsSchema } from '../options/SVG2PNGOptionsSchema'
+import { Down_the_Rabbit_Hole_png } from './files/Down_the_Rabbit_Hole_png'
 import { graph1_svg } from './files/graph1_svg'
 import { hierarchy1_svg } from './files/hierarchy1_svg'
 import { hierarchy2_png } from './files/hierarchy2_png'
@@ -14,7 +15,6 @@ import { shade_blur_and_gradients43 } from './files/shade_blur_and_gradients43'
 import { something_png } from './files/something_jpg'
 import { tiger_svg } from './files/tiger_svg'
 import { yao_jpg } from './files/yao_jpg'
-import { Down_the_Rabbit_Hole_png } from './files/Down_the_Rabbit_Hole_png';
 
 export interface Example {
   code: string;
@@ -118,15 +118,15 @@ export const examples: Example[] = ([
     },
     code: tiger_svg.trim(),
     description: ' ',
-  },  
-  
+  },
+
   {
     name: 'Down_the_Rabbit_Hole.png',
     outputName: 'Down_the_Rabbit_Hole.svg',
     code: Down_the_Rabbit_Hole_png.trim(),
     description: ' ',
   },
-  
+
   {
     name: 'photo1.jpg',
     outputName: 'photo1.svg',

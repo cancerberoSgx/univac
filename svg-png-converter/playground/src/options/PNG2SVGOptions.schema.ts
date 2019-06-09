@@ -10,15 +10,15 @@ export const PNG2SVGOptionsSchema: JSONSchema6 = {
       type: 'string',
       title: "Input",
       // anyOf: [
-        // , {
-          // type: "string",
-          format: "data-url",
-        //   title: "Local file",
-        // } as any,
-        // {
-        //   type: "string",
-        //   title: "Source Code",
-        // }
+      // , {
+      // type: "string",
+      format: "data-url",
+      //   title: "Local file",
+      // } as any,
+      // {
+      //   type: "string",
+      //   title: "Source Code",
+      // }
       // ],
       description: "PNG/JPEG file content encoded as dataURL.",
       default: yao_jpg.trim()

@@ -58,6 +58,21 @@ form{
   border-radius: 1em;
 border: 2px dotted #83963e;  
 }
+.appBody .ui.optionsContainer, .ui.mainHeader {
+  position: fixed;
+  float: right;
+  right: 0; 
+  z-index: 6;
+  opacity: 0.9;
+}
+.ui.mainHeader {
+  width:100vw;
+  z-index: 7;
+}
+.appBody .ui.optionsContainer {
+  top: 20vh;
+  max-width: 40vw;
+}
 [type="submit"]{
   font-size: 1.5em;
   background: #2f224d;
