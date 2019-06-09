@@ -1,6 +1,4 @@
 import test from 'ava'
-import { execSync } from 'child_process'
-import { readdirSync } from 'fs'
 
 test('should output to stdout if no --output', async t => {
   // const result = execSync('node bin/universal-svg-rasterizer.js --input test/assets/C.blockItem.dot', { stdio: 'pipe' }).toString()
@@ -47,5 +45,5 @@ test('should output to stdout if no --output', async t => {
 // // test('--format png', async t => {
 // //   const result = execSync('node bin/universal-svg-rasterizer.js --input "digraph { a -> b; }" --format png', { stdio: 'pipe' }).toString()
 // //   t.truthy(result);
-  
+
 // // })

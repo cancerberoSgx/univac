@@ -12,7 +12,7 @@
     "test-watch": "ava -w",
     "prepare": "npm run build",
     "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
-    "clean": "rm -rf dist docs test-browser-outdir",
+    "clean": "rm -rf tmp* dist docs test-browser-outdir",
     "build": "npm run clean && npx tsc",
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
@@ -32,12 +32,16 @@
     "typescript": "^3.5.1"
   },
   "dependencies": {
+    "blob-to-buffer": "^1.2.8",
+    "buffer": "^5.2.1",
     "fabric": "^3.1.0",
+    "file-type": "^11.1.0",
     "glob": "^7.1.4",
     "js-base64": "^2.5.1",
     "minimist": "^1.2.0",
     "misc-utils-of-mine-generic": "^0.2.8",
-    "potrace": "^2.1.1"
+    "potrace": "^2.1.1",
+    "typedarray-to-buffer": "^3.1.5"
   },
   "keywords": [
     "SVG",

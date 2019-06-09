@@ -1,9 +1,21 @@
-import { promisify } from 'util';
-var potrace = require('potrace');
+import { promisify } from 'util'
+var potrace = require('potrace')
 
-export const potraceTrace = promisify(potrace.trace as (url: string, o: PotraceTraceOptions, callback: (err: NodeJS.ErrnoException | null, svg: string) => void) => void);
+export const potraceTrace = promisify(potrace.trace as (url: string, o: PotraceTraceOptions, callback: (err: NodeJS.ErrnoException | null, svg: string) => void) => void)
 
-export const potracePosterize = promisify(potrace.posterize as (url: string, o: PotracePosterizeOptions, callback: (err: NodeJS.ErrnoException | null, svg: string) => void) => void);
+/**
+ * @param url  Source image, file path or {@link Jimp} instance
+ * @param callback Callback function. Accepts 3 arguments: error, svg content and instance of {@link Potrace} (so it could be reused with different set of parameters)
+ */
+type PosterizeFnCb = (url: string, o: PotracePosterizeOptions, callback: (err: NodeJS.ErrnoException | null, svg: string) => void) => void
+/**
+ * @param url  Source image, file path or {@link Jimp} instance
+ * @param o
+ * @returns plain svg content string
+ */
+type PosterizeFn = (url: string|Buffer, o: PotracePosterizeOptions ) => Promise<string>
+
+export const potracePosterize = promisify(potrace.posterize as PosterizeFnCb) as PosterizeFn
 
 export interface PotracePosterizeOptions extends PotraceTraceOptions {
   /**
@@ -31,47 +43,47 @@ export interface PotraceTraceOptions {
    * how to resolve ambiguities in path decomposition (default PotraceTurnPolicy.TURNPOLICY_MINORITY).
    */
   turnPolicy?: PotraceTurnPolicy;
-  
+
   /**
    * suppress speckles of up to this size (default 2).
    */
   turdSize?: number;
-  
+
   /**
    * corner threshold parameter (default 1).
    */
   alphaMax?: number;
-  
+
   /**
    * curve optimization (default true).
    */
   optCurve?: boolean;
-  
+
   /**
    * curve optimization tolerance (default 0.2).
    */
   optTolerance?: number;
-  
+
   /**
    * threshold below which color is considered black (0..255, default Potrace.THRESHOLD_AUTO).
    */
   threshold?: number;
-  
+
   /**
    * specifies colors by which side from threshold should be traced (default true).
    */
   blackOnWhite?: boolean;
-  
+
   /**
    * foreground color (default: 'auto' (black or white)) Will be ignored when exporting as <symbol>.
    */
   color?: string;
-  
+
   /**
    * background color (default: 'transparent') Will be ignored when exporting as <symbol>.
    */
   background?: string;
-  
+
 }
 
 export enum Potrace {

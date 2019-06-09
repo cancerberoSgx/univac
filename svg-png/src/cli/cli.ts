@@ -3,9 +3,9 @@ import { sync as glob } from 'glob'
 import { serial } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
 import { svg2png } from '../svg2png'
-import { Options } from '../types';
+import { SVG2PNGOptions } from '../types'
 
-export async function cliMain(o: Options) {
+export async function cliMain(o: SVG2PNGOptions) {
   try {
 
     preconditions(o)
@@ -48,7 +48,7 @@ export async function cliMain(o: Options) {
   }
 }
 
-function preconditions(options: Options) {
+function preconditions(options: SVG2PNGOptions) {
   if (options.help) {
     printHelp()
     process.exit(0)
