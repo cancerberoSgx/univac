@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Dropdown, Menu, Modal } from 'semantic-ui-react'
-import { examples } from '../../app/examples'
+import { examples } from '../../examples/examples'
 import { AbstractComponent } from '../component'
 import { About } from './about'
 
@@ -20,12 +20,6 @@ export class Header extends AbstractComponent {
 
 
       <Menu.Menu position="right">
-        <Menu.Item icon="th icon">
-          <label>{''+Math.random() === 'graph' ? 'AST Default View' : 'AST Graph View'}
-            <input type="checkbox" checked={true} onChange={e => {
-            }}></input></label>
-        </Menu.Item>
-
         <Modal trigger={<Menu.Item as='a' icon="help">About</Menu.Item>}>
           <Modal.Header>About</Modal.Header>
           <Modal.Content>

@@ -1,6 +1,11 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { svg2png } from '../src/svg2png'
 
+async function base55() {
+  writeFileSync('tmp.txt', readFileSync('/Users/sebastiangurin/Downloads/chart2.pngw').toString('base64'))
+}
+base55()
+
 async function test22() {
   let s = await svg2png({
     input: readFileSync('test/assets/tmp2.svg'),
@@ -10,7 +15,7 @@ async function test22() {
   writeFileSync('test/assets/tmp25.png.buffer', s)
   writeFileSync("tmp25.png", s)
 }
-test22()
+// test22()
 // function fabricTest() {
 //   var canvas = new fabric.Canvas('c')
 //   canvas.add(new fabric.Circle({
