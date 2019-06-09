@@ -1,6 +1,6 @@
 import test from 'ava'
-import { execSync } from 'child_process';
-import { readdirSync } from 'fs';
+import { execSync } from 'child_process'
+import { readdirSync } from 'fs'
 
 test('--help', async t => {
   const result = execSync('node bin/svg2png.js --help', { stdio: 'pipe' }).toString()
@@ -10,7 +10,7 @@ test('--help', async t => {
 })
 
 test('error on no --input', async t => {
-  t.throws(()=>execSync('node bin/svg2png.js --debug --format jpeg --output foo', { stdio: 'pipe' }))
+  t.throws(() => execSync('node bin/svg2png.js --debug --format jpeg --output foo', { stdio: 'pipe' }))
 })
 
 test('should accept globs and output folder', async t => {
