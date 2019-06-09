@@ -43,7 +43,7 @@
     "js-base64": "^2.5.1",
     "minimist": "^1.2.0",
     "misc-utils-of-mine-generic": "^0.2.8",
-    "potrace": "^2.1.1",
+    "potrace": "file:../../node-potrace",
     "typedarray-to-buffer": "^3.1.5"
   },
   "keywords": [

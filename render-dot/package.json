@@ -36,6 +36,7 @@
     "glob": "^7.1.4",
     "minimist": "^1.2.0",
     "misc-utils-of-mine-generic": "^0.2.8",
+    "svg-png-converter": "0.0.2",
     "tiny-worker": "^2.2.0",
     "universal-base64": "^2.1.0",
     "viz.js": "^2.1.2"

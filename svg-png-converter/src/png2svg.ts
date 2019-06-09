@@ -1,7 +1,7 @@
 import { isNode } from 'misc-utils-of-mine-generic'
 import { urlToBase64 } from "./base64"
 import { blobToBuffer, BufferClass, typedArrayToBuffer } from './buffer'
-import { isBase64 } from './misc'
+import { isBase64 } from './base64'
 import { potracePosterize, PotraceTraceOptions } from './potrace'
 import { PNG2SVGOptions } from './types'
 

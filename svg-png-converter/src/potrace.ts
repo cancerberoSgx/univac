@@ -1,7 +1,7 @@
 import { promisify } from 'util'
 var potrace = require('potrace')
 
-export const potraceTrace = promisify(potrace.trace as (url: string, o: PotraceTraceOptions, callback: (err: NodeJS.ErrnoException | null, svg: string) => void) => void)
+export const potraceTrace = promisify(potrace.trace.bind(potrace) as (url: string, o: PotraceTraceOptions, callback: (err: NodeJS.ErrnoException | null, svg: string) => void) => void)
 
 /**
  * @param url  Source image, file path or {@link Jimp} instance
@@ -17,7 +17,7 @@ type PosterizeFnCb = (url: string, o: PotracePosterizeOptions, callback: (err: N
  */
 type PosterizeFn = (url: string | Buffer, o: PotracePosterizeOptions) => Promise<string>
 
-export const potracePosterize = promisify(potrace.posterize as PosterizeFnCb) as PosterizeFn
+export const potracePosterize = promisify(potrace.posterize.bind(potrace) as PosterizeFnCb) as PosterizeFn
 
 /**
  * - When number of `steps` is greater than 10 - an extra layer could be added to ensure presence of
