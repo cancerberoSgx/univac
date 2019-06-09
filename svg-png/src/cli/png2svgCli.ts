@@ -2,23 +2,19 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { sync as glob } from 'glob'
 import { serial } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
-import { svg2png } from '../svg2png'
-import { SVG2PNGOptions } from '../types'
+import { png2svg } from '../png2svg'
+import { PNG2SVGOptions } from '../types'
 
-export async function cliMain(o: SVG2PNGOptions) {
+export async function png2svgCli(o: PNG2SVGOptions) {
   try {
 
     preconditions(o)
 
-    const files = glob(o.input).filter(existsSync)
-
-    const input = files.length ? files.map(f => ({
-      name: f,
-      content: readFileSync(f).toString()
-    })) : [{
-      name: 'input.dot',
-      content: o.input
-    }]
+    const input = (typeof o.input === 'string' ? glob(o.input).filter(existsSync) : [])
+      .map(f => ({
+        name: f,
+        content: readFileSync(f)
+      }))
 
     if (o.output && !existsSync(o.output)) {
       mkdirSync(o.output, { recursive: true })
@@ -27,7 +23,7 @@ export async function cliMain(o: SVG2PNGOptions) {
     await serial(input.map(input => async () => {
       try {
         o.debug && console.log('Rendering ' + input.name)
-        const result = ({ name: input.name + '.svg', content: await svg2png({ ...o, input: input.content }) })
+        const result = ({ name: input.name + '.svg', content: await png2svg({ ...o, input: input.content }) })
         if (o.output) {
           const file = join(o.output, basename(result.name))
           o.debug && console.log('Writing ' + file)
@@ -36,19 +32,17 @@ export async function cliMain(o: SVG2PNGOptions) {
         else {
           process.stdout.write(result.content)
         }
-        return result
       } catch (error) {
         console.error('ERROR while rendering file ' + input.name)
         console.error(error)
       }
     }))
-
   } catch (error) {
     fail(error)
   }
 }
 
-function preconditions(options: SVG2PNGOptions) {
+function preconditions(options: PNG2SVGOptions) {
   if (options.help) {
     printHelp()
     process.exit(0)
@@ -67,7 +61,7 @@ function printHelp() {
   console.log(`
 Usage: 
 
-render-dot --input "**/*go*/*.dot" --output ../svgs
-render-dot --input graph1.dot > graph1.svg
+png2svg --input "**/*pics*/*.png" --output ../svgs
+png2svg --input graph1.png > graph1.svg
 `)
 }

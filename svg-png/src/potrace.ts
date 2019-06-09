@@ -5,42 +5,101 @@ export const potraceTrace = promisify(potrace.trace as (url: string, o: PotraceT
 
 /**
  * @param url  Source image, file path or {@link Jimp} instance
- * @param callback Callback function. Accepts 3 arguments: error, svg content and instance of {@link Potrace} (so it could be reused with different set of parameters)
+ * @param callback Callback function. Accepts 3 arguments: error, svg content and instance of {@link Potrace}
+ * (so it could be reused with different set of parameters)
  */
 type PosterizeFnCb = (url: string, o: PotracePosterizeOptions, callback: (err: NodeJS.ErrnoException | null, svg: string) => void) => void
+
 /**
  * @param url  Source image, file path or {@link Jimp} instance
  * @param o
  * @returns plain svg content string
  */
-type PosterizeFn = (url: string|Buffer, o: PotracePosterizeOptions ) => Promise<string>
+type PosterizeFn = (url: string | Buffer, o: PotracePosterizeOptions) => Promise<string>
 
 export const potracePosterize = promisify(potrace.posterize as PosterizeFnCb) as PosterizeFn
 
+/**
+ * - When number of `steps` is greater than 10 - an extra layer could be added to ensure presence of
+ *   darkest/brightest colors if needed to ensure presence of probably-important-at-this-point details like
+ *   shadows or line art.
+ *
+ * - With big number of layers produced image will be looking brighter overall than original due to math error
+ *   at the rendering phase because of how layers are composited.
+ *
+ * - With default configuration `steps`, `threshold` and `rangeDistribution` settings all set to auto,
+ *   resulting in a 4 thresholds/color stops being calculated with Multilevel Thresholding algorithm mentioned
+ *   above. Calculation of 4 thresholds takes 3-5 seconds on average laptop. You may want to explicitly limit
+ *   number of `steps` to 3 to moderately improve processing speed.  
+ *
+ */
 export interface PotracePosterizeOptions extends PotraceTraceOptions {
   /**
    *  Number of samples that needs to be taken (and number of layers in SVG). (default: Posterizer.STEPS_AUTO,
    *  which most likely will result in 3, sometimes 4). Threshold computation for more than 5 levels may take
-   *  a long time
+   *  a long time. 
+   *
+   *  Specifies desired number of layers in resulting image. If a number provided - thresholds for each layer
+   *  will be automatically calculated according to `rangeDistribution` parameter. 
+   *
+   *  If an array provided it expected to be an array with pre computed thresholds for each layer (in range
+   *  0..255)  
+   *
+   *  (default: `STEPS_AUTO` which will result in `3` or `4`, depending on `threshold` value)
+   *
    */
-  steps?: number;
+  steps?: number | number[];
 
   /**
-   *  How to select fill color for color ranges - equally spread or dominant. (default:
-   *  PotraceFillPolicy.FILL_DOMINANT).
+   *  determines how fill color for each layer should be selected. Possible values are exported as constants:
+   *
+   *  - `FILL_DOMINANT` (`dominant`) - most frequent color in range (used by default), 
+   *
+   *  - `FILL_MEAN` (`mean`) - arithmetic mean (average), 
+   *
+   *  - `FILL_MEDIAN` (`median`) - median color, 
+   *
+   *  - `FILL_SPREAD` (`spread`) - ignores color information of the image and just spreads colors equally in range
+   *    0..threshold (or threshold..255 if `blackOnWhite` is set to `false`),
+   * 
+   *  - `none` 
+   *
+   *  (default: PotraceFillPolicy.FILL_DOMINANT).
    */
-  fill?: PotraceFillPolicy;
+  fillStrategy?: PotraceFillPolicy;
 
   /**
    * How to choose thresholds in-between - after equal intervals or automatically balanced. (default:
-   * PotraceRangeDistributionPolicy.RANGES_AUTO).
+   * PotraceRangeDistributionPolicy.RANGES_AUTO). Ignored if `steps` is an array. Possible values are:
+   *
+   *  - `RANGES_AUTO` (`auto`) - Performs automatic thresholding (using [Algorithm For Multilevel
+   *    Thresholding][multilevel-thresholding]). Preferable method for already posterized sources, but takes
+   *    long time to calculate 5 or more thresholds (exponential time complexity)  
+   *    *(used by default)*
+   *
+   *  - `RANGES_EQUAL`  (`equal`)  - Ignores color information of the image and breaks available color space into equal
+   *    chunks
    */
   rangeDistribution?: PotraceRangeDistributionPolicy;
+
+  /**
+   *  - Breaks image into foreground and background (and only foreground being broken into desired number of
+   *    layers). Basically when provided it becomes a threshold for last (least opaque) layer and then `steps
+   *    - 1` intermediate thresholds calculated. If **steps** is an array of thresholds and every value from
+   *    the array is lower (or larger if **blackOnWhite** parameter set to `false`) than threshold - threshold
+   *    will be added to the array, otherwise just ignored.  Default: `PotraceTurnPolicy.THRESHOLD_AUTO`
+   */
+  threshold?: number
 }
 
 export interface PotraceTraceOptions {
   /**
-   * how to resolve ambiguities in path decomposition (default PotraceTurnPolicy.TURNPOLICY_MINORITY).
+   * how to resolve ambiguities in path decomposition. Possible values are exported as constants:
+   * `TURNPOLICY_BLACK`, `TURNPOLICY_WHITE`, `TURNPOLICY_LEFT`, `TURNPOLICY_RIGHT`, `TURNPOLICY_MINORITY`,
+   * `TURNPOLICY_MAJORITY`. (`black`, `white`, `left`, `right`, `minority`, `majority`)
+   * 
+   * Refer to [this document](http://potrace.sourceforge.net/potrace.pdf) for more
+   * information (page 4)  .  (default PotraceTurnPolicy.TURNPOLICY_MINORITY). 
    */
   turnPolicy?: PotraceTurnPolicy;
 
@@ -65,7 +124,11 @@ export interface PotraceTraceOptions {
   optTolerance?: number;
 
   /**
-   * threshold below which color is considered black (0..255, default Potrace.THRESHOLD_AUTO).
+   * threshold below which color is considered black (0..255, default Potrace.THRESHOLD_AUTO). Should be a
+   * number in range 0..255 or `PotraceTurnPolicy.THRESHOLD_AUTO` in which case threshold will be selected
+   * automatically using [Algorithm For Multilevel
+   * Thresholding][http://www.iis.sinica.edu.tw/page/jise/2001/200109_01.pdf]  
+   *
    */
   threshold?: number;
 
@@ -75,12 +138,14 @@ export interface PotraceTraceOptions {
   blackOnWhite?: boolean;
 
   /**
-   * foreground color (default: 'auto' (black or white)) Will be ignored when exporting as <symbol>.
+   *  Fill color. Will be ignored when exporting as \<symbol\>. (default: `PotraceTurnPolicy.COLOR_AUTO`,
+   *  which means black or white, depending on `blackOnWhite` property)
    */
   color?: string;
 
   /**
-   * background color (default: 'transparent') Will be ignored when exporting as <symbol>.
+   * Background color. Will be ignored when exporting as \<symbol\>. By default is not present
+   * (`PotraceTurnPolicy.COLOR_TRANSPARENT`)
    */
   background?: string;
 
@@ -105,7 +170,8 @@ export enum PotraceFillPolicy {
   FILL_SPREAD = 'spread',
   FILL_DOMINANT = 'dominant',
   FILL_MEDIAN = 'median',
-  FILL_MEAN = 'mean'
+  FILL_MEAN = 'mean',
+  FILL_NONE = 'none'
 }
 
 export enum PotraceTurnPolicy {

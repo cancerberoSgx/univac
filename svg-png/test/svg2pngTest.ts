@@ -2,6 +2,7 @@ import test from 'ava'
 import { existsSync, unlinkSync, writeFileSync } from 'fs'
 import { tryTo } from 'misc-utils-of-mine-generic'
 import { svg2png } from '../src'
+import { BufferClass } from '../src/buffer'
 import { svg } from './assets/code'
 
 test('should render png and jpeg', async t => {
@@ -14,12 +15,12 @@ test('should render png and jpeg', async t => {
   t.false(existsSync('tmp22.jpeg'))
 
   let s = await svg2png({ input: svg.trim(), encoding: 'raw', format: 'jpeg' })
-  t.true(s.length>100)
-  writeFileSync("tmp22.png", Buffer.from(s), 'binary')
+  t.true(s.length > 100)
+  writeFileSync("tmp22.png", BufferClass.isBuffer(s) ? s : Buffer.from(s), 'binary')
   t.true(existsSync('tmp22.png'))
 
   s = await svg2png({ input: svg.trim(), encoding: 'raw', format: 'jpeg' })
-  t.true(s.length>100)
-  writeFileSync("tmp22.jpeg", Buffer.from(s, 'binary'))
+  t.true(s.length > 100)
+  writeFileSync("tmp22.jpeg", BufferClass.isBuffer(s) ? s : Buffer.from(s, 'binary'))
   t.true(existsSync('tmp22.jpeg'))
 })

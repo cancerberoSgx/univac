@@ -1,6 +1,8 @@
-import { PotracePosterizeOptions } from './potrace';
+import { IDataURLOptions } from 'fabric/fabric-impl'
+import { RemoveProperties } from 'misc-utils-of-mine-generic'
+import { PotracePosterizeOptions } from './potrace'
 
-export interface SVG2PNGOptions extends BaseOptions {
+export interface SVG2PNGOptions extends BaseOptions, IDataURLOptions {
   /**
    * SVG code to render as plain text.
    * 
@@ -14,7 +16,7 @@ export interface SVG2PNGOptions extends BaseOptions {
   format?: OutputFormat;
 
   /**
-   * Output image encoding. One of: `base64, dataURL, raw`. By default: `raw`.
+   * Output image encoding. One of: `base64, dataURL, raw, buffer`. By default: `raw`.
    */
   encoding?: Encoding
 
@@ -33,13 +35,17 @@ export interface SVG2PNGOptions extends BaseOptions {
   //  */
   // height?: number;
 }
-export interface PNG2SVGOptions extends BaseOptions, PotracePosterizeOptions {
- /**
-   * PNG/JPEG file content encoded as dataURL. 
-   * 
-   * For CLi and Node.js, it can also be a path or glob file pattern to .png / .jpg files, relative to current dir.
+export interface PNG2SVGOptions extends BaseOptions, RemoveProperties<PotracePosterizeOptions, 'optCurve'> {
+  /**
+   * Disable curve optimization (default false).
    */
-  input: Buffer|string|Uint8Array|Blob;
+  noCurveOptimization?: boolean
+  /**
+    * PNG/JPEG file content encoded as dataURL. 
+    * 
+    * For CLi and Node.js, it can also be a path or glob file pattern to .png / .jpg files, relative to current dir.
+    */
+  input: Buffer | string | Uint8Array | Blob;
 
   // /** 
   //  * Necessary in case the input is a string If the input format is other than PNG then the format must be declared here. By default PNG is assumed. 
@@ -51,17 +57,15 @@ export interface PNG2SVGOptions extends BaseOptions, PotracePosterizeOptions {
 
 
 interface BaseOptions {
-
   /**
    * Node.js and CLI only. Folder for output files. If it doesn't exists it will be created. If none, output will be written to
    * stdout.
    */
   output?: string
 
-  
- /**
-   * CLI only. Print usage information, then exit.
-   */
+  /**
+    * CLI only. Print usage information, then exit.
+    */
   help?: boolean
 
   /**
@@ -74,4 +78,4 @@ export type Format = 'svg' | OutputFormat
 
 export type OutputFormat = 'png' | 'jpeg'
 
-type Encoding = 'base64' | 'dataURL' | 'raw'
+type Encoding = 'base64' | 'dataURL' | 'raw' | 'buffer'

@@ -4,7 +4,10 @@
   "description": "Convert SVG to PNG or JPEG, both in browser and node.js. JavaScript API and Command Line",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
-  "bin": "bin/svg-png.js",
+  "bin": {
+    "png2svg": "bin/png2svg.js",
+    "svg2png": "bin/svg2png.js"
+  },
   "scripts": {
     "test": "npm run build && ava",
     "test-browser": "exit 0; npx ava test-browser/*Test.ts",

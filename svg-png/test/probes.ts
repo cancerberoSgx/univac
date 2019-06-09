@@ -1,5 +1,6 @@
 import { fabric } from 'fabric'
 import { readFileSync, writeFileSync } from 'fs'
+import { BufferClass } from '../src/buffer'
 import { fabricImageFromData, fabricImageFromUrl } from "../src/fabric"
 import { potracePosterize, potraceTrace } from "../src/potrace"
 import { svg2png } from '../src/svg2png'
@@ -37,8 +38,9 @@ async function fabricTest2() {
 
 async function fabricTest22() {
   let s = await svg2png({ input: svg.trim(), encoding: 'raw' })
-  writeFileSync("tmp22.png", Buffer.from(s, 'binary'))
-  writeFileSync("tmp22.jpeg", Buffer.from(await svg2png({ input: svg.trim(), encoding: 'raw', format: 'jpeg' }), 'binary'))
+  writeFileSync("tmp22.png", BufferClass.isBuffer(s) ? s : BufferClass.from(s, 'binary'))
+  s = await svg2png({ input: svg.trim(), encoding: 'raw', format: 'jpeg' })
+  writeFileSync("tmp22.jpeg", BufferClass.isBuffer(s) ? s : BufferClass.from(s, 'binary'))
 }
 fabricTest22()
 
