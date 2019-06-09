@@ -1,15 +1,18 @@
 import { Base64 } from 'js-base64'
 
-export function dataToUrl(data: string, mimeType: string) {
-  return base64ToUrl(dataToBase64(data), mimeType)
+export function dataToUrl(data: string, mimeType: string, fileName?: string) {
+  return base64ToUrl(dataToBase64(data), mimeType, fileName)
 }
 
 export function dataToBase64(data: string): string {
   return Base64.encode(data)
 }
 
-export function base64ToUrl(base64: string, mimeType: string): string {
-  return `data:${mimeType};base64,${base64}`
+/**
+ * Creates a DataUrl like `data:image/jpeg;name=hindenburg.jpg;base64,` using given base64 content, mimeType and fileName.
+ */
+export function base64ToUrl(base64: string, mimeType: string, fileName?: string): string {
+  return `data:${mimeType}${fileName ? `;name=${fileName}` : ''};base64,${base64}`
 }
 
 export function urlToBase64(s: string) {
@@ -27,4 +30,14 @@ export function isBase64(str: string) {
   } catch (err) {
     return false
   }
+}
+
+/**
+ * Extracts the name of a data url like `data:image/jpeg;name=hindenburg.jpg;base64,`..., if any.
+ */
+export function getDataUrlFileName(url: string) {
+  let p = url.split(';base64,')
+  p = p[0].split('=')
+  const name = p[p.length - 1]
+  return name
 }

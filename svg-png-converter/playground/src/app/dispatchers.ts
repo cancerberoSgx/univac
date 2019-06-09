@@ -6,19 +6,20 @@ export async function convert(e: Example) {
   if (e.svg2png) {
     output = await svg2png({
       ...e.svg2png,
-      input: e.code,
+      input: e.code.startsWith('data:') ?  urlToData(e.code) : e.code,
       encoding: 'dataURL',
     })
   }
   else {
     output = await png2svg({
       ...e.png2svg,
-      input: e.code.startsWith('data:') ? e.code : urlToData(e.code),
+      input: e.code.startsWith('data:') ?  urlToData(e.code): e.code 
     })
   }
 
   e.inputSize = e.code.length
   e.outputSize = (output || '').length
-  console.log({ ...e.png2svg, ...e.svg2png, input: null })
+  // console.log({ ...e.png2svg, ...e.svg2png, input: null })
   return output || ''
 }
+

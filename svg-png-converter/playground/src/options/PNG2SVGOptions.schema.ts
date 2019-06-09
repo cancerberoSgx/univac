@@ -9,17 +9,17 @@ export const PNG2SVGOptionsSchema: JSONSchema6 = {
     input: {
       type: 'string',
       title: "Input",
-      anyOf: [
-        , {
-          type: "string",
+      // anyOf: [
+        // , {
+          // type: "string",
           format: "data-url",
-          title: "Local file",
-        } as any,
-        {
-          type: "string",
-          title: "Source Code",
-        }
-      ],
+        //   title: "Local file",
+        // } as any,
+        // {
+        //   type: "string",
+        //   title: "Source Code",
+        // }
+      // ],
       description: "PNG/JPEG file content encoded as dataURL.",
       default: yao_jpg.trim()
     },
@@ -28,13 +28,13 @@ export const PNG2SVGOptionsSchema: JSONSchema6 = {
       description: "Fill color. Will be ignored when exporting as \\<symbol\\>. (default: `PotraceTurnPolicy.COLOR_AUTO`,\nwhich means black or white, depending on `blackOnWhite` property)",
       type: "string",
       title: 'Foreground color',
-      default: 'black'
+      default: '#000000'
     },
     background: {
       title: "backgorund color",
       description: "Background color. Will be ignored when exporting as \\<symbol\\>. By default is not present\n(`PotraceTurnPolicy.COLOR_TRANSPARENT`)",
       type: "string",
-      default: "-1"
+      default: "#ffffff"
     },
     blackOnWhite: {
       title: "Black on white",
