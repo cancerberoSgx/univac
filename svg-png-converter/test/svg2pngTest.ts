@@ -1,11 +1,11 @@
 import test from 'ava'
+// const fileType = require('file-type')
+import fileType from 'file-type'
 import { readFileSync, writeFileSync } from 'fs'
 import { svg2png } from '../src'
 import { base64ToUrl, urlToBase64, urlToData } from '../src/base64'
 import { BufferClass } from '../src/buffer'
 import { svg } from './assets/code'
-// const fileType = require('file-type')
-import fileType from 'file-type'
 
 test('should render png and jpeg from literal SVG string input to raw binary strings', async t => {
   let s = await svg2png({ input: svg.trim(), encoding: 'raw', format: 'png' })

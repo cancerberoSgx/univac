@@ -13,7 +13,7 @@
     "start": " npx parcel serve  src/index.html -d docs   --no-source-maps",
     "build-dev-no-maps": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-content-hash  --no-source-maps",
     "build-dev": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-source-maps --no-content-hash",
-    "build": "npm run clean && npx tsc && npm run build-only && rm -rf ../../../demos/docs/svg-png-converter/playground/* && mv docs/* ../../../demos/docs/svg-png-converter/playground/",
+    "build": "npm run clean && npx tsc && npm run build-only && rm -rf ../../../demos/docs/svg-png-converter/playground/* && rm -rf docs/static && mkdir -p docs/static && cp -r static/*  docs/static && mv docs/* ../../../demos/docs/svg-png-converter/playground/",
     "build-only": "export NODE_ENV=production && node --max-old-space-size=5000 node_modules/parcel/bin/cli.js build src/index.html -d docs --no-content-hash --detailed-report  --no-source-maps --public-url './'",
     "all": "npm run clean && npm run lint && npm run build"
   },

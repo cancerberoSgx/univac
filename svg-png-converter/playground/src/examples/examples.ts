@@ -1,5 +1,5 @@
-import { RemoveProperties, getFileNameFromUrl, getMimeTypeForExtension } from 'misc-utils-of-mine-generic'
-import { PNG2SVGOptions, SVG2PNGOptions, dataToUrl } from 'svg-png-converter'
+import { getFileNameFromUrl, RemoveProperties } from 'misc-utils-of-mine-generic'
+import { dataToUrl, PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
 import { PNG2SVGOptionsSchema } from '../options/PNG2SVGOptions.schema'
 import { SVG2PNGOptionsSchema } from '../options/SVG2PNGOptionsSchema'
 import { Down_the_Rabbit_Hole_png } from './files/Down_the_Rabbit_Hole_png'
@@ -15,7 +15,6 @@ import { shade_blur_and_gradients43 } from './files/shade_blur_and_gradients43'
 import { something_png } from './files/something_jpg'
 import { tiger_svg } from './files/tiger_svg'
 import { yao_jpg } from './files/yao_jpg'
-import { getFileExtension } from 'misc-utils-of-mine-generic';
 
 export interface Example {
   // ...{input: string};
@@ -24,8 +23,8 @@ export interface Example {
   outputName: string
   inputSize?: number
   outputSize?: number
-  svg2png?: {input: string}& RemoveProperties<SVG2PNGOptions, 'input'>
-  png2svg?: {input: string}&RemoveProperties<PNG2SVGOptions, 'input'>
+  svg2png?: { input: string } & RemoveProperties<SVG2PNGOptions, 'input'>
+  png2svg?: { input: string } & RemoveProperties<PNG2SVGOptions, 'input'>
 }
 
 export const examples: Example[] = ([
@@ -43,42 +42,42 @@ export const examples: Example[] = ([
   {
     name: 'oldpic.jpg',
     outputName: 'oldpic.svg',
-    png2svg: {input: oldpic_jpg.trim()},
+    png2svg: { input: oldpic_jpg.trim() },
     description: ' ',
   },
 
   {
     name: 'hindenburg.jpg',
     outputName: 'hindenburg.svg',
-    png2svg: {input: hindenburg_jpg.trim()},
+    png2svg: { input: hindenburg_jpg.trim() },
     description: ' ',
   },
 
   {
     name: 'something.jpg',
     outputName: 'something.svg',
-    png2svg: {input: something_png.trim()},
+    png2svg: { input: something_png.trim() },
     description: ' ',
   },
 
   {
     name: 'yao.jpg',
     outputName: 'yao.svg',
-    png2svg: {input: yao_jpg.trim()},
+    png2svg: { input: yao_jpg.trim() },
     description: ' ',
   },
 
   {
     name: 'panda.png',
     outputName: 'panda.svg',
-    png2svg: {input: panda_png.trim()},
+    png2svg: { input: panda_png.trim() },
     description: ' ',
   },
   {
     name: 'shade_blur_and_gradients43.svg',
     outputName: 'shade_blur_and_gradients43.jpg',
     svg2png: {
-      input:shade_blur_and_gradients43.trim(),
+      input: shade_blur_and_gradients43.trim(),
       format: 'jpeg'
     }
     ,
@@ -89,7 +88,7 @@ export const examples: Example[] = ([
     name: 'hierarchy1.svg',
     outputName: 'hierarchy1.jpg',
     svg2png: {
-      format: 'jpeg',input: hierarchy1_svg.trim()
+      format: 'jpeg', input: hierarchy1_svg.trim()
     },
     description: ' ',
   },
@@ -98,7 +97,7 @@ export const examples: Example[] = ([
     name: 'hierarchy2.svg',
     outputName: 'hierarchy1.png',
     svg2png: {
-      format: 'png',input: hierarchy2_svg.trim()
+      format: 'png', input: hierarchy2_svg.trim()
     },
     description: ' ',
   },
@@ -107,14 +106,14 @@ export const examples: Example[] = ([
     name: 'hierarchy2.png',
     outputName: 'hierarchy2.svg',
     description: ' ',
-    png2svg: {input: hierarchy2_png.trim()}
+    png2svg: { input: hierarchy2_png.trim() }
   },
 
   {
     name: 'tiger.svg',
     outputName: 'tiger.jpg',
     svg2png: {
-      format: 'jpeg',input: tiger_svg.trim()
+      format: 'jpeg', input: tiger_svg.trim()
     },
     description: ' ',
   },
@@ -122,14 +121,14 @@ export const examples: Example[] = ([
   {
     name: 'Down_the_Rabbit_Hole.png',
     outputName: 'Down_the_Rabbit_Hole.svg',
-    svg2png: {input: Down_the_Rabbit_Hole_png.trim()},
+    png2svg: { input: Down_the_Rabbit_Hole_png.trim() },
     description: ' ',
   },
 
   {
     name: 'photo1.jpg',
     outputName: 'photo1.svg',
-    svg2png: {input: photo1_jpg.trim()},
+    png2svg: { input: photo1_jpg.trim() },
     description: ' ',
   },
 

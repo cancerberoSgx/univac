@@ -36,17 +36,15 @@ export function isBase64(str: string) {
  * Extracts the name of a data url like `data:image/jpeg;name=hindenburg.jpg;base64,`..., if any.
  */
 export function getDataUrlFileName(url: string) {
-  let p = url.split(';base64,')
-  p = p[0].split('=')
-  const name = p[p.length - 1]
-  return name
+  let p = url && url.split(';base64,')
+  const q = p.length ? p[0].split(';').find(s => s.includes('name=')) : ''
+  p = q ? q.split('=') : []
+  return p[p.length - 1]
 }
 
 export function arrayBufferToBase64(buffer: ArrayBuffer) {
-  var binary = '';
-  var bytes = [].slice.call(new Uint8Array(buffer));
-
-  bytes.forEach((b) => binary += String.fromCharCode(b));
-
-  return window.btoa(binary);
-};
+  var binary = ''
+  var bytes = [].slice.call(new Uint8Array(buffer))
+  bytes.forEach((b) => binary += String.fromCharCode(b))
+  return window.btoa(binary)
+}

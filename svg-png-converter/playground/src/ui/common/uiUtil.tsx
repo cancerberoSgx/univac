@@ -1,8 +1,8 @@
+import { getFileExtension, getFileNameFromUrl, getMimeTypeForExtension } from 'misc-utils-of-mine-generic'
 import * as React from 'react'
-import {blobToBuffer, PNG2SVGOptions, SVG2PNGOptions, base64ToUrl} from 'svg-png-converter'
-import fileType = require('file-type');
-import { getFileNameFromUrl } from 'misc-utils-of-mine-generic';
-import { getFileExtension } from 'misc-utils-of-mine-generic';
+import { base64ToUrl, blobToBuffer, PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
+import fileType = require('file-type')
+import { convert } from '../../app/convert';
 export function width() {
   return document.body.clientWidth
 }
@@ -28,57 +28,51 @@ export function createUrl() {
   window.location.hash = '#state=' + b
 }
 
-export async function loadUrl() {
+export async function loadUrl(url=window.location.hash) {
   if (window.location.hash.includes('state=')) {
-    const d = window.location.hash.split('state=')[1]
-    const {imageUrl, options} = JSON.parse(atob(d)) as {imageUrl: string, options: SVG2PNGOptions | PNG2SVGOptions}
-    // setCodeEditorText(state.code)
-    // const {imageUrl, options} = 
-
-    const dataUrl = await fetchAsBuffer(imageUrl)
-    
+    const d = url.split('state=')[1]
+    const { imageUrl, options } = JSON.parse(atob(d)) as { imageUrl: string, options: SVG2PNGOptions | PNG2SVGOptions }
+    const member = (options as any).svg2png||(options as any).png2svg
+    if(!member) {
+      throw new Error('Cannot retrieve image document options from url. aborting')
+    }
+const example ={...options, ...{input: (options as any).svg2png ?(options as any) .input : (options as any).png2svg  }}
+const result = await convert(example as any)
+    // convert(options)
+    // const buffer = await fetchAsBuffer(imageUrl)
+    // const dataUrl =base64ToUrl( buffer.toString('base64'), getFileNameFromUrl(url))
   } else {
   }
 }
 
 
-export async function fetchAsBuffer(url: string, headers?: Headers){
-  // var url = 'https://ronreiter-meme-generator.p.mashape.com/meme?meme=Baby+Godfather&font_size=50&font=Impact&top=Thanks+m&bottom=Later';
-// var headers = new Headers({'X-Mashape-Key': 'API_KEY'});
-var options : RequestInit = {
-  method: 'GET',
-  headers: headers,
-  mode: 'cors',
-  cache: 'default'
-}  
-var request = new Request(url);
-const response = await fetch(request, options)
-// .then(() => {
+export async function fetchAsBuffer(url: string, headers?: Headers) {
+  var options: RequestInit = {
+    method: 'GET',
+    headers: headers,
+    mode: 'cors',
+    cache: 'default'
+  }
+  var request = new Request(url)
+  const response = await fetch(request, options)
   const blob = await response.blob()
-  // .then((blob) => {
-    const buffer = await blobToBuffer(blob)
-    return buffer
-    // var base64Flag = 'data:image/jpeg;base64,';
-    // var imageStr = arrayBufferToBase64(buffer);
-    // resolve(k
-    // document.querySelector('img').src = base64Flag + imageStr;
-  // })
-// })
-
+  const buffer = await blobToBuffer(blob)
+  return buffer
 }
 
 
 
-export async function fetchImageDocument(url:string) {
-  // const url = e.currentTarget.value;
-  // if(!fileNme){
-  //   // throw new Error('Sorry, a file Name cannot be extracted from t')
-  // }
-  // const u = new URL(val)
-  const buffer = await fetchAsBuffer(url);
-  const fileNme = getFileNameFromUrl(url);
-  let t = fileType(buffer);
-  const mimeType = t && t.mime || fileNme && getFileExtension(fileNme) && getFileNameFromUrl(getFileExtension(fileNme));
-  const dataUrl = base64ToUrl(buffer.toString('base64'), mimeType, fileNme);
-  return dataUrl;
+export async function fetchImageDocument(url: string) {
+  const buffer = await fetchAsBuffer(url)
+  const fileNme = getFileNameFromUrl(url)
+  let t = fileType(buffer)
+  const mimeType = t && t.mime || fileNme && getFileExtension(fileNme) && getFileNameFromUrl(getFileExtension(fileNme))
+  const imageUrl=  base64ToUrl(buffer.toString('base64'), mimeType, fileNme) 
 }
+
+// function getMimeTypeFromUrl(url:string){
+//  const name = getFileNameFromUrl(url)
+//  if(name){
+//    return getmime
+//  }
+// }

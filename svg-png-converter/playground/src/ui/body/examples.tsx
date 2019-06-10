@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Header, Icon, Segment, Select } from 'semantic-ui-react'
+import { Header, Segment, Select } from 'semantic-ui-react'
 import { convert } from '../../app/convert'
 import { examples } from '../../examples/examples'
 import { AbstractComponent } from '../component'

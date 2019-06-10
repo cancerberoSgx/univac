@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { Header, Segment } from 'semantic-ui-react'
-import { urlToData, svg2png } from '../../../../dist/src'
+import { urlToData } from '../../../../dist/src'
+import { getCode } from '../../app/convert'
 import { AbstractComponent } from '../component'
-import { Example } from '../../examples/examples';
-import { getCode } from '../../app/convert';
 
 export class Input extends AbstractComponent {
   render() {

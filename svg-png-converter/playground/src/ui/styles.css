@@ -81,14 +81,8 @@ border: 2px dotted #83963e;
   top: 20vh;
   max-width: 40vw;
 }
- .appBody  .ui.header:first-child{
-/* margin: 0; */
-/* } */
-/* .ui.examplesContainer{
-  position: absolute;
-} */
- /* .ui.header:first-child { */
-   /* margin-top: 0.6em; */
+ .appBody {
+   padding-top: 4em;
  }
 [type="submit"]{
   font-size: 1.5em;

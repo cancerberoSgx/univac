@@ -1,11 +1,12 @@
 
 [Playground](https://cancerberosgx.github.io/demos/svg-png-converter/playground//) (WIP)
 
-TODO :
+## TODO :
 
- [ ] load images form external urls and remove most of the testing ones or request them
+ [x] load images form external urls and remove most of the testing ones or request them
  [ ] download current images and transformations as zip files. or store images in FS and put settings in url
-
+ [ ] zwitch between output/input images so we can perform png=>svg=> png multiple times to see if degrades or improves. Also a mechanism to perform this N times.
+ [ ] suggests users to use https://jakearchibald.github.io/svgomg/ after ownloading since it really improves output size
  good results:
 
  just load these images using the playground - they both look great and small when  transformed to SVG:
@@ -15,14 +16,16 @@ comics:
   * https://www.syfy.com/sites/syfy/files/styles/1200x680/public/2017/10/screen_shot_2017-10-31_at_1.46.05_pm.png
 
 
+## Ideas
 
+ * add Imagemagic to measure difference.
 
 <!-- 
 
 
     "lazy-line-painter": "^1.9.6",
 
-    
+
   function simulatePathDrawing(path) {
   // var path = document.querySelector('.squiggle-animated path');
   var length = path.getTotalLength();
