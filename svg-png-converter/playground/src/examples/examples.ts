@@ -1,4 +1,4 @@
-import { RemoveProperties } from 'misc-utils-of-mine-generic'
+import { RemoveProperties, getFileNameFromUrl } from 'misc-utils-of-mine-generic'
 import { PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
 import { PNG2SVGOptionsSchema } from '../options/PNG2SVGOptions.schema'
 import { SVG2PNGOptionsSchema } from '../options/SVG2PNGOptionsSchema'
@@ -134,4 +134,4 @@ export const examples: Example[] = ([
     description: ' ',
   },
 
-] as Example[]).map(f => f.svg2png ? { ...f, ...{ svg2png: { ...SVG2PNGOptionsSchema, ...f.svg2png } } } : { ...f, png2svg: { ...PNG2SVGOptionsSchema, ...f.png2svg } } as any)
+] as Example[]).map(f => f.svg2png ? { ...f, ...{ svg2png: { ...SVG2PNGOptionsSchema, ...f.svg2png } } } : { ...f, png2svg: { ...PNG2SVGOptionsSchema, ...f.png2svg }, name: getFileNameFromUrl(f.code) } as any)

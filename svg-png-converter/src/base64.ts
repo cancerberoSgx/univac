@@ -41,3 +41,12 @@ export function getDataUrlFileName(url: string) {
   const name = p[p.length - 1]
   return name
 }
+
+export function arrayBufferToBase64(buffer: ArrayBuffer) {
+  var binary = '';
+  var bytes = [].slice.call(new Uint8Array(buffer));
+
+  bytes.forEach((b) => binary += String.fromCharCode(b));
+
+  return window.btoa(binary);
+};

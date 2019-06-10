@@ -1,11 +1,12 @@
 import { Example, examples } from "../examples/examples"
-import { convert } from './dispatchers'
+import { convert } from './convert'
 
 export interface State {
   example: Example
   error?: Error | undefined;
   examples: Example[];
   output: string
+  loadImageFromUrlModalOpen: boolean
 }
 
 export async function getInitialState(): Promise<State> {
@@ -14,5 +15,6 @@ export async function getInitialState(): Promise<State> {
     error: undefined,
     examples,
     output: await convert(examples[0]),
+    loadImageFromUrlModalOpen: false
   }
 }

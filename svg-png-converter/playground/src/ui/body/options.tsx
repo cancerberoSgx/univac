@@ -3,12 +3,13 @@ import { getFileExtension } from 'misc-utils-of-mine-generic'
 import React from "react"
 import Form, { IChangeEvent, UiSchema } from "react-jsonschema-form"
 import { getDataUrlFileName, PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
-import { convert } from '../../app/dispatchers'
+import { convert, createExample } from '../../app/convert'
 import { Example } from '../../examples/examples'
 import { PNG2SVGOptionsSchema } from '../../options/PNG2SVGOptions.schema'
 import { SVG2PNGOptionsSchema } from '../../options/SVG2PNGOptionsSchema'
 import { AbstractComponent } from '../component'
 import { Segment } from 'semantic-ui-react';
+import fileType = require('file-type');
 
 const png2svgUISchema = {
   "color": {
@@ -36,22 +37,21 @@ export class Options extends AbstractComponent {
       </Segment>)
   }
   async change(e: IChangeEvent<SVG2PNGOptions | PNG2SVGOptions>) {
-    if (e.formData.input && typeof e.formData.input === 'string' && e.formData.input !== this.state.example.code) {
+    // debugger
+    console.log('CHANGED', this.state.example, e);
+    
+    if (e.edit && e.formData.input && typeof e.formData.input === 'string' && e.formData.input !== this.state.example.code) {
       const name = getDataUrlFileName(e.formData.input)
-      if (name !== this.state.example.name) {
-        const ext = getFileExtension(name)
-        const svg2png = ext === 'svg'
+      if (!this.state.examples.find(e=>e.name===name)){//} !== this.state.example.name) {
         // create another model, convert and setState so possible the editor changes mode.
-        const example = {
-          name,
-          code: e.formData.input,
-          description: 'new input',
-          outputName: name + (svg2png ? '.png' : '.svg'),
-          inputSize: e.formData.input.length,
-          svg2png: svg2png ? e.formData : undefined,
-          png2svg: svg2png ? undefined : e.formData
-        }
-        this.setState({ example, output: await convert(example) })
+          // const ext = getFileExtension(name)
+          // const fileNme = getFileNameFromUrl(url)
+          // let t = fileType(buffer)
+          // const mimeType = name && getFileExtension(fileNme) && getFileNameFromUrl(getFileExtension(fileNme))
+
+          await createExample({
+          dataUrl: e.formData.input, extra: e.formData, convert: true
+        })        
       }
     }
   }

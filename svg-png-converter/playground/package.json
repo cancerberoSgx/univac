@@ -38,7 +38,8 @@
     "watch": "^1.0.2"
   },
   "dependencies": {
-    "misc-utils-of-mine-generic": "^0.2.8",
+    "file-type": "^11.1.0",
+    "misc-utils-of-mine-generic": "^0.2.10",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-jsonschema-form": "^1.6.1",

@@ -50,7 +50,11 @@ input, select,  {
   padding: 0;
   margin: 0
 }
-
+/* .ui.basic.segment {
+  margin: 0; 
+  padding: 0; 
+  position: inherit;
+} */
 fieldset {
   border: 0!important;
 }
@@ -66,6 +70,9 @@ border: 2px dotted #83963e;
   opacity: 0.9;
 }
 .ui.mainHeader {
+  top: 0px;
+  margin: 0;
+  padding: .5em 0 0 0;
   width:100vw;
   z-index: 7;
 }
@@ -73,6 +80,9 @@ border: 2px dotted #83963e;
   top: 20vh;
   max-width: 40vw;
 }
+/* .ui.examplesContainer{
+  position: absolute;
+} */
 [type="submit"]{
   font-size: 1.5em;
   background: #2f224d;
@@ -104,4 +114,8 @@ i.glyphicon {
   }
 .array-item-remove::after {
    content: "\f057";
+  }
+  
+  .ui.header:first-child{
+    margin: 2em;
   }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Header, Icon, Segment, Select } from 'semantic-ui-react'
-import { convert } from '../../app/dispatchers'
+import { convert } from '../../app/convert'
 import { examples } from '../../examples/examples'
 import { AbstractComponent } from '../component'
 
@@ -8,10 +8,10 @@ export class Examples extends AbstractComponent {
   render() {
     return (
       <>
-        <Segment basic floated="right">
+        <Segment basic floated="right" className="examplesContainer">
           <Header as="h3" className="header-examples">
             Examples:
-        </Header>
+          </Header>
           <Select className="select-examples" search
             selectedLabel={this.state.example.name} value={this.state.example.name}
             onChange={async (e, props) => {
