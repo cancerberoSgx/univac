@@ -23,7 +23,7 @@ const png2svgUISchema = {
 export class Options extends AbstractComponent {
   render() {
     let schema: JSONSchema6 = this.state.example.svg2png ? SVG2PNGOptionsSchema : PNG2SVGOptionsSchema
-    let uiSchema: UiSchema = this.state.example.svg2png ? {} : png2svgUISchema
+    let uiSchema: UiSchema = png2svgUISchema//this.state.example.svg2png ? {} : png2svgUISchema
     return (
       <Segment className="optionsContainer">
         <Form<SVG2PNGOptions | PNG2SVGOptions>
@@ -39,7 +39,7 @@ export class Options extends AbstractComponent {
   async change(e: IChangeEvent<SVG2PNGOptions | PNG2SVGOptions>) {
     if (e.edit && e.formData.input && typeof e.formData.input === 'string' && e.formData.input !== getCode(this.state.example)) {
       const name = getDataUrlFileName(e.formData.input)
-      if (!this.state.examples.find(e => e.name === name)) {//} !== this.state.example.name) {
+      if (!this.state.examples.find(e => e.name === name)) {
         await createExample({
           dataUrl: e.formData.input,
           extra: e.formData,

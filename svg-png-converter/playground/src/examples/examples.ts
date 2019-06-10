@@ -132,4 +132,23 @@ export const examples: Example[] = ([
     description: ' ',
   },
 
-] as Example[]).map(f => f.svg2png ? { ...f, ...{ svg2png: { ...SVG2PNGOptionsSchema, ...f.svg2png, input: dataToUrl(f.svg2png.input, 'image/svg+xml') } } } : { ...f, png2svg: { ...PNG2SVGOptionsSchema, ...f.png2svg }, name: getFileNameFromUrl(f.png2svg!.input) } as any)
+] as Example[]).map(f => {
+  if(f.svg2png){
+    return { ...f, 
+       svg2png: {
+        ...SVG2PNGOptionsSchema, 
+        ...f.svg2png, 
+        input: dataToUrl(f.svg2png.input, 'image/svg+xml') 
+      } 
+    
+  }}
+   else {
+      return {
+        ...f, 
+        png2svg: { 
+          ...PNG2SVGOptionsSchema, 
+          ...f.png2svg 
+        }, 
+    } as any
+    }
+})

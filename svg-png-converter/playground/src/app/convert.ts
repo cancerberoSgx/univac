@@ -1,11 +1,10 @@
 import { getFileExtension, getFileNameFromUrl } from 'misc-utils-of-mine-generic'
 import { png2svg, PNG2SVGOptions, svg2png, SVG2PNGOptions, urlToData } from 'svg-png-converter'
 import { Example } from '../examples/examples'
-import { State } from './state'
+import { BaseCreateImageOptions } from '../ui/common/uiUtil'
 import { getStore } from './store'
 
 export async function convert(e: Example) {
-
   const input = getCode(e).startsWith('data:') ? urlToData(getCode(e)) : getCode(e)
   let output: string | undefined
   if (e.svg2png) {
@@ -21,9 +20,9 @@ export async function convert(e: Example) {
       input
     })
   }
-
   e.inputSize = getCode(e).length
   e.outputSize = (output || '').length
+  e.outputName = getFileNameFromUrl(getCode(e))||e.name+'.'+(e.svg2png && e.svg2png.format||'png')
   return output || ''
 }
 
@@ -37,33 +36,30 @@ export function getLastConversionOptions(svg2png = true) {
   // }
   // }
 }
-interface O {
+
+
+export interface createExampleOptions extends BaseCreateImageOptions {
   dataUrl: string,
-  // fileName?:string, 
-  // mimeType?:string, 
-  extraState?: Partial<State>
-  convert?: boolean
-  extra?: Partial<SVG2PNGOptions | PNG2SVGOptions>
 }
-export async function createExample(o: O) {
-  const name = getFileNameFromUrl(o.dataUrl)
+export async function createExample(options: createExampleOptions) {
+  const name = getFileNameFromUrl(options.dataUrl)
   const svg2png = name && getFileExtension(name) === 'svg'
   const example = {
     name,
     description: 'new input',
     outputName: name + (svg2png ? '.png' : '.svg'),
-    inputSize: o.dataUrl.length,
-    svg2png: svg2png ? { ...svg2pngOptions, input: o.dataUrl } : undefined,
-    png2svg: svg2png ? undefined : { ...png2svgOptions, input: o.dataUrl },
-    ...o.extra
+    inputSize: options.dataUrl.length,
+    svg2png: svg2png ? { ...svg2pngOptions, input: options.dataUrl } : undefined,
+    png2svg: svg2png ? undefined : { ...png2svgOptions, input: options.dataUrl },
+    ...options.extra
   }
-  const output = o.convert ? await convert(example) : getStore().getState().output
-  const nextState = { 
-    example, 
+  const output = options.convert ? await convert(example) : getStore().getState().output
+  const nextState = {
+    example,
     output,
-     examples: [...getStore().getState().examples, example]
-     , ...o.extraState || {} 
-    }
+    examples: [...getStore().getState().examples, example]
+    , ...options.extraState || {}
+  }
   getStore().setState(nextState)
   return nextState
 

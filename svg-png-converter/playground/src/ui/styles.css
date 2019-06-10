@@ -66,6 +66,7 @@ border: 2px dotted #83963e;
 .appBody .ui.optionsContainer, .ui.mainHeader {
   position: fixed;
   float: right;
+  top: 0;
   right: 0; 
   z-index: 6;
   opacity: 0.9;
@@ -90,6 +91,9 @@ border: 2px dotted #83963e;
   border-radius: 1em;
   padding: 0.3em 1em;
   color: #edffee;  
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 i.glyphicon { 
   display: none; 

@@ -34,7 +34,7 @@ export const PNG2SVGOptionsSchema: JSONSchema6 = {
       title: "backgorund color",
       description: "Background color. Will be ignored when exporting as \\<symbol\\>. By default is not present\n(`PotraceTurnPolicy.COLOR_TRANSPARENT`)",
       type: "string",
-      default: "#ffffff"
+      default: -1 as any
     },
     blackOnWhite: {
       title: "Black on white",

@@ -26,7 +26,8 @@ export const SVG2PNGOptionsSchema: JSONSchema6 = {
       "description": "Output format. One of: `png, jpeg`. By default: `png`.",
       "enum": [
         "jpeg",
-        "png"
+        "png",
+        "gif"
       ],
       "type": "string",
       "default": "png"
@@ -35,6 +36,25 @@ export const SVG2PNGOptionsSchema: JSONSchema6 = {
     "width": {
       "description": "Cropping width. Introduced in v1.2.14",
       "type": "number"
+    },
+
+    color: {
+      description: "Fill color. Will be ignored when exporting as \\<symbol\\>. (default: `PotraceTurnPolicy.COLOR_AUTO`,\nwhich means black or white, depending on `blackOnWhite` property)",
+      type: "string",
+      title: 'Foreground color',
+      default: '#000000'
+    },
+    background: {
+      title: "backgorund color",
+      description: "Background color. Will be ignored when exporting as \\<symbol\\>. By default is not present\n(`PotraceTurnPolicy.COLOR_TRANSPARENT`)",
+      type: "string",
+      default: -1 as any
+    },
+    blackOnWhite: {
+      title: "Black on white",
+      description: "specifies colors by which side from threshold should be traced (default true).",
+      type: "boolean",
+      default: true
     },
     "height": {
       "description": "Cropping height. Introduced in v1.2.14",

@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { Button, Header as H, Icon, Input, Modal, ModalProps, Segment } from 'semantic-ui-react'
-import { createExample } from '../../app/convert'
 import { Examples } from '../body/examples'
 import { fetchImageDocument } from '../common/uiUtil'
 import { AbstractComponent } from '../component'
 import { About } from './about'
 
-const statics = ['wolverine.jpg', 'tololo1.jpeg', 'xmen.jpeg']
+const statics = ['wolverine.jpg', 'tololo1.jpeg', 'xmen.jpeg', 'star-trek-next-generation.jpg']
 export class Header extends AbstractComponent {
   loadImageModal: React.Component<ModalProps, any, any> | null = null;
   render() {
@@ -32,15 +31,15 @@ export class Header extends AbstractComponent {
           <Modal.Content>
             <p>These are a couple of test images you can try:</p>
             <ul>
-              {statics.map(s=>`static/${s}`).map(s => <li>
+              {statics.map(s => `static/${s}`).map(s => <li>
                 <a onClick={e => this.loadImage(s)} href="#">{s}</a>
-                </li>)}
+              </li>)}
 
             </ul>
 
             {/* <Header>Load Image form Url</Header> */}
-            <Input 
-            float="right" action='Load'
+            <Input
+              float="right" action='Load'
               // fluid focus 
               label="Image Url to load"
               //  as="input"  
@@ -52,33 +51,16 @@ export class Header extends AbstractComponent {
               }} />
           </Modal.Content>
         </Modal>
-
-
       </Segment>
-
     )
   }
 
   private async loadImage(url: string) {
-    // const dataUrl = a(es);
-    await createExample({
-      dataUrl: await fetchImageDocument(url),
+    return await fetchImageDocument({
+      url,
       convert: true,
       extraState: { loadImageFromUrlModalOpen: false }
     })
   }
 }
-
-
-
-// const addressDefinitions = faker.definitions.address
-// const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
-//   key: addressDefinitions.state_abbr[index],
-//   text: state,
-//   value: addressDefinitions.state_abbr[index],
-// }))
-
-// const DropdownExampleSearchSelectionTwo = () => (
-//   <Dropdown placeholder='State' search selection options={stateOptions} />
-// )
 
