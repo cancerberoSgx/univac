@@ -6,7 +6,7 @@ import { State } from './state';
 
 export async function convert(e: Example) {
 
-  const input = e.code.startsWith('data:') ? urlToData(e.code) : e.code
+  const input = getCode(e).startsWith('data:') ? urlToData(getCode(e)) : getCode(e)
   let output: string | undefined
   if (e.svg2png) {
     output = await svg2png({
@@ -22,7 +22,7 @@ export async function convert(e: Example) {
     })
   }
 
-  e.inputSize = e.code.length
+  e.inputSize = getCode(e).length
   e.outputSize = (output || '').length  
   return output || ''
 }
@@ -50,12 +50,11 @@ export async function  createExample(o: O){
   const svg2png = name&&getFileExtension(name)=== 'svg'
   const example = {
     name ,
-    code: o.dataUrl,
     description: 'new input',
     outputName: name + (svg2png ? '.png' : '.svg'),
     inputSize: o.dataUrl.length,
-    svg2png: svg2png ?svg2pngOptions: undefined,
-    png2svg: svg2png ? undefined : png2svgOptions,
+    svg2png: svg2png ?{...svg2pngOptions, input: o.dataUrl}: undefined,
+    png2svg: svg2png ? undefined : {...png2svgOptions, input: o.dataUrl},
     ...o.extra
   }
   const output = o.convert ? await convert(example) : getStore(). getState().output
@@ -63,4 +62,9 @@ export async function  createExample(o: O){
   getStore().setState(nextState) 
 return nextState
 
+}
+
+
+export function getCode(e: Example){
+  return e.svg2png ? e.svg2png.input! : e.png2svg && e.png2svg.input ||''
 }

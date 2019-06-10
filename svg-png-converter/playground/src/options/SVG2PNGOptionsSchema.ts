@@ -68,15 +68,15 @@ export const SVG2PNGOptionsSchema: JSONSchema6 = {
       "type": "boolean",
       "default": false
     },
+    "enableRetinaScaling": {
+      "type": "boolean",
+      "default": false
+    },
     "debug": {
       "description": "Node.js and CLI only. Prints debug messages.",
       "type": "boolean",
       "default": false
     },
-    "enableRetinaScaling": {
-      "type": "boolean",
-      "default": false
-    }
   },
   "type": "object"
 }

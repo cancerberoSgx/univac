@@ -50,6 +50,7 @@ input, select,  {
   padding: 0;
   margin: 0
 }
+
 /* .ui.basic.segment {
   margin: 0; 
   padding: 0; 
@@ -72,7 +73,7 @@ border: 2px dotted #83963e;
 .ui.mainHeader {
   top: 0px;
   margin: 0;
-  padding: .5em 0 0 0;
+  padding: .5em 0 0 1em;
   width:100vw;
   z-index: 7;
 }
@@ -80,9 +81,15 @@ border: 2px dotted #83963e;
   top: 20vh;
   max-width: 40vw;
 }
+ .appBody  .ui.header:first-child{
+/* margin: 0; */
+/* } */
 /* .ui.examplesContainer{
   position: absolute;
 } */
+ /* .ui.header:first-child { */
+   /* margin-top: 0.6em; */
+ }
 [type="submit"]{
   font-size: 1.5em;
   background: #2f224d;
@@ -115,7 +122,9 @@ i.glyphicon {
 .array-item-remove::after {
    content: "\f057";
   }
-  
-  .ui.header:first-child{
-    margin: 2em;
+  .appBody {
+    margin-top: 3em!important;
   }
+  /* .ui.header:first-child{
+    margin-top: 3em;
+  } */

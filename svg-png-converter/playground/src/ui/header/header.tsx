@@ -3,12 +3,13 @@ import { Button, Modal, Icon, Header as H, Segment, Input, ModalProps } from 'se
 import { Examples } from '../body/examples'
 import { AbstractComponent } from '../component'
 import { About } from './about'
-import { fetchAsBuffer } from '../common/uiUtil';
+import { fetchAsBuffer, fetchImageDocument } from '../common/uiUtil';
 import { getFileExtension, getFileNameFromUrl } from 'misc-utils-of-mine-generic';
 import { base64ToUrl } from '../../../../dist/src';
 import fileType from 'file-type'
 import { createExample } from '../../app/convert';
 
+const statics = ['static/wolverine.jpg', 'static/tololo1.jpeg', 'xmen.jpeg']
 export class Header extends AbstractComponent {
   loadImageModal:  React.Component<ModalProps, any, any> |null = null;
   render() {
@@ -26,34 +27,27 @@ export class Header extends AbstractComponent {
         <Modal
         open={this.state.loadImageFromUrlModalOpen} 
         onClose={e=>this.setState({loadImageFromUrlModalOpen: false})}
-
-        trigger={<Button
-         
+        trigger={<Button         
           onClick={(e: any)=>this.setState({loadImageFromUrlModalOpen: true})}
-          
         as='a' icon="load" floated="right">Load Image</Button>}
         >
           <Modal.Header>Load Image form Url</Modal.Header>
           <Modal.Content>
+            <p>These are a couple of test images you can try:</p>
+            <ul>
+              {statics.map(s=><li><a onClick={e=>this.loadImage(s)} href="#">{s}</a></li>) }
+                       
+           </ul>
+
             {/* <Header>Load Image form Url</Header> */}
-            <Input float="right" action='Image Address' input='https://i.imgur.com/FVKBIJ7.png' onChange={async e => {
-              const url = e.currentTarget.value
-              // if(!fileNme){
+            <Input float="right" action='Load'  
+            // fluid focus 
+            label="Image Url to load"
+            //  as="input"  
+            input='https://i.imgur.com/FVKBIJ7.png' 
+            onChange={ e => {
 
-              //   // throw new Error('Sorry, a file Name cannot be extracted from t')
-              // }
-              // const u = new URL(val)
-              const buffer = await fetchAsBuffer(url)
-
-              const fileNme = getFileNameFromUrl(url)
-              let t = fileType(buffer)
-              const mimeType = t && t.mime || fileNme && getFileExtension(fileNme) && getFileNameFromUrl(getFileExtension(fileNme))
-
-              const dataUrl = base64ToUrl(buffer.toString('base64'), mimeType, fileNme)
-              
-              await createExample({
-                dataUrl, convert: false, extraState: {loadImageFromUrlModalOpen: false}
-              })
+               this.loadImage(e.currentTarget.value)
 
               // self.loadImageModal && self.loadImageModal.sprops.open = true
               
@@ -75,7 +69,7 @@ export class Header extends AbstractComponent {
               //    svg2png: svg2png ? e.formData : undefined,
               //    png2svg: svg2png ? undefined : e.formData
               //  }
-              debugger
+              // debugger
             }} />
           </Modal.Content>
         </Modal>
@@ -85,5 +79,27 @@ export class Header extends AbstractComponent {
 
     )
   }
+
+  private async loadImage(url: string) {
+    // const dataUrl = a(es);
+    await createExample({
+      dataUrl: await fetchImageDocument(url),
+      // convert: false,
+      extraState: { loadImageFromUrlModalOpen: false }
+    });
+  }
 }
+
+
+
+// const addressDefinitions = faker.definitions.address
+// const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
+//   key: addressDefinitions.state_abbr[index],
+//   text: state,
+//   value: addressDefinitions.state_abbr[index],
+// }))
+
+// const DropdownExampleSearchSelectionTwo = () => (
+//   <Dropdown placeholder='State' search selection options={stateOptions} />
+// )
 

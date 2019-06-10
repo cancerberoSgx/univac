@@ -1,6 +1,8 @@
 import * as React from 'react'
-import {blobToBuffer} from 'svg-png-converter'
-import { resolve } from 'url';
+import {blobToBuffer, PNG2SVGOptions, SVG2PNGOptions, base64ToUrl} from 'svg-png-converter'
+import fileType = require('file-type');
+import { getFileNameFromUrl } from 'misc-utils-of-mine-generic';
+import { getFileExtension } from 'misc-utils-of-mine-generic';
 export function width() {
   return document.body.clientWidth
 }
@@ -17,27 +19,6 @@ export const Space = () => (
   <span style={{ marginRight: '0.5em' }}></span>
 )
 
-export function iconForNodeKind(kind = '') {
-  kind = kind.toLowerCase()
-  if (['method', 'member', 'property', 'constructor'].find(s => kind.includes(s))) {
-    return 'cube'
-  }
-  if (['type', 'interface', 'alias'].find(s => kind.includes(s))) {
-    return 'cog'
-  }
-  if (['import', 'export'].find(s => kind.includes(s))) {
-    return 'map'
-  }
-  if (kind.includes('jsx')) {
-    return 'code'
-  }
-  if (kind.includes('declaration')) {
-    return 'puzzle piece'
-  }
-  else {
-    return 'leaf'
-  }
-}
 
 export function createUrl() {
   const s = {
@@ -47,13 +28,16 @@ export function createUrl() {
   window.location.hash = '#state=' + b
 }
 
-export function loadUrl() {
+export async function loadUrl() {
   if (window.location.hash.includes('state=')) {
     const d = window.location.hash.split('state=')[1]
-    const state = JSON.parse(atob(d))
+    const {imageUrl, options} = JSON.parse(atob(d)) as {imageUrl: string, options: SVG2PNGOptions | PNG2SVGOptions}
     // setCodeEditorText(state.code)
-  } else {
+    // const {imageUrl, options} = 
 
+    const dataUrl = await fetchAsBuffer(imageUrl)
+    
+  } else {
   }
 }
 
@@ -81,4 +65,20 @@ const response = await fetch(request, options)
   // })
 // })
 
+}
+
+
+
+export async function fetchImageDocument(url:string) {
+  // const url = e.currentTarget.value;
+  // if(!fileNme){
+  //   // throw new Error('Sorry, a file Name cannot be extracted from t')
+  // }
+  // const u = new URL(val)
+  const buffer = await fetchAsBuffer(url);
+  const fileNme = getFileNameFromUrl(url);
+  let t = fileType(buffer);
+  const mimeType = t && t.mime || fileNme && getFileExtension(fileNme) && getFileNameFromUrl(getFileExtension(fileNme));
+  const dataUrl = base64ToUrl(buffer.toString('base64'), mimeType, fileNme);
+  return dataUrl;
 }
