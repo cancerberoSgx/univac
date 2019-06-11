@@ -6,7 +6,7 @@
  [x] load images form external urls and remove most of the testing ones or request them
  [ ] download current images and transformations as zip files. or store images in FS and put settings in url
  [ ] zwitch between output/input images so we can perform png=>svg=> png multiple times to see if degrades or improves. Also a mechanism to perform this N times.
- [ ] suggests users to use https://jakearchibald.github.io/svgomg/ after ownloading since it really improves output size
+ [ ] suggests users to use https://jakearchibald.github.io/svgomg/ after downloading since it really improves output size
  good results:
 
  just load these images using the playground - they both look great and small when  transformed to SVG:

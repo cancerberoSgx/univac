@@ -63,6 +63,7 @@ export interface BaseCreateImageOptions {
   extraState?: Partial<State>
   convert?: boolean
   extra?: Partial<SVG2PNGOptions | PNG2SVGOptions>
+  name?: string
 }
 
 export interface createImageDocumentOptions extends BaseCreateImageOptions {
@@ -75,6 +76,6 @@ export async function fetchImageDocument(options: createImageDocumentOptions) {
   let t = fileType(buffer)
   const mimeType = t && t.mime || fileNme && getFileExtension(fileNme) && getFileNameFromUrl(getFileExtension(fileNme))
   const dataUrl = base64ToUrl(buffer.toString('base64'), mimeType, fileNme)
-  const doc = createExample({ ...options, dataUrl })
+  const doc = createExample({ ...options, dataUrl, name: fileNme })
   return doc
 }

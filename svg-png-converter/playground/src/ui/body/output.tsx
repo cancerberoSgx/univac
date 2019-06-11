@@ -17,9 +17,9 @@ export class Output extends AbstractComponent {
           <a href="#" onClick={e => {
             var blob = new Blob([this.state.output], { type: 'image/svg+xml;charset=utf-8' })
             FileSaver.saveAs(blob, this.state.example.outputName)
-
-
-          }}>{this.state.example.outputName}</a>
+          }}>
+            {this.state.example.outputName}
+          </a>
 
         </Header>
         {this.state.example.svg2png ? <img src={this.state.output} /> : <div dangerouslySetInnerHTML={{ __html: this.state.output }}></div>}

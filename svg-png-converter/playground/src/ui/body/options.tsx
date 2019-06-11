@@ -43,7 +43,8 @@ export class Options extends AbstractComponent {
         await createExample({
           dataUrl: e.formData.input,
           extra: e.formData,
-          convert: true
+          convert: true,
+          name
         })
       }
     }

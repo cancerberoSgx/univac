@@ -22,7 +22,7 @@ export async function convert(e: Example) {
   }
   e.inputSize = getCode(e).length
   e.outputSize = (output || '').length
-  e.outputName = getFileNameFromUrl(getCode(e))||e.name+'.'+(e.svg2png && e.svg2png.format||'png')
+  e.outputName = e.outputName || getFileNameFromUrl(getCode(e)) || e.name + '.' + (e.svg2png && e.svg2png.format || 'png')
   return output || ''
 }
 
@@ -30,24 +30,19 @@ let svg2pngOptions: SVG2PNGOptions
 let png2svgOptions: PNG2SVGOptions
 export function getLastConversionOptions(svg2png = true) {
   return svg2png ? svg2pngOptions : png2svgOptions
-  // if(svg2png){
-  // if(!svg2pngOptions){
-  // svg2pngOptions = examples.find(e=>!!e.svg2png)!.svg2png
-  // }
-  // }
 }
-
 
 export interface createExampleOptions extends BaseCreateImageOptions {
   dataUrl: string,
 }
+
 export async function createExample(options: createExampleOptions) {
-  const name = getFileNameFromUrl(options.dataUrl)
+  const name = options.name || getFileNameFromUrl(options.dataUrl)
   const svg2png = name && getFileExtension(name) === 'svg'
   const example = {
     name,
     description: 'new input',
-    outputName: name + (svg2png ? '.png' : '.svg'),
+    outputName: 'output' + (svg2png ? '.png' : '.svg'), // TODO: getFileNameFromUrl issue
     inputSize: options.dataUrl.length,
     svg2png: svg2png ? { ...svg2pngOptions, input: options.dataUrl } : undefined,
     png2svg: svg2png ? undefined : { ...png2svgOptions, input: options.dataUrl },
@@ -62,9 +57,7 @@ export async function createExample(options: createExampleOptions) {
   }
   getStore().setState(nextState)
   return nextState
-
 }
-
 
 export function getCode(e: Example) {
   return e.svg2png ? e.svg2png.input! : e.png2svg && e.png2svg.input || ''

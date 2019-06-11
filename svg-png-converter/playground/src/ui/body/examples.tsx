@@ -13,8 +13,8 @@ export class Examples extends AbstractComponent {
             Examples:
           </Header>
           <Select className="select-examples" search
-          text="Examples"
-            selectedLabel={this.state.example.name} 
+            text="Examples"
+            selectedLabel={this.state.example.name}
             value={this.state.example.name}
             onChange={async (e, props) => {
               const example = examples.find(e => e.name === props.value)

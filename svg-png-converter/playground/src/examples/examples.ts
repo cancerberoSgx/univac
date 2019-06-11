@@ -1,4 +1,4 @@
-import { getFileNameFromUrl, RemoveProperties } from 'misc-utils-of-mine-generic'
+import { RemoveProperties } from 'misc-utils-of-mine-generic'
 import { dataToUrl, PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
 import { PNG2SVGOptionsSchema } from '../options/PNG2SVGOptions.schema'
 import { SVG2PNGOptionsSchema } from '../options/SVG2PNGOptionsSchema'
@@ -133,22 +133,24 @@ export const examples: Example[] = ([
   },
 
 ] as Example[]).map(f => {
-  if(f.svg2png){
-    return { ...f, 
-       svg2png: {
-        ...SVG2PNGOptionsSchema, 
-        ...f.svg2png, 
-        input: dataToUrl(f.svg2png.input, 'image/svg+xml') 
-      } 
-    
-  }}
-   else {
-      return {
-        ...f, 
-        png2svg: { 
-          ...PNG2SVGOptionsSchema, 
-          ...f.png2svg 
-        }, 
-    } as any
+  if (f.svg2png) {
+    return {
+      ...f,
+      svg2png: {
+        ...SVG2PNGOptionsSchema,
+        ...f.svg2png,
+        input: dataToUrl(f.svg2png.input, 'image/svg+xml')
+      }
+
     }
+  }
+  else {
+    return {
+      ...f,
+      png2svg: {
+        ...PNG2SVGOptionsSchema,
+        ...f.png2svg
+      },
+    } as any
+  }
 })

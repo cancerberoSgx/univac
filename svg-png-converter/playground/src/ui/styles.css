@@ -79,7 +79,7 @@ border: 2px dotted #83963e;
   z-index: 7;
 }
 .appBody .ui.optionsContainer {
-  top: 20vh;
+  top: 10vh;
   max-width: 40vw;
 }
  .appBody {

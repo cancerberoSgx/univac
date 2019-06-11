@@ -12,7 +12,7 @@ Checkout [Project Playground](https://cancerberosgx.github.io/demos/svg-png-conv
  * Supports browsers and node.js (Same JavaScript API). 
  * Command Line interface.
  * Uses [fabricjs](http://fabricjs.com/) to rasterize SVG documents into PNG/JPEG,.
- * Uses []
+ * Uses [potrace](https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter) to convert PNG/JPEG bitmap images to SVG vector graphics. 
 
 ## Usage
 

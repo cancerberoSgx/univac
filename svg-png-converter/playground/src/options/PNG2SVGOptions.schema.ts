@@ -9,21 +9,10 @@ export const PNG2SVGOptionsSchema: JSONSchema6 = {
     input: {
       type: 'string',
       title: "Input",
-      // anyOf: [
-      // , {
-      // type: "string",
       format: "data-url",
-      //   title: "Local file",
-      // } as any,
-      // {
-      //   type: "string",
-      //   title: "Source Code",
-      // }
-      // ],
       description: "PNG/JPEG file content encoded as dataURL.",
       default: yao_jpg.trim()
     },
-
     color: {
       description: "Fill color. Will be ignored when exporting as \\<symbol\\>. (default: `PotraceTurnPolicy.COLOR_AUTO`,\nwhich means black or white, depending on `blackOnWhite` property)",
       type: "string",

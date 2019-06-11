@@ -11,17 +11,6 @@ export const SVG2PNGOptionsSchema: JSONSchema6 = {
       "description": "SVG code to render as plain text.\n\nFor CLi or Node.js, it can also be path or glob file pattern to .svg files, relative to current dir.",
       default: dataToUrl(graph1_svg.trim(), 'image/svg+xml')
     },
-    // "encoding": {
-    //   "description": "Output image encoding. One of: `base64, dataURL, raw, buffer`. By default: `raw`.",
-    //   "enum": [
-    //     "base64",
-    //     "dataURL",
-    //     "raw",
-    //     "buffer"
-    //   ],
-    //   "type": "string",
-    //   "default": "dataURL"
-    // },
     "format": {
       "description": "Output format. One of: `png, jpeg`. By default: `png`.",
       "enum": [
@@ -48,7 +37,7 @@ export const SVG2PNGOptionsSchema: JSONSchema6 = {
       title: "backgorund color",
       description: "Background color. Will be ignored when exporting as \\<symbol\\>. By default is not present\n(`PotraceTurnPolicy.COLOR_TRANSPARENT`)",
       type: "string",
-      default: -1 as any
+      default: '#ffffff'
     },
     blackOnWhite: {
       title: "Black on white",
