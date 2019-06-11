@@ -5,7 +5,7 @@ export async function renderDot(options: Options) {
   if(options.format!=='png'){
     return await getLibrary().renderString(options.input, options)
   }else {
-    return await getLibrary().renderImageElement(options.input, {...options, mimeType: 'image/png'})
+    const svg =  await getLibrary().renderString(options.input, {...options, format: 'svg'})    
   }
 }
 
