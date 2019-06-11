@@ -1,6 +1,6 @@
 {
   "name": "svg-png-converter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Convert SVG/PNG and back, both in browser and node.js. JavaScript API and Command Line",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",

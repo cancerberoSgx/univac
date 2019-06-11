@@ -26,7 +26,7 @@
     "@types/glob": "^7.1.1",
     "@types/jsdom": "^12.2.3",
     "@types/node": "^12.0.7",
-    "ava": "^2.0.0",
+    "ava": "^2.1.0",
     "fabric": "^3.1.0",
     "ts-node": "^8.2.0",
     "ts-refactor": "0.0.6",
@@ -35,8 +35,8 @@
   "dependencies": {
     "glob": "^7.1.4",
     "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.8",
-    "svg-png-converter": "0.0.2",
+    "misc-utils-of-mine-generic": "^0.2.10",
+    "svg-png-converter": "0.0.3",
     "tiny-worker": "^2.2.0",
     "universal-base64": "^2.1.0",
     "viz.js": "^2.1.2"

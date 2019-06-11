@@ -23,7 +23,7 @@ test('--format json should generate valid json object', async t => {
   const result = execSync('node bin/render-dot.js --input "digraph { a -> b; }" --format json', { stdio: 'pipe' }).toString()
   const expected = [`"points"`]
   expected.forEach(e => t.true(result.includes(e)))
-  t.notThrows(()=>JSON.parse(result))
+  t.notThrows(() => JSON.parse(result))
 })
 
 test('--format xdot should work', async t => {
@@ -46,5 +46,5 @@ stop`.trim()]
 // test('--format png', async t => {
 //   const result = execSync('node bin/render-dot.js --input "digraph { a -> b; }" --format png', { stdio: 'pipe' }).toString()
 //   t.truthy(result);
-  
+
 // })

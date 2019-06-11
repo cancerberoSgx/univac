@@ -4,7 +4,7 @@ import { serial } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
 import { terminateLibrary } from '../library'
 import { renderDot } from '../renderDot'
-import { Options } from '../types';
+import { Options } from '../types'
 
 export async function cliMain(o: Options) {
   try {

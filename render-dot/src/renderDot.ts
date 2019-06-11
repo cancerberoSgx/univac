@@ -1,11 +1,22 @@
+import { svg2png } from 'svg-png-converter'
 import { getLibrary } from './library'
 import { Options } from './types'
 
 export async function renderDot(options: Options) {
-  if(options.format!=='png'){
+  if (!options.format || !['jpeg', 'png', 'gif'].includes(options.format)) {
     return await getLibrary().renderString(options.input, options)
-  }else {
-    const svg =  await getLibrary().renderString(options.input, {...options, format: 'svg'})    
+  } else {
+    const input = await getLibrary().renderString(options.input, { ...options, format: 'svg' })
+    let s = await svg2png({
+      input,
+      // encoding: 'dataURL',           //TODO: add to options
+      format: (options.format || 'png') as any,
+      width: options.width || 400,
+      height: options.height || 400,
+      // multiplier: options.debug,     //TODO: add to options
+      // quality: .5                    //TODO: add to options
+    })
+    return s
   }
 }
 

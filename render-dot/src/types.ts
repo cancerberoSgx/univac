@@ -1,4 +1,4 @@
-import { enumKeys } from 'misc-utils-of-mine-typescript';
+import { enumKeys } from 'misc-utils-of-mine-typescript'
 
 export interface Options {
   /**
@@ -20,7 +20,7 @@ export interface Options {
   /**
    * Output format. One of: `svg, png, json, xdot, plain, ps`. By default: `svg`.
    */
-  format?: 'svg' | 'png' | 'json' | 'xdot' | 'plain' | 'ps';
+  format?: 'svg' | 'png' | 'jpeg' | 'gif' | 'json' | 'xdot' | 'plain' | 'ps';
 
   /**
    * Graph layout implementation. One of : `dot, circo, fdp, neato, asage, twopi, patchwork, sfdp`. By default: `dot`.

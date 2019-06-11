@@ -18,19 +18,32 @@ npm install render-dot
 
 ### JavaScript
 
+Render DOT code to SVG code as string:
+
 ```ts
 import {renderDot} from 'render-dot'
-
 const svgCode = await renderDot({
   input: 'digraph { a -> b; }'
 })
 ```
+
+Render DOT to PNG file:
+
+```ts
+const result = await renderDot({
+  input: 'digraph { a -> b; }', 
+  format: 'png'
+})
+writeFileSync('graph.png', result, 'binary')
+```
+
 
 ### Command Line
 
 ```sh
 render-dot --input "some/**/*.dot" --output outputFolder
 render-dot --input "digraph { a -> b; }" > tmp.svg
+render-dot --input "some/**/*.dot" --output outputFolder --format gif
 ```
 
 ## Options

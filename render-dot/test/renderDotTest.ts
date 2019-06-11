@@ -1,4 +1,5 @@
 import test from 'ava'
+import { readFileSync } from 'fs'
 import { terminateLibrary } from '../src/library'
 import { renderDot } from '../src/renderDot'
 
@@ -12,4 +13,15 @@ test('should render svg by default', async t => {
   })
   const expected = [`<polygon`, `<svg`]
   expected.forEach(e => t.true(result.includes(e)))
+})
+
+
+test('should render png', async t => {
+  const result = await renderDot({
+    input: 'digraph { a -> b; }',
+    format: 'png'
+  })
+  // writeFileSync('tmp.png', result, 'binary')
+  const expected = readFileSync('test/assets/expectedOutput.png').toString('binary')
+  t.deepEqual(expected, result)
 })
