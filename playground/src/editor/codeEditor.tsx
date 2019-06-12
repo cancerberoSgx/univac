@@ -87,7 +87,10 @@ export function setCodeEditorText(s: string) {
 
 export function getEditorTextAtNode(n: Node) {
   const text = getCodeEditorText()
-  return text.substring(n.start!.start, n.stop!.stop) || ''
+  if(!n.start||!n.stop){
+    return ''
+  }
+  return text.substring(n.start.start, n.stop.stop) || ''
 }
 
 let editor: monaco.editor.IStandaloneCodeEditor

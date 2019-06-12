@@ -38,6 +38,7 @@ export enum Language {
   'visualbasic6' = 'visualbasic6',
   'less' = 'less',
   'wat' = 'wat',
+  'cpp' = 'cpp',
 }
 
 export interface Options extends BaseOptions {

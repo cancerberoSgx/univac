@@ -173,6 +173,147 @@ class MyClass<T> {
 
 
   {
+    name: 'overridingConflicts.kt',
+    language: Language.kotlin,
+    code: `
+interface A {
+  fun foo() { print("A") }
+  fun bar()
+}
+
+interface B {
+  fun foo() { print("B") }
+  fun bar() { print("bar") }
+}
+
+class C : A {
+  override fun bar() { print("bar") }
+}
+
+class D : A, B {
+  override fun foo() {
+    super<A>.foo()
+    super<B>.foo()
+  }
+  override fun bar() {
+    super<B>.bar()
+  }
+}
+`.trim(),
+    description: '',
+  },
+
+
+  {
+    name: 'fold.kt',
+    language: Language.kotlin,
+    code: `
+
+fun <T, R> Collection.fold(
+  initial: R, 
+  combine: (acc: R, nextElement: T) -> R
+): R {
+  var accumulator: R = initial
+  for (element: T in this) {
+      accumulator = combine(accumulator, element)
+  }
+  return accumulator
+}
+
+val items = listOf(1, 2, 3, 4, 5)
+
+// Lambdas are code blocks enclosed in curly braces.
+items.fold(0, { 
+    // When a lambda has parameters, they go first, followed by '->'
+    acc: Int, i: Int -> 
+        print("acc = $acc, i = $i, ") 
+    val result = acc + i
+    println("result = $result")
+    // The last expression in a lambda is considered the return value:
+    result
+})
+
+// Parameter types in a lambda are optional if they can be inferred:
+val joinedToString = items.fold("Elements:", { acc, i -> acc + " " + i })
+
+// Function references can also be used for higher-order function calls:
+val product = items.fold(1, Int::times)
+
+  
+`.trim(),
+    description: '',
+  },
+
+
+
+  {
+    name: 'account.lua',
+    language: Language.lua,
+    code: `
+Account = {balance = 0}
+
+function Account:new (o, name)
+  o = o or {name=name}
+  setmetatable(o, self)
+  self.__index = self
+  return o
+end
+
+function Account:deposit (v)
+  self.balance = self.balance + v
+end
+
+function Account:withdraw (v)
+  if v > self.balance then error("insufficient funds on account "..self.name) end
+  self.balance = self.balance - v
+end
+
+function Account:show (title)
+  print(title or "", self.name, self.balance)
+end
+
+a = Account:new(nil,"demo")
+a:show("after creation")
+a:deposit(1000.00)
+a:show("after deposit")
+a:withdraw(100.00)
+a:show("after withdraw")
+    
+`.trim(),
+    description: '',
+  },
+  
+
+  {
+    name: 'temperature.erl',
+    language: Language.erlang,
+    code: `
+
+-module(tut5).
+-export([format_temps/1]).
+
+%% Only this function is exported
+format_temps([])->                        % No output for an empty list
+    ok;
+format_temps([City | Rest]) ->
+    print_temp(convert_to_celsius(City)),
+    format_temps(Rest).
+
+convert_to_celsius({Name, {c, Temp}}) ->  % No conversion needed
+    {Name, {c, Temp}};
+convert_to_celsius({Name, {f, Temp}}) ->  % Do the conversion
+    {Name, {c, (Temp - 32) * 5 / 9}}.
+
+print_temp({Name, {c, Temp}}) ->
+    io:format("~-15w ~w c~n", [Name, Temp]).
+    
+`.trim(),
+    description: '',
+  },
+  
+
+
+  {
     name: 'looping.rb',
     language: Language.ruby,
     code: `
@@ -271,6 +412,27 @@ C AREA OF THE TRIANGLE
 
 
   {
+    name: 'headings.less',
+    language: Language.less,
+    code: `
+// primary content that needs to be highlighted
+@primarycolor: #FF7F50;
+@color:#800080;
+h1 {
+    color: @primarycolor;
+}
+h3 {
+    color: @color;
+}
+`.trim(),
+    description: '',
+  },
+
+
+
+
+
+  {
     name: 'randomStuff.st',
     language: Language.smalltalk,
     code: `
@@ -301,6 +463,7 @@ girlInBar phoneNumber
 `.trimLeft(),
     description: '',
   },
+
   {
     name: 'module1.cls',
     language: Language.visualbasic6,
@@ -352,14 +515,373 @@ End Function
 
 Private Declare Sub subName1 Lib "MyLib" Alias "alias1" (arg1, arg2, ParamArray arg3)
 
-Begin VB.Form Form
-Begin TabDlg.SSTab Tab1
-   TabCaption(0)   =   "Tab 1"
-   Tab(0).ControlEnabled = 0   'False
-   Tab(0).Control(1).Enabled=   0   'False
-End
-End
 `.trimLeft(),
+    description: '',
+  },
+ {
+    name: 'aux.wat',
+    language: Language.wat,
+    code: `
+(module
+  ;; Auxiliary definition
+  (memory 1)
+
+  (func $dummy)
+
+  (func (export "empty")
+    (block)
+    (block $l)
+  )
+
+  (func (export "add") (param $x f64) (param $y f64) (result f64) (f64.add (local.get $x) (local.get $y)))
+
+  (func (export "nearest") (param $x f64) (result f64) (f64.nearest (local.get $x)))
+
+  (func (export "as-call_indirect-first") (result i32)
+    (block (result i32)
+      (call_indirect (type $check)
+        (loop (result i32) (i32.const 1)) (i32.const 2) (i32.const 0)
+      )
+    )
+  )
+  (func (f64.const 1e308) drop)
+)
+`.trim(),
+    description: '',
+  },
+
+  {
+    name: 'concurrentPi.go',
+    language: Language.golang,
+    code: `
+// Concurrent computation of pi.
+// See https://goo.gl/la6Kli.
+//
+// This demonstrates Go's ability to handle
+// large numbers of concurrent processes.
+// It is an unreasonable way to calculate pi.
+package main
+
+import (
+  "fmt"
+  "math"
+)
+
+func main() {
+  fmt.Println(pi(5000))
+}
+
+// pi launches n goroutines to compute an
+// approximation of pi.
+func pi(n int) float64 {
+  ch := make(chan float64)
+  for k := 0; k <= n; k++ {
+    go term(ch, float64(k))
+  }
+  f := 0.0
+  for k := 0; k <= n; k++ {
+    f += <-ch
+  }
+  return f
+}
+
+func term(ch chan float64, k float64) {
+  ch <- 4 * math.Pow(-1, k) / (2*k + 1)
+}
+`.trim(),
+    description: '',
+  },
+
+  {
+    name: 'treeCompare.go',
+    language: Language.golang,
+    code: `
+// Go's concurrency primitives make it easy to
+// express concurrent concepts, such as
+// this binary tree comparison.
+//
+// Trees may be of different shapes,
+// but have the same contents. For example:
+//
+//        4               6
+//      2   6          4     7
+//     1 3 5 7       2   5
+//                  1 3
+//
+// This program compares a pair of trees by
+// walking each in its own goroutine,
+// sending their contents through a channel
+// to a third goroutine that compares them.
+
+package main
+
+import (
+  "fmt"
+  "math/rand"
+)
+
+// A Tree is a binary tree with integer values.
+type Tree struct {
+  Left  *Tree
+  Value int
+  Right *Tree
+}
+
+// Walk traverses a tree depth-first,
+// sending each Value on a channel.
+func Walk(t *Tree, ch chan int) {
+  if t == nil {
+    return
+  }
+  Walk(t.Left, ch)
+  ch <- t.Value
+  Walk(t.Right, ch)
+}
+
+// Walker launches Walk in a new goroutine,
+// and returns a read-only channel of values.
+func Walker(t *Tree) <-chan int {
+  ch := make(chan int)
+  go func() {
+    Walk(t, ch)
+    close(ch)
+  }()
+  return ch
+}
+
+// Compare reads values from two Walkers
+// that run simultaneously, and returns true
+// if t1 and t2 have the same contents.
+func Compare(t1, t2 *Tree) bool {
+  c1, c2 := Walker(t1), Walker(t2)
+  for {
+    v1, ok1 := <-c1
+    v2, ok2 := <-c2
+    if !ok1 || !ok2 {
+      return ok1 == ok2
+    }
+    if v1 != v2 {
+      break
+    }
+  }
+  return false
+}
+
+// New returns a new, random binary tree
+// holding the values 1k, 2k, ..., nk.
+func New(n, k int) *Tree {
+  var t *Tree
+  for _, v := range rand.Perm(n) {
+    t = insert(t, (1+v)*k)
+  }
+  return t
+}
+
+func insert(t *Tree, v int) *Tree {
+  if t == nil {
+    return &Tree{nil, v, nil}
+  }
+  if v < t.Value {
+    t.Left = insert(t.Left, v)
+    return t
+  }
+  t.Right = insert(t.Right, v)
+  return t
+}
+
+func main() {
+  t1 := New(100, 1)
+  fmt.Println(Compare(t1, New(100, 1)), "Same Contents")
+  fmt.Println(Compare(t1, New(99, 1)), "Differing Sizes")
+  fmt.Println(Compare(t1, New(100, 2)), "Differing Values")
+  fmt.Println(Compare(t1, New(101, 2)), "Dissimilar")
+}
+`.trim(),
+    description: '',
+  },
+
+
+
+  {
+    name: 'svgstring.r',
+    language: Language.r,
+    code: `
+svgstring <- function(width = 10, height = 8, bg = "white",
+                      pointsize = 12, standalone = TRUE,
+                      system_fonts = list(), user_fonts = list()) {
+  aliases <- validate_aliases(system_fonts, user_fonts)
+
+  env <- new.env(parent = emptyenv())
+  string_src <- svgstring_(env, width = width, height = height, bg = bg,
+          pointsize = pointsize, standalone = standalone, aliases = aliases)
+
+  function() {
+    svgstr <- if(env$is_closed) env$svg_string else get_svg_content(string_src)
+    structure(svgstr, class = "svg")
+  }
+}
+`.trim(),
+    description: '',
+  },
+
+
+  {
+    name: 'die.rb',
+    language: Language.ruby,
+    code: `
+class Die
+
+  def roll
+    @numberShowing = 1 + rand(6)
+  end
+
+  def showing
+    @numberShowing
+  end
+
+end
+
+die = Die.new
+die.roll
+puts die.showing
+puts die.showing
+die.roll
+puts die.showing
+puts die.showing
+`.trim(),
+    description: '',
+  },
+
+
+
+  {
+    name: 'dragon.rb',
+    language: Language.ruby,
+    code: `
+ 
+class Dragon
+
+def initialize name
+  @name = name
+  @asleep = false
+  @stuffInBelly     = 10  # He's full.
+  @stuffInIntestine =  0  # He doesn't need to go.
+
+  puts @name + ' is born.'
+end
+
+def feed
+  puts 'You feed ' + @name + '.'
+  @stuffInBelly = 10
+  passageOfTime
+end
+
+def walk
+  puts 'You walk ' + @name + '.'
+  @stuffInIntestine = 0
+  passageOfTime
+end
+
+def putToBed
+  puts 'You put ' + @name + ' to bed.'
+  @asleep = true
+  3.times do
+    if @asleep
+      passageOfTime
+    end
+    if @asleep
+      puts @name + ' snores, filling the room with smoke.'
+    end
+  end
+  if @asleep
+    @asleep = false
+    puts @name + ' wakes up slowly.'
+  end
+end
+
+def toss
+  puts 'You toss ' + @name + ' up into the air.'
+  puts 'He giggles, which singes your eyebrows.'
+  passageOfTime
+end
+
+def rock
+  puts 'You rock ' + @name + ' gently.'
+  @asleep = true
+  puts 'He briefly dozes off...'
+  passageOfTime
+  if @asleep
+    @asleep = false
+    puts '...but wakes when you stop.'
+  end
+end
+
+private
+
+# "private" means that the methods defined here are
+# methods internal to the object.  (You can feed
+# your dragon, but you can't ask him if he's hungry.)
+
+def hungry?
+  # Method names can end with "?".
+  # Usually, we only do this if the method
+  # returns true or false, like this:
+  @stuffInBelly <= 2
+end
+
+def poopy?
+  @stuffInIntestine >= 8
+end
+
+def passageOfTime
+  if @stuffInBelly > 0
+    # Move food from belly to intestine.
+    @stuffInBelly     = @stuffInBelly     - 1
+    @stuffInIntestine = @stuffInIntestine + 1
+  else  # Our dragon is starving!
+    if @asleep
+      @asleep = false
+      puts 'He wakes up suddenly!'
+    end
+    puts @name + ' is starving!  In desperation, he ate YOU!'
+    exit  # This quits the program.
+  end
+
+  if @stuffInIntestine >= 10
+    @stuffInIntestine = 0
+    puts 'Whoops!  ' + @name + ' had an accident...'
+  end
+
+  if hungry?
+    if @asleep
+      @asleep = false
+      puts 'He wakes up suddenly!'
+    end
+    puts @name + '\\'s stomach grumbles...'
+  end
+
+  if poopy?
+    if @asleep
+      @asleep = false
+      puts 'He wakes up suddenly!'
+    end
+    puts @name + ' does the potty dance...'
+  end
+end
+
+end
+
+pet = Dragon.new 'Norbert'
+pet.feed
+pet.toss
+pet.walk
+pet.putToBed
+pet.rock
+pet.putToBed
+pet.putToBed
+pet.putToBed
+pet.putToBed
+`.trim(),
     description: '',
   },
 

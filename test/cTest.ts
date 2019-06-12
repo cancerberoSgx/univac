@@ -31,7 +31,7 @@ test.skip('should throw on invalid input', async t => {
 test('should report syntax errors to given listener', async t => {
   await parseAst({
     input: 'jo jo jo',
-    language: Language.fortran77,
+    language: Language.c,
     errorListener: {
       syntaxError(a, b, c, d, msg) {
         t.true(msg.includes(`missing EOL at`), msg)
