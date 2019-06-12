@@ -1,8 +1,12 @@
 import { existsSync } from 'fs'
 import { join } from 'path'
+import { inBrowser } from 'misc-utils-of-mine-generic';
 
 let packageJsonFolder: string | undefined
 export function getPackageJsonFolder(f = __dirname): string | undefined {
+  if(inBrowser()){
+    return ''
+  }
   if (!packageJsonFolder) {
     if (existsSync(join(f, 'package.json')) && existsSync(join(f, 'node_modules'))) {
       packageJsonFolder = f

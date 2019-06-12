@@ -15,14 +15,15 @@ export function getParserImpl(language: Language): ParserImpl {
     return {
       Lexer: require('./grammar/c/CLexer').CLexer,
       Parser: require('./grammar/c/CParser').CParser,
-      mainRule: 'compilationUnit'
+      mainRule: 'compilationUnit',
+      redundantTypes: node => node.children.length === 1 && node.type.endsWith('Expression')
     }
   }
   else if (language === 'golang') {
     return {
       Lexer: require('./grammar/golang/GolangLexer').GolangLexer,
       Parser: require('./grammar/golang/GolangParser').GolangParser,
-      mainRule: 'sourceFile'
+      mainRule: 'sourceFile',
     }
   }
   else if (language === 'scala') {

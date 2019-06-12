@@ -23,12 +23,12 @@ export class Header extends AbstractComponent {
 
 
       <Menu.Menu position="right">
-        <Menu.Item icon="th icon">
-          <label>{this.state.astViewer === 'graph' ? 'AST Default View' : 'AST Graph View'}
-            <input type="checkbox" checked={this.state.astViewer === 'graph'} onChange={e => {
-              this.setState({ astViewer: e.currentTarget.checked ? 'graph' : 'default' })
+        {/* <Menu.Item icon="th icon">
+          <label>{this.state.astViewer === 'evenParent' ? 'AST Default View' : 'AST Graph View'}
+            <input type="checkbox" checked={this.state.astViewer === 'evenParent'} onChange={e => {
+              this.setState({ astViewer: e.currentTarget.checked ? 'evenParent' : 'default' })
             }}></input></label>
-        </Menu.Item>
+        </Menu.Item> */}
 
 
         <Menu.Item icon="th icon">

@@ -1,9 +1,6 @@
 import * as d3 from 'd3'
 import { unique } from 'misc-utils-of-mine-generic'
-
-
 // )
-
 // const types = {} as any
 // visitDescendants({node: d, visitor: (n, parent)=>{
 //   types[n.type] = types[n.type] || 0
@@ -18,7 +15,9 @@ import { unique } from 'misc-utils-of-mine-generic'
 //   // }
 //   return false
 // }, childrenFirst: true})
-import {ast as d } from './ast'
+import { ast as d } from './ast'
+
+
 ff2(d)
 // debugger
 // console.log(d);

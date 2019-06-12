@@ -18,10 +18,10 @@ export interface State {
   examples: Example[];
   sidebarVisibility: boolean;
   currentTab: number
-  astViewer: 'default' | 'graph' | 'tidyTreeView',
+  astViewer: 'default' | 'evenParent' | 'tidyTreeView' | 'dot',
   argGraphViewOptions: AstGraphViewOptions
 }
-export const astViewers = ['default', 'graph', 'tidyTreeView']
+export const astViewers = ['default', 'dot', 'evenParent', 'tidyTreeView']
 export interface ParserError {
   offendingSymbol: Token
   line: number
