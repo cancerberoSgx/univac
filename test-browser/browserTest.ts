@@ -4,7 +4,7 @@ import puppeteer from 'puppeteer'
 
 test('parseAst', async t => {
   execSync('npm run build')
-  execSync("parcel build test-browser/testBrowser.html --public-url './' -d test-browser-outdir")
+  execSync("npx parcel build test-browser/testBrowser.html --public-url './' -d test-browser-outdir --no-source-maps --no-minify")
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();

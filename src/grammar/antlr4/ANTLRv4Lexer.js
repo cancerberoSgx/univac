@@ -615,11 +615,7 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 var LexerAdaptor = require('./LexerAdaptor').LexerAdaptor;
 
 function ANTLRv4Lexer(input) {
-  // console.log(arguments);
-  
- antlr4.Lexer.call(this, input)//apply(this, arguments) 
-  // this.prototype = new LexerAdaptor(input)
-	// LexerAdaptor.constructor.call(this, input);
+    antlr4.Lexer.call(this, input) 
     this._interp = new antlr4.atn.LexerATNSimulator(this, atn, decisionsToDFA, new antlr4.PredictionContextCache());
     return this;
 }
