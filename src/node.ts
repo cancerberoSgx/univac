@@ -69,9 +69,9 @@ ${node.children.length ?
   // .split('\n').filter(l=>l.trim()).join('')
 }
 
-export function getNodeId(n: Node){
-  if(!(n as any).__id){
+export function getNodeId(n: Node) {
+  if (!(n as any).__id) {
     (n as any).__id = unique('node')
   }
-  return (n as any).__id 
+  return (n as any).__id
 }

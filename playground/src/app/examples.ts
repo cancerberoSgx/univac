@@ -143,6 +143,52 @@ class Triangle(
   },
 
   {
+    name: 'hello.g4',
+    language: Language.antlr4,
+    code: `
+// define a grammar called Hello
+grammar Hello;
+r   : 'hello' ID;
+ID  : [a-z]+ ;
+WS  : [ \\t\\r\\n]+ -> skip ;   
+`,
+    description: '',
+  },
+ 
+  {
+    name: 'misc.cpp',
+    language: Language.cpp,
+    code: `
+#include <iostream.h>
+main()
+{
+  cout << "Hello World!";
+  return 0;
+}
+class C {
+  public:
+    int a;
+    operator int() const;
+    virtual ~Foo();
+}; 
+typedef int X;
+struct S {
+  union {
+    int i;
+  } U;
+};
+void f() {
+  int x;
+  static int y;
+  thread_local int z;
+}
+int a; 
+`,
+    description: '',
+  },
+ 
+
+  {
     name: 'factorial.erl',
     language: Language.erlang,
     code: `

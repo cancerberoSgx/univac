@@ -1,11 +1,11 @@
-import test, { todo } from 'ava'
+import test from 'ava'
+import { writeFileSync } from 'fs'
 import { parseAst } from '../src/parseAst'
-import { Language, Node } from '../src/types'
-import { toDot } from '../src/util/toDot';
-import { writeFileSync } from 'fs';
+import { Language } from '../src/types'
+import { toDot } from '../src/util/toDot'
 
 test('toDot', async t => {
-  const r  = await parseAst({
+  const r = await parseAst({
     input: `
 import java.io.File;
 class Test {
@@ -30,5 +30,5 @@ class Test {
   // console.log(d); 
   t.true(d.includes('-> node'))
   t.true(d.includes('label="classOrInterfaceModifier"'))
-  
+
 })

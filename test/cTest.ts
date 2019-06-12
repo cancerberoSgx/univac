@@ -34,7 +34,7 @@ test('should report syntax errors to given listener', async t => {
     language: Language.c,
     errorListener: {
       syntaxError(a, b, c, d, msg) {
-        t.true(msg.includes(`missing EOL at`), msg)
+        t.true(msg.includes(`no viable alternative at input`), msg)
       }
     }
   })

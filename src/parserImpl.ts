@@ -8,7 +8,7 @@ export interface ParserImpl {
   Filter?: typeof Parser;
   mainRule: string;
   redundantTypes?(node: Node, parent?: Node): boolean;
-} 
+}
 
 export function getParserImpl(language: Language): ParserImpl {
   if (language === 'c') {
@@ -18,7 +18,7 @@ export function getParserImpl(language: Language): ParserImpl {
       mainRule: 'compilationUnit',
       redundantTypes: node => node.children.length === 1 && node.type.endsWith('Expression')
     }
-  } 
+  }
   else if (language === 'cpp') {
     return {
       Lexer: require('./grammar/cpp/CPP14Lexer').CPP14Lexer,
@@ -27,14 +27,14 @@ export function getParserImpl(language: Language): ParserImpl {
       redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => node.type.endsWith('expression') || ['ptrdeclarator', 'noptrdeclarator'].includes(node.type))
     }
   }
-  // else if (language === 'cpp') {
-  //   return {
-  //     Lexer: require('./grammar/cpp/CPP14Lexer').CPP14Lexer,
-  //     Parser: require('./grammar/cpp/CPP14Parser').CPP14Parser,
-  //     mainRule: 'translationunit',
-  //     redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => node.type.endsWith('expression') || ['ptrdeclarator', 'noptrdeclarator'].includes(node.type))
-  //   }
-  // }
+  else if (language === 'antlr4') {
+    return {
+      Lexer: require('./grammar/antlr4/ANTLRv4Lexer').ANTLRv4Lexer,
+      Parser: require('./grammar/antlr4/ANTLRv4Parser').ANTLRv4Parser,
+      mainRule: 'grammarSpec',
+      // redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => node.type.endsWith('expression') || ['ptrdeclarator', 'noptrdeclarator'].includes(node.type))
+    }
+  }
   else if (language === 'golang') {
     return {
       Lexer: require('./grammar/golang/GolangLexer').GolangLexer,

@@ -39,6 +39,7 @@ export enum Language {
   'less' = 'less',
   'wat' = 'wat',
   'cpp' = 'cpp',
+  'antlr4' = 'antlr4'
 }
 
 export interface Options extends BaseOptions {

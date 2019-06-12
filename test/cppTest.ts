@@ -1,9 +1,8 @@
 import test from 'ava'
+import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
 import { parseAst } from '../src/parseAst'
 import { Language, Node } from '../src/types'
-import { removeWhites } from 'misc-utils-of-mine-generic';
-import { writeFileSync } from 'fs';
 
 let result: Node
 test.before(async t => {
@@ -65,7 +64,7 @@ test('generate correct ast', async t => {
   const o = printNode({
     node: result
   })
-  writeFileSync('tmp.txt', o)
+  // writeFileSync('tmp.txt', o)
   const expected = [`<storageclassspecifier text="thread_local">`, `<storageclassspecifier text="static">`, `<simpletypespecifier text="void">`, `<classkey text="struct">
   </classkey> <classheadname text="S">
     <classname text="S">`, `  <simpledeclaration text="typedefintX;">
