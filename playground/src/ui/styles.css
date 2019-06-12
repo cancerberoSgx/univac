@@ -35,6 +35,8 @@ ul.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item,
 .astTree {
   padding: 0!important;
   margin: 0!important;
+  max-height: 50vh;
+  overflow: scroll;
 }
 
 .appBody .ui.grid > .column:not(.row) {

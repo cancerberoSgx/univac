@@ -25,7 +25,7 @@ export interface Options {
   /**
    * Graph layout implementation. One of : `dot, circo, fdp, neato, asage, twopi, patchwork, sfdp`. By default: `dot`.
    */
-  layout?: Layout;
+  engine?: Engine;
 
   /** 
    * Quality of output image.
@@ -80,7 +80,7 @@ export interface Options {
   debug?: boolean
 }
 
-export enum Layout {
+export enum Engine {
   'dot' = 'dot',
   'circo' = 'circo',
   'fdp' = 'fdp',
@@ -91,4 +91,4 @@ export enum Layout {
   'sfdp' = 'sfdp',
 }
 
-export const layouts = enumKeys(Layout)
+export const layouts = enumKeys(Engine)

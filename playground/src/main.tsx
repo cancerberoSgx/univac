@@ -9,9 +9,7 @@ async function main() {
   initMonacoWorkers()
   const s = await getInitialState()
   _setStore(s)
-  // setTimeout(() => {
   render(<App />, document.getElementById('main'))
-  // }, 100)
 }
 
 main()

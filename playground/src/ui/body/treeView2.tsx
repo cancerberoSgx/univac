@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Segment } from 'semantic-ui-react';
-import { AbstractComponent } from '../component';
+import * as React from 'react'
+import { Segment } from 'semantic-ui-react'
+import { AbstractComponent } from '../component'
 
 export class TreeView1 extends AbstractComponent {
   render() {
@@ -10,4 +10,3 @@ export class TreeView1 extends AbstractComponent {
       </Segment>)
   }
 }
- 

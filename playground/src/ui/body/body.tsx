@@ -8,16 +8,16 @@ import { AstGraph } from '../astGraph/astGraph'
 import { AbstractComponent } from '../component'
 import { Ast } from './ast'
 import { CursorBreadcrumb } from './cursorBreadcrumb'
-import { TidyTreeView } from './tidyTreeView';
+import { TidyTreeView } from './tidyTreeView'
 
 export class Body extends AbstractComponent<{ activeIndex: number }> {
   render() {
     return (
       <Segment basic className="appBody">
-        {/* <Grid> */}
-          {/* <Grid.Column floated='left' width={this.state.astViewer==='graph' ? 6   : 8}>           */}
+        <Grid>
+          <Grid.Column floated='left' width={6}>
             <CursorBreadcrumb />
-            <div id="editor-container" className="editor-container" style={{ height: '100vh', maxHeight: '60vh', margin: 0, padding: 0 }}></div>
+            <div id="editor-container" className="editor-container" style={{ height: '100vh', maxHeight: '50vh', margin: 0, padding: 0 }}></div>
 
             {this.state.error && !(isArray(this.state.error) && !this.state.error.length) ?
               <Segment>
@@ -45,25 +45,27 @@ export class Body extends AbstractComponent<{ activeIndex: number }> {
               </Segment>
               : <></>}
 
-          {/* </Grid.Column> */}
-          {/* <Grid.Column floated='right' width={this.state.astViewer!=='default' ? 10 : 8}> */}
-            <ASTViewerSwitch/>  
-          {/* </Grid.Column> */}
-        {/* </Grid> */}
+          </Grid.Column>
+          <Grid.Column floated='right' width={10}>
+            <Ast />
+          </Grid.Column>
+        </Grid>
+        <ASTViewerSwitch />
+        {/* {this.state.astViewer === 'tidyTreeView' ? <TidyTreeView /> : ''} */}
       </Segment>)
   }
 }
 
 export class ASTViewerSwitch extends AbstractComponent {
-  render(){
-    if(this.state.astViewer === 'graph'){
+  render() {
+    if (this.state.astViewer === 'graph') {
       return <AstGraph />
     }
-    else if(this.state.astViewer === 'tidyTreeView'){
+    else if (this.state.astViewer === 'tidyTreeView') {
       return <TidyTreeView />
     }
     else {
-      return <Ast/>  
+      return ''
     }
   }
 }

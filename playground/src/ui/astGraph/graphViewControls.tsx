@@ -4,7 +4,7 @@ import { Component } from 'react'
 import { Segment } from 'semantic-ui-react'
 
 let evenParent = require('cytoscape-even-parent')
-cytoscape.use(evenParent) 
+cytoscape.use(evenParent)
 
 export interface AstGraphViewOptions extends BaseLayoutOptions {
   childrenSize: number;
@@ -37,45 +37,45 @@ export class Controls extends Component<P, AstGraphViewOptions> {
     ...defaultAstGraphViewOptions
   }
 
-   render() {
+  render() {
     return <Segment basic className="astGraphControlsContainer">
-     
-      <label>Children Size<input type="number" step={0.1} 
-      onChange={e =>this.setNumberOption(e, 'childrenSize')}
+
+      <label>Children Size<input type="number" step={0.1}
+        onChange={e => this.setNumberOption(e, 'childrenSize')}
         defaultValue={this.state.childrenSize + ''}></input></label><br />
 
-      <label>Horizontal Padding<input type="number" step={100} 
-      onChange={e =>this.setNumberOption(e, 'horizontalPadding')}  
-      defaultValue={this.state.horizontalPadding + ''}></input></label><br />
+      <label>Horizontal Padding<input type="number" step={100}
+        onChange={e => this.setNumberOption(e, 'horizontalPadding')}
+        defaultValue={this.state.horizontalPadding + ''}></input></label><br />
 
-      <label>Vertical Padding<input type="number" step={100} 
-      onChange={e =>this.setNumberOption(e, 'verticalPadding')} 
-      defaultValue={this.state.verticalPadding + ''}></input></label><br />
+      <label>Vertical Padding<input type="number" step={100}
+        onChange={e => this.setNumberOption(e, 'verticalPadding')}
+        defaultValue={this.state.verticalPadding + ''}></input></label><br />
 
-      <label>Font Size<input type="number" step={50}  
-      onChange={e =>this.setNumberOption(e, 'fontSize')}  
-      defaultValue={this.state.fontSize + ''}></input></label><br />
+      <label>Font Size<input type="number" step={50}
+        onChange={e => this.setNumberOption(e, 'fontSize')}
+        defaultValue={this.state.fontSize + ''}></input></label><br />
 
-      <label>Edge Size<input type="number" step={50} 
-     onChange={e =>this.setNumberOption(e, 'edgeSize')} 
-      defaultValue={this.state.edgeSize + ''}></input></label><br />
+      <label>Edge Size<input type="number" step={50}
+        onChange={e => this.setNumberOption(e, 'edgeSize')}
+        defaultValue={this.state.edgeSize + ''}></input></label><br />
 
-      <label>horizontal Spread<input type="checkbox" 
-      onChange={e => this.props.setOptions({  horizontalSpread: !!e.currentTarget.checked })} 
-      defaultChecked={this.state.horizontalSpread}></input></label><br />
+      <label>horizontal Spread<input type="checkbox"
+        onChange={e => this.props.setOptions({ horizontalSpread: !!e.currentTarget.checked })}
+        defaultChecked={this.state.horizontalSpread}></input></label><br />
 
-      <label>Smart<input type="checkbox" 
-       onChange={e => this.props.setOptions({  smart: !!e.currentTarget.checked })} 
+      <label>Smart<input type="checkbox"
+        onChange={e => this.props.setOptions({ smart: !!e.currentTarget.checked })}
         defaultChecked={this.state.smart}></input></label><br />
 
     </Segment>
   }
- 
+
 
   private setNumberOption(e: React.ChangeEvent<HTMLInputElement>, name: string) {
-    var v = parseFloat(e.currentTarget.value);
+    var v = parseFloat(e.currentTarget.value)
     if (v !== NaN) {
-      this.props.setOptions({ [name]: v });
+      this.props.setOptions({ [name]: v })
     }
   }
 }
