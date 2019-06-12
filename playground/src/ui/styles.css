@@ -37,6 +37,9 @@ ul.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item,
   padding: 0!important;
   margin: 0!important;
 }
+.ui.grid {
+  margin-bottom:0
+}
 /* 
 .headerContainer.ui.segment, .headerContainer * {
   margin: 0; 
@@ -86,4 +89,13 @@ h3.sub.header {
   top: 100%;
   left: 70%;
   display: block;
+}
+
+.ui.dropdown.languageMenu > .text {
+  float: right;
+  margin-left: 1.2em;
+}
+.ui.dropdown.languageMenu > .icon {
+  float: left;
+  position: absolute;
 }

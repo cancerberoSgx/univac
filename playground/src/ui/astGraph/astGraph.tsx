@@ -16,7 +16,6 @@ export class AstGraph extends AbstractComponent {
 
   render() {
     return <>
-
       <a href="#" onClick={async e => {
         FileSaver.saveAs(new Blob([JSON.stringify({ nodes: (this.cy!.json() as any).elements!.nodes.map((n: any) => ({ ...n, data: null })), edges: (this.cy!.json() as any).elements.edges.map((n: any) => ({ ...n, data: null })) })]), 'ast.json')
       }}>
@@ -61,8 +60,8 @@ export class AstGraph extends AbstractComponent {
     let node = this.state.ast
     const elements = getGraphNodesFor(node).map(e => ({
       ...e,
-      grabbable: true, // whether the node can be grabbed and moved by the user
-      pannable: true, // whether dragging the node causes panning instead of grabbing
+      grabbable: true,  
+      pannable: true,  
     }))
     this.cy = cytoscape({
       container,
@@ -89,9 +88,6 @@ export class AstGraph extends AbstractComponent {
         ...defaultAstGraphViewOptions, container
       } as any
     })
-    container.querySelector<HTMLCanvasElement>('canvas')!.toBlob(b => {
-      debugger
-    }, 'image/png')
     this.cy.on('click', e => {
       const node = e.target.data().__astNode as Node
       if (!node) {

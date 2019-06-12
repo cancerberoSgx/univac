@@ -18,10 +18,10 @@ export interface State {
   examples: Example[];
   sidebarVisibility: boolean;
   currentTab: number
-  astViewer: 'default' | 'evenParent' | 'tidyTreeView' | 'dot' | 'patchwork' | 'fdp' | 'neato',
+  astViewer: 'evenParent' | 'tidyTreeView' | 'dot' | 'patchwork' | 'fdp' | 'neato',
   argGraphViewOptions: AstGraphViewOptions
 }
-export const astViewers = ['default', 'dot', 'patchwork', 'neato', 'evenParent', 'fdp', 'tidyTreeView']
+export const astViewers = ['dot', 'patchwork', 'neato', 'evenParent', 'fdp', 'tidyTreeView']
 export interface ParserError {
   offendingSymbol: Token
   line: number
@@ -47,7 +47,7 @@ export async function getInitialState(): Promise<State> {
     sidebarVisibility: false,
     examples: [],
     currentTab: 0,
-    astViewer: 'default',
+    astViewer: 'dot',
     argGraphViewOptions: defaultAstGraphViewOptions
   }
 }

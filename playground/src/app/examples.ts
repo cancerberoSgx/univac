@@ -92,15 +92,13 @@ class Test {
     language: Language.golang,
     code: `
 package main
-import "fmt"
-type Person struct {
-  work func()
-  name string
-  age int32
-}
+
+import (
+  "fmt"
+)
+
 func main() {
-  person := Person{work: nil, name: "Michał", age: 29}
-  fmt.Println(person)
+  fmt.Printf("Hello, Golang\\n")
 }
 `.trimLeft(),
     description: '',

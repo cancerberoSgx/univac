@@ -12,7 +12,7 @@ interface P {
 }
 
 export class GraphvizTreeViews extends AbstractComponent<P> {
-  protected svg: string = ""
+  protected svg: string = ''
   protected dot: string = ''
 
   shouldComponentUpdate(nextProps: any, nextState: Readonly<State>, nextContext: any) {
@@ -58,12 +58,10 @@ export class GraphvizTreeViews extends AbstractComponent<P> {
     if (!c) {
       return
     }
-
     const { dot, output } = await this.renderAst()
     this.dot = dot.dot
     this.svg = output
     c.innerHTML = this.svg
-
     const svgPanZoom = require('svg-pan-zoom')
     const panZoomInstance = svgPanZoom(c.querySelector('svg'), {
       zoomEnabled: true,

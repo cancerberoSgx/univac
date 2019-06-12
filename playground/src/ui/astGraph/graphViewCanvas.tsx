@@ -1,4 +1,3 @@
-
 import * as React from 'react'
 
 interface S {
@@ -11,33 +10,6 @@ interface P {
   afterRender(): void
 }
 
-/**
- * Placeholder when needing to prevent react to update/remove child nodes (for rich components like monaco-editor , d3 graphs, etc) that cannnot be updated / recreated each time the state changes. Sage example: 
- * 
- * ``` 
-  render() {
-    return  <GraphViewCanvas 
-    placeholder={
-      <div style={{ height:'500px', width: '500px' }}>
-        Try to reserve best guess height, placeholder graphic, etc and also add other controls.
-        <Controls setOptions={o=>this.setControlOptions(o)}/>
-      </div>
-    }
-    html={`
-      <div class="astGraphCanvasContainer">HHHOOOLA</div>
-      <div class="astGraphMinimapContainer"  ></div>
-    `} // this won't re-render
-    afterRender={()=>{
-      // host component will be notified by us when the innerHtml placeholders are rendered and attached. so they can mount the rich widgets.
-      const canvasContainer = document.querySelector<HTMLDivElement>('.astGraphCanvasContainer')
-      const minimapContainer = document.querySelector<HTMLDivElement>('.astGraphMinimapContainer')
-      this.canvasContainerReady(canvasContainer)
-      this.navigatorContainerReady (minimapContainer)
-    }}
-  />
-  }
- * ```
- */
 export class GraphViewCanvas extends React.Component<P, S> {
 
   shouldComponentUpdate() {

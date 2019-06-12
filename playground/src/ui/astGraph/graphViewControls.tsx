@@ -7,13 +7,25 @@ let evenParent = require('cytoscape-even-parent')
 cytoscape.use(evenParent)
 
 export interface AstGraphViewOptions extends BaseLayoutOptions {
-  childrenSize: number;
-  horizontalPadding: number;
-  verticalPadding: number;
-  fontSize: number; // 0 to ~  ::: Size of font
-  edgeSize: number; // 0 to ~  ::: Size of edge
-  horizontalSpread: boolean; // boolean ::: Spread the graph horizontally if true
-  smart: boolean// boolean ::: If true, displays children in rows to get maximum node width
+  childrenSize: number
+  horizontalPadding: number
+  verticalPadding: number
+  /**
+   * 0 to ~  ::: Size of font
+   */
+  fontSize: number 
+  /**
+   * 0 to ~  ::: Size of edge
+   */
+  edgeSize: number // 
+  /**
+   *  Spread the graph horizontally if true
+   */
+  horizontalSpread: boolean 
+  /**
+   *  If true, displays children in rows to get maximum node width
+   */
+  smart: boolean 
 
 }
 interface P {
@@ -70,7 +82,6 @@ export class Controls extends Component<P, AstGraphViewOptions> {
 
     </Segment>
   }
-
 
   private setNumberOption(e: React.ChangeEvent<HTMLInputElement>, name: string) {
     var v = parseFloat(e.currentTarget.value)

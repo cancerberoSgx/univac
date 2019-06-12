@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Node } from 'univac'
-import { getCodeEditorText, setCodeEditorText } from '../../editor/codeEditor'
+import { selectExample } from '../../app/dispatchers'
+import { Example } from '../../app/examples'
+import { getStore } from '../../app/store'
 
 export function width() {
   return document.body.clientWidth
@@ -22,42 +24,23 @@ export const Space = () => (
   <span style={{ marginRight: '0.5em' }}></span>
 )
 
-export function iconForNodeKind(kind = '') {
-  kind = kind.toLowerCase()
-  if (['method', 'member', 'property', 'constructor'].find(s => kind.includes(s))) {
-    return 'cube'
-  }
-  if (['type', 'interface', 'alias'].find(s => kind.includes(s))) {
-    return 'cog'
-  }
-  if (['import', 'export'].find(s => kind.includes(s))) {
-    return 'map'
-  }
-  if (kind.includes('jsx')) {
-    return 'code'
-  }
-  if (kind.includes('declaration')) {
-    return 'puzzle piece'
-  }
-  else {
-    return 'leaf'
-  }
-}
-
 export function createUrl() {
-  const s = {
-    code: getCodeEditorText(),
+  const state = getStore().getState()
+  const s: PersistentState = {
+    example: state.example,
   }
   const b = btoa(JSON.stringify(s))
   window.location.hash = '#state=' + b
 }
 
+interface PersistentState {
+  example: Example,
+}
+
 export function loadUrl() {
   if (window.location.hash.includes('state=')) {
     const d = window.location.hash.split('state=')[1]
-    const state = JSON.parse(atob(d))
-    setCodeEditorText(state.code)
-  } else {
-
+    const state = JSON.parse(atob(d)) as PersistentState
+    selectExample(state.example, true)
   }
 }

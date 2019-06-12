@@ -37,19 +37,9 @@ export function installCodeEditor(editorContainer: HTMLElement) {
     selectExample({ ...getStore().getState().example, code: getCodeEditorText() }, false)
   }, 5000, { trailing: true }))
 
-  //   getStore().add(s=>{
-  //     if(s.partial.ast){
-  // setTimeout(() => {
-  //   needsUpdateLanguage=false
-  //   selectExample({...getStore().getState().example, code: getCodeEditorText()}, false)
-
-  //     }, 2200);
-
-  //     }
-  //   })
   return editor
 }
-// let needsUpdateLanguage=false
+
 export function highlightNodesInEditor(result: Node[]): any {
   const selections: ISelection[] = result.map(node => {
     return { selectionStartLineNumber: node.start!.line, selectionStartColumn: node.start!.column, positionLineNumber: node.stop!.line, positionColumn: node.stop!.column }
@@ -90,9 +80,6 @@ export function setCodeEditorText(s: string) {
 
   if (editor.getModel() !== model) {
     editor.setModel(model)
-    // needsUpdateLanguage=true
-    // // editor.updateOptions({})
-
   }
 
   editor.getModel()!.setValue(s)
