@@ -2,14 +2,14 @@ import { asArray, notUndefined } from 'misc-utils-of-mine-generic'
 import * as React from 'react'
 import { Grid, Segment } from 'semantic-ui-react'
 import { isArray } from 'util'
-import { ParserError, State } from '../../app/state'
+import { ParserError } from '../../app/state'
 import { select } from '../../editor/codeEditor'
 import { AstGraph } from '../astGraph/astGraph'
 import { AbstractComponent } from '../component'
 import { Ast } from './ast'
 import { CursorBreadcrumb } from './cursorBreadcrumb'
-import { TidyTreeView } from './tidyTreeView'
 import { GraphvizTreeViews } from './graphvizTreeViews'
+import { TidyTreeView } from './tidyTreeView'
 
 export class Body extends AbstractComponent<{ activeIndex: number }> {
 
@@ -53,7 +53,6 @@ export class Body extends AbstractComponent<{ activeIndex: number }> {
           </Grid.Column>
         </Grid>
         <ASTViewerSwitch />
-        {/* {this.state.astViewer === 'tidyTreeView' ? <TidyTreeView /> : ''} */}
       </Segment>)
   }
 }
@@ -68,6 +67,15 @@ export class ASTViewerSwitch extends AbstractComponent {
     }
     else if (this.state.astViewer === 'dot') {
       return <GraphvizTreeViews engine="dot" />
+    }
+    else if (this.state.astViewer === 'patchwork') {
+      return <GraphvizTreeViews engine="patchwork" />
+    }
+    else if (this.state.astViewer === 'fdp') {
+      return <GraphvizTreeViews engine="fdp" />
+    }
+    else if (this.state.astViewer === 'neato') {
+      return <GraphvizTreeViews engine="neato" />
     }
     else {
       return ''

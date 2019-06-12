@@ -72,3 +72,18 @@ h3.sub.header {
   max-width: 100%;
   overflow: scroll;
 }
+.astGraphCanvasContainer {
+  width: 100vw;
+  height: 40vh;
+  display: block;
+  position: absolute
+}
+
+.ui.astGraphControlsContainer {
+  z-index: 99;
+  position: absolute;
+  right: 0%;
+  top: 100%;
+  left: 70%;
+  display: block;
+}

@@ -1,30 +1,35 @@
 import cytoscape from 'cytoscape'
+import FileSaver from 'file-saver'
 import * as React from 'react'
 import { Node } from 'univac'
 import { highlightNodesInEditor } from '../../editor/codeEditor'
+import { Space } from '../common/uiUtil'
 import { AbstractComponent } from '../component'
-import './astGraph.css'
 import { getGraphNodesFor } from './buildGraphNodes'
 import { GraphViewCanvas } from './graphViewCanvas'
 import { AstGraphViewOptions, Controls, defaultAstGraphViewOptions } from './graphViewControls'
-// var navigator = require('cytoscape-navigator')
-// cytoscape.use(navigator)
-
-// var navigatorDefaults = {
-//   container: null//document.getElementById('minimap') // can be a HTML or jQuery element or jQuery selector
-//   , viewLiveFramerate: 0 // set false to update graph pan only on drag end; set 0 to do it instantly; set a number (frames per second) to update not more than N times per second
-//   , thumbnailEventFramerate: 30 // max thumbnail's updates per second triggered by graph updates
-//   , thumbnailLiveFramerate: false // max thumbnail's updates per second. Set false to disable
-//   , dblClickDelay: 200 // milliseconds
-//   , removeCustomContainer: true // destroy the container specified by user on plugin destroy
-//   , rerenderDelay: 100 // ms to throttle rerender updates to the panzoom for performance
-// }
 
 export class AstGraph extends AbstractComponent {
   cy: cytoscape.Core | undefined
+  svg: string = ''
+  canvasContainer: HTMLDivElement | null = null
 
   render() {
     return <>
+
+      <a href="#" onClick={async e => {
+        FileSaver.saveAs(new Blob([JSON.stringify({ nodes: (this.cy!.json() as any).elements!.nodes.map((n: any) => ({ ...n, data: null })), edges: (this.cy!.json() as any).elements.edges.map((n: any) => ({ ...n, data: null })) })]), 'ast.json')
+      }}>
+        JSON
+          </a><Space />
+      <a href="#" onClick={async e => {
+        const c = this.canvasContainer!.querySelectorAll<HTMLCanvasElement>('canvas')
+        c[c.length - 1].toBlob(b => {
+          FileSaver.saveAs(b!, 'ast.png')
+        }, 'image/png')
+      }}>
+        PNG
+          </a><Space />
       <Controls setOptions={o => this.setControlOptions(o)} />
       <GraphViewCanvas
         placeholder={
@@ -36,10 +41,8 @@ export class AstGraph extends AbstractComponent {
 <div class="astGraphCanvasContainer"></div> 
     `} // this won't re-render
         afterRender={() => {
-          const canvasContainer = document.querySelector<HTMLDivElement>('.astGraphCanvasContainer')
-          // const minimapContainer = document.querySelector<HTMLDivElement>('.astGraphMinimapContainer')
-          this.canvasContainerReady(canvasContainer)
-          // this.navigatorContainerReady(minimapContainer)
+          this.canvasContainer = document.querySelector<HTMLDivElement>('.astGraphCanvasContainer')
+          this.canvasContainerReady(this.canvasContainer)
         }}
       />
     </>
@@ -50,13 +53,6 @@ export class AstGraph extends AbstractComponent {
     this.cy!.layout(f).run()
     this.setState({ argGraphViewOptions: f })
   }
-
-  // navigatorContainerReady(container: HTMLDivElement | null): void {
-  //   if (!container) {
-  //     return
-  //   }
-  //   (this.cy as any).navigator({ ...navigatorDefaults, container })
-  // }
 
   canvasContainerReady(container: HTMLDivElement | null): void {
     if (!container) {
@@ -93,6 +89,9 @@ export class AstGraph extends AbstractComponent {
         ...defaultAstGraphViewOptions, container
       } as any
     })
+    container.querySelector<HTMLCanvasElement>('canvas')!.toBlob(b => {
+      debugger
+    }, 'image/png')
     this.cy.on('click', e => {
       const node = e.target.data().__astNode as Node
       if (!node) {

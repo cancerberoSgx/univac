@@ -133,3 +133,7 @@ geometric primitives:
 
  Many of them supports JavaScript and this one in particular supports both node.js and browsers:
  https://github.com/tooolbox/node-potrace, and that's what this project uses to transform SVG to bitmaps. 
+
+## TODO
+
+ * This is another library to rasterize svgs DOM based and fast: https://github.com/canvg/canvg
