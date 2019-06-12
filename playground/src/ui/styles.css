@@ -28,7 +28,6 @@ ul.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item,
 .astTree.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item,
 .astTree.ui.list ul, ol.ui.list ol, .ui.list .list
 {
-
   margin: 0;
   padding: 0;
   padding-left: 0.8em;
@@ -70,4 +69,10 @@ h3.sub.header {
 }
 .ui.list .list > .item > .content, .ui.list > .item > .content {
   border-left: 1px dotted rgb(113, 130, 147);
+}
+
+.astViewD3 {
+  width: 100%;
+  max-width: 100%;
+  overflow: scroll;
 }

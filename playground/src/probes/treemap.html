@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+<meta charset="utf-8">
+</head>
+
+<body>
+<script src="https://d3js.org/d3.v5.js"></script>
+
+<script>
+  let counter = 0
+  function unique(s){
+    return s + (counter++) + ''
+  }
+  async function test(){
+    data = await d3.json("https://raw.githubusercontent.com/d3/d3-hierarchy/v1.1.8/test/data/flare.json")
+    const width = 975,
+    height = 1060,
+    format = d3.format(",d"),
+    color = d3.scaleOrdinal(d3.schemeCategory10)
+
+    const treemap = data => 
+    d3.treemap()
+    // .tile(d3[tile])
+    .size([width, height])
+    .padding(1)
+    .round(true)
+  (d3.hierarchy(data)
+    .sum(d => d.value)
+    .sort((a, b) => b.value - a.value))
+
+const root = treemap(data);
+
+const svg = d3.create("svg")
+    .attr("viewBox", [0, 0, width, height])
+    .style("font", "10px sans-serif");
+debugger
+const leaf = svg.selectAll("g")
+  .data(root.leaves())
+  .join("g")
+    .attr("transform", d => `translate(${d.x0},${d.y0})`);
+
+leaf.append("title")
+    .text(d => `${d.ancestors().reverse().map(d => d.data.name).join("/")}\n${format(d.value)}`);
+
+leaf.append("rect")
+    .attr("id", d => (d.leafUid = unique("leaf")).id)
+    .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
+    .attr("fill-opacity", 0.6)
+    .attr("width", d => d.x1 - d.x0)
+    .attr("height", d => d.y1 - d.y0);
+
+
+leaf.append("clipPath")
+    .attr("id", d => (d.clipUid = unique("clip")).id)
+  .append("use")
+    .attr("xlink:href", d => d.leafUid.href);
+
+leaf.append("text")
+    .attr("clip-path", d => d.clipUid)
+  .selectAll("tspan")
+  .data(d => d.data.name.split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
+  .join("tspan")
+    .attr("x", 3)
+    .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+    .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
+    .text(d => d);
+    document.body.appendChild(svg.node())
+  }
+
+  test()
+    </script>
+</body>
+</html>

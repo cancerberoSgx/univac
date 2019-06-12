@@ -28,7 +28,7 @@ export async function cliMain(o: Options) {
     await serial(input.map(input => async () => {
       try {
         o.debug && console.log('Rendering ' + input.name)
-        const result = ({ name: input.name + '.svg', content: await renderDot({ ...o, input: input.content }) })
+        const result = ({ name: input.name + `.${o.format || 'svg'}`, content: await renderDot({ ...o, input: input.content }) })
         if (o.output) {
           const file = join(o.output, basename(result.name))
           o.debug && console.log('Writing ' + file)
@@ -73,6 +73,6 @@ function printHelp() {
 Usage: 
 
 render-dot --input "**/*go*/*.dot" --output ../svgs
-render-dot --input graph1.dot > graph1.svg
+render-dot --input graph1.dot --format ps > graph1.ps
 `)
 }

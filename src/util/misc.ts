@@ -1,4 +1,3 @@
-
 /**
  * List given enum keys as array. Must be used on enums with declared values (enum E {a='a', b='b'},
  * if not values could be also returned . For enums without declared values, use enumNoValueKeys

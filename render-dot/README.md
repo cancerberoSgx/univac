@@ -6,7 +6,9 @@ Based on Graphviz [Emscripten](http://kripken.github.io/emscripten-site/ port [v
 
  * Supports node.js and browser JavaScript API.
  * CLI.
- * Outputs png, svg, json, dotx, jpeg. 
+ * Outputs 
+   * Image formats: png, svg, jpeg, gif, json, ps, eps, ps2, pic, vml
+   * text formats: xdot, json, xdot_json, plain, plain_ext, pov
 
 ## Usage
 

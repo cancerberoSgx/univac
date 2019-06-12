@@ -8,13 +8,14 @@ import { AstGraph } from '../astGraph/astGraph'
 import { AbstractComponent } from '../component'
 import { Ast } from './ast'
 import { CursorBreadcrumb } from './cursorBreadcrumb'
+import { TidyTreeView } from './tidyTreeView';
 
 export class Body extends AbstractComponent<{ activeIndex: number }> {
   render() {
     return (
       <Segment basic className="appBody">
-        <Grid>
-          <Grid.Column floated='left' width={this.state.astViewer==='graph' ? 6 : 8}>          
+        {/* <Grid> */}
+          {/* <Grid.Column floated='left' width={this.state.astViewer==='graph' ? 6   : 8}>           */}
             <CursorBreadcrumb />
             <div id="editor-container" className="editor-container" style={{ height: '100vh', maxHeight: '60vh', margin: 0, padding: 0 }}></div>
 
@@ -44,12 +45,25 @@ export class Body extends AbstractComponent<{ activeIndex: number }> {
               </Segment>
               : <></>}
 
-          </Grid.Column>
-          <Grid.Column floated='right' width={this.state.astViewer==='graph' ? 10 : 8}>
-            {this.state.astViewer === 'default' ? <Ast /> : <AstGraph />}
-                
-          </Grid.Column>
-        </Grid>
+          {/* </Grid.Column> */}
+          {/* <Grid.Column floated='right' width={this.state.astViewer!=='default' ? 10 : 8}> */}
+            <ASTViewerSwitch/>  
+          {/* </Grid.Column> */}
+        {/* </Grid> */}
       </Segment>)
+  }
+}
+
+export class ASTViewerSwitch extends AbstractComponent {
+  render(){
+    if(this.state.astViewer === 'graph'){
+      return <AstGraph />
+    }
+    else if(this.state.astViewer === 'tidyTreeView'){
+      return <TidyTreeView />
+    }
+    else {
+      return <Ast/>  
+    }
   }
 }

@@ -27,6 +27,7 @@ class Test {
     text: true
   })
 })
+
 test('should parse', async t => {
   t.is(result.children.length, 2)
 })

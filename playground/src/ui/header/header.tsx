@@ -5,6 +5,7 @@ import { selectExample, selectLanguage } from '../../app/dispatchers'
 import { examples } from '../../app/examples'
 import { AbstractComponent } from '../component'
 import { About } from './about'
+import { astViewers } from '../../app/state';
 
 export class Header extends AbstractComponent {
   render() {
@@ -23,12 +24,30 @@ export class Header extends AbstractComponent {
 
       <Menu.Menu position="right">
         <Menu.Item icon="th icon">
-          <label>{this.state.astViewer === 'graph' ? 'AST Default View' : 'AST Graph View'}
+          <label>{this.state.astViewer === 'graph' ? 'AST Default View' : 'AST Graph View'}          
             <input type="checkbox" checked={this.state.astViewer === 'graph'} onChange={e => {
               this.setState({ astViewer: e.currentTarget.checked ? 'graph' : 'default' })
             }}></input></label>
         </Menu.Item>
 
+
+        <Menu.Item icon="th icon">
+        <Dropdown
+    button
+    className='icon'
+    floating
+    labeled
+    icon='world'
+    options={astViewers.map(s=>({key: s, text: s, value: s}))}
+    search
+    text='AST View'
+    onChange={(e, p)=>{
+      p.value && this.setState({astViewer: p.value as any})
+    }}
+  />
+  </Menu.Item>
+
+  
         {/* <Dropdown item  icon='astView' text={`${this.state.language} language`}  >
         <Dropdown.Menu>
           {languages.map(l => <Dropdown.Item onClick={e => selectLanguage(l as any)}>{l}</Dropdown.Item>)}

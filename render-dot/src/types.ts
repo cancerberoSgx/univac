@@ -18,9 +18,9 @@ export interface Options {
   height?: number;
 
   /**
-   * Output format. One of: `svg, png, json, xdot, plain, ps`. By default: `svg`.
+   * Output format. One of: ` 'svg' | 'png' | 'jpeg' | 'gif' | 'json' | 'xdot' | 'plain' | 'ps'|   'eps'| 'ps2'| 'pic'| 'vml'| 'xdot_json'| 'plain_ext'| 'pov'`. By default: `svg`.
    */
-  format?: 'svg' | 'png' | 'jpeg' | 'gif' | 'json' | 'xdot' | 'plain' | 'ps';
+  format?: 'svg' | 'png' | 'jpeg' | 'gif' | 'json' | 'xdot' | 'plain' | 'ps' | 'eps' | 'ps2' | 'pic' | 'vml' | 'xdot_json' | 'plain_ext' | 'pov'
 
   /**
    * Graph layout implementation. One of : `dot, circo, fdp, neato, asage, twopi, patchwork, sfdp`. By default: `dot`.
@@ -38,7 +38,7 @@ export interface Options {
    * Thus, feeding the output of a graph laid out by one program into neato or fdp almost always requires this
    * flag. Ignored if the -n flag is used.
    */
-  scale?: boolean;
+  scale?: number;
 
   /**
    * By default, the coordinate system used in generic output formats, such as attributed dot, extended dot,

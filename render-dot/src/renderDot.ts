@@ -5,7 +5,8 @@ import { Options } from './types'
 export async function renderDot(options: Options) {
   if (!options.format || !['jpeg', 'png', 'gif'].includes(options.format)) {
     return await getLibrary().renderString(options.input, options)
-  } else {
+  }
+  else {
     const input = await getLibrary().renderString(options.input, { ...options, format: 'svg' })
     let s = await svg2png({
       input,
@@ -18,6 +19,10 @@ export async function renderDot(options: Options) {
     })
     return s
   }
+  // renderImageElement(src, options = {}) {
+  //   let { scale, mimeType, quality } = options;
+
+  // renderString(src, { format = 'svg', engine = 'dot', files = [], images = [], yInvert = false, nop = 0 } = {}) {
 }
 
 

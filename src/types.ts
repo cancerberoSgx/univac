@@ -1,5 +1,5 @@
 import { ErrorListener } from 'antlr4/error'
-import { enumKeys } from './util'
+import { enumKeys } from './util/misc'
 
 interface BaseOptions {
   language: Language

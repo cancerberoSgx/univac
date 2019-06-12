@@ -1,0 +1,46 @@
+{
+  "name":"diet",
+  "children":
+    [
+      {
+      "name":"A党",
+      "children":
+        [
+          {
+           "name": "pesonA",
+           "ground":"100",
+           "building":"200",
+           "cash":"300",
+           "total":"600"
+          },
+          {
+           "name": "pesonB",
+           "ground":"10",
+           "building":"20",
+           "cash":"300",
+           "total":"330"
+          }
+        ]
+      },
+      {
+      "name":"B党",
+      "children":
+        [
+          {
+           "name": "pesonC",
+           "ground":"200",
+           "building":"10",
+           "cash":"100",
+           "total":"310"
+          },
+          {
+           "name": "pesonD",
+           "ground":"50",
+           "building":"30",
+           "cash":"10",
+           "total":"90"
+          }
+        ]
+      }
+    ]
+  }
