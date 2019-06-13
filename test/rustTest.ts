@@ -4,6 +4,7 @@ import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
 import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
+import { getPackageJsonFolder } from '../src/util/misc'
 
 let result: Node
 test.before(async t => {
@@ -32,7 +33,8 @@ pub const TSInputEncoding_TSInputEncodingUTF8: TSInputEncoding = 0;
     `,
     language: Language.rust,
     omitPosition: true,
-    text: true
+    text: true,
+    basePath: getPackageJsonFolder() + '/dist/static/'
   })!
   t.true(!!result)
 })

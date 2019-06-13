@@ -1,5 +1,4 @@
 import { Lexer, Parser } from 'antlr4'
-import { join } from 'path'
 import { Language, Node } from './types'
 
 export interface ParserImpl {

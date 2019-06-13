@@ -36,7 +36,7 @@ export function addParents(n: Node) {
 export function getNodeAtPosition(node: Node, position: NodePositionLineColumn): Node | undefined {
   function includes(n: Node, p: NodePositionLineColumn) {
     return n && (n.start!.line <= p.line) &&
-    (n.stop!.line >= p.line)
+      (n.stop!.line >= p.line)
   }
   let found: Node | undefined
   function find(n: Node, p: NodePositionLineColumn): Node | undefined {

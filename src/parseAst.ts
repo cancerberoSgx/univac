@@ -1,6 +1,6 @@
-import Parser from 'web-tree-sitter'
 import * as antlr4 from 'antlr4'
 import { ErrorListener } from 'antlr4/error'
+import Parser from 'web-tree-sitter'
 import { getParserImpl, ParserImpl } from './parserImpl'
 import { GetAstOptions, Node } from './types'
 import { Visitor } from './visitor'

@@ -41,7 +41,7 @@ export class TreeSitterVisitor implements Normalizer<SyntaxNode> {
       children: []
     }
   }
-  
+
   protected getStopPosition(sn: SyntaxNode): NodePosition | undefined {
     return {
       column: sn.endPosition.column,

@@ -1,10 +1,10 @@
 import { existsSync } from 'fs'
 import { join } from 'path'
-import { inBrowser } from 'misc-utils-of-mine-generic';
+import { inBrowser, isNode } from 'misc-utils-of-mine-generic';
 
 let packageJsonFolder: string | undefined
 export function getPackageJsonFolder(f = __dirname): string | undefined {
-  if(inBrowser()){
+  if(!isNode() && inBrowser()){
     return ''
   }
   if (!packageJsonFolder) {
