@@ -1,16 +1,36 @@
 import { Lexer, Parser } from 'antlr4'
+import { join } from 'path'
 import { Language, Node } from './types'
 
 export interface ParserImpl {
-  Lexer: typeof Lexer;
-  Parser: typeof Parser;
-  /** some implementations require two-steps, like R or ObjectiveC. The later has a preprocessor that removes directives / spaces for its output to be compiled by the real parser. */
+  /**
+   * For antlr4 grammars. 
+   */
+  Lexer?: typeof Lexer;
+  /** 
+   * For antlr4 grammars.  
+   */
+  Parser?: typeof Parser;
+  /** 
+   * For antlr4 grammars. Some implementations require two-steps, like R or ObjectiveC. The later has a preprocessor that removes directives / spaces for its output to be compiled by the real parser. 
+   */
   Filter?: typeof Parser;
-  mainRule: string;
+  /**
+   * For antlr4 grammars. 
+   */
+  mainRule?: string;
+  /**
+   * For antlr4 grammars. 
+   */
   redundantTypes?(node: Node, parent?: Node): boolean;
+
+  /**
+   * For tree-sitter AST parsers. path to the parser implementation .wasm file.
+   */
+  treeSitterParser?: string
 }
 
-export function getParserImpl(language: Language): ParserImpl {
+export async function getParserImpl(language: Language): Promise<ParserImpl> {
   if (language === 'c') {
     return {
       Lexer: require('./grammar/c/CLexer').CLexer,
@@ -19,6 +39,12 @@ export function getParserImpl(language: Language): ParserImpl {
       redundantTypes: node => node.children.length === 1 && node.type.endsWith('Expression')
     }
   }
+  if (language === 'rust') {
+    return {
+      treeSitterParser: join(__dirname, 'tree-sitter-parser', 'tree-sitter-rust.wasm')
+    }
+  }
+
   else if (language === 'cpp') {
     return {
       Lexer: require('./grammar/cpp/CPP14Lexer').CPP14Lexer,

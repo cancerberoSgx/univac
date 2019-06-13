@@ -1,0 +1,2 @@
+npx tree-sitter build-wasm node_modules/tree-sitter-javascript && mv tree-sitter-javascript.wasm src/tree-sitter-parser
+npx tree-sitter build-wasm node_modules/tree-sitter-rust && mv tree-sitter-rust.wasm src/tree-sitter-parser

@@ -13,7 +13,7 @@ export interface AstGraphViewOptions extends BaseLayoutOptions {
   /**
    * 0 to ~  ::: Size of font
    */
-  fontSize: number 
+  fontSize: number
   /**
    * 0 to ~  ::: Size of edge
    */
@@ -21,11 +21,11 @@ export interface AstGraphViewOptions extends BaseLayoutOptions {
   /**
    *  Spread the graph horizontally if true
    */
-  horizontalSpread: boolean 
+  horizontalSpread: boolean
   /**
    *  If true, displays children in rows to get maximum node width
    */
-  smart: boolean 
+  smart: boolean
 
 }
 interface P {

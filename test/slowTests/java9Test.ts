@@ -1,12 +1,12 @@
 import test from 'ava'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../../src'
-import { parseAst } from '../../src/parseAst'
+import { parseAstOrThrow } from '../../src/parseAst'
 import { Language, Node } from '../../src/types'
 
 let result: Node
 test.before(async t => {
-  result = await parseAst({
+  result = await parseAstOrThrow({
     input: `
   import java.io.File;
   class Test {
@@ -21,7 +21,8 @@ test.before(async t => {
     `,
     language: Language.java9,
     text: true
-  })
+  })!
+  t.true(!!result)
 })
 
 // console.log(printNode({node: result}));
@@ -35,7 +36,7 @@ test('should serialize', async t => {
 })
 
 test('should throw on invalid input', async t => {
-  await t.throwsAsync(() => parseAst({
+  await t.throwsAsync(() => parseAstOrThrow({
     input: '--  -- `` [[ ``  ^ j + + o j+ o . Ñ  jo . 123 ( % ) . .',
     language: Language.java9
   }))
@@ -43,7 +44,7 @@ test('should throw on invalid input', async t => {
 
 test('should get correct ast', async t => {
   t.deepEqual(printNode({
-    node: await parseAst({
+    node: await parseAstOrThrow({
       input: `
   class Test {
     public int i;
@@ -91,7 +92,7 @@ test('should get correct ast', async t => {
 
 test('should get correct ast 2', async t => {
   const r = printNode({
-    node: await parseAst({
+    node: await parseAstOrThrow({
       input: `
 class Test<T> {
   public static boolean profile = false;

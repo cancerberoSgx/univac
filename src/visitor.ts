@@ -1,14 +1,22 @@
 import { Ctx, CtxPosition } from './antlr4Types'
-import { GetAstOptions, Node, NodePosition } from './types'
+import { GetAstOptions, Node, NodePosition, Normalizer } from './types'
 
-export class Visitor {
+export class Visitor implements Normalizer<Ctx> {
 
   protected currentParent: Node | undefined
+  protected _options: GetAstOptions | undefined
 
-  constructor(protected options: GetAstOptions) {
+  public get options(): GetAstOptions | undefined {
+    return this._options
+  }
+  public set options(value: GetAstOptions | undefined) {
+    this._options = value
   }
 
   getAst() {
+    if (!this._options) {
+      throw new Error('Options not set')
+    }
     if (!this.currentParent) {
       throw new Error('tree.accept(visitor) not called. ')
     }
@@ -17,7 +25,7 @@ export class Visitor {
     }
   }
 
-  visitChildren(ctx: Ctx) {
+  protected visitChildren(ctx: Ctx) {
     if (!ctx) {
       return
     }
@@ -27,7 +35,7 @@ export class Visitor {
     }
     else {
       this.currentParent.children!.push(node)
-      if (this.options.parents) {
+      if (this.options!.parents) {
         node.parent = this.currentParent
       }
     }
@@ -51,14 +59,14 @@ export class Visitor {
   getNode(ctx: Ctx): Node {
     return {
       type: ctx.parser.ruleNames[ctx.ruleIndex] || ctx.constructor.name,
-      start: !this.options.omitPosition && ctx.start ? this.getPosition(ctx.start) : undefined,
-      stop: !this.options.omitPosition && ctx.stop ? this.getPosition(ctx.stop) : undefined,
-      text: this.options.text ? ctx.getText() : undefined,
+      start: !this.options!.omitPosition && ctx.start ? this.getPosition(ctx.start) : undefined,
+      stop: !this.options!.omitPosition && ctx.stop ? this.getPosition(ctx.stop) : undefined,
+      text: this.options!.text ? ctx.getText() : undefined,
       children: []
     }
   }
 
-  getPosition(start: CtxPosition): NodePosition {
+  protected getPosition(start: CtxPosition): NodePosition {
     const source = start.source.find(e => typeof e.strdata === 'string')
     return {
       start: start.start,
@@ -66,7 +74,7 @@ export class Visitor {
       line: start.line,
       column: start.column,
       text: start.text,
-      source: this.options.positionSource && source && source.strdata as string
+      source: this.options!.positionSource && source && source.strdata as string
     }
   }
 }

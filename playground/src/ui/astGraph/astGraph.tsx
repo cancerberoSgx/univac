@@ -60,8 +60,8 @@ export class AstGraph extends AbstractComponent {
     let node = this.state.ast
     const elements = getGraphNodesFor(node).map(e => ({
       ...e,
-      grabbable: true,  
-      pannable: true,  
+      grabbable: true,
+      pannable: true,
     }))
     this.cy = cytoscape({
       container,

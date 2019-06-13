@@ -87,7 +87,7 @@ export function setCodeEditorText(s: string) {
 
 export function getEditorTextAtNode(n: Node) {
   const text = getCodeEditorText()
-  if(!n.start||!n.stop){
+  if (!n.start || !n.stop) {
     return ''
   }
   return text.substring(n.start.start, n.stop.stop) || ''

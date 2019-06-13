@@ -1,12 +1,12 @@
 import test from 'ava'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
-import { parseAst } from '../src/parseAst'
+import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
 
 let result: Node
 test.before(async t => {
-  result = await parseAst({
+  result = await parseAstOrThrow({
     input: `
 class MyClass<T> {
   final T a;
@@ -20,7 +20,8 @@ class MyClass<T> {
   `.trim(),
     language: Language.dart2,
     text: true
-  })
+  })!
+  t.true(!!result)
 })
 
 test('should parse', async t => {
@@ -32,14 +33,14 @@ test('should serialize', async t => {
 })
 
 test.skip('should throw on invalid input', async t => {
-  await t.throwsAsync(() => parseAst({
+  await t.throwsAsync(() => parseAstOrThrow({
     input: 'fac -> -> -> -> 11 f Ñ un c 8',
     language: Language.dart2
   }))
 })
 
 test('should report syntax errors to given listener', async t => {
-  await parseAst({
+  await parseAstOrThrow({
     input: 'class A h {}',
     language: Language.dart2,
     errorListener: {

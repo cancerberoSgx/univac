@@ -14,7 +14,7 @@
     "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
     "clean": "rm -rf dist docs test-browser-outdir",
     "build": "npm run clean && npx tsc && npm run copy",
-    "copy": "rm -rf dist/src/grammar && mkdir -p dist/src/grammar && cp -r src/grammar/* dist/src/grammar",
+    "copy": "rm -rf dist/src/grammar && mkdir -p dist/src/grammar && cp -r src/grammar/* dist/src/grammar && rm -rf src/tree-sitter-parser && mkdir -p src/tree-sitter-parser && cp -r src/tree-sitter-parser/* dist/src/tree-sitter-parser",
     "prepare": "npm run build",
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
@@ -31,6 +31,9 @@
     "ava": "^2.0.0",
     "parcel": "^1.12.3",
     "puppeteer": "^1.17.0",
+    "tree-sitter-cli": "^0.15.3",
+    "tree-sitter-javascript": "^0.15.0",
+    "tree-sitter-rust": "^0.15.0",
     "ts-node": "^8.2.0",
     "ts-refactor": "0.0.6",
     "typescript": "^3.5.1"
@@ -38,7 +41,8 @@
   "dependencies": {
     "antlr4": "^4.7.2",
     "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.8"
+    "misc-utils-of-mine-generic": "^0.2.8",
+    "web-tree-sitter": "^0.15.6"
   },
   "keywords": [
     "typescript",

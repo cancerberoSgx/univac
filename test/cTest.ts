@@ -1,16 +1,17 @@
 import test from 'ava'
 import { printNode } from '../src'
-import { parseAst } from '../src/parseAst'
+import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
 
 let result: Node
 test.before(async t => {
-  result = await parseAst({
+  result = await parseAstOrThrow({
     input: 'int main() {}',
     language: Language.c,
     omitPosition: true,
     text: true
-  })
+  })!
+  t.true(!!result)
 })
 
 test('should parse', async t => {
@@ -22,14 +23,14 @@ test('JSON stringify', async t => {
 })
 
 test.skip('should throw on invalid input', async t => {
-  await t.throwsAsync(() => parseAst({
+  await t.throwsAsync(() => parseAstOrThrow({
     input: 'jo jo jo 123',
     language: Language.c
   }))
 })
 
 test('should report syntax errors to given listener', async t => {
-  await parseAst({
+  await parseAstOrThrow({
     input: 'jo jo jo',
     language: Language.c,
     errorListener: {

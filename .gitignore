@@ -15,3 +15,5 @@ tmp*
 .antlr
 grammar-graph
 universal-svg-rasterizer
+*.wasm
+doc

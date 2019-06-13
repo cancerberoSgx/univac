@@ -1,10 +1,10 @@
 import test from 'ava'
-import { parseAst } from '../src/parseAst'
+import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
 
 let result: Node
 test.before(async t => {
-  result = await parseAst({
+  result = await parseAstOrThrow({
     input: `
 for(i = 1; i < length - 1; i+=1)
   for(j = 0; j < length - i; j+=1)
@@ -29,13 +29,13 @@ test('should serialize', async t => {
 })
 
 test.skip('should throw on invalid input', async t => {
-  await t.throwsAsync(() => parseAst({
+  await t.throwsAsync(() => parseAstOrThrow({
     input: `/&%$·@ def && 1 h 7 6 ¿Ñ`,
     language: Language.ruby
   }))
 })
 test.skip('should report syntax errors to given listener', async t => {
-  await parseAst({
+  await parseAstOrThrow({
     input: '-- ',
     language: Language.ruby,
     errorListener: {

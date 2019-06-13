@@ -154,7 +154,7 @@ WS  : [ \\t\\r\\n]+ -> skip ;
 `,
     description: '',
   },
- 
+
   {
     name: 'misc.cpp',
     language: Language.cpp,
@@ -186,7 +186,7 @@ int a;
 `,
     description: '',
   },
- 
+
 
   {
     name: 'factorial.erl',
@@ -328,7 +328,7 @@ a:show("after withdraw")
 `.trim(),
     description: '',
   },
-  
+
 
   {
     name: 'temperature.erl',
@@ -356,7 +356,7 @@ print_temp({Name, {c, Temp}}) ->
 `.trim(),
     description: '',
   },
-  
+
 
 
   {
@@ -564,7 +564,7 @@ Private Declare Sub subName1 Lib "MyLib" Alias "alias1" (arg1, arg2, ParamArray 
 `.trimLeft(),
     description: '',
   },
- {
+  {
     name: 'aux.wat',
     language: Language.wat,
     code: `

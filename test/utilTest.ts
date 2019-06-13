@@ -1,11 +1,11 @@
 import test from 'ava'
 import { writeFileSync } from 'fs'
-import { parseAst } from '../src/parseAst'
+import { parseAstOrThrow } from '../src/parseAst'
 import { Language } from '../src/types'
 import { toDot } from '../src/util/toDot'
 
 test('toDot', async t => {
-  const r = await parseAst({
+  const result = await parseAstOrThrow({
     input: `
 import java.io.File;
 class Test {
@@ -24,8 +24,9 @@ class Test {
   `,
     language: Language.java,
     text: true
-  })
-  const d = toDot(r)
+  })!
+  t.true(!!result)
+  const d = toDot(result)
   writeFileSync('tmp.dot', d)
   // console.log(d); 
   t.true(d.includes('-> node'))

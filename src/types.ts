@@ -6,9 +6,19 @@ interface BaseOptions {
   input: string
 }
 
-export interface GetAstOptions extends BaseOptions {
+export interface GetAstOptions<N = any> extends BaseOptions {
+  /**
+   * If given, it will be notified of parsing errors or other diagnostics. 
+   * TODO: make an adapter interface simpler independent of antlr4. 
+   */
   errorListener?: Partial<ErrorListener>;
+  /**
+   * If given, each node will have a `text` property with its text. 
+   */
   text?: boolean
+  /**
+   * If true, properties `start`and `stop` won't be emitted in nodes. false bu default.
+   */
   omitPosition?: boolean
   /**
    * Adds [[parent]] property to each node referencing node¡'s parent. Notice that the AST won't be serializable with JSON.stringify anymore because of cycles. By default is false.  
@@ -18,6 +28,10 @@ export interface GetAstOptions extends BaseOptions {
    * Adds [[source]] property to [[start]] and [[stop]] positions. By default is false. 
    */
   positionSource?: boolean;
+  /**
+   * For tree-sitter based parsers. antlr grammars based implementations doesn't need this, but tree-sitter do since they don't actually visit, they are provided with an AST that needs to be normalized
+   */
+  root?: N
 }
 
 export enum Language {
@@ -39,7 +53,8 @@ export enum Language {
   'less' = 'less',
   'wat' = 'wat',
   'cpp' = 'cpp',
-  'antlr4' = 'antlr4'
+  'antlr4' = 'antlr4',
+  'rust' = 'rust'
 }
 
 export interface Options extends BaseOptions {
@@ -53,7 +68,7 @@ export interface Node {
   start?: NodePosition;
   stop?: NodePosition;
   children: Node[];
-  parent?: Node
+  parent?: Node | null
 }
 export interface NodePositionLineColumn {
 
@@ -67,5 +82,16 @@ export interface NodePosition extends NodePositionLineColumn {
   source?: string;
 }
 
+export const languages = enumKeys(Language).filter(l => l !== 'java9')
 
-export const languages = enumKeys(Language)
+export interface Normalizer<N = any> {
+  /**
+   * Ast generation options.
+   */
+  options: GetAstOptions<N> | undefined
+  getAst(): Node
+  /**
+   * Normalizes given node individually, returning empty array for children.
+   */
+  getNode(sn: N): Node
+}

@@ -1,12 +1,12 @@
 import test from 'ava'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
-import { parseAst } from '../src/parseAst'
+import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
 
 let result: Node
 test.before(async t => {
-  result = await parseAst({
+  result = await parseAstOrThrow({
     input: `
 import java.io.File;
 class Test {
@@ -25,7 +25,8 @@ class Test {
   `,
     language: Language.java,
     text: true
-  })
+  })!
+  t.true(!!result)
 })
 
 test('should parse', async t => {
@@ -37,14 +38,14 @@ test('should serialize', async t => {
 })
 
 test.skip('should throw on invalid input', async t => {
-  await t.throwsAsync(() => parseAst({
+  await t.throwsAsync(() => parseAstOrThrow({
     input: '--  -- `` [[ ``  ^ j + + o j+ o . Ñ  jo . 123 ( % ) . .',
     language: Language.java
   }))
 })
 
 test.skip('should report syntax errors to given listener', async t => {
-  await parseAst({
+  await parseAstOrThrow({
     input: '-- ',
     language: Language.java,
     errorListener: {

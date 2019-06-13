@@ -1,12 +1,12 @@
 import test from 'ava'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
-import { parseAst } from '../src/parseAst'
+import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
 
 let result: Node
 test.before(async t => {
-  result = await parseAst({
+  result = await parseAstOrThrow({
     input: `
 @primarycolor: #FF7F50;
 @color:#800080;
@@ -19,7 +19,8 @@ h3 {
     ` .trim(),
     language: Language.less,
     text: true
-  })
+  })!
+  t.true(!!result)
 })
 
 test('should parse', async t => {
@@ -31,7 +32,7 @@ test('should serialize', async t => {
 })
 
 test('should report syntax errors to given listener', async t => {
-  await parseAst({
+  await parseAstOrThrow({
     input: 'no .=%& # kÑ f=)+oo9t valid css  }{',
     language: Language.less,
     errorListener: {

@@ -1,12 +1,12 @@
 import test from 'ava'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
-import { parseAst } from '../src/parseAst'
+import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
 
 let result: Node
 test.before(async t => {
-  result = await parseAst({
+  result = await parseAstOrThrow({
     input: `
 #include <iostream.h>
 main()
@@ -36,7 +36,8 @@ int a;
     language: Language.cpp,
     omitPosition: true,
     text: true
-  })
+  })!
+  t.true(!!result)
 })
 
 test('should parse', async t => {
@@ -48,7 +49,7 @@ test('JSON stringify', async t => {
 })
 
 test('should report syntax errors to given listener', async t => {
-  await parseAst({
+  await parseAstOrThrow({
     input: 'jo jo jo',
     language: Language.cpp,
     errorListener: {
