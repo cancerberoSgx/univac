@@ -87,6 +87,36 @@ class Test {
     description: '',
   },
 
+
+  {
+    name: 'system.rs',
+    language: Language.rust,
+    code: `
+pub type __darwin_size_t = ::std::os::raw::c_ulong;
+pub type FILE = [u64; 19usize];
+pub type TSSymbol = u16;
+pub type TSFieldId = u16;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct TSLanguage {
+    _unused: [u8; 0],
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct TSParser {
+    _unused: [u8; 0],
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct TSTree {
+    _unused: [u8; 0],
+}
+pub const TSInputEncoding_TSInputEncodingUTF8: TSInputEncoding = 0;
+`.trimLeft(),
+    description: '',
+  },
+
+  
   {
     name: 'personTest.go',
     language: Language.golang,

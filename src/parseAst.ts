@@ -1,6 +1,6 @@
+import Parser from 'web-tree-sitter'
 import * as antlr4 from 'antlr4'
 import { ErrorListener } from 'antlr4/error'
-import Parser from 'web-tree-sitter'
 import { getParserImpl, ParserImpl } from './parserImpl'
 import { GetAstOptions, Node } from './types'
 import { Visitor } from './visitor'
@@ -39,9 +39,11 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
     return removeRedundantNode(ast, info)
   }
   else if (info.treeSitterParser) {
+    options.basePath = options.basePath || ''
     await Parser.init()
     const parser = new Parser()
-    const Lang = await Parser.Language.load(info.treeSitterParser)
+    // TODO; don't load again if already loaded.
+    const Lang = await Parser.Language.load(options.basePath + info.treeSitterParser)
     parser.setLanguage(Lang)
     const tree = parser.parse(input)
     const normalizer = new TreeSitterVisitor()

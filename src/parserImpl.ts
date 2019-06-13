@@ -41,7 +41,7 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
   }
   if (language === 'rust') {
     return {
-      treeSitterParser: join(__dirname, 'tree-sitter-parser', 'tree-sitter-rust.wasm')
+      treeSitterParser: 'tree-sitter-rust.wasm'
     }
   }
 
@@ -58,7 +58,6 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
       Lexer: require('./grammar/antlr4/ANTLRv4Lexer').ANTLRv4Lexer,
       Parser: require('./grammar/antlr4/ANTLRv4Parser').ANTLRv4Parser,
       mainRule: 'grammarSpec',
-      // redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => node.type.endsWith('expression') || ['ptrdeclarator', 'noptrdeclarator'].includes(node.type))
     }
   }
   else if (language === 'golang') {

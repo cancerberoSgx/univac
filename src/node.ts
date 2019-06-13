@@ -35,8 +35,8 @@ export function addParents(n: Node) {
  */
 export function getNodeAtPosition(node: Node, position: NodePositionLineColumn): Node | undefined {
   function includes(n: Node, p: NodePositionLineColumn) {
-    return n.start!.line <= p.line &&
-      n.stop!.line >= p.line
+    return n && (n.start!.line <= p.line) &&
+    (n.stop!.line >= p.line)
   }
   let found: Node | undefined
   function find(n: Node, p: NodePositionLineColumn): Node | undefined {
@@ -62,11 +62,8 @@ export function printNode({ node, level = 0 }: { node: Node, level?: number }): 
 ${node.children.length ?
       `${indent(level + 1)}${node.children.map(c => printNode({ node: c, level: level + 1 })).join('') + '\n'}` : ''}${indent(level)}</${node.type}>
   `.trim()
-    // +(node.children.length>1 ? '\n'+indent(level+1) : '')
   )
-    // + '\n'+indent(level+1) 
     .replace(/\>\</gm, '\> \<')
-  // .split('\n').filter(l=>l.trim()).join('')
 }
 
 export function getNodeId(n: Node) {

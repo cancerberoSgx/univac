@@ -12,15 +12,16 @@ export async function getAst(input: string, language: Language) {
       input, language, parents: true, text: true, errorListener: {
         syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
           error.push({ offendingSymbol, line, column, msg, e })
-
         }
       }
     })
     return { ast, error }
   } catch (error) {
+    debugger
     return { error }
   }
 }
+
 export async function selectExample(selectedExample: Example, setEditorText = true) {
   const { ast, error } = await getAst(selectedExample.code, selectedExample.language)
   getStore().setState({ example: selectedExample, ast, error, language: selectedExample.language })

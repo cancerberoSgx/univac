@@ -50,6 +50,9 @@ interface E {
 }
 
 export function getNodeId(n: Node) {
+  if(!n){
+    return ''
+  }
   if (!n.id) {
     n.id = unique('node')
   }

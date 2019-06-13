@@ -8,6 +8,10 @@ interface BaseOptions {
 
 export interface GetAstOptions<N = any> extends BaseOptions {
   /**
+   * Base path from where to load .wasm files needed by tree-sitter based parsers. By default is '.'
+   */
+  basePath?: string
+  /**
    * If given, it will be notified of parsing errors or other diagnostics. 
    * TODO: make an adapter interface simpler independent of antlr4. 
    */
@@ -71,10 +75,10 @@ export interface Node {
   parent?: Node | null
 }
 export interface NodePositionLineColumn {
-
   line: number;
   column: number;
 }
+
 export interface NodePosition extends NodePositionLineColumn {
   start: number;
   stop: number;
@@ -89,6 +93,9 @@ export interface Normalizer<N = any> {
    * Ast generation options.
    */
   options: GetAstOptions<N> | undefined
+  /**
+   * Returns the whole AST with all descendants loaded.
+   */
   getAst(): Node
   /**
    * Normalizes given node individually, returning empty array for children.
