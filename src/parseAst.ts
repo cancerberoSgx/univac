@@ -16,6 +16,8 @@ export async function parseAstOrThrow(options: GetAstOptions): Promise<Node> {
 export async function parseAst(options: GetAstOptions): Promise<Node | undefined> {
   const input = options.input
   var info = await getParserImpl(options.language)
+  let ast: Node
+
   if (info.Parser && info.Lexer) {
     var chars = new antlr4.InputStream(input)
     //@ts-ignore
@@ -35,25 +37,28 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
     const visitor = new Visitor()
     visitor.options = options
     tree.accept(visitor)
-    const ast = visitor.getAst()
-    return removeRedundantNode(ast, info)
+    ast = visitor.getAst()    
   }
   else if (info.treeSitterParser) {
     options.basePath = options.basePath || ''
     await Parser.init()
     const parser = new Parser()
-    // TODO; don't load again if already loaded.
+    // TODO; don't load again the .wasm if already loaded.
     const Lang = await Parser.Language.load(options.basePath + info.treeSitterParser)
     parser.setLanguage(Lang)
     const tree = parser.parse(input)
     const normalizer = new TreeSitterVisitor()
     normalizer.options = { ...options, root: tree.rootNode }
-    const ast = normalizer.getAst()
-    return ast
+    ast = normalizer.getAst()
   }
+
   else {
     throw new Error('Unrecognized ParseImpl returned ' + info)
   }
+  // common post-processing
+  ast= removeRedundantNode(ast, info)
+  ast = info.mutate ? info.mutate(ast, info) : ast
+  return ast
 }
 
 function removeRedundantNode(node: Node, info: ParserImpl) {

@@ -86,12 +86,13 @@ THis is a very new project, WIP, this is the current status:
  * playground improved with many examples, syntax hihgiling,different kind of ast viewers.
  * antlr4 grammar
  * c++ grammar 
- * async call parseAst()
  * introduced second kind of parser : tree-sitting. These return a "real" ast - not visitor. 
    * declared adaptor interfaces
    * visitor is now  a normalizer Normalizer
    * tree-sitter tests for node
+   * async call parseAst()
  * rust (tree-sitter)
+ * sexpressions (antlr4)
 
 ## Language grammars notes
 

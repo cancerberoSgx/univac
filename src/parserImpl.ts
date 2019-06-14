@@ -1,27 +1,42 @@
 import { Lexer, Parser } from 'antlr4'
 import { Language, Node } from './types'
+import { getSExpressionImpl } from './impls/sexpression';
 
 export interface ParserImpl {
   /**
    * For antlr4 grammars. 
    */
-  Lexer?: typeof Lexer;
+  Lexer?: typeof Lexer
+
   /** 
    * For antlr4 grammars.  
    */
-  Parser?: typeof Parser;
+  Parser?: typeof Parser
+
   /** 
-   * For antlr4 grammars. Some implementations require two-steps, like R or ObjectiveC. The later has a preprocessor that removes directives / spaces for its output to be compiled by the real parser. 
+   * For antlr4 grammars. Some implementations require two-steps, like R or ObjectiveC. The later has a
+   * preprocessor that removes directives / spaces for its output to be compiled by the real parser. 
    */
-  Filter?: typeof Parser;
+  Filter?: typeof Parser
+
   /**
    * For antlr4 grammars. 
    */
-  mainRule?: string;
+  mainRule?: string
+
   /**
-   * For antlr4 grammars. 
+   * For antlr4 grammars. A node predicate. If true and it will be remoed if:
+   * 
+   *   * has 0 children
+   *   * has 1 child an dit child or its parent also have 1 child.X
    */
-  redundantTypes?(node: Node, parent?: Node): boolean;
+  redundantTypes?(node: Node, parent?: Node): boolean
+
+  /**
+   * Mostly for antlr4 grammars, gives the possibility to an implementation to completly mutate the AST at
+   * piaccere, for example, renaming original, types, removing nodes with custom policies, etc. 
+   */
+  mutate?(ast: Node, impl : ParserImpl): Node 
 
   /**
    * For tree-sitter AST parsers. path to the parser implementation .wasm file.
@@ -30,6 +45,7 @@ export interface ParserImpl {
 }
 
 export async function getParserImpl(language: Language): Promise<ParserImpl> {
+  
   if (language === 'c') {
     return {
       Lexer: require('./grammar/c/CLexer').CLexer,
@@ -38,12 +54,11 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
       redundantTypes: node => node.children.length === 1 && node.type.endsWith('Expression')
     }
   }
-  if (language === 'rust') {
+  else if (language === 'rust') {
     return {
       treeSitterParser: 'tree-sitter-rust.wasm'
     }
   }
-
   else if (language === 'cpp') {
     return {
       Lexer: require('./grammar/cpp/CPP14Lexer').CPP14Lexer,
@@ -97,6 +112,9 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
       Parser: require('./grammar/lua/LuaParser').LuaParser,
       mainRule: 'chunk'
     }
+  }
+  else if (language === 'sexpression') {
+    return getSExpressionImpl()
   }
   else if (language === 'dart2') {
     return {

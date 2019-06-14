@@ -505,6 +505,28 @@ h3 {
   },
 
 
+  {
+    name: 'expression_syntax_kind.txt',
+    language: Language.less,
+    code: `
+(source_file ((milk juice a b c 1 2 (3)) (honey marmalade))
+  (package_clause (package_identifier))
+  (function_declaration (identifier) (parameter_list) (block
+    (call_expression
+      (identifier)
+      (argument_list
+        (identifier)
+        (variadic_argument (identifier))))
+    (call_expression (((milk juice) (honey marmalade)))
+      (identifier)
+      (argument_list (identifier) (identifier)))
+    (call_expression
+      (identifier)
+      (argument_list (identifier) (variadic_argument (identifier)))))))  
+`.trim(),
+    description: '',
+  },
+
 
 
 

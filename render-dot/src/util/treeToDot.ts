@@ -1,11 +1,5 @@
 import { unique } from 'misc-utils-of-mine-generic'
-
-interface Node {
-  children: Node[]
-  label: string
-  attrs?: any
-  id?: string
-}
+import { Node } from '../types';
 
 export function treeToDot({ node, name = 'AST', cluster = false, rankdir = 'LR' }: { node: Node, name?: string, cluster?: boolean, rankdir?: 'TB' | 'LR' | 'BT' | 'RL' }) {
   const elements: E[] = []

@@ -18,17 +18,12 @@ export function getLibrary() {
       const TWorker = require('tiny-worker')
       worker = new TWorker(resolve(join(getPackageJsonFolder() || '.', 'dist', 'src', 'full.render.js')))
     }
-    
-    else {
-      // worker = new Worker(join(getPackageJsonFolder()+'/node_modules/viz.js/full.render.js'))
+        else {
       worker = new Worker('full.render.js')
-      // worker = new Worker('node_modules/viz.js/full.render.js')
-      // viz = new Viz.default( {workerURL: 'full.render.js'})
     }
   }
   if (!viz) {
     viz = new Viz({ worker })
   } 
-  // viz = new Viz.default( {worker})
   return viz
 }

@@ -1,5 +1,12 @@
 import { enumKeys } from 'misc-utils-of-mine-typescript'
 
+export interface Node {
+  children: Node[]
+  label: string
+  attrs?: any
+  id?: string
+}
+
 export interface Options {
   /**
    * .dot code to render. For Command line, it can also be path to .dot files or glob pattern to many .dot

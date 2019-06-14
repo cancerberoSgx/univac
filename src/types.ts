@@ -11,27 +11,33 @@ export interface GetAstOptions<N = any> extends BaseOptions {
    * Base path from where to load .wasm files needed by tree-sitter based parsers. By default is '.'
    */
   basePath?: string
+
   /**
    * If given, it will be notified of parsing errors or other diagnostics. 
    * TODO: make an adapter interface simpler independent of antlr4. 
    */
-  errorListener?: Partial<ErrorListener>;
+  errorListener?: Partial<ErrorListener>
+
   /**
    * If given, each node will have a `text` property with its text. 
    */
   text?: boolean
+
   /**
    * If true, properties `start`and `stop` won't be emitted in nodes. false bu default.
    */
   omitPosition?: boolean
+
   /**
    * Adds [[parent]] property to each node referencing node¡'s parent. Notice that the AST won't be serializable with JSON.stringify anymore because of cycles. By default is false.  
    */
   parents?: boolean
+
   /**
    * Adds [[source]] property to [[start]] and [[stop]] positions. By default is false. 
    */
   positionSource?: boolean;
+
   /**
    * For tree-sitter based parsers. antlr grammars based implementations doesn't need this, but tree-sitter do since they don't actually visit, they are provided with an AST that needs to be normalized
    */
@@ -58,7 +64,8 @@ export enum Language {
   'wat' = 'wat',
   'cpp' = 'cpp',
   'antlr4' = 'antlr4',
-  'rust' = 'rust'
+  'rust' = 'rust',
+  'sexpression'='sexpression'
 }
 
 export interface Options extends BaseOptions {
@@ -72,8 +79,9 @@ export interface Node {
   start?: NodePosition;
   stop?: NodePosition;
   children: Node[];
-  parent?: Node | null
+  parent?: Node | undefined
 }
+
 export interface NodePositionLineColumn {
   line: number;
   column: number;

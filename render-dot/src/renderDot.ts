@@ -19,10 +19,6 @@ export async function renderDot(options: Options) {
     })
     return s
   }
-  // renderImageElement(src, options = {}) {
-  //   let { scale, mimeType, quality } = options;
-
-  // renderString(src, { format = 'svg', engine = 'dot', files = [], images = [], yInvert = false, nop = 0 } = {}) {
 }
 
 

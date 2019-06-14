@@ -44,3 +44,91 @@ import Parser from 'web-tree-sitter'
 ```sh
 ts-node test.ts
 ```
+
+
+
+
+
+
+
+
+<!-- 
+## pegjs based grammars for common languages
+
+ * https://github.com/michael-brade/LaTeX.js/blob/master/src/latex-parser.pegjs
+ * https://libraries.io/npm/lucene-query-parser
+
+https://github.com/honza/inertia/blob/master/inertia/grammar.pegjs
+https://github.com/devijvers/lisp.js/tree/master/lisp/grammar
+Schemeish grammar https://github.com/patrickdlogan/nconc/blob/master/public/scripts/nconc.pegjs
+
+objective C - https://github.com/okaxaki/objc2swift/blob/master/grammar/objc.pegjs
+formal logic  https://github.com/cameronbwhite/WeberLogicJS/blob/master/src/grammer.pegjs
+
+misc https://github.com/for-GET/core-pegjs/tree/master/src/ietf
+
+markdown: https://github.com/shamansir/xtd/blob/master/sources/assets/mdown-parse-pegjs/markdown.pegjs 
+
+list: https://libraries.io/search?keywords=pegjs&page=2
+
+https://github.com/kevinludwig/pgn-parser
+https://github.com/bpow/pegjs-bonsai
+https://www.npmjs.com/package/pegjs-prolog-parser
+https://github.com/bripkens/lucene https://libraries.io/npm/lucene-query-parser
+https://github.com/Bannerets/ti-el - https://github.com/Bannerets/ti-el/blob/master/packages/tl-parser/src/tl.pegjs
+-->
+
+<!-- 
+
+7. BNF for syntax
+
+We give separate BNF's for canonical and advanced forms of S-expressions.
+We use the following notation:
+	<x>* 		means 0 or more occurrences of <x>
+	<x>+		means 1 or more occurrences of <x>  
+	<x>?		means 0 or 1 occurrences of <x>
+	parentheses	are used for grouping, as in (<x> | <y>)*
+
+
+For canonical and basic transport:
+https://people.csail.mit.edu/rivest/Sexp.txt
+
+<sexpr>    	:: <string> | <list>
+<string>   	:: <display>? <simple-string> ;
+<simple-string>	:: <raw> ;
+<display>  	:: "[" <simple-string> "]" ;
+<raw>      	:: <decimal> ":" <bytes> ;
+<decimal>  	:: <decimal-digit>+ ;
+		-- decimal numbers should have no unnecessary leading zeros
+<bytes> 	-- any string of bytes, of the indicated length
+<list>     	:: "(" <sexp>* ")" ;
+<decimal-digit> :: "0" | ... | "9" ;
+
+For advanced transport:
+
+<sexpr>    	:: <string> | <list>
+<string>   	:: <display>? <simple-string> ;
+<simple-string>	:: <raw> | <token> | <base-64> | <hexadecimal> | 
+		           <quoted-string> ;
+<display>  	:: "[" <simple-string> "]" ;
+<raw>      	:: <decimal> ":" <bytes> ;
+<decimal>  	:: <decimal-digit>+ ;
+		-- decimal numbers should have no unnecessary leading zeros
+<bytes> 	-- any string of bytes, of the indicated length
+<token>    	:: <tokenchar>+ ;
+<base-64>  	:: <decimal>? "|" ( <base-64-char> | <whitespace> )* "|" ;
+<hexadecimal>   :: "#" ( <hex-digit> | <white-space> )* "#" ;
+<quoted-string> :: <decimal>? <quoted-string-body>  
+<quoted-string-body> :: "\"" <bytes> "\""
+<list>     	:: "(" ( <sexp> | <whitespace> )* ")" ;
+<whitespace> 	:: <whitespace-char>* ;
+<token-char>  	:: <alpha> | <decimal-digit> | <simple-punc> ;
+<alpha>       	:: <upper-case> | <lower-case> | <digit> ;
+<lower-case>  	:: "a" | ... | "z" ;
+<upper-case>  	:: "A" | ... | "Z" ;
+<decimal-digit> :: "0" | ... | "9" ;
+<hex-digit>     :: <decimal-digit> | "A" | ... | "F" | "a" | ... | "f" ;
+<simple-punc> 	:: "-" | "." | "/" | "_" | ":" | "*" | "+" | "=" ;
+<whitespace-char> :: " " | "\t" | "\r" | "\n" ;
+<base-64-char> 	:: <alpha> | <decimal-digit> | "+" | "/" | "=" ;
+<null>        	:: "" ; -->
