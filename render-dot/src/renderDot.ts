@@ -1,23 +1,33 @@
 import { svg2png } from 'svg-png-converter'
-import { getLibrary } from './library'
+import { getLibrary, terminateLibrary } from './library'
 import { Options } from './types'
 
 export async function renderDot(options: Options) {
-  if (!options.format || !['jpeg', 'png', 'gif'].includes(options.format)) {
-    return await getLibrary().renderString(options.input, options)
-  }
-  else {
-    const input = await getLibrary().renderString(options.input, { ...options, format: 'svg' })
-    let s = await svg2png({
-      input,
-      // encoding: 'dataURL',           //TODO: add to options
-      format: (options.format || 'png') as any,
-      width: options.width || 400,
-      height: options.height || 400,
-      // multiplier: options.debug,     //TODO: add to options
-      // quality: .5                    //TODO: add to options
-    })
-    return s
+  try {
+    options.debug && console.log('renderDot options', options)    
+    if (!options.format || !['jpeg', 'png', 'gif'].includes(options.format)) {
+      return await getLibrary().renderString(options.input, options)
+    }
+    else {
+      const input = await getLibrary().renderString(options.input, 
+        { ...options, format: 'svg' 
+      })
+      let s = await svg2png({
+        ...options,
+        input,
+        // encoding: 'dataURL',           //TODO: add to options
+        format: (options.format || 'png') as any,
+        // width: options.width || undefined,
+        // height: options.height || undefined,
+        // multiplier: options.debug,     //TODO: add to options
+        // quality: options.quality || undefined//.5                    //TODO: add to options
+      })
+      return s
+    }
+  } catch (error) {
+    // console.error('renderDot() error ', error)
+    terminateLibrary()
+    throw error
   }
 }
 

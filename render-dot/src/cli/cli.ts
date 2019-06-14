@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { sync as glob } from 'glob'
-import { serial } from 'misc-utils-of-mine-generic'
+import { serial, sleep } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
 import { terminateLibrary } from '../library'
 import { renderDot } from '../renderDot'
@@ -28,22 +28,38 @@ export async function cliMain(o: Options) {
     await serial(input.map(input => async () => {
       try {
         o.debug && console.log('Rendering ' + input.name)
-        const result = ({ name: input.name + `.${o.format || 'svg'}`, content: await renderDot({ ...o, input: input.content }) })
+        const result = {
+          name: input.name + `.${o.format || 'svg'}`,
+          content: await renderDot({ ...o, input: input.content })
+        }
+        // o.debug && console.log('Rendered ' + input.name)
         if (o.output) {
           const file = join(o.output, basename(result.name))
-          o.debug && console.log('Writing ' + file)
-          writeFileSync(file, result.content)
+          // o.debug && console.log('Writing ' + file)
+          if(!o.format||o.format==='svg'){
+            writeFileSync(file, result.content)
+          }
+          else {
+            writeFileSync(file, result.content, 'binary')
+          }
         }
         else {
           process.stdout.write(result.content)
         }
-        return result
+        // return result
       } catch (error) {
         console.error('ERROR while rendering file ' + input.name)
         console.error(error)
+        //         return { name: input.name + `.${o.format || 'svg'}`, content: await renderDot({ ...o, input: `
+        // digraph ATN {
+        //   rankdir=LR;
+        //   s2[fontsize=11, label="error", shape=doublecircle, fixedsize=true, width=.6];
+        // }`}) }
       }
+      await sleep(10)
     }))
 
+    o.debug && console.log('Terminating Library')
     terminateLibrary()
 
   } catch (error) {
@@ -59,6 +75,9 @@ function preconditions(options: Options) {
   }
   if (!options.input) {
     fail(`--input is mandatory but one was not given. Aborting.`)
+  }
+  if (options.nop) {
+    options.nop = parseInt(options.nop + '')
   }
 }
 

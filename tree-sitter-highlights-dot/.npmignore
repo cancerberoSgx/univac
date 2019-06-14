@@ -11,8 +11,10 @@
 /declarations.d.ts
 *.tgz
 test
+typescript-ast-query-editor
 formatCodeSettings.json
 .nyc_output
+cannabis-cli
 coverage
 test-browser-outdir
 guitarra
@@ -35,8 +37,5 @@ grammar-graph
 tmp.json
 .DS_Store
 render-dot
-svg-png-converter
-tree-sitter-highlights-dot
-.antlr
-tmp*
-generatetreeSitterWasm.sh
+svg-png
+/tmp*

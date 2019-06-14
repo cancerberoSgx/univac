@@ -19,7 +19,9 @@ test('should render svg by default', async t => {
 test('should render png', async t => {
   const result = await renderDot({
     input: 'digraph { a -> b; }',
-    format: 'png'
+    format: 'png',
+    width: 400,
+    height: 400,
   })
   // writeFileSync('tmp.png', result, 'binary')
   const expected = readFileSync('test/assets/expectedOutput.png').toString('binary')

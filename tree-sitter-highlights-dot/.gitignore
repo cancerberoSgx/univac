@@ -11,10 +11,8 @@ log2.txt
 /package
 .vscode
 test-browser-outdir
-tmp*
+tmp.?*
 .antlr
 grammar-graph
-universal-svg-rasterizer
-doc
-tree-sitter-highlights-dot
-.antlr
+render-dot
+/tmp*

@@ -1,5 +1,5 @@
 import test from 'ava'
-import { treeToDot } from '../src'
+import { graphToDot } from '../src'
 import { terminateLibrary } from '../src/library'
 
 test.after(async t => {
@@ -7,7 +7,7 @@ test.after(async t => {
 })
 
 test('should render dot from given tree', async t => {
-  const r = treeToDot({
+  const r = graphToDot({
     node: {
       label: '1',
       children: [
@@ -15,8 +15,8 @@ test('should render dot from given tree', async t => {
         { label: '13', children: [] }, { label: '14', children: [{ label: '141', children: [] }] }
       ]
     }
-    , rankdir: 'LR', name: 'ATN'  
-})
+    , rankdir: 'LR', name: 'ATN'
+  })
   t.deepEqual(r.dot,
     `
 digraph ATN {

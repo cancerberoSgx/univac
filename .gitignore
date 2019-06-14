@@ -17,5 +17,4 @@ grammar-graph
 universal-svg-rasterizer
 *.wasm
 doc
-tree-sitter-highlights-dot
 .antlr
