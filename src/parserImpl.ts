@@ -1,6 +1,7 @@
 import { Lexer, Parser } from 'antlr4'
+import { getSExpressionImpl } from './impls/sexpression'
 import { Language, Node } from './types'
-import { getSExpressionImpl } from './impls/sexpression';
+import { getAbnfImpl } from './impls/abnf';
 
 export interface ParserImpl {
   /**
@@ -36,7 +37,7 @@ export interface ParserImpl {
    * Mostly for antlr4 grammars, gives the possibility to an implementation to completly mutate the AST at
    * piaccere, for example, renaming original, types, removing nodes with custom policies, etc. 
    */
-  mutate?(ast: Node, impl : ParserImpl): Node 
+  mutate?(ast: Node, impl: ParserImpl): Node
 
   /**
    * For tree-sitter AST parsers. path to the parser implementation .wasm file.
@@ -45,7 +46,7 @@ export interface ParserImpl {
 }
 
 export async function getParserImpl(language: Language): Promise<ParserImpl> {
-  
+
   if (language === 'c') {
     return {
       Lexer: require('./grammar/c/CLexer').CLexer,
@@ -115,6 +116,9 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
   }
   else if (language === 'sexpression') {
     return getSExpressionImpl()
+  }
+  else if (language === 'abnf') {
+    return getAbnfImpl()
   }
   else if (language === 'dart2') {
     return {
@@ -206,7 +210,7 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
   }
 }
 
-function preventRedundantTypeNames(node: Node, parent: Node | undefined, predicate: (node: Node, parent: Node | undefined) => boolean): boolean {
+export function preventRedundantTypeNames(node: Node, parent: Node | undefined, predicate: (node: Node, parent: Node | undefined) => boolean): boolean {
   const textSameAsParent = parent && parent.text === node.text
   const textSameAsChild = node.children.length === 1 && node.children[0].text === node.text
   return predicate(node, parent) && node.children.length < 2 && (textSameAsParent || textSameAsChild)

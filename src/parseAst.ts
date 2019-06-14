@@ -37,7 +37,7 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
     const visitor = new Visitor()
     visitor.options = options
     tree.accept(visitor)
-    ast = visitor.getAst()    
+    ast = visitor.getAst()
   }
   else if (info.treeSitterParser) {
     options.basePath = options.basePath || ''
@@ -56,7 +56,7 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
     throw new Error('Unrecognized ParseImpl returned ' + info)
   }
   // common post-processing
-  ast= removeRedundantNode(ast, info)
+  ast = removeRedundantNode(ast, info)
   ast = info.mutate ? info.mutate(ast, info) : ast
   return ast
 }

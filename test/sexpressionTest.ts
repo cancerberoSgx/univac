@@ -54,40 +54,40 @@ test('should report syntax errors to given listener', async t => {
 })
 
 test('generate correct ast', async t => {
-t.deepEqual( await parseAstOrThrow({
-  input:  `(a 1)`, 
-  language: Language.sexpression,
-  omitPosition: true,
-  text: true
-}), {
-  "type": "sexpr",
-  "text": "(a1)<EOF>",
-  "children": [
-    {
-      "type": "list",
-      "text": "(a1)",
+  t.deepEqual(await parseAstOrThrow({
+    input: `(a 1)`,
+    language: Language.sexpression,
+    omitPosition: true,
+    text: true
+  }), {
+      "type": "sexpr",
+      "text": "(a1)<EOF>",
       "children": [
         {
-          "type": "atom",
-          "text": "a",
-          "children": []
-        },
-        {
-          "type": "atom",
-          "text": "1",
-          "children": []
+          "type": "list",
+          "text": "(a1)",
+          "children": [
+            {
+              "type": "atom",
+              "text": "a",
+              "children": []
+            },
+            {
+              "type": "atom",
+              "text": "1",
+              "children": []
+            }
+          ]
         }
       ]
-    }
-  ]
-})
+    })
 })
 
 test('generate correct ast 2', async t => {
-    const o = printNode({
-      node: result
-    })
-    const expected = [`
+  const o = printNode({
+    node: result
+  })
+  const expected = [`
                   `, `
 <list text="((milkjuiceabc12(3))(honeymarmalade))">
   <list text="(milkjuiceabc12(3))">
@@ -117,6 +117,5 @@ test('generate correct ast 2', async t => {
     <atom text="identifier">
       
                     `]
-    expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))
-  })
-  
+  expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))
+})

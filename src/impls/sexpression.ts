@@ -1,6 +1,5 @@
-import { ParserImpl } from '../parserImpl';
-import { Node } from '../types';
-import { format } from 'url';
+import { ParserImpl } from '../parserImpl'
+import { Node } from '../types'
 
 export function getSExpressionImpl(): ParserImpl {
   const Lexer = require('../grammar/sexpression/sexpressionLexer').sexpressionLexer
@@ -8,8 +7,8 @@ export function getSExpressionImpl(): ParserImpl {
   const r = {
     Lexer,
     Parser,
-    mainRule: 'sexpr', 
-     mutate
+    mainRule: 'sexpr',
+    mutate
   }
   return r
 }
@@ -21,40 +20,40 @@ function mutate(ast: Node, impl: ParserImpl) {
 
   function f(n: Node, p?: Node) {
     // let mutated = false
-    if(n.start===undefined){
+    if (n.start === undefined) {
       delete n.start
     }
-    if(n.stop===undefined){
+    if (n.stop === undefined) {
       delete n.stop
     }
     if (n.type === 'item') {
       p = p || n.parent
       if (p) {
-        if (n.children.length ) {
-          const ni = p.children.findIndex(i=>i===n)
+        if (n.children.length) {
+          const ni = p.children.findIndex(i => i === n)
           p.children.splice(ni, 1, ...n.children)
           // const ci = n.children.findIndex(i=>i===c)
           // const c = n.children[0]
           // if (n.text === c.text) {
-            // we can mutate
-            // p.children = [c]
-            // c.parent = p
-            // mutated = true
+          // we can mutate
+          // p.children = [c]
+          // c.parent = p
+          // mutated = true
           // }
           // else {
-            //TODO
+          //TODO
           // }
         }
         else {
-            //TODO
+          //TODO
         }
       }
       else {
-            //TODO
+        //TODO
       }
     }
     else {
-            //TODO
+      //TODO
     }
     // n.type = n.type === 'ListContext' ? 'list' : 'atom'
     n.children.forEach(c => f(c, n))
