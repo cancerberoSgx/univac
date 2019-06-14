@@ -1,6 +1,8 @@
 # TODO
 
  [ ] replace what we cant with tree-sitter ones (ruby, go, etc)
+ [ ] support error listener in non antlr4 asts
+ [ ] integrate a peg.js based AST parser
  [ ] remove .wasm files from the repo,  
  [ ] tree-sitter tests for browser
  [ ] make sure if using only one grammar, its possible to generate a browser bundle that only contains that parser and not all of them. Dependency injection - user should be able to configure somehow which parsears it will use so only those are combined.
