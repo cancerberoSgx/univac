@@ -66,7 +66,7 @@ export enum Language {
   'antlr4' = 'antlr4',
   'rust' = 'rust',
   'sexpression' = 'sexpression',
-  'abnf'='abnf'
+  'abnf' = 'abnf'
 }
 
 export interface Options extends BaseOptions {

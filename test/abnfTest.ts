@@ -50,7 +50,7 @@ test('should report syntax errors to given listener', async t => {
     language: Language.abnf,
     errorListener: {
       syntaxError(a, b, c, d, msg) {
-        t.true(msg.includes(`mismatched input`) , msg)
+        t.true(msg.includes(`mismatched input`), msg)
       }
     }
   })
@@ -67,8 +67,8 @@ test('generate correct ast ', async t => {
     </repeat> <element text="ALPHA">
     </element>
   </repetition>
-</rule>`, 
-`
+</rule>`,
+    `
 <rule text="street=[aptSP]house-numSPstreet-nameCRLF">
   <concatenation text="[aptSP]house-numSPstreet-nameCRLF">
     <element text="[aptSP]">

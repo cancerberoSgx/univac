@@ -12,7 +12,7 @@ grammars](https://github.com/antlr/grammars-v4)
  * JavaScript API for node.js and browser. 
  * Command line tool
  * TypeScript
- * ASTs for C, golang, ruby, java, python, scala, erlang, lua, dart2, kotlin, smalltalk, fortran77, VisualBasic6, less wat, and
+ * ASTs for C, golang, ruby, java, python, scala, erlang, lua, dart2, rust, antlr4, kotlin, smalltalk, fortran77, VisualBasic6, less wat, and
    more... 
 
 
@@ -93,6 +93,7 @@ THis is a very new project, WIP, this is the current status:
    * async call parseAst()
  * rust (tree-sitter)
  * sexpressions (antlr4)
+ * abnf (antlr4)
 
 ## Language grammars notes
 

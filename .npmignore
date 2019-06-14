@@ -39,3 +39,6 @@ tmp.json
 render-dot
 svg-png-converter
 tree-sitter-highlights-dot
+.antlr
+tmp*
+generatetreeSitterWasm.sh

@@ -1,12 +1,13 @@
 # TODO
 
+ [ ] replace what we cant with tree-sitter ones (ruby, go, etc)
  [ ] remove .wasm files from the repo,  
  [ ] tree-sitter tests for browser
  [ ] make sure if using only one grammar, its possible to generate a browser bundle that only contains that parser and not all of them. Dependency injection - user should be able to configure somehow which parsears it will use so only those are combined.
- [ ]implement: wat, unicode, 
+ [ ]implement:unicode, 
  * visuallise with d3 : https://raw.githubusercontent.com/tree-sitter/tree-sitter-typescript/master/typescript/src/highlights.json
  integrate http://tree-sitter.github.io/tree-sitter/creating-parsers
-   * unicode, abnf
+   * unicode
    * guido
    * objc, javadoc , pascal, modula, clojure
    * plsql, sqlite, mysql, 

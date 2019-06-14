@@ -1,7 +1,7 @@
 import { Lexer, Parser } from 'antlr4'
+import { getAbnfImpl } from './impls/abnf'
 import { getSExpressionImpl } from './impls/sexpression'
 import { Language, Node } from './types'
-import { getAbnfImpl } from './impls/abnf';
 
 export interface ParserImpl {
   /**
