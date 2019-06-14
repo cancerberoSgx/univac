@@ -14,7 +14,7 @@
     "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
     "clean": "rm -rf dist docs test-browser-outdir",
     "build": "npm run clean && npx tsc && npm run copy",
-    "copy": "rm -rf dist/src/grammar && mkdir -p dist/src/grammar && cp -r src/grammar/* dist/src/grammar && rm -rf dist/static src/static && mkdir -p dist/static src/static &&  cp node_modules/tree-sitter-rust/tree-sitter-rust.wasm node_modules/web-tree-sitter/tree-sitter.wasm node_modules/tree-sitter-javascript/tree-sitter-javascript.wasm dist/static",
+    "copy": "rm -rf dist/src/grammar && mkdir -p dist/src/grammar && cp -r src/grammar/* dist/src/grammar && rm -rf dist/static && mkdir -p dist/static && cp src/tree-sitter-parser/* dist/static",
     "prepare": "npm run build",
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
