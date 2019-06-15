@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-grammar-to-dot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generates .dot files from highlights.json tree-sitter files rendering the property states for each type. Inspired on antlr4 -atn command. ",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
