@@ -20,7 +20,7 @@ export function buildDot(options: Options) {
   const rules  = objectKeys(options.input.rules).map(name=>{
     const rule = options.input.rules[name]
     const result: string[] = [];
-    buildRule(rule, undefined, result);
+    buildRule(rule, undefined, result,  (name: string)=>`${options.name||options.input.name||'javascript'}-grammar.json.${name}.dot.svg`);
     const dot = `
   digraph ${name} {
   
