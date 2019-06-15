@@ -1,7 +1,7 @@
-import { RemoveProperties } from 'misc-utils-of-mine-generic';
+import { RemoveProperties } from 'misc-utils-of-mine-generic'
 
 export interface Rule {
-  type: 'SEQ' | 'STRING' | 'CHOICE' | 'SYMBOL' | 'REPEAT' | 'BLANK' | 'PATTERN' | 'REPEAT1' | 'PREC'| 'TOKEN' | 'ALIAS'
+  type: 'SEQ' | 'STRING' | 'CHOICE' | 'SYMBOL' | 'REPEAT' | 'BLANK' | 'PATTERN' | 'REPEAT1' | 'PREC' | 'TOKEN' | 'ALIAS'
   members?: Rule[];
   value?: string;
   name?: string;
@@ -15,12 +15,12 @@ export interface Options {
 }
 
 export interface Grammar {
-    name: string,
-    word: string,
-    rules: {[ruleName: string]: RemoveProperties<Rule, 'id'>}
-    extras: {type: string, name: string}[]
-    conflicts: string[][]
-    externals: {type: string, name: string}[]
-    inline: string[]
-    supertypes: any[]
+  name: string,
+  word: string,
+  rules: { [ruleName: string]: RemoveProperties<Rule, 'id'> }
+  extras: { type: string, name: string }[]
+  conflicts: string[][]
+  externals: { type: string, name: string }[]
+  inline: string[]
+  supertypes: any[]
 }

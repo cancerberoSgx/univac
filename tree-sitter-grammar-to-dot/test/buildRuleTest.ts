@@ -1,7 +1,7 @@
-import test, { beforeEach } from 'ava'
-import { removeWhites, notSame } from 'misc-utils-of-mine-generic'
-import { Rule } from '../src/types';
-import { buildRule, _resetBuildRuleId } from '../src/buildRule';
+import test from 'ava'
+import { notSame, removeWhites } from 'misc-utils-of-mine-generic'
+import { buildRule, _resetBuildRuleId } from '../src/buildRule'
+import { Rule } from '../src/types'
 
 test('should parse', async t => {
   const grammar = {
@@ -39,9 +39,9 @@ test('should parse', async t => {
       }
     ]
   } as Rule
-  const result: string[] = [];
+  const result: string[] = []
   _resetBuildRuleId()
-  buildRule(grammar, undefined, result);
+  buildRule(grammar, undefined, result)
   t.deepEqual(removeWhites(result.filter(notSame).join('\n')), removeWhites(`
   s1 [label="s1\\n&rarr; SEQ", shape=record, fixedsize=false, peripheries=1];
   s2 [label="s2 STRING\\n\\"import\\""];
@@ -131,9 +131,9 @@ test('repeat choice, seq', t => {
     ]
   } as Rule
 
-  const result: string[] = [];
+  const result: string[] = []
   _resetBuildRuleId()
-  buildRule(grammar, undefined, result);
+  buildRule(grammar, undefined, result)
   t.deepEqual(removeWhites(result.filter(notSame).join('\n')), removeWhites(`
 s1 [label="{s1\\n&rarr; CHOICE|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
 s2 [label="s2\\n&rarr; SEQ", shape=record, fixedsize=false, peripheries=1];
@@ -173,7 +173,7 @@ s1:p1 -> s16 [label=""];
     `))
 
 
-}) 
+})
 
 
 

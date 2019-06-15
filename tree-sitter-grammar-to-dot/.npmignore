@@ -39,3 +39,4 @@ tmp.json
 render-dot
 svg-png
 /tmp*
+build-grammars-svgs.sh

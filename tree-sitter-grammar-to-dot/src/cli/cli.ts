@@ -2,8 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { sync as glob } from 'glob'
 import { serial, sleep } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
-import { Options } from '../types'
-import { buildGrammarDot } from '../buildDot';
+import { buildGrammarDot } from '../buildDot'
 
 export interface CliOptions {
   input: string
@@ -18,34 +17,34 @@ export async function cliMain(o: CliOptions) {
 
     const files = glob(o.input).filter(existsSync)
 
-    const input =files.map(f => ({
+    const input = files.map(f => ({
       name: f,
       content: readFileSync(f).toString()
     }))
-    if(input.length===0){
-      fail('No input files found matching '+o.input+'. Aborting. ')
+    if (input.length === 0) {
+      fail('No input files found matching ' + o.input + '. Aborting. ')
     }
-    if (  !existsSync(o.output)) {
+    if (!existsSync(o.output)) {
       mkdirSync(o.output, { recursive: true })
     }
 
     await serial(input.map(input => async () => {
       try {
         o.debug && console.log('Rendering ' + input.name)
-         const result = buildGrammarDot({  input: JSON.parse(input.content)  })
+        const result = buildGrammarDot({ input: JSON.parse(input.content) })
 
-         result.rules.forEach(rule =>{
-           const file = join(o.output, basename(input.name))+'.'+rule.name+'.dot'
-           writeFileSync(file, rule.dot)
-         })
+        result.rules.forEach(rule => {
+          const file = join(o.output, basename(input.name)) + '.' + rule.name + '.dot'
+          writeFileSync(file, rule.dot)
+        })
         // o.debug && console.log('Rendered ' + input.name)
         // if (o.output) {
-          // o.debug && console.log('Writing ' + file)
-          // if(!o.format||o.format==='svg'){
-          // }
-          // else {
-          //   writeFileSync(file, result.content, 'binary')
-          // }
+        // o.debug && console.log('Writing ' + file)
+        // if(!o.format||o.format==='svg'){
+        // }
+        // else {
+        //   writeFileSync(file, result.content, 'binary')
+        // }
         // }
         // else {
         //   process.stdout.write(result.content)
@@ -73,7 +72,7 @@ function preconditions(options: CliOptions) {
     printHelp()
     process.exit(0)
   }
-  if (!options.input||!options.output) {
+  if (!options.input || !options.output) {
     fail(`--input and --output are mandatory but where not given. Aborting.`)
   }
 }

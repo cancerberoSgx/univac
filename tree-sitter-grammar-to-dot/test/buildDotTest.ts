@@ -1,11 +1,10 @@
-import test from 'ava';
-import { buildGrammarDot, buildRuleDot } from '../src/buildDot';
-import { writeFileSync, readFileSync } from 'fs';
-import { _resetBuildRuleId } from '../src/buildRule';
-import { Rule } from '../src';
-import { removeWhites, notSame } from 'misc-utils-of-mine-generic';
+import test from 'ava'
+import { removeWhites } from 'misc-utils-of-mine-generic'
+import { Rule } from '../src'
+import { buildRuleDot } from '../src/buildDot'
+import { _resetBuildRuleId } from '../src/buildRule'
 
-test('buildRuleDot', async t =>{
+test('buildRuleDot', async t => {
   const rule = {
     "type": "SEQ",
     "members": [
@@ -42,7 +41,7 @@ test('buildRuleDot', async t =>{
     ]
   } as Rule
   _resetBuildRuleId()
-  const dot = buildRuleDot(rule, 'Cool');
+  const dot = buildRuleDot(rule, 'Cool')
 
   t.deepEqual(removeWhites(dot), removeWhites(`
 digraph Cool {
@@ -74,7 +73,7 @@ digraph Cool {
 test.skip('should parse official javascript grammar ', async (t) => {
   // console.log(result.join('\n'));
   // writeFileSync('tmp3.dot', buildGrammarDot({ input: JSON.parse(readFileSync('test/assets/javascript-grammar.json').toString()) as any, name: 'import_declaration' }));
-  t.true(true);
+  t.true(true)
   // const result = buildDot({input: grammar, name: 'import_declaration'});
   //   t.deepEqual(removeWhites(result.join('\n')), removeWhites(`
   // s1 [ label="s1\\n&rarr; SEQ"];
@@ -92,4 +91,4 @@ test.skip('should parse official javascript grammar ', async (t) => {
   // s7 -> s4 [];
   // s8 -> s4 [];
   //     `))
-});
+})
