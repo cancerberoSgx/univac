@@ -1,9 +1,15 @@
 Generates .dot files from grammar.json tree-sitter files rendering the property states for each type. Inspired on antlr4 -atn command.
 
+## Install
+
+```sg
+npm install tree-sitter-grammar-to-dot
+```
+
 ## Command line
 
 ```sh
-tree-sitter-grammar-to-dot --input test/assets/javascript-grammar.json --output tmp
+tree-sitter-grammar-to-dot --input test/assets/javascript-grammar.json --output output/folder
 ```
 
 ## JavaScript API
@@ -25,7 +31,8 @@ result.rules.forEach(rule => {
 Builds .dot source code from a single rule object:
 
 ```ts
- const rule = {
+import {buildRuleDot} from 'tree-sitter-grammar-to-dot'
+const rule = {
   "type": "SEQ",
   "members": [
     {
@@ -59,13 +66,10 @@ Builds .dot source code from a single rule object:
       "name": "_semicolon"
     }
   ]
-} as Rule
-_resetBuildRuleId()
+}
 const dot = buildRuleDot(rule, 'importDeclaration')
 writeFileSync('importDeclaration.dot', dot)
 ```
-
-## Status
 
 ## TODO
 

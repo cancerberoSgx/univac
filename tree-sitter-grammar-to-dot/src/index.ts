@@ -1,3 +1,3 @@
-export { buildGrammarDot as buildDot } from './buildDot'
+export * from './buildDot'
 export * from './types'
 
