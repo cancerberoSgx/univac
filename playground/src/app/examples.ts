@@ -94,6 +94,62 @@ int main()
     description: ' ',
   },
 
+
+  {
+    name: 'atom.sh',
+    language: Language.bash,
+    code: `    
+#!/bin/bash
+
+if [ "$(uname)" == 'Darwin' ]; then
+  OS='Mac'
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+  OS='Linux'
+else
+  echo "Your platform ($(uname -a)) is not supported."
+  exit 1
+fi
+
+if [ "$(basename $0)" == 'atom-beta' ]; then
+  BETA_VERSION=true
+else
+  BETA_VERSION=
+fi
+
+export ATOM_DISABLE_SHELLING_OUT_FOR_ENVIRONMENT=true
+
+while getopts ":wtfvh-:" opt; do
+  case "$opt" in
+    -)
+      case "\${OPTARG}" in
+        wait)
+          WAIT=1
+          ;;
+        help|version)
+          REDIRECT_STDERR=1
+          EXPECT_OUTPUT=1
+          ;;
+        foreground|benchmark|benchmark-test|test)
+          EXPECT_OUTPUT=1
+          ;;
+      esac
+      ;;
+    w)
+      WAIT=1
+      ;;
+    h|v)
+      REDIRECT_STDERR=1
+      EXPECT_OUTPUT=1
+      ;;
+    f|t)
+      EXPECT_OUTPUT=1
+      ;;
+  esac
+done
+`.trimLeft(),
+    description: ' ',
+  },
+
   {
     name: 'factorial.lua',
     language: Language.lua,

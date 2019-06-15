@@ -72,7 +72,7 @@ export class Visitor implements Normalizer<Ctx> {
       start: start.start,
       stop: start.stop,
       line: start.line,
-      column: start.column,
+      column: start.column + 1,
       text: start.text,
       source: this.options!.positionSource && source && source.strdata as string
     }

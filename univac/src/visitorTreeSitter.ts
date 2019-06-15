@@ -44,8 +44,8 @@ export class TreeSitterVisitor implements Normalizer<SyntaxNode> {
 
   protected getStopPosition(sn: SyntaxNode): NodePosition | undefined {
     return {
-      column: sn.endPosition.column,
-      line: sn.endPosition.row,
+      column: sn.endPosition.column +1,
+      line: sn.endPosition.row +1,
       start: sn.endIndex - sn.text.length,
       stop: sn.endIndex
     }
@@ -53,8 +53,8 @@ export class TreeSitterVisitor implements Normalizer<SyntaxNode> {
 
   protected getStartPosition(sn: SyntaxNode): NodePosition | undefined {
     return {
-      column: sn.startPosition.column,
-      line: sn.startPosition.row,
+      column: sn.startPosition.column +1,
+      line: sn.startPosition.row + 1 ,
       start: sn.startIndex - sn.text.length,
       stop: sn.startIndex
     }

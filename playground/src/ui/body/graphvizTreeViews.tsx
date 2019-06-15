@@ -1,6 +1,6 @@
 import FileSaver from 'file-saver'
 import * as React from 'react'
-import { Options, renderDot, treeToDot } from 'render-dot'
+import { Options, renderDot, graphToDot } from 'render-dot'
 import { svg2png } from 'svg-png-converter'
 import { visitDescendants } from 'univac'
 import { State } from '../../app/state'
@@ -71,7 +71,7 @@ export class GraphvizTreeViews extends AbstractComponent<P> {
     panZoomInstance.zoomAtPoint(0.4, { x: 22, y: 22 })
   }
 
-  async renderAst(treeToDotExtraOptions = {}, renderDotExtraOptions: Partial<Options> = {}) {
+  async renderAst(graphToDotExtraOptions = {}, renderDotExtraOptions: Partial<Options> = {}) {
     function countDescendants(n: any) {
       let counter = 0
       visitDescendants({ node: n, visitor: n => { counter++; return false } })
@@ -79,13 +79,15 @@ export class GraphvizTreeViews extends AbstractComponent<P> {
     }
     visitDescendants({
       node: this.state.ast, visitor: (n: any) => {
-        n.label = n.type
+        n.label = n.type.replace(/[\"]+/g, '\\"').replace(/[\n]+/g, '\\n').replace(/[\$\[]+/g, '_')
         n.attrs = n.attrs || {}
         n.attrs.area = countDescendants(n)
         return false
       }
     })
-    const dot = treeToDot({ node: this.state.ast as any, name: this.state.example.name.replace(/[\s\.\-]+/g, '_'), rankdir: 'TB', cluster: this.props.engine === 'patchwork', ...treeToDotExtraOptions })
+    const dot = graphToDot({ node: this.state.ast as any, name: this.state.example.name.replace(/[\s\.\-]+/g, '_'), rankdir: 'TB', 
+    cluster: this.props.engine === 'patchwork', ...graphToDotExtraOptions })
+    debugger
     const output = await renderDot({ input: dot.dot, engine: (this.props.engine || 'dot') as any, ...renderDotExtraOptions })
     return { dot, output }
   }

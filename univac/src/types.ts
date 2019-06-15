@@ -68,6 +68,7 @@ export enum Language {
   'sexpression' = 'sexpression',
   'scss' = 'scss',
   'abnf' = 'abnf',
+  'bash' = 'bash',
 }
 
 export interface Options extends BaseOptions {

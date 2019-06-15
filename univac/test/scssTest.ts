@@ -1,9 +1,9 @@
 import test from 'ava'
+import { writeFileSync } from 'fs'
 import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
 import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
-import { writeFileSync } from 'fs';
 
 let result: Node
 test.before(async t => {

@@ -10,7 +10,7 @@
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
-    "copy": "cp node_modules/univac/dist/src/tree-sitter-parser/* docs",
+    "copy": "cp node_modules/univac/dist/static/* docs",
     "start": "npm run copy &&  npx parcel serve  src/index.html -d docs --no-source-maps ",
     "build-dev-no-maps": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-content-hash  --no-source-maps",
     "build-dev": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-source-maps --no-content-hash",
@@ -41,6 +41,7 @@
     "watch": "^1.0.2"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "cytoscape": "^3.7.0",
     "cytoscape-even-parent": "^1.1.1",
     "d3": "^5.9.2",
@@ -48,7 +49,6 @@
     "file-saver": "^2.0.2",
     "misc-utils-of-mine-generic": "^0.2.7",
     "monaco-editor": "^0.17.0",
-    "babel-polyfill": "^6.26.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "render-dot": "file:../render-dot",
@@ -56,7 +56,7 @@
     "semantic-ui-react": "^0.87.1",
     "svg-pan-zoom": "^3.6.0",
     "svg-png-converter": "file:../svg-png-converter",
-    "univac": "file:.."
+    "univac": "file:../univac"
   },
   "repository": {
     "type": "git",

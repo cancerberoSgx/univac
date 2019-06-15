@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs'
-import { Engine, renderDot, treeToDot } from 'render-dot'
+import { Engine, renderDot, graphToDot } from 'render-dot'
 import { visitDescendants } from 'univac'
 import { ast } from './ast'
 
@@ -18,7 +18,7 @@ async function f() {
       return false
     }
   })
-  const dot = treeToDot({ node: ast as any, rankdir: 'BT', cluster: true })
+  const dot = graphToDot({ node: ast as any, rankdir: 'BT', cluster: true })
   writeFileSync('tmp.dot', dot.dot)
 
   let r = await renderDot({ input: dot.dot })

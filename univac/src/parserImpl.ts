@@ -1,8 +1,8 @@
 import { Lexer, Parser } from 'antlr4'
 import { getAbnfImpl } from './impl/abnf'
+import { getScssImpl } from './impl/scss'
 import { getSExpressionImpl } from './impl/sexpression'
 import { Language, Node } from './types'
-import { getScssImpl } from './impl/scss';
 
 export interface ParserImpl {
   /**
@@ -61,6 +61,12 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
       treeSitterParser: 'tree-sitter-rust.wasm'
     }
   }
+  else if (language === 'bash') {
+    return {
+      treeSitterParser: 'tree-sitter-bash.wasm'
+    }
+  }
+
   else if (language === 'cpp') {
     return {
       Lexer: require('./grammar/cpp/CPP14Lexer').CPP14Lexer,

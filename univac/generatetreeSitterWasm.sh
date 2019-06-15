@@ -1,13 +1,17 @@
 
- 
+ mkdir -p src/tree-sitter-parser
 
-rm node_modules/tree-sitter-javascript/tree-sitter-javascript.wasm
-npx tree-sitter build-wasm node_modules/tree-sitter-javascript 
-cp node_modules/tree-sitter-javascript/tree-sitter-javascript.wasm src/tree-sitter-parser
+# rm tree-sitter-javascript.wasm
+# npx tree-sitter build-wasm node_modules/tree-sitter-javascript 
+# mv tree-sitter-javascript.wasm src/tree-sitter-parser
 
-rm -rf node_modules/tree-sitter-rust/tree-sitter-rust.wasm
+rm -rf tree-sitter-rust.wasm
 npx tree-sitter build-wasm node_modules/tree-sitter-rust 
-cp node_modules/tree-sitter-rust/tree-sitter-rust.wasm src/tree-sitter-parser
+mv tree-sitter-rust.wasm src/tree-sitter-parser
+
+rm -rf tree-sitter-bash.wasm
+npx tree-sitter build-wasm node_modules/tree-sitter-bash 
+mv tree-sitter-bash.wasm src/tree-sitter-parser
 
 #  rm -rf dist/src/tree-sitter-parser;
 

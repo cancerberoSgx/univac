@@ -1,4 +1,4 @@
-import { Token } from 'antlr4'
+// import { Token } from 'antlr4'
 import { Language, Node } from 'univac'
 import { AstGraphViewOptions, defaultAstGraphViewOptions } from '../ui/astGraph/graphViewControls'
 import { getAst } from './dispatchers'
@@ -23,7 +23,7 @@ export interface State {
 }
 export const astViewers = ['dot', 'patchwork', 'neato', 'evenParent', 'fdp', 'tidyTreeView']
 export interface ParserError {
-  offendingSymbol: Token
+  offendingSymbol: any
   line: number
   column: number
   msg: string
