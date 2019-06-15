@@ -66,7 +66,11 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
       treeSitterParser: 'tree-sitter-bash.wasm'
     }
   }
-
+  else if (language === 'scala') {
+    return {
+      treeSitterParser: 'tree-sitter-scala.wasm'
+    }
+  }
   else if (language === 'cpp') {
     return {
       Lexer: require('./grammar/cpp/CPP14Lexer').CPP14Lexer,
@@ -87,13 +91,6 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
       Lexer: require('./grammar/golang/GolangLexer').GolangLexer,
       Parser: require('./grammar/golang/GolangParser').GolangParser,
       mainRule: 'sourceFile',
-    }
-  }
-  else if (language === 'scala') {
-    return {
-      Lexer: require('./grammar/scala/ScalaLexer').ScalaLexer,
-      Parser: require('./grammar/scala/ScalaParser').ScalaParser,
-      mainRule: 'compilationUnit'
     }
   }
   else if (language === 'ruby') {

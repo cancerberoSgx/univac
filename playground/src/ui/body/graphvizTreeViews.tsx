@@ -1,6 +1,6 @@
 import FileSaver from 'file-saver'
 import * as React from 'react'
-import { Options, renderDot, graphToDot } from 'render-dot'
+import { graphToDot, Options, renderDot } from 'render-dot'
 import { svg2png } from 'svg-png-converter'
 import { visitDescendants } from 'univac'
 import { State } from '../../app/state'
@@ -16,7 +16,8 @@ export class GraphvizTreeViews extends AbstractComponent<P> {
   protected dot: string = ''
 
   shouldComponentUpdate(nextProps: any, nextState: Readonly<State>, nextContext: any) {
-    return nextState.ast !== this.state.ast || nextProps.engine !== this.props.engine
+    return nextState.ast !== this.state.ast && this.state.astAutoUpdate ||
+      nextState.astAutoUpdate !== this.state.astAutoUpdate || nextProps.engine !== this.props.engine || nextState.example.name !== this.state.example.name
   }
 
   render() {
@@ -66,9 +67,12 @@ export class GraphvizTreeViews extends AbstractComponent<P> {
     const panZoomInstance = svgPanZoom(c.querySelector('svg'), {
       zoomEnabled: true,
       controlIconsEnabled: true,
-      minZoom: 0.1
+      minZoom: 0.1,
     })
     panZoomInstance.zoomAtPoint(0.4, { x: 22, y: 22 })
+    setTimeout(() => {
+      document.querySelector<SVGElement>('#svg-pan-zoom-controls')!.setAttribute('transform', 'translate(44 47) scale(0.75)')
+    }, 1000)
   }
 
   async renderAst(graphToDotExtraOptions = {}, renderDotExtraOptions: Partial<Options> = {}) {
@@ -85,9 +89,10 @@ export class GraphvizTreeViews extends AbstractComponent<P> {
         return false
       }
     })
-    const dot = graphToDot({ node: this.state.ast as any, name: this.state.example.name.replace(/[\s\.\-]+/g, '_'), rankdir: 'TB', 
-    cluster: this.props.engine === 'patchwork', ...graphToDotExtraOptions })
-    debugger
+    const dot = graphToDot({
+      node: this.state.ast as any, name: this.state.example.name.replace(/[\s\.\-]+/g, '_'), rankdir: 'TB',
+      cluster: this.props.engine === 'patchwork', ...graphToDotExtraOptions
+    })
     const output = await renderDot({ input: dot.dot, engine: (this.props.engine || 'dot') as any, ...renderDotExtraOptions })
     return { dot, output }
   }

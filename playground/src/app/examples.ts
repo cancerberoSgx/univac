@@ -217,7 +217,7 @@ pub const TSInputEncoding_TSInputEncodingUTF8: TSInputEncoding = 0;
     description: '',
   },
 
-  
+
   {
     name: 'personTest.go',
     language: Language.golang,

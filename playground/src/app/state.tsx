@@ -41,7 +41,7 @@ export async function getInitialState(): Promise<State> {
     error,
     astShowText: true,
     expandedNodes: [],
-    astAutoUpdate: true,
+    astAutoUpdate: false,
     nodeAtCursor: ast!,
     logs: [],
     sidebarVisibility: false,

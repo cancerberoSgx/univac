@@ -1,4 +1,4 @@
-import { throttle } from 'misc-utils-of-mine-generic'
+import { sleep, throttle } from 'misc-utils-of-mine-generic'
 import * as monaco from 'monaco-editor'
 import { ISelection } from 'monaco-editor'
 import { getNodeAtPosition, Node } from 'univac'
@@ -27,15 +27,13 @@ export function installCodeEditor(editorContainer: HTMLElement) {
     minimap: { enabled: false, }
   })
 
+  addEditorContentChangeListener(editor.getModel()!)
+
   getCodeEditor()!.onDidChangeCursorPosition(e => {
     getStore().setState({
       nodeAtCursor: getNodeAtPosition(getStore().getState().ast, { line: e.position.lineNumber, column: e.position.column })
     })
   })
-
-  editor.getModel()!.onDidChangeContent(throttle(e => {
-    selectExample({ ...getStore().getState().example, code: getCodeEditorText() }, false)
-  }, 5000, { trailing: true }))
 
   return editor
 }
@@ -76,6 +74,7 @@ export function setCodeEditorText(s: string) {
   if (!model) {
     model = monaco.editor.createModel(examples[0].code, languageMapping[getStore().getState().example.language], monaco.Uri.parse(`file:///${fileName}`))
     models[fileName] = model
+    addEditorContentChangeListener(model)
   }
 
   if (editor.getModel() !== model) {
@@ -83,6 +82,13 @@ export function setCodeEditorText(s: string) {
   }
 
   editor.getModel()!.setValue(s)
+}
+
+function addEditorContentChangeListener(model: monaco.editor.ITextModel) {
+  model.onDidChangeContent(throttle(async (e) => {
+    await selectExample({ ...getStore().getState().example, code: getCodeEditorText() }, false)
+    await sleep(100)
+  }, 5000, { trailing: true, leading: true }))
 }
 
 export function getEditorTextAtNode(n: Node) {

@@ -4,20 +4,7 @@ import { enumKeys } from './util/misc'
 interface BaseOptions {
   language: Language
   input: string
-}
-
-export interface GetAstOptions<N = any> extends BaseOptions {
-  /**
-   * Base path from where to load .wasm files needed by tree-sitter based parsers. By default is '.'
-   */
-  basePath?: string
-
-  /**
-   * If given, it will be notified of parsing errors or other diagnostics. 
-   * TODO: make an adapter interface simpler independent of antlr4. 
-   */
-  errorListener?: Partial<ErrorListener>
-
+  debug?: boolean
   /**
    * If given, each node will have a `text` property with its text. 
    */
@@ -27,6 +14,20 @@ export interface GetAstOptions<N = any> extends BaseOptions {
    * If true, properties `start`and `stop` won't be emitted in nodes. false bu default.
    */
   omitPosition?: boolean
+  /**
+   * Base path from where to load .wasm files needed by tree-sitter based parsers. By default is '.'
+   */
+  basePath?: string
+}
+
+export interface GetAstOptions<N = any> extends BaseOptions {
+
+
+  /**
+   * If given, it will be notified of parsing errors or other diagnostics. 
+   * TODO: make an adapter interface simpler independent of antlr4. 
+   */
+  errorListener?: Partial<ErrorListener>
 
   /**
    * Adds [[parent]] property to each node referencing node¡'s parent. Notice that the AST won't be serializable with JSON.stringify anymore because of cycles. By default is false.  

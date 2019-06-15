@@ -69,9 +69,6 @@ def f:
       text: true
     })
   })
-
   const expected = [`<and_test text="a==1and2.2>'e'">`, `<atom text="2.2">`, `<not_test text="True">`, `<or_test text="a==1and2.2>'e'ornotTrue">`, `<str text="'e'">`, `<integer text="1">`, `<integer text="1">`]
   expected.forEach(e => t.true(o.includes(e), e))
-
-  t.is(1, 1)
 })

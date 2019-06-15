@@ -1,6 +1,8 @@
 # TODO
 
 - [ ] replace what we cant with tree-sitter ones (ruby, go, etc)
+- [ ] cli test for tree-sitter grammars
+- [ ] output alternative formats besides json
 - [ ] support error listener in non antlr4 asts
 - [ ] integrate a peg.js based AST parser
 - [ ] remove .wasm files from the repo,  

@@ -13,6 +13,12 @@ rm -rf tree-sitter-bash.wasm
 npx tree-sitter build-wasm node_modules/tree-sitter-bash 
 mv tree-sitter-bash.wasm src/tree-sitter-parser
 
+
+rm -rf tree-sitter-scala.wasm
+npx tree-sitter build-wasm node_modules/tree-sitter-scala 
+mv tree-sitter-scala.wasm src/tree-sitter-parser
+
+
 #  rm -rf dist/src/tree-sitter-parser;
 
 #  mkdir -p dist/src/tree-sitter-parser 

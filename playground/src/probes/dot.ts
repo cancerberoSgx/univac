@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs'
-import { Engine, renderDot, graphToDot } from 'render-dot'
+import { Engine, graphToDot, renderDot } from 'render-dot'
 import { visitDescendants } from 'univac'
 import { ast } from './ast'
 

@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Button, Checkbox, List, Popup } from 'semantic-ui-react'
 import { Node, printNodeText } from 'univac'
+import { updateAst } from '../../app/dispatchers'
 import { State } from '../../app/state'
 import { getEditorTextAtNode, highlightNodesInEditor } from '../../editor/codeEditor'
 import { Space } from '../common/uiUtil'
 import { AbstractComponent } from '../component'
-import { updateAst } from '../../app/dispatchers';
 
 export class Ast extends AbstractComponent {
 
@@ -25,9 +25,10 @@ export class Ast extends AbstractComponent {
         this.setState({ astAutoUpdate: !!props.checked })
       }}></Checkbox>
       <Space />
-      {this.state.astAutoUpdate ? '' : <Button size="small" onClick={async e => {
-        await updateAst()
-        this.forceUpdate()
+      {this.state.astAutoUpdate ? '' :
+        <Button size="small" onClick={async e => {
+          await updateAst(true)
+          this.forceUpdate()
         }}>Update</Button>}
       <Checkbox defaultChecked={this.state.expandNegated} label={this.state.expandNegated ? 'Collapse' : 'Expand'} onChange={(e, props) => {
         this.setState({ expandNegated: !!props.checked })

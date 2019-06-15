@@ -5,6 +5,7 @@ import { getParserImpl, ParserImpl } from './parserImpl'
 import { GetAstOptions, Node } from './types'
 import { Visitor } from './visitor'
 import { TreeSitterVisitor } from './visitorTreeSitter'
+import { pathJoin } from 'misc-utils-of-mine-generic';
 
 export async function parseAstOrThrow(options: GetAstOptions): Promise<Node> {
   const r = await parseAst(options)
@@ -13,6 +14,7 @@ export async function parseAstOrThrow(options: GetAstOptions): Promise<Node> {
   }
   return r
 }
+
 export async function parseAst(options: GetAstOptions): Promise<Node | undefined> {
   const input = options.input
   var info = await getParserImpl(options.language)
@@ -44,9 +46,11 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
     await Parser.init()
     const parser = new Parser()
     // TODO; don't load again the .wasm if already loaded.
-    const Lang = await Parser.Language.load(options.basePath + info.treeSitterParser)
+    const Lang = await Parser.Language.load(pathJoin(options.basePath, info.treeSitterParser))
     parser.setLanguage(Lang)
     const tree = parser.parse(input)
+    options.debug && console.log(tree.rootNode.toString());
+    
     const normalizer = new TreeSitterVisitor()
     normalizer.options = { ...options, root: tree.rootNode }
     ast = normalizer.getAst()

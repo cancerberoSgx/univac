@@ -1,6 +1,8 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { parseAst } from '../parseAst'
 import { languages, Options } from '../types'
+import { join } from 'path';
+import { getPackageJsonFolder } from '../util/misc';
 
 interface CliOptions extends Options {
   help?: boolean
@@ -10,7 +12,7 @@ interface CliOptions extends Options {
 export async function cliMain(o: Options) {
   preconditions(o)
   let input = existsSync(o.input) ? readFileSync(o.input).toString() : o.input
-  const result = await parseAst({ ...o, input })
+  const result = await parseAst({ ...o, input, basePath: o.basePath || join(getPackageJsonFolder()||'.', 'dist', 'static') })
   const text = o.outputStyle === 'json' ? JSON.stringify(result, null, 2) : JSON.stringify(result)
   if (o.output) {
     writeFileSync(o.output, text)

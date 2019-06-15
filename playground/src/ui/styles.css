@@ -99,3 +99,7 @@ h3.sub.header {
   float: left;
   position: absolute;
 }
+
+#svg-pan-zoom-controls {
+  transform: translate(44 47) scale(0.75)
+}
