@@ -32,8 +32,7 @@
   "dependencies": {
     "glob": "^7.1.4",
     "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.10",
-    "render-dot": "file:../render-dot"
+    "misc-utils-of-mine-generic": "^0.2.10"
   },
   "keywords": [
     "Graphviz",

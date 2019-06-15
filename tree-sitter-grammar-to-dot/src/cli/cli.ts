@@ -3,7 +3,7 @@ import { sync as glob } from 'glob'
 import { serial, sleep } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
 import { Options } from '../types'
-import { buildDot } from '../buildDot';
+import { buildGrammarDot } from '../buildDot';
 
 export interface CliOptions {
   input: string
@@ -32,7 +32,7 @@ export async function cliMain(o: CliOptions) {
     await serial(input.map(input => async () => {
       try {
         o.debug && console.log('Rendering ' + input.name)
-         const result = buildDot({  input: JSON.parse(input.content)  })
+         const result = buildGrammarDot({  input: JSON.parse(input.content)  })
 
          result.rules.forEach(rule =>{
            const file = join(o.output, basename(input.name))+'.'+rule.name+'.dot'

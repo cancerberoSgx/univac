@@ -83,10 +83,17 @@ export function buildRule(n: PropertyOptional<Rule, 'id'>, parent?: Rule, output
   return [n as Rule];
   // return output
 }
+
 let counter = 1;
+
 function setId(n: PropertyOptional<Rule, "id">) {
   n.id = n.id || ('s' + ((counter++) + '')); //.padStart(3, '0')
 }
+
 function getEdgeLabel(n: Rule, c: Rule) {
   return c.value || c.name || '';
+}
+
+export function _resetBuildRuleId() {
+  counter = 1
 }

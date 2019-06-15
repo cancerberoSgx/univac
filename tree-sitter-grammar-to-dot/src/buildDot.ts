@@ -2,38 +2,28 @@ import { Options, Rule } from "./types";
 import { buildRule } from './buildRule';
 import { notSame, objectKeys } from 'misc-utils-of-mine-generic';
 
-export function buildDot(options: Options) {
-  // const rule: Rule = {
-    //   type: 'SEQ', 
-    //   members: [
-      //     {
-  //       type: 'SYMBOL',
-  //       name: 'START'
-  //     },
-  //     ...objectKeys(options.input.rules).map(name=>options.input.rules[name]), 
-  //     {
-  //       type: 'SYMBOL',
-  //       name: 'END'
-  //     }
-  //   ]
-  // }
-  const rules  = objectKeys(options.input.rules).map(name=>{
+export function buildGrammarDot(options: Options) {
+  const rules = objectKeys(options.input.rules).map(name => {
     const rule = options.input.rules[name]
-    const result: string[] = [];
-    buildRule(rule, undefined, result,  (name: string)=>`${options.name||options.input.name||'javascript'}-grammar.json.${name}.dot.svg`);
-    const dot = `
-  digraph ${name} {
-  
-    rankdir=LR;
-  
-    ${result.filter(notSame).join('\n  ')}
-  
-  }
-  `;
-  return {name, dot};
-})
-
-return {rules}
+    const dot = buildRuleDot(rule, options.name, (name: string) => `${name || 'javascript'}-grammar.json.${name}.dot.svg`);
+    return { name, dot };
+  })
+  return { rules }
 }
 
+
+export function buildRuleDot(rule: Rule, name?: string, symbolRef?: (name: string) => string) {
+  const result: string[] = [];
+  buildRule(rule, undefined, result, symbolRef);
+  const dot = `
+digraph ${name||'rule'} {
+
+  rankdir=LR;
+
+  ${result.filter(notSame).join('\n  ')}
+
+}
+  `;
+  return dot;
+}
 

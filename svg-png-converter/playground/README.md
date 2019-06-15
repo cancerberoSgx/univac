@@ -2,12 +2,12 @@
 [Playground](https://cancerberosgx.github.io/demos/svg-png-converter/playground//) (WIP)
 
 ## TODO :
- [ ] remove embedded example files and add them as static files.
- [ ] download current images and transformations as zip files. or store images in FS and put settings in url
- [ ] switch between output/input images so we can perform png=>svg=> png multiple times to see if degrades or improves. Also a mechanism to perform this N times.
- [ ] suggests users to use https://jakearchibald.github.io/svgomg/ after downloading since it really improves output size
+- [ ] remove embedded example files and add them as static files.
+- [ ] download current images and transformations as zip files. or store images in FS and put settings in url
+- [ ] switch between output/input images so we can perform png=>svg=> png multiple times to see if degrades or improves. Also a mechanism to perform this N times.
+- [ ] suggests users to use https://jakearchibald.github.io/svgomg/ after downloading since it really improves output size
  good results:
- [x] load images form external urls and remove most of the testing ones or request them
+- [x] load images form external urls and remove most of the testing ones or request them
 
 ## Ideas
 

@@ -91,7 +91,7 @@ stdout.
 
 ## Road map
 
- [x] CLI
- [ ] Browser
- [ ] browser tests
- [ ] keep investigating if it's possible to input several .dot files and render them all together biding common elements.
+- [x] CLI
+- [ ] Browser
+- [ ] browser tests
+- [ ] keep investigating if it's possible to input several .dot files and render them all together biding common elements.

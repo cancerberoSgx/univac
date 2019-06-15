@@ -99,11 +99,11 @@ See [types.ts](src/types.ts). Options apply both to JavaScript API and CLI.
 
 ## Status
 
- [x] Node.js API and tests
- [x] CLI
- [x] Browser
- [x] CLI tests
- [ ] browser tests
+- [x] Node.js API and tests
+- [x] CLI
+- [x] Browser
+- [x] CLI tests
+- [ ] browser tests
 
 ## Why?
 
