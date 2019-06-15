@@ -1,5 +1,5 @@
 import { Language, parseAst } from 'univac'
-import { setCodeEditorText } from '../editor/codeEditor'
+import { setCodeEditorText, getCodeEditorText } from '../editor/codeEditor'
 import { createUrl } from '../ui/common/uiUtil'
 import { Example, examples } from './examples'
 import { ParserError } from './state'
@@ -32,4 +32,11 @@ export async function selectExample(selectedExample: Example, setEditorText = tr
 export async function selectLanguage(l: Language) {
   const selectedExample = examples.find(e => e.language === l)
   selectedExample && selectExample(selectedExample)
+}
+
+export async function updateAst() {
+const code = getCodeEditorText()
+if(getStore().getState().example.code!==code) {
+  await selectExample({...getStore().getState().example, code})
+}
 }

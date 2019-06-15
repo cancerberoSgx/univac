@@ -5,6 +5,7 @@ import { State } from '../../app/state'
 import { getEditorTextAtNode, highlightNodesInEditor } from '../../editor/codeEditor'
 import { Space } from '../common/uiUtil'
 import { AbstractComponent } from '../component'
+import { updateAst } from '../../app/dispatchers';
 
 export class Ast extends AbstractComponent {
 
@@ -24,7 +25,10 @@ export class Ast extends AbstractComponent {
         this.setState({ astAutoUpdate: !!props.checked })
       }}></Checkbox>
       <Space />
-      {this.state.astAutoUpdate ? '' : <Button size="small" onClick={e => this.forceUpdate()}>Update</Button>}
+      {this.state.astAutoUpdate ? '' : <Button size="small" onClick={async e => {
+        await updateAst()
+        this.forceUpdate()
+        }}>Update</Button>}
       <Checkbox defaultChecked={this.state.expandNegated} label={this.state.expandNegated ? 'Collapse' : 'Expand'} onChange={(e, props) => {
         this.setState({ expandNegated: !!props.checked })
       }}></Checkbox>
