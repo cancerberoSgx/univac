@@ -1,7 +1,8 @@
 import { Lexer, Parser } from 'antlr4'
-import { getAbnfImpl } from './impls/abnf'
-import { getSExpressionImpl } from './impls/sexpression'
+import { getAbnfImpl } from './impl/abnf'
+import { getSExpressionImpl } from './impl/sexpression'
 import { Language, Node } from './types'
+import { getScssImpl } from './impl/scss';
 
 export interface ParserImpl {
   /**
@@ -119,6 +120,9 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
   }
   else if (language === 'abnf') {
     return getAbnfImpl()
+  }
+  else if (language === 'scss') {
+    return getScssImpl()
   }
   else if (language === 'dart2') {
     return {

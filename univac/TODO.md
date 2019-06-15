@@ -56,6 +56,10 @@ ts-node test.ts
 
 
 <!-- 
+
+https://www.lua.org/manual/5.1/manual.html#8
+
+
 ## pegjs based grammars for common languages
 
  * https://github.com/michael-brade/LaTeX.js/blob/master/src/latex-parser.pegjs

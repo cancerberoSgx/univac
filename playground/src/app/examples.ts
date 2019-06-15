@@ -8,7 +8,52 @@ export interface Example {
 }
 
 export const examples: Example[] = [
+  {
+    name: 'skin.scss',
+    language: Language.scss,
+    code: `
+$title-font: normal 24px/1.5 'Open Sans', sans-serif;
+$cool-red: #F44336;
+$box-shadow-bottom-only: 0 2px 1px 0 rgba(0, 0, 0, 0.2);
 
+h1.title {
+  font: $title-font;
+  color: $cool-red;
+}
+
+div.container {
+  color: $cool-red;
+  background: #fff;
+  width: 100%;
+  box-shadow: $box-shadow-bottom-only;
+}
+`.trimLeft(),
+    description: ' ',
+  },
+  {
+    name: 'expr1.txt',
+    language: Language.sexpression,
+    code: `
+(source_file ((milk juice a b c 1 2 (3)) (honey marmalade))
+  (package_clause (package_identifier))
+  (function_declaration (identifier) (parameter_list) (block
+    (call_expression
+      (identifier)
+      (argument_list
+        (identifier)
+        (variadic_argument (identifier))))
+    (call_expression (((milk juice) (honey marmalade)))
+      (identifier)
+      (argument_list (identifier) (identifier)))
+    (call_expression
+      (identifier)
+      (argument_list (identifier) (variadic_argument (identifier))))
+    )
+  )
+)   
+`.trimLeft(),
+    description: ' ',
+  },
   {
     name: 'future.py',
     language: Language.python3,
@@ -184,6 +229,39 @@ WS  : [ \\t\\r\\n]+ -> skip ;
 `,
     description: '',
   },
+
+  {
+    name: 'syntax1.txt',
+    language: Language.abnf,
+    code: `
+
+postal-address   = name-part street zip-part
+
+name-part        = *(personal-part SP) last-name [SP suffix] CRLF
+name-part        =/ personal-part CRLF
+
+personal-part    = first-name / (initial ".")
+first-name       = *ALPHA
+initial          = ALPHA
+last-name        = *ALPHA
+suffix           = ("Jr." / "Sr." / 1*("I" / "V" / "X"))
+
+street           = [apt SP] house-num SP street-name CRLF
+apt              = 1*4DIGIT
+house-num        = 1*8(DIGIT / ALPHA)
+street-name      = 1*VCHAR
+
+zip-part         = town-name "," SP state 1*2SP zip-code CRLF
+town-name        = 1*(ALPHA / SP)
+state            = 2ALPHA
+zip-code         = 5DIGIT ["-" 4DIGIT]
+    
+    
+`,
+    description: '',
+  },
+
+
 
   {
     name: 'misc.cpp',
