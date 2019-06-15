@@ -1,28 +1,22 @@
 import { PropertyOptional } from 'misc-utils-of-mine-generic';
-import { GrammarNode } from "./types";
-export function buildRule(n: PropertyOptional<GrammarNode, 'id'>, parent?: GrammarNode, output: string[] = []) {
+import { Rule } from "./types";
+
+export function buildRule(n: PropertyOptional<Rule, 'id'>, parent?: Rule, output: string[] = []): Rule[] {
   setId(n);
   if (n.type === 'SEQ') {
-    // TODO: skip SEQ node
-    // if(parent){
-    //   n.id = parent.id 
-    //   n.type = parent.id
-    // }
     output.push(`${n.id} [label="${n.id}\\n&rarr; SEQ", shape=record, fixedsize=false, peripheries=1];`);
-    let lastChild: GrammarNode = n as GrammarNode;
+    let lastChild: Rule = n as Rule;
     (n.members || []).forEach((c, i, a) => {
       lastChild = c;
       setId(c);
-      buildRule(c, n as GrammarNode, output);
-      // buildRule({ ...c, members: [] }, n as GrammarNode, output);
+      buildRule(c, n as Rule, output);
       if (i === 0) {
         output.push(`${n.id} -> ${c.id} [];`);
       }
       else {
-        // buildGraph(c, n as GrammarNode,  output)
         const previous = a[i - 1];
         setId(previous);
-        const endPoints = [...buildRule(previous, n as GrammarNode, output)]; //, ...i===a.length-1 ? [] : [previous]].filter(notSame)
+        const endPoints = [...buildRule(previous, n as Rule, output)];  
         endPoints.forEach(cc => {
           output.push(`${cc.id} -> ${c.id} [];`);
         });
@@ -32,24 +26,32 @@ export function buildRule(n: PropertyOptional<GrammarNode, 'id'>, parent?: Gramm
   }
   else if (n.type === 'CHOICE') {
     output.push(`${n.id} [label="{${n.id}\\n&rarr; CHOICE|{${(n.members || []).map((m, i) => `<p${i}>`).join('|')}}}", shape=record, fixedsize=false, peripheries=1];`);
-    const endPoints: GrammarNode[] = [];
+    const endPoints: Rule[] = [];
     (n.members || []).forEach((c, i, a) => {
       setId(c);
-      endPoints.push(...buildRule(c, n as GrammarNode, output));
-      output.push(`${n.id}:p${i} -> ${c.id} [label="${getEdgeLabel(n as GrammarNode, c)}"];`);
+      endPoints.push(...buildRule(c, n as Rule, output));
+      output.push(`${n.id}:p${i} -> ${c.id} [label="${getEdgeLabel(n as Rule, c)}"];`);
     });
     return endPoints;
   }
-  else if (n.type === 'REPEAT') {
-    output.push(`${n.id} [label="${n.id}\\n&rarr; REPEAT", shape=record, fixedsize=false, peripheries=1];`);
-    const endPoints = buildRule(n.content!, n as GrammarNode, output)
+  else if (n.type === 'REPEAT' || n.type === 'REPEAT1') {
+    output.push(`${n.id} [label="${n.id}\\n&rarr; ${n.type}", shape=record, fixedsize=false, peripheries=1];`);
+    const endPoints = buildRule(n.content!, n as Rule, output)
     output.push(`${n.id} -> ${n.content!.id} [];`)
     endPoints.forEach(c=>{
       output.push(`${c.id} -> ${n.id} [];`)
     })
+    return endPoints
+  }
+  else if (n.type === 'TOKEN' ||n.type==='PREC' ||n.type==='ALIAS') {
+    output.push(`${n.id} [label="${n.id}\\n&rarr; ${n.type}", shape=record, fixedsize=false, peripheries=1];`);
+    const endPoints = buildRule(n.content!, n as Rule, output)
+    output.push(`${n.id} -> ${n.content!.id} [];`)
+    // })
+    return endPoints
   }
   else if (n.type === 'STRING' || n.type=== 'PATTERN') {
-    output.push(`${n.id} [label="${n.id} ${n.type}\\n${n.value}"];`);
+    output.push(`${n.id} [label="${n.id} ${n.type}\\n\\"${n.value}\\""];`);
   }
   else if (n.type === 'SYMBOL') {
     output.push(`${n.id} [label="${n.id} ${n.type}\\n${n.name}"];`);
@@ -78,13 +80,13 @@ export function buildRule(n: PropertyOptional<GrammarNode, 'id'>, parent?: Gramm
     output.push(`${n.id} [label="${n.id} ${n.type}\\n(not-implemented)"];`);
   }
   // return []
-  return [n as GrammarNode];
+  return [n as Rule];
   // return output
 }
 let counter = 1;
-function setId(n: PropertyOptional<GrammarNode, "id">) {
+function setId(n: PropertyOptional<Rule, "id">) {
   n.id = n.id || ('s' + ((counter++) + '')); //.padStart(3, '0')
 }
-function getEdgeLabel(n: GrammarNode, c: GrammarNode) {
+function getEdgeLabel(n: Rule, c: Rule) {
   return c.value || c.name || '';
 }
