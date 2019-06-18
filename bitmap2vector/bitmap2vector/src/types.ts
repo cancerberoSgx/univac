@@ -1,10 +1,10 @@
 // import  {Buffer} from 'buffer/'
 // 
-export interface Bitmap2VectorOptionsOptions extends ITOptions{
+export interface Bitmap2VectorOptionsOptions extends ITOptions {
   /**
     * URL, typed array or Buffer containing the input image. Formats supported:  PNG, GIF, JPEG, BMP, TIFF.
     */
-  input: string | Uint8Array| Buffer 
+  input: string | Uint8Array | Buffer
 
   // /**
   //  * Folder for output files. If it doesn't exists it will be created. If none, output files will be written
@@ -37,7 +37,7 @@ export interface ITOptions {
    * Error threshold for straight lines. Default value: 1. 
    */
   ltres?: number
-  
+
   /**
    * Error threshold for quadratic splines. Default value: 1.
    */
@@ -83,28 +83,28 @@ export interface ITOptions {
    *  SVG stroke-width. Default value: 1.
    */
   strokewidth?: number
-  
+
   /**
    *  Enable or disable line filter for noise reduction. Default value: false.
    */
   linefilter?: boolean
-  
+
   /**
    *  Every coordinate will be multiplied with this, to scale the SVG. Default value: 1.
    */
   scale?: number
-  
+
   /**
    *  rounding coordinates to a given decimal place. 1 means rounded to 1 decimal place like 7.3 ; 3 means
    *  rounded to 3 places, like 7.356. Default value: 1.
    */
   roundcoords?: number
-  
+
   /**
    *  Enable or disable SVG viewbox. Default value: false.
    */
   viewbox?: boolean
-  
+
   /**
    *  Enable or disable SVG descriptions. Default value: false.
    */
@@ -114,12 +114,12 @@ export interface ITOptions {
    *  	Set this to 1..5 for selective Gaussian blur preprocessing. Default value: 0.
    */
   blurradius?: number
- 
+
   /**
    *  	RGBA delta treshold for selective Gaussian blur preprocessing. Default value: 20.
    */
-  blurdelta?: number 
-  
+  blurdelta?: number
+
   // layercontainerid No default value  Edge node layers can be visualized if a container div's id is defined.
   // lcpr 0 Straight line control point radius, if this is greater than zero, small circles will be drawn in
   // the SVG. Do not use this for big/complex images. qcpr 0 Quadratic spline control point radius, if this is

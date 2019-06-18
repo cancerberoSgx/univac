@@ -1,6 +1,6 @@
 import test from 'ava'
-import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { bitmap2vector } from '../src';
+import { readFileSync, writeFileSync } from 'fs'
+import { bitmap2vector } from '../src'
 test('should parse PNG', async t => {
   const out = await bitmap2vector({
     input: readFileSync('test/assets/panda.png')
