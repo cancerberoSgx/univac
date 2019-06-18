@@ -5,7 +5,6 @@ import { sync as glob } from 'glob'
 import { basename, join } from 'path'
 import { CliOptions } from './types'
 import { serial } from './util'
-// var ImageTracer = require('imagetracerjs');
 
 export async function traceImage(options: CliOptions) {
   preconditions(options)

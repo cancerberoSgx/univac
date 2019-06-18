@@ -7,7 +7,7 @@ export async function bitmap2vector(options: Bitmap2VectorOptions) {
   const image = await resolveInput(options)
   const content = imagedataToSVG(image.bitmap, options)
   return {
-  content,
+    content,
     width: image.bitmap.width,
     height: image.bitmap.height
   }
