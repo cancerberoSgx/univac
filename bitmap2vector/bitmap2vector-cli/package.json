@@ -1,0 +1,59 @@
+{
+  "name": "bitmap2vector",
+  "version": "0.0.1",
+  "description": "Command line interface for imagetracerjs: raster image tracer and vectorizer, bitmap to SVG converter",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "bin": "bin/bitmap2vector.js",
+  "scripts": {
+    "test": "ava",
+    "clean": "rm -rf dist tmp",
+    "build": "npm run clean && tsc",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/node": "^12.0.8",
+    "@types/png.js": "^0.2.0",
+    "ava": "^2.1.0",
+    "typescript": "^3.5.2"
+  },
+  "homepage": "https://github.com/jankovicsandras/imagetracerjs#readme",
+  "dependencies": {
+    "glob": "^7.1.4",
+    "imagetracerjs": "git+https://github.com/jankovicsandras/imagetracerjs.git",
+    "minimist": "^1.2.0",
+    "png.js": "^0.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jankovicsandras/imagetracerjs.git"
+  },
+  "keywords": [
+    "image",
+    "tracer",
+    "tracing",
+    "vector",
+    "raster",
+    "vectorize",
+    "vectorizing",
+    "convert",
+    "conversion",
+    "converting",
+    "tracing",
+    "bitmap",
+    "svg",
+    "bmp",
+    "png",
+    "cli",
+    "command line",
+    "jpg",
+    "jpeg",
+    "gif"
+  ],
+  "author": "András Jankovics",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/jankovicsandras/imagetracerjs/issues"
+  }
+}

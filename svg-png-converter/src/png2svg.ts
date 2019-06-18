@@ -41,7 +41,6 @@ export async function png2svg(options: PNG2SVGOptions) {
       console.log((options.steps as any).split(','), (options.steps as string).split(',').map(e => parseInt(e)))
       options.steps = (options.steps as string).split(',').map(e => parseInt(e))
     }
-    // options.blackOnWhite = options.blackOnWhite !== true;
     (options as PotraceTraceOptions).optCurve = options.noCurveOptimization !== false
     options.debug && console.log(`Options: ${JSON.stringify({ ...options, input: null })}`)
     return await potracePosterize(buffer, options)
@@ -50,7 +49,7 @@ export async function png2svg(options: PNG2SVGOptions) {
   else {
     try {
       var Tracer = require('imagetracerjs')
-      const outputContent = await Tracer.tracePngToSvg(buffer, options)//ImageTracer.imagedataToSVG({ ...png, data: png.pixels }, options)
+      const outputContent = await Tracer.tracePngToSvg(buffer, options) 
       return outputContent
     } catch (error) {
       console.error('ERROR tracePngToSvg', error)

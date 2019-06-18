@@ -18,12 +18,9 @@ export async function svg2png<E extends keyof EncodingValueMap, T = EncodingValu
 
   var canvas = new fabric.Canvas('c')
   const data = typeof options.input === 'string' ? options.input : options.input.toString()
-  // debugger
   const img = await fabricImageFromData(data, 'svg')
   canvas.add(img)
-  // debugger
-  const s = canvas.toDataURL({ height: img.height, width: img.width, ...options, format: options.format || 'png' })//as any as T
-  // console.log('SJSJSJSJSJSJ', s);
+  const s = canvas.toDataURL({ height: img.height, width: img.width, ...options, format: options.format || 'png' })
 
   if (options.encoding === 'dataURL') {
     return s as unknown as T
