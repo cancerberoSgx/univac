@@ -1,31 +1,15 @@
 // import  {Buffer} from 'buffer/'
 // 
-export interface Bitmap2VectorOptionsOptions extends ITOptions {
+export interface Bitmap2VectorOptions extends ITOptions {
   /**
     * URL, typed array or Buffer containing the input image. Formats supported:  PNG, GIF, JPEG, BMP, TIFF.
     */
   input: string | Uint8Array | Buffer
 
-  // /**
-  //  * Folder for output files. If it doesn't exists it will be created. If none, output files will be written
-  //  * in current folder.
-  //  */
-  // output?: string
-
-  // /**
-  //  *  Print usage information, then exit.
-  //  */
-  // help?: boolean
-
-  // /**
-  //  *  Prints debug messages. 
-  //  */
-  // debug?: boolean
-
-  // /**
-  //  * output file format. Currently only svg is supported
-  //  */
-  // format?: 'svg'
+  /**
+   * output file format. Currently only svg is supported
+   */
+  format?: 'svg'
 
 
 }

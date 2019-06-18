@@ -6,8 +6,8 @@ test('should build', async t => {
   t.notThrows(()=> execSync('npm run build', { stdio: 'pipe' }))
 })
 
-test('should output panda.svg', async t => {
-  t.false(existsSync('tmp/panda.png.svg'))
-  const r = execSync('node bin/image-tracer.js --input ../panda.png --output tmp', { stdio: 'pipe' })
-  t.true(readFileSync('tmp/panda.png.svg').toString().includes('<svg'))
+test('should render png', async t => {
+  t.false(existsSync('tmp/1/panda.png.svg'))
+  const r = execSync('node bin/bitmap2vector.js --input test/assets/panda.png --output tmp/1', { stdio: 'pipe' })
+  t.true(readFileSync('tmp/1/panda.png.svg').toString().includes('<svg'))
 })

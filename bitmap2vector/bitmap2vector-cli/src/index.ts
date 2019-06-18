@@ -1,2 +1,2 @@
 export {traceImage}from './cli'
-export * from './options'
+export {CliOptions} from './types'

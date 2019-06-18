@@ -1,7 +1,7 @@
 
 import { ITOptions } from './types'
 export { bitmap2vector } from './bitmap2vector'
-export { Bitmap2VectorOptionsOptions } from './types'
+export { Bitmap2VectorOptions  } from './types'
 
 
 const IT = require('imagetracerjs')

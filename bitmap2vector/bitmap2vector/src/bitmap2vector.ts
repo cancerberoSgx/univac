@@ -1,20 +1,19 @@
 import Jimp from 'jimp'
 import { imagedataToSVG } from '.'
 import { BufferClass } from './buffer'
-import { Bitmap2VectorOptionsOptions } from './types'
+import { Bitmap2VectorOptions } from './types'
 
-export async function bitmap2vector(options: Bitmap2VectorOptionsOptions) {
-  // const buffer = await resolveInput(options)
+export async function bitmap2vector(options: Bitmap2VectorOptions) {
   const image = await resolveInput(options)
-  const svg = imagedataToSVG(image.bitmap, options)
+  const content = imagedataToSVG(image.bitmap, options)
   return {
-    svg,
+  content,
     width: image.bitmap.width,
     height: image.bitmap.height
   }
 }
 
-async function resolveInput(options: Bitmap2VectorOptionsOptions) {
+async function resolveInput(options: Bitmap2VectorOptions) {
   let buffer: Buffer
   if (BufferClass.isBuffer(options.input)) {
     buffer = options.input

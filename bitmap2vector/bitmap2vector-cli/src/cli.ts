@@ -1,12 +1,13 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { sync as glob } from 'glob'
-import { Options } from './options';
 import { basename, join } from 'path';
-import { serial, readPng } from './util';
-var ImageTracer = require('imagetracerjs');
+import { serial } from './util';
+import { CliOptions } from './types';
+import { bitmap2vector } from 'bitmap2vector';
+// var ImageTracer = require('imagetracerjs');
 
-export async function traceImage(options: Options) {
+export async function traceImage(options: CliOptions) {
   preconditions(options)
   options.debug && console.log(`CLI Options: ${JSON.stringify({ ...options, input: null })}`)
   const input = (typeof options.input === 'string' ? glob(options.input).filter(existsSync) : [])
@@ -23,14 +24,15 @@ export async function traceImage(options: Options) {
   await serial(input.map(input => async () => {
     try {
       options.debug && console.log('Rendering ' + input.name)
-      const png = await readPng(input.content)
-      const outputContent = ImageTracer.imagedataToSVG({ ...png, data: png.pixels }, options)
+      const {content} = await bitmap2vector(options)
+      // const png = await readPng(input.content)
+      // const outputContent = ImageTracer.imagedataToSVG({ ...png, data: png.pixels }, options)
       if (options.output) {
         const outputFilePath = join(options.output, basename(input.name + '.' + (options.format || 'svg')))
-        writeFileSync(outputFilePath, outputContent)
+        writeFileSync(outputFilePath, content)
       }
       else {
-        process.stdout.write(outputContent)
+        process.stdout.write(content)
       }
     } catch (error) {
       console.error('ERROR while rendering file ' + input.name)
@@ -39,7 +41,7 @@ export async function traceImage(options: Options) {
   }))
 }
 
-function preconditions(options: Options) {
+function preconditions(options: CliOptions) {
   if (!options.input) {
     fail('--input argument is mandatory but not given. Aborting.')
   }

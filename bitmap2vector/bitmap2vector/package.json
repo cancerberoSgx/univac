@@ -4,7 +4,6 @@
   "description": "https://github.com/jankovicsandras/imagetracerjs with TypeScript API and support for PNG, JPEG, GIF, BMP, TIFF both in browser and Node.js",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
-  "bin": "bin/tree-sitter-highlights-dot.js",
   "scripts": {
     "test": "npm run build && ava",
     "test-browser": "exit 0; npx ava test-browser/*Test.ts",

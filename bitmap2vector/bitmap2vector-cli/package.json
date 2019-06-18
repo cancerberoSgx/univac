@@ -1,10 +1,10 @@
 {
-  "name": "bitmap2vector",
+  "name": "bitmap2vector-cli",
   "version": "0.0.1",
-  "description": "Command line interface for imagetracerjs: raster image tracer and vectorizer, bitmap to SVG converter",
+  "description": "Command line interface for bitmap2vector: raster image tracer and vectorizer, bitmap to SVG converter",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
-  "bin": "bin/bitmap2vector.js",
+  "bin":{"bitmap2vector":  "bin/bitmap2vector.js"},
   "scripts": {
     "test": "ava",
     "clean": "rm -rf dist tmp",
@@ -14,20 +14,19 @@
   "devDependencies": {
     "@types/glob": "^7.1.1",
     "@types/node": "^12.0.8",
-    "@types/png.js": "^0.2.0",
     "ava": "^2.1.0",
+    "ts-node": "^8.3.0",
     "typescript": "^3.5.2"
   },
-  "homepage": "https://github.com/jankovicsandras/imagetracerjs#readme",
+  "homepage": "https://github.com/cancerberoSgx/univac/bitmap2vector-cli",
   "dependencies": {
+    "bitmap2vector": "file:../bitmap2vector",
     "glob": "^7.1.4",
-    "imagetracerjs": "git+https://github.com/jankovicsandras/imagetracerjs.git",
-    "minimist": "^1.2.0",
-    "png.js": "^0.2.1"
+    "minimist": "^1.2.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jankovicsandras/imagetracerjs.git"
+    "url": "git+https://github.com/cancerberoSgx/univac.git"
   },
   "keywords": [
     "image",
@@ -51,9 +50,9 @@
     "jpeg",
     "gif"
   ],
-  "author": "András Jankovics",
+  "author": "Sebastián Gurin",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/jankovicsandras/imagetracerjs/issues"
+    "url": "https://github.com/cancerberosgx/univac/issues"
   }
 }

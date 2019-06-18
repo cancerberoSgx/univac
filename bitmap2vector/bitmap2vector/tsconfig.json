@@ -9,13 +9,12 @@
     "sourceMap": true,
     "outDir": "./dist", 
     "declaration": true,
-    "rootDir": ".",
-    "skipLibCheck": true
+    "rootDir": "."
   },
   "include": [
     "src", "test"
   ],
   "exclude": [
-    "node_modules","src/grammar", "probes"
+    "node_modules", "dist"
   ]
 }
