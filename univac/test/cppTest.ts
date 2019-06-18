@@ -34,6 +34,7 @@ void f() {
 int a;
     `,
     language: Language.cpp,
+    debug: true,
     omitPosition: true,
     text: true
   })!
@@ -52,6 +53,7 @@ test('should report syntax errors to given listener', async t => {
   await parseAstOrThrow({
     input: 'jo jo jo',
     language: Language.cpp,
+    debug: true,
     errorListener: {
       syntaxError(a, b, c, d, msg) {
         t.true(msg.includes(`no viable alternative at input`), msg)

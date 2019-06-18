@@ -6,7 +6,7 @@ export function getAbnfImpl(): ParserImpl {
     Lexer: require('../grammar/abnf/AbnfLexer').AbnfLexer,
     Parser: require('../grammar/abnf/AbnfParser').AbnfParser,
     mainRule: 'rulelist',
-    redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => ['repetition', 'element', 'option', 'alternation', 'concatenation', 'elements'].includes(node.type)),
+    redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, node=> ['repetition', 'element', 'option', 'alternation', 'concatenation', 'elements'].includes(node.type)),
     mutate
   }
 }

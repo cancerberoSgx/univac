@@ -37,14 +37,8 @@ test('should serialize', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
 
-test.skip('should throw on invalid input', async t => {
-  await t.throwsAsync(() => parseAstOrThrow({
-    input: '--  -- `` [[ ``  ^ j + + o j+ o . Ñ  jo . 123 ( % ) . .',
-    language: Language.java
-  }))
-})
 
-test.skip('should report syntax errors to given listener', async t => {
+test('should report syntax errors to given listener', async t => {
   await parseAstOrThrow({
     input: '-- ',
     language: Language.java,

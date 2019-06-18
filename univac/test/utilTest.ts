@@ -2,9 +2,9 @@ import test from 'ava'
 import { writeFileSync } from 'fs'
 import { parseAstOrThrow } from '../src/parseAst'
 import { Language } from '../src/types'
-import { toDot } from '../src/util/toDot'
+// import { toDot } from '../src/util/toDot'
 
-test('toDot', async t => {
+test.skip('toDot', async t => {
   const result = await parseAstOrThrow({
     input: `
 import java.io.File;
@@ -26,10 +26,10 @@ class Test {
     text: true
   })!
   t.true(!!result)
-  const d = toDot(result)
-  writeFileSync('tmp.dot', d)
-  // console.log(d); 
-  t.true(d.includes('-> node'))
-  t.true(d.includes('label="classOrInterfaceModifier"'))
+  // const d = toDot(result)
+  // writeFileSync('tmp.dot', d)
+  // // console.log(d); 
+  // t.true(d.includes('-> node'))
+  // t.true(d.includes('label="classOrInterfaceModifier"'))
 
 })

@@ -10,7 +10,12 @@ export async function getAst(input: string, language: Language) {
   try {
     const error: ParserError[] = []
     const ast = await parseAst({
-      input, language, parents: true, text: true, errorListener: {
+      debug: true,
+      input, 
+      language, 
+      parents: true, 
+      text: true, 
+      errorListener: {
         syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
           error.push({ offendingSymbol, line, column, msg, e })
         }

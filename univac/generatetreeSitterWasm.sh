@@ -18,6 +18,9 @@ rm -rf tree-sitter-scala.wasm
 npx tree-sitter build-wasm node_modules/tree-sitter-scala 
 mv tree-sitter-scala.wasm src/tree-sitter-parser
 
+# rm -rf tree-sitter-ocaml.wasm
+# npx tree-sitter build-wasm node_modules/tree-sitter-ocaml 
+# mv tree-sitter-ocaml.wasm src/tree-sitter-parser
 
 #  rm -rf dist/src/tree-sitter-parser;
 

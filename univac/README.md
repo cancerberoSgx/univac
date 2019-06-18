@@ -94,6 +94,7 @@ THis is a very new project, WIP, this is the current status:
  * rust (tree-sitter)
  * sexpressions (antlr4)
  * abnf (antlr4)
+ * julia (tree-sitter)
 
 ## Language grammars notes
 

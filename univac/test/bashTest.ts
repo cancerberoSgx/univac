@@ -93,7 +93,7 @@ test('generate correct ast', async t => {
     node: result
   })
   writeFileSync('tmp.txt', o)
-  const expected = [`  <comment text="#!/bin/bash">`,`
+  const expected = [`  <comment text="#!/bin/bash">`, `
   <if text="if">
     </if> <test_command text="[ \\"$(uname)\\" == 'Darwin' ]">
       <[ text="[">
@@ -118,12 +118,12 @@ test('generate correct ast', async t => {
       </]>
     </test_command> <; text=";">
     </;>
-    `,`<while text="while">
+    `, `<while text="while">
     </while> <command text="getopts \\":wtfvh-:\\" opt">
       <command_name text="getopts">
         <word text="getopts">
         </word>
-      </command_name>`,`  <case text="case">
+      </command_name>`, `  <case text="case">
       </case> <string text="\\"\${OPTARG}\\"">
         <" text="\\"">
         </"> <expansion text="\${OPTARG}">
@@ -131,8 +131,8 @@ test('generate correct ast', async t => {
           </\${> <variable_name text="OPTARG">
           </variable_name> <} text="}">
           </}>
-        </expansion>`,`<esac text="esac">
+        </expansion>`, `<esac text="esac">
         </esac>
-      </case_statement>`,``,``,``,]
+      </case_statement>`, ``, ``, ``,]
   expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))
 })

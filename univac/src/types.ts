@@ -2,9 +2,13 @@ import { ErrorListener } from 'antlr4/error'
 import { enumKeys } from './util/misc'
 
 interface BaseOptions {
+
   language: Language
+
   input: string
+
   debug?: boolean
+
   /**
    * If given, each node will have a `text` property with its text. 
    */
@@ -21,16 +25,15 @@ interface BaseOptions {
 }
 
 export interface GetAstOptions<N = any> extends BaseOptions {
-
-
   /**
-   * If given, it will be notified of parsing errors or other diagnostics. 
-   * TODO: make an adapter interface simpler independent of antlr4. 
+   * If given, it will be notified of parsing errors or other diagnostics. TODO: make an adapter interface
+   * simpler independent of antlr4. 
    */
   errorListener?: Partial<ErrorListener>
 
   /**
-   * Adds [[parent]] property to each node referencing node¡'s parent. Notice that the AST won't be serializable with JSON.stringify anymore because of cycles. By default is false.  
+   * Adds [[parent]] property to each node referencing node¡'s parent. Notice that the AST won't be
+   * serializable with JSON.stringify anymore because of cycles. By default is false.  
    */
   parents?: boolean
 
@@ -40,7 +43,8 @@ export interface GetAstOptions<N = any> extends BaseOptions {
   positionSource?: boolean;
 
   /**
-   * For tree-sitter based parsers. antlr grammars based implementations doesn't need this, but tree-sitter do since they don't actually visit, they are provided with an AST that needs to be normalized
+   * For tree-sitter based parsers. antlr grammars based implementations doesn't need this, but tree-sitter do
+   * since they don't actually visit, they are provided with an AST that needs to be normalized
    */
   root?: N
 }
@@ -70,6 +74,9 @@ export enum Language {
   'scss' = 'scss',
   'abnf' = 'abnf',
   'bash' = 'bash',
+  // 'ocaml' = 'ocaml',
+  'julia' = 'julia',
+
 }
 
 export interface Options extends BaseOptions {

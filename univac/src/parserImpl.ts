@@ -3,6 +3,10 @@ import { getAbnfImpl } from './impl/abnf'
 import { getScssImpl } from './impl/scss'
 import { getSExpressionImpl } from './impl/sexpression'
 import { Language, Node } from './types'
+import { getCppImpl } from './impl/cpp';
+import { getAntlr4Impl } from './impl/antlr4';
+import { getGolangImpl } from './impl/golang';
+import { getSmalltalkImpl } from './impl/smalltalk';
 
 export interface ParserImpl {
   /**
@@ -63,7 +67,8 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
   }
   else if (language === 'bash') {
     return {
-      treeSitterParser: 'tree-sitter-bash.wasm'
+      treeSitterParser: 'tree-sitter-bash.wasm',
+      redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) =>  [' '].includes(node.type))
     }
   }
   else if (language === 'scala') {
@@ -71,27 +76,21 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
       treeSitterParser: 'tree-sitter-scala.wasm'
     }
   }
-  else if (language === 'cpp') {
+  // else if (language === 'ocaml') {
+  // }
+    else if (language === 'julia') {
     return {
-      Lexer: require('./grammar/cpp/CPP14Lexer').CPP14Lexer,
-      Parser: require('./grammar/cpp/CPP14Parser').CPP14Parser,
-      mainRule: 'translationunit',
-      redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => node.type.endsWith('expression') || ['ptrdeclarator', 'noptrdeclarator'].includes(node.type))
+      treeSitterParser: 'tree-sitter-julia.wasm'
     }
+  }
+  else if (language === 'cpp') {
+    return getCppImpl()
   }
   else if (language === 'antlr4') {
-    return {
-      Lexer: require('./grammar/antlr4/ANTLRv4Lexer').ANTLRv4Lexer,
-      Parser: require('./grammar/antlr4/ANTLRv4Parser').ANTLRv4Parser,
-      mainRule: 'grammarSpec',
-    }
+    return getAntlr4Impl()
   }
   else if (language === 'golang') {
-    return {
-      Lexer: require('./grammar/golang/GolangLexer').GolangLexer,
-      Parser: require('./grammar/golang/GolangParser').GolangParser,
-      mainRule: 'sourceFile',
-    }
+    return getGolangImpl()
   }
   else if (language === 'ruby') {
     return {
@@ -185,11 +184,7 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
     }
   }
   else if (language === 'smalltalk') {
-    return {
-      Lexer: require('./grammar/smalltalk/SmalltalkLexer').SmalltalkLexer,
-      Parser: require('./grammar/smalltalk/SmalltalkParser').SmalltalkParser,
-      mainRule: 'script'
-    }
+    return getSmalltalkImpl()
   }
   else if (language === 'visualbasic6') {
     return {

@@ -287,6 +287,23 @@ WS  : [ \\t\\r\\n]+ -> skip ;
   },
 
   {
+    name: 'test.jl',
+    language: Language.julia,
+    code: `
+function test(x, y)
+  if x < y
+      println("x is less than y")
+  elseif x > y
+      println("x is greater than y")
+  else
+      println("x is equal to y")
+  end
+end
+`,
+    description: '',
+  },
+
+  {
     name: 'syntax1.txt',
     language: Language.abnf,
     code: `

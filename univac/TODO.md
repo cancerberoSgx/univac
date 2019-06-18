@@ -1,5 +1,6 @@
 # TODO
 
+- [ ] fix julia.wasm so it also works in node.js
 - [ ] replace what we cant with tree-sitter ones (ruby, go, etc)
 - [ ] cli test for tree-sitter grammars
 - [ ] output alternative formats besides json

@@ -1,10 +1,9 @@
 import test from 'ava'
+import { removeWhites } from 'misc-utils-of-mine-generic'
+import { printNode } from '../src'
 import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
-import { getPackageJsonFolder } from '../src/util/misc';
-import { printNode } from '../src';
-import { writeFileSync } from 'fs';
-import { removeWhites } from 'misc-utils-of-mine-generic';
+import { getPackageJsonFolder } from '../src/util/misc'
 
 let result: Node
 test.before(async t => {
@@ -51,7 +50,7 @@ test('should parse', async t => {
 test('should serialize', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
- 
+
 test.skip('should report syntax errors to given listener', async t => {
   await parseAstOrThrow({
     input: '-- ',
@@ -67,7 +66,7 @@ test.skip('should report syntax errors to given listener', async t => {
   })
 })
 
-test('ast is correct', async t => { 
+test('ast is correct', async t => {
   const o = printNode({
     node: await parseAstOrThrow({
       input: `
@@ -84,7 +83,7 @@ class Point(var x: Int, var y: Int) {
     s"($x, $y)"
 }
 val point1 = new Point(2, 3)
-`, 
+`,
       language: Language.scala,
       text: true,
       basePath: getPackageJsonFolder() + '/dist/static/',

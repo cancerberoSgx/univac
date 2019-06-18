@@ -1,7 +1,7 @@
 import test from 'ava'
+import { printNode } from '../src'
 import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
-import { printNode } from '../src';
 
 let result: Node
 test.before(async t => {
@@ -77,4 +77,4 @@ Rectangle.new([10, 23], [14, 13]) `,
   const expected = [`asddasd`]
   expected.forEach(e => t.true(o.includes(e), e))
 
- })
+})

@@ -1,11 +1,11 @@
 import * as antlr4 from 'antlr4'
 import { ErrorListener } from 'antlr4/error'
+import { pathJoin } from 'misc-utils-of-mine-generic'
 import Parser from 'web-tree-sitter'
 import { getParserImpl, ParserImpl } from './parserImpl'
 import { GetAstOptions, Node } from './types'
 import { Visitor } from './visitor'
 import { TreeSitterVisitor } from './visitorTreeSitter'
-import { pathJoin } from 'misc-utils-of-mine-generic';
 
 export async function parseAstOrThrow(options: GetAstOptions): Promise<Node> {
   const r = await parseAst(options)
@@ -15,11 +15,14 @@ export async function parseAstOrThrow(options: GetAstOptions): Promise<Node> {
   return r
 }
 
+const wasmLoaded:{[wasm:string]: Parser} = {}
+
 export async function parseAst(options: GetAstOptions): Promise<Node | undefined> {
   const input = options.input
   var info = await getParserImpl(options.language)
   let ast: Node
-
+  const parseT0 = Date.now()
+  let postProcessingT0=-1, parseTime = -1 , postProcessingTime = -1
   if (info.Parser && info.Lexer) {
     var chars = new antlr4.InputStream(input)
     //@ts-ignore
@@ -33,35 +36,51 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
     }
     var parser = new info.Parser(tokens)
     options.errorListener && parser.addErrorListener({ ...defaultErrorListener, ...options.errorListener || {} } as any)
-    parser.buildParseTrees = true
+    // parser.buildParseTrees = true
     //@ts-ignore
     var tree = parser[info.mainRule]()
+    parseTime = Date.now()- parseT0
+
+    postProcessingT0=Date.now()
     const visitor = new Visitor()
+
     visitor.options = options
     tree.accept(visitor)
     ast = visitor.getAst()
   }
   else if (info.treeSitterParser) {
     options.basePath = options.basePath || ''
-    await Parser.init()
-    const parser = new Parser()
-    // TODO; don't load again the .wasm if already loaded.
-    const Lang = await Parser.Language.load(pathJoin(options.basePath, info.treeSitterParser))
-    parser.setLanguage(Lang)
-    const tree = parser.parse(input)
-    options.debug && console.log(tree.rootNode.toString());
+    let parser: Parser = wasmLoaded[options.basePath] as any
     
+    if(!parser){
+      await Parser.init()
+      parser = new Parser()
+      const Lang = await Parser.Language.load(pathJoin(options.basePath, info.treeSitterParser))
+      parser.setLanguage(Lang)
+      wasmLoaded[options.basePath] = parser
+    }
+    // TODO; don't load again the .wasm if already loaded.
+    const tree = parser.parse(input)
+    parseTime = Date.now()- parseT0
+    postProcessingT0=Date.now()
+
+    options.debug && console.log(tree.rootNode.toString())
     const normalizer = new TreeSitterVisitor()
     normalizer.options = { ...options, root: tree.rootNode }
     ast = normalizer.getAst()
+
   }
 
   else {
     throw new Error('Unrecognized ParseImpl returned ' + info)
   }
+
   // common post-processing
   ast = removeRedundantNode(ast, info)
   ast = info.mutate ? info.mutate(ast, info) : ast
+  postProcessingTime=Date.now() - postProcessingT0
+ options.debug && console.log({parseTime, postProcessingTime});
+  
   return ast
 }
 

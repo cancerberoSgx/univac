@@ -9495,7 +9495,7 @@ GolangParser.prototype.eos_sempred = function(localctx, predIndex) {
         // debugger
         var possibleIndexEosToken = this.getCurrentToken().tokenIndex - 1;
         var ahead = this._input.get(possibleIndexEosToken);
-        if (ahead.channel !== antlr4.Lexer.HIDDEN) {
+        if (!ahead || ahead.channel !== antlr4.Lexer.HIDDEN) {
             return false;
         }
         if (ahead.type === GolangParser.TERMINATOR) {

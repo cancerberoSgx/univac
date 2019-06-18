@@ -37,14 +37,15 @@
     "puppeteer": "^1.17.0",
     "tree-sitter-bash": "^0.13.9",
     "tree-sitter-cli": "^0.15.3",
+    "tree-sitter-julia": "0.0.3",
     "tree-sitter-rust": "^0.15.0",
     "tree-sitter-scala": "^0.13.0",
     "ts-node": "^8.2.0",
     "ts-refactor": "0.0.6",
-    "typescript": "^3.5.1",
-    "web-tree-sitter": "^0.15.6"
+    "typescript": "^3.5.1"
   },
   "dependencies": {
+    "web-tree-sitter": "^0.15.6",
     "antlr4": "^4.7.2",
     "minimist": "^1.2.0",
     "misc-utils-of-mine-generic": "^0.2.8"
