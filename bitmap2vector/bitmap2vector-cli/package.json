@@ -1,6 +1,6 @@
 {
   "name": "bitmap2vector-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Command line interface for bitmap2vector: raster image tracer and vectorizer, bitmap to SVG converter",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -30,7 +30,6 @@
   },
   "homepage": "https://www.npmjs.com/package/svg-png-converter/univac/bitmap2vector-cli",
   "dependencies": {
-    "bitmap2vector": "file:../bitmap2vector",
     "glob": "^7.1.4",
     "minimist": "^1.2.0"
   },
