@@ -18,6 +18,7 @@ export async function parseAstOrThrow(options: GetAstOptions): Promise<Node> {
 const wasmLoaded: { [wasm: string]: Parser } = {}
 
 export async function parseAst(options: GetAstOptions): Promise<Node | undefined> {
+  options.debug && console.log('parseAst options', options)
   const input = options.input
   var info = await getParserImpl(options.language)
   let ast: Node
@@ -53,10 +54,17 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
     let parser: Parser = wasmLoaded[options.basePath] as any
 
     if (!parser) {
+      
       await Parser.init()
+  options.debug && console.log('Parser.init()')
+
       parser = new Parser()
       const Lang = await Parser.Language.load(pathJoin(options.basePath, info.treeSitterParser))
+  options.debug && console.log('load')
+
       parser.setLanguage(Lang)
+  options.debug && console.log('setLanguage')
+
       wasmLoaded[options.basePath] = parser
     }
     // TODO; don't load again the .wasm if already loaded.

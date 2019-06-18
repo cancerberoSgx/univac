@@ -1,10 +1,10 @@
 import test from 'ava'
-// import { writeFileSync } from 'fs'
-// import { removeWhites } from 'misc-utils-of-mine-generic'
-// import { printNode } from '../src'
-// import { parseAstOrThrow } from '../src/parseAst'
-// import { Language, Node } from '../src/types'
-// import { getPackageJsonFolder } from '../src/util/misc'
+import { writeFileSync } from 'fs'
+import { removeWhites } from 'misc-utils-of-mine-generic'
+import { printNode } from '../src'
+import { parseAstOrThrow } from '../src/parseAst'
+import { Language, Node } from '../src/types'
+import { getPackageJsonFolder } from '../src/util/misc'
 
 
 test('dummy', t => {
@@ -17,22 +17,24 @@ test('dummy', t => {
 //   console.time('julia')
 //   result = await parseAstOrThrow({
 //     input: `
-// x = 10
-// s = "helloo world"
-// i = (1 + 2im)/(1 - 2im)
-// struct Squares
-//   count::Int
-// end 
+//     function test(x, y)
+//     if x < y
+//         println("x is less than y")
+//     elseif x > y
+//         println("x is greater than y")
+//     else
+//         println("x is equal to y")
+//     end
+//   end
 //     `,
-//     language: Language.ocaml,
+//     language: Language.julia,
+//     debug: true,
 //     omitPosition: true,
 //     text: true,
 //     basePath: getPackageJsonFolder() + '/dist/static/'
 //   })!
 //   t.true(!!result)
 //   console.timeEnd('julia')
-
-
 // })
 
 // test('should parse', async t => {

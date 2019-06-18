@@ -7,6 +7,7 @@ import { getScssImpl } from './impl/scss'
 import { getSExpressionImpl } from './impl/sexpression'
 import { getSmalltalkImpl } from './impl/smalltalk'
 import { Language, Node } from './types'
+import { getJuliaImpl } from './impl/julia';
 
 export interface ParserImpl {
   /**
@@ -79,9 +80,7 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
   // else if (language === 'ocaml') {
   // }
   else if (language === 'julia') {
-    return {
-      treeSitterParser: 'tree-sitter-julia.wasm'
-    }
+    return getJuliaImpl()
   }
   else if (language === 'cpp') {
     return getCppImpl()
