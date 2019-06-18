@@ -1,0 +1,58 @@
+{
+  "name": "bitmap2vector-online-converter",
+  "version": "0.0.3",
+  "description": "online png to SVG tool",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf dist docs",
+    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
+    "lint": "npm run organizeImports && npm run format",
+    "start": " npx parcel serve  src/index.html -d docs   --no-source-maps",
+    "start-sm": " npx parcel serve  src/index.html -d docs",
+    "build-dev-no-maps": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-content-hash  --no-source-maps",
+    "build-dev": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-source-maps --no-content-hash",
+    "build": "npm run clean && npx tsc && npm run build-only && rm -rf ../../../demos/docs/svg-png-converter/playground/* && rm -rf docs/static && mkdir -p docs/static && cp -r static/*  docs/static && mv docs/* ../../../demos/docs/svg-png-converter/playground/",
+    "build-only": "export NODE_ENV=production && node --max-old-space-size=5000 node_modules/parcel/bin/cli.js build src/index.html -d docs --no-content-hash --detailed-report  --no-source-maps --public-url './'",
+    "all": "npm run clean && npm run lint && npm run build"
+  },
+  "keywords": [
+    "typescript",
+    "ast",
+    "query",
+    "astq"
+  ],
+  "author": "Sebastián Gurin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/file-saver": "^2.0.1",
+    "@types/node": "^12.0.4",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "babel-polyfill": "^6.26.0",
+    "http-server": "^0.11.1",
+    "p-queue": "^6.0.2",
+    "parcel": "^1.12.3",
+    "ts-refactor": "0.0.6",
+    "typescript": "^3.5.1",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.2",
+    "file-type": "^11.1.0",
+    "materialize-css": "^1.0.0-rc.2",
+    "misc-utils-of-mine-generic": "^0.2.10",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "svg-png-converter": "file:../svg-png-converter"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/univac.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter"
+  }
+}

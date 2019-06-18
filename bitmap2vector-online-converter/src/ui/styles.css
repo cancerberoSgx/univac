@@ -1,0 +1,13 @@
+.drop-file {
+  width: 4em;
+  height: 3em;
+  background-color: 'green'
+}
+
+@media only screen and (min-width: 993px) {
+  .container {
+    width: 100%;
+    margin: 0.5em 1em;
+    max-width: 100%;
+  }
+}
