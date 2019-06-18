@@ -1,7 +1,8 @@
 .drop-file {
   width: 4em;
   height: 3em;
-  background-color: 'green'
+  background-color: 'green'; 
+  border: 2px solid pink;
 }
 
 @media only screen and (min-width: 993px) {

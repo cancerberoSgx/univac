@@ -62,7 +62,7 @@ export async function fetchAsBuffer(url: string, headers?: Headers) {
 
 export interface BaseCreateImageOptions {
   extraState?: Partial<State>
-  convert?: boolean
+  // convert?: boolean
   extra?: Partial<SVG2PNGOptions | PNG2SVGOptions>
   name: string
 }

@@ -41,7 +41,7 @@ export interface createImageOptions extends BaseCreateImageOptions {
 export async function createImage(options: createImageOptions) {
   // const name = options.name || getFileNameFromUrl(options.dataUrl)
   // const svg2png = name && getFileExtension(name) === 'svg'
-  const image = {
+  const input = {
     // name,
     content: options.content,
     // content: options.dataUrl,
@@ -52,17 +52,17 @@ export async function createImage(options: createImageOptions) {
     // options: { ...png2svgOptions, input: options.dataUrl },
     // ...options.extra
   }
-  const content = await convert(image)
-  const output = options.convert ?{name: 'output.svg', content , size: content.length} : getStore().getState().output
-  const nextState = {
-    input: image,
+  const content = await convert(input)
+  const output =  {name: 'output.svg', content , size: content.length} 
+  // const nextState = 
+  getStore().setState({
+    input,
     output,
     // options
     // Images: [...getStore().getState().Images, Image]
-    // , ...options.extraState || {}
-  }
-  getStore().setState(nextState)
-  return nextState
+     ...options.extraState || {}
+  })
+  // return nextState
 }
 
 // export function getCode(e: Image) {

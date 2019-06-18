@@ -36,7 +36,13 @@ export class LoadImage extends AbstractComponent {
                   {/* <p>From your computer or internet, most common formats accepted PNG, JPEG, TIFF, BMP, etc.</p> */}
                   {/* <div className="light">Drag and drop HERE</div> */}
                   <div className="light">
-                   <input type="file" onChange={async e=>{
+
+                  <form action="#">
+    <div className="file-field input-field">
+      <div className="btn">
+        <span>File</span>
+        {/* <input type="file"> */}
+        <input type="file" onChange={async e=>{
                      if(e.currentTarget.files && e.currentTarget.files.length){
                       //  debugger
                        const size = e.currentTarget.files[0].size
@@ -47,6 +53,26 @@ export class LoadImage extends AbstractComponent {
                      }
                      
                    }}></input>
+
+      </div>
+      <div className="file-path-wrapper">
+        <input className="file-path validate" type="text"/>
+      </div>
+    </div>
+  </form>
+
+
+                   {/* <input type="file" onChange={async e=>{
+                     if(e.currentTarget.files && e.currentTarget.files.length){
+                      //  debugger
+                       const size = e.currentTarget.files[0].size
+                       const name =  e.currentTarget.files[0].name
+                       const content = await                      blobToBuffer(e.currentTarget.files[0])
+                       //TODO verify correct format
+                       this.setState({input:{name, size, content } , page: 'editor'})
+                     }
+                     
+                   }}></input> */}
                    </div>
                   {/* <div className="light">From URL: <input type="text"></input></div> */}
                 </div>
