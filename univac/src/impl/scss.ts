@@ -8,4 +8,3 @@ export function getScssImpl(): ParserImpl {
     redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, node => ['ExpressionContext'].includes(node.type)),
   }
 }
- 

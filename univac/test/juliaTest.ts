@@ -7,13 +7,13 @@ import test from 'ava'
 // import { getPackageJsonFolder } from '../src/util/misc'
 
 
-test('dummy', t=>{
+test('dummy', t => {
   t.true(true)
 })
 
 // let result: Node
 // test.before(async t => {
- 
+
 //   console.time('julia')
 //   result = await parseAstOrThrow({
 //     input: `
@@ -32,7 +32,7 @@ test('dummy', t=>{
 //   t.true(!!result)
 //   console.timeEnd('julia')
 
-  
+
 // })
 
 // test('should parse', async t => {

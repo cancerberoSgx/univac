@@ -1,12 +1,12 @@
 import { Lexer, Parser } from 'antlr4'
 import { getAbnfImpl } from './impl/abnf'
+import { getAntlr4Impl } from './impl/antlr4'
+import { getCppImpl } from './impl/cpp'
+import { getGolangImpl } from './impl/golang'
 import { getScssImpl } from './impl/scss'
 import { getSExpressionImpl } from './impl/sexpression'
+import { getSmalltalkImpl } from './impl/smalltalk'
 import { Language, Node } from './types'
-import { getCppImpl } from './impl/cpp';
-import { getAntlr4Impl } from './impl/antlr4';
-import { getGolangImpl } from './impl/golang';
-import { getSmalltalkImpl } from './impl/smalltalk';
 
 export interface ParserImpl {
   /**
@@ -68,7 +68,7 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
   else if (language === 'bash') {
     return {
       treeSitterParser: 'tree-sitter-bash.wasm',
-      redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) =>  [' '].includes(node.type))
+      redundantTypes: (node, parent) => preventRedundantTypeNames(node, parent, (node, parent) => [' '].includes(node.type))
     }
   }
   else if (language === 'scala') {
@@ -78,7 +78,7 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
   }
   // else if (language === 'ocaml') {
   // }
-    else if (language === 'julia') {
+  else if (language === 'julia') {
     return {
       treeSitterParser: 'tree-sitter-julia.wasm'
     }

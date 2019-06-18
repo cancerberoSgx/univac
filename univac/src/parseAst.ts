@@ -15,14 +15,14 @@ export async function parseAstOrThrow(options: GetAstOptions): Promise<Node> {
   return r
 }
 
-const wasmLoaded:{[wasm:string]: Parser} = {}
+const wasmLoaded: { [wasm: string]: Parser } = {}
 
 export async function parseAst(options: GetAstOptions): Promise<Node | undefined> {
   const input = options.input
   var info = await getParserImpl(options.language)
   let ast: Node
   const parseT0 = Date.now()
-  let postProcessingT0=-1, parseTime = -1 , postProcessingTime = -1
+  let postProcessingT0 = -1, parseTime = -1, postProcessingTime = -1
   if (info.Parser && info.Lexer) {
     var chars = new antlr4.InputStream(input)
     //@ts-ignore
@@ -39,9 +39,9 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
     // parser.buildParseTrees = true
     //@ts-ignore
     var tree = parser[info.mainRule]()
-    parseTime = Date.now()- parseT0
+    parseTime = Date.now() - parseT0
 
-    postProcessingT0=Date.now()
+    postProcessingT0 = Date.now()
     const visitor = new Visitor()
 
     visitor.options = options
@@ -51,8 +51,8 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
   else if (info.treeSitterParser) {
     options.basePath = options.basePath || ''
     let parser: Parser = wasmLoaded[options.basePath] as any
-    
-    if(!parser){
+
+    if (!parser) {
       await Parser.init()
       parser = new Parser()
       const Lang = await Parser.Language.load(pathJoin(options.basePath, info.treeSitterParser))
@@ -61,8 +61,8 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
     }
     // TODO; don't load again the .wasm if already loaded.
     const tree = parser.parse(input)
-    parseTime = Date.now()- parseT0
-    postProcessingT0=Date.now()
+    parseTime = Date.now() - parseT0
+    postProcessingT0 = Date.now()
 
     options.debug && console.log(tree.rootNode.toString())
     const normalizer = new TreeSitterVisitor()
@@ -78,9 +78,9 @@ export async function parseAst(options: GetAstOptions): Promise<Node | undefined
   // common post-processing
   ast = removeRedundantNode(ast, info)
   ast = info.mutate ? info.mutate(ast, info) : ast
-  postProcessingTime=Date.now() - postProcessingT0
- options.debug && console.log({parseTime, postProcessingTime});
-  
+  postProcessingTime = Date.now() - postProcessingT0
+  options.debug && console.log({ parseTime, postProcessingTime })
+
   return ast
 }
 

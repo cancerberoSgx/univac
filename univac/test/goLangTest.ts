@@ -31,14 +31,14 @@ test('should parse', async t => {
 test('should serialize', async t => {
   t.notThrows(() => JSON.stringify(result))
 })
- 
+
 test('should report syntax errors to given listener', async t => {
   await parseAstOrThrow({
     input: 'func 8',
     language: Language.golang,
     errorListener: {
       syntaxError(a, b, c, d, msg) {
-        t.true(msg.includes(`mismatched input`)  , msg)
+        t.true(msg.includes(`mismatched input`), msg)
       }
     }
   })

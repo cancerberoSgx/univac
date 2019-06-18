@@ -1,5 +1,4 @@
 import test from 'ava'
-import { writeFileSync } from 'fs'
 import { parseAstOrThrow } from '../src/parseAst'
 import { Language } from '../src/types'
 // import { toDot } from '../src/util/toDot'

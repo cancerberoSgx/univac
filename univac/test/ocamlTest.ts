@@ -6,7 +6,7 @@ import test from 'ava'
 // import { Language, Node } from '../src/types'
 // import { getPackageJsonFolder } from '../src/util/misc'
 
-test('dummy', t=>{
+test('dummy', t => {
   t.true(true)
 })
 // let result: Node
