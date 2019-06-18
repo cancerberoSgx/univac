@@ -58,3 +58,10 @@ TODO
 
  * [svg-png-converter](https://www.npmjs.com/package/svg-png-converter)
  * [render-dot](https://www.npmjs.com/package/render-dot)
+
+ ## TODO
+
+- [x] document src/options.ts
+- [x] options in readme
+- [x] node js basic tests
+- [ ] browser basic tests

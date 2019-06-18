@@ -30,6 +30,7 @@
   },
   "homepage": "https://www.npmjs.com/package/svg-png-converter/univac/bitmap2vector-cli",
   "dependencies": {
+    "bitmap2vector": "0.0.3",
     "glob": "^7.1.4",
     "minimist": "^1.2.0"
   },
