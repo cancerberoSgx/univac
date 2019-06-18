@@ -1,10 +1,10 @@
 
+import { bitmap2vector } from 'bitmap2vector'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { sync as glob } from 'glob'
-import { basename, join } from 'path';
-import { serial } from './util';
-import { CliOptions } from './types';
-import { bitmap2vector } from 'bitmap2vector';
+import { basename, join } from 'path'
+import { CliOptions } from './types'
+import { serial } from './util'
 // var ImageTracer = require('imagetracerjs');
 
 export async function traceImage(options: CliOptions) {
@@ -24,9 +24,7 @@ export async function traceImage(options: CliOptions) {
   await serial(input.map(input => async () => {
     try {
       options.debug && console.log('Rendering ' + input.name)
-      const {content} = await bitmap2vector(options)
-      // const png = await readPng(input.content)
-      // const outputContent = ImageTracer.imagedataToSVG({ ...png, data: png.pixels }, options)
+      const { content } = await bitmap2vector(options)
       if (options.output) {
         const outputFilePath = join(options.output, basename(input.name + '.' + (options.format || 'svg')))
         writeFileSync(outputFilePath, content)

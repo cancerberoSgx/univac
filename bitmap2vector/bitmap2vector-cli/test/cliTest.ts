@@ -1,9 +1,9 @@
 import test from 'ava'
 import { execSync } from 'child_process'
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs'
 
 test('should build', async t => {
-  t.notThrows(()=> execSync('npm run build', { stdio: 'pipe' }))
+  t.notThrows(() => execSync('npm run build', { stdio: 'pipe' }))
 })
 
 test('should render png', async t => {

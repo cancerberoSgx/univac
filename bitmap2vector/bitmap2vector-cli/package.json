@@ -4,21 +4,31 @@
   "description": "Command line interface for bitmap2vector: raster image tracer and vectorizer, bitmap to SVG converter",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
-  "bin":{"bitmap2vector":  "bin/bitmap2vector.js"},
+  "bin": {
+    "bitmap2vector": "bin/bitmap2vector.js"
+  },
   "scripts": {
     "test": "ava",
+    "test-browser": "exit 0; npx ava test-browser/*Test.ts",
+    "test-js": " npx ava ./dist/test/*Test.js",
     "clean": "rm -rf dist tmp",
     "build": "npm run clean && tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
+    "lint": "npm run organizeImports && npm run format",
+    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run test-browser",
+    "all-publish": "npm run all && git commit -a -m \"version patch\" && npm version patch && npm publish"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",
     "@types/node": "^12.0.8",
     "ava": "^2.1.0",
+    "ts-refactor": "0.0.6",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.2"
   },
-  "homepage": "https://github.com/cancerberoSgx/univac/bitmap2vector-cli",
+  "homepage": "https://www.npmjs.com/package/svg-png-converter/univac/bitmap2vector-cli",
   "dependencies": {
     "bitmap2vector": "file:../bitmap2vector",
     "glob": "^7.1.4",

@@ -1,4 +1,4 @@
-import { Bitmap2VectorOptions } from 'bitmap2vector';
+import { Bitmap2VectorOptions } from 'bitmap2vector'
 
 export interface CliOptions extends Bitmap2VectorOptions {
 

@@ -14,17 +14,18 @@ import { bitmap2vector } from 'bitmap2vector';
 const out = await bitmap2vector({
   input: readFileSync('test/assets/panda.png')
 })
+writeFileSync('output.svg', out.content)
 
 // from URL or path
 const out = await bitmap2vector({
-  input: 'test/assets/bluebells.jpg'
+  input: '../assets/bluebells.jpg'
 })
+aDiv.innerHTML = out.content
 ```
 
 ## Options
 
  * `input: string | Buffer`: Path or glob file pattern to .png files, relative to current dir.
- * `output?: string`: Folder for output files. If it doesn't exists it will be created. If none, output files will be written
 in current folder.
  * `help?: boolean`:  Print usage information, then exit.
  * `debug?: boolean`:  Prints debug messages. 
@@ -52,3 +53,8 @@ rounded to 3places, like 7.356. Default value: 1.
 ## Examples
 
 TODO
+
+## Related 
+
+ * [svg-png-converter](https://www.npmjs.com/package/svg-png-converter)
+ * [render-dot](https://www.npmjs.com/package/render-dot)

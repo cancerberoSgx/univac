@@ -11,7 +11,7 @@
     "test-watch": "ava -w",
     "prepare": "npm run build",
     "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
-    "clean": "rm -rf dist docs test-browser-outdir",
+    "clean": "rm -rf dist docs test-browser-outdir tmp*",
     "build": "npm run clean && npx tsc ",
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",

@@ -9,6 +9,7 @@ npm install bitmap2vector-cli -g
 ## Usage
 
 ```sh
+bitmap2vector --input "that.jpg" --blurdelta 40 > that.jpg.svg
 bitmap2vector --input "foo/imgs/**/*.png" --output bar/imgs-svg
 ```
 
@@ -43,3 +44,7 @@ bitmap2vector --input "foo/imgs/**/*.png" --output bar/imgs-svg
 - [x] document src/options.ts
 - [x] options in readme
 - [x] tests
+
+## Related Projects
+
+ * [](svg-png-converter)
