@@ -5,8 +5,9 @@ import { Segment } from 'semantic-ui-react'
 import { getDataUrlFileName, PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
 import { convert, createExample, getCode } from '../../app/convert'
 import { Example } from '../../examples/examples'
-import { PNG2SVGOptionsSchema } from '../../options/PNG2SVGOptions.schema'
-import { SVG2PNGOptionsSchema } from '../../options/SVG2PNGOptionsSchema'
+import { PNG2SVGOptionsSchema } from '../../options/PNG2SVGOptionsSchema'
+import { SVG2PNGOptionsSchema } from '../../options/SVG2PNGPotraceOptionsSchema'
+import { PNG2SVGImageTracerOptionsSchema } from '../../options/PNG2SVGImageTracerOptionsSchema'
 import { AbstractComponent } from '../component'
 import fileType = require('file-type')
 
@@ -23,7 +24,7 @@ const png2svgUISchema = {
 export class Options extends AbstractComponent {
   render() {
     let schema: JSONSchema6 = this.state.example.svg2png ? SVG2PNGOptionsSchema : PNG2SVGOptionsSchema
-    let uiSchema: UiSchema = png2svgUISchema//this.state.example.svg2png ? {} : png2svgUISchema
+    let uiSchema: UiSchema = png2svgUISchema 
     return (
       <Segment className="optionsContainer">
         <Form<SVG2PNGOptions | PNG2SVGOptions>

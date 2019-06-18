@@ -10,19 +10,6 @@ import { PNG2SVGOptions, PotraceTraceOptions } from './types'
  * parameter is given it will produce a black-white (background transparent) image. 
  */
 export async function png2svg(options: PNG2SVGOptions) {
-  if (options.fillStrategy === 'none') {
-    options.fillStrategy = true as any
-  }
-  if (typeof options.steps === 'string' && (options.steps as any).includes(',')) {
-    console.log((options.steps as any).split(','), (options.steps as string).split(',').map(e => parseInt(e)))
-    options.steps = (options.steps as string).split(',').map(e => parseInt(e))
-  }
-
-  // options.blackOnWhite = options.blackOnWhite !== true;
-  (options as PotraceTraceOptions).optCurve = options.noCurveOptimization !== false
-
-  options.debug && console.log(`Options: ${JSON.stringify({ ...options, input: null })}`)
-
   let buffer: Buffer | undefined
   if (BufferClass.isBuffer(options.input)) {
     buffer = options.input
@@ -45,5 +32,28 @@ export async function png2svg(options: PNG2SVGOptions) {
   if (!buffer) {
     throw new Error('Invalid input option, must be one of Buffer|Uint8Array|Blob|data-url string|binary string')
   }
-  return await potracePosterize(buffer, options)
+
+  if (!options.tracer || options.tracer === 'potrace') {
+    if (options.fillStrategy === 'none') {
+      options.fillStrategy = true as any
+    }
+    if (typeof options.steps === 'string' && (options.steps as any).includes(',')) {
+      console.log((options.steps as any).split(','), (options.steps as string).split(',').map(e => parseInt(e)))
+      options.steps = (options.steps as string).split(',').map(e => parseInt(e))
+    }
+    // options.blackOnWhite = options.blackOnWhite !== true;
+    (options as PotraceTraceOptions).optCurve = options.noCurveOptimization !== false
+    options.debug && console.log(`Options: ${JSON.stringify({ ...options, input: null })}`)
+    return await potracePosterize(buffer, options)
+  }
+
+  else {
+    try {
+      var Tracer = require('imagetracerjs')
+      const outputContent = await Tracer.tracePngToSvg(buffer, options)//ImageTracer.imagedataToSVG({ ...png, data: png.pixels }, options)
+      return outputContent
+    } catch (error) {
+      console.error('ERROR tracePngToSvg', error)
+    }
+  }
 }
