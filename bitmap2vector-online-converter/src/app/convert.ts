@@ -1,8 +1,7 @@
-import { getFileExtension, getFileNameFromUrl } from 'misc-utils-of-mine-generic'
-import { png2svg, PNG2SVGOptions, svg2png, SVG2PNGOptions, urlToData } from 'svg-png-converter'
+import { png2svg } from 'svg-png-converter'
 import { BaseCreateImageOptions } from '../ui/common/uiUtil'
+import { Image } from './state'
 import { getStore } from './store'
-import { Image } from './state';
 
 
 export async function convert(e: Image) {
@@ -16,15 +15,15 @@ export async function convert(e: Image) {
   //   })
   // }
   // else {
-   const output = await png2svg({
-      ... getStore().getState().options,
-      input: e.content, 
-    })
+  const output = await png2svg({
+    ...getStore().getState().options,
+    input: e.content,
+  })
   // }
 
   // getStore().getState().output.size = (output || '').length
   // getStore().getState().output.name= getStore().getState().output.name|| getFileNameFromUrl(e.content) || e.name + '.' + (getStore().getState().options.format )
-  return output  
+  return output
 }
 
 // let svg2pngOptions: SVG2PNGOptions
@@ -53,14 +52,14 @@ export async function createImage(options: createImageOptions) {
     // ...options.extra
   }
   const result = await convert(input)
-  const output =  {name: 'output.svg', content: Buffer.from(result.content) , size: result.content.length} 
+  const output = { name: 'output.svg', content: Buffer.from(result.content), size: result.content.length }
   // const nextState = 
   getStore().setState({
     input,
     output,
     // options
     // Images: [...getStore().getState().Images, Image]
-     ...options.extraState || {}
+    ...options.extraState || {}
   })
   // return nextState
 }

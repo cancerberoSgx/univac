@@ -1,7 +1,7 @@
 import { getFileExtension, getFileNameFromUrl } from 'misc-utils-of-mine-generic'
 import * as React from 'react'
-import { base64ToUrl, blobToBuffer, PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
-import { convert, createImage} from '../../app/convert'
+import { blobToBuffer, PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
+import { convert, createImage } from '../../app/convert'
 import { State } from '../../app/state'
 import fileType = require('file-type')
 

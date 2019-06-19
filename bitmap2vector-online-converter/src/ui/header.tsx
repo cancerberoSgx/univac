@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { AbstractComponent } from './component';
+import { AbstractComponent } from './component'
 
 export class Header extends AbstractComponent {
 

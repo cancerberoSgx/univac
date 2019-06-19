@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { AbstractComponent } from './component';
-import { blobToBuffer } from 'svg-png-converter';
+import { blobToBuffer } from 'svg-png-converter'
+import { AbstractComponent } from './component'
 
 export class LoadImage extends AbstractComponent {
 
@@ -16,12 +16,12 @@ export class LoadImage extends AbstractComponent {
           <h1 className="header center orange-text">Load an image</h1>
           <div className="row center">
             <h5 className="header col s12 light">from your computer, or internet</h5>
-            {this.state.input.size!==0 ? 
-                 <div className="row center"> 
-                 <a href="#" onClick={e => this.setState({ page: 'loadImage' })} className="btn-large waves-effect waves-light orange">Convert to vector!</a> 
-               </div> : ''}
+            {this.state.input.size !== 0 ?
+              <div className="row center">
+                <a href="#" onClick={e => this.setState({ page: 'loadImage' })} className="btn-large waves-effect waves-light orange">Convert to vector!</a>
+              </div> : ''}
           </div>
-     
+
           <br />
         </div>
 
@@ -37,32 +37,32 @@ export class LoadImage extends AbstractComponent {
                   {/* <div className="light">Drag and drop HERE</div> */}
                   <div className="light">
 
-                  <form action="#">
-    <div className="file-field input-field">
-      <div className="btn">
-        <span>File</span>
-        {/* <input type="file"> */}
-        <input type="file" onChange={async e=>{
-                     if(e.currentTarget.files && e.currentTarget.files.length){
-                      //  debugger
-                       const size = e.currentTarget.files[0].size
-                       const name =  e.currentTarget.files[0].name
-                       const content = await                      blobToBuffer(e.currentTarget.files[0])
-                       //TODO verify correct format
-                       this.setState({input:{name, size, content } , page: 'editor'})
-                     }
-                     
-                   }}></input>
+                    <form action="#">
+                      <div className="file-field input-field">
+                        <div className="btn">
+                          <span>File</span>
+                          {/* <input type="file"> */}
+                          <input type="file" onChange={async e => {
+                            if (e.currentTarget.files && e.currentTarget.files.length) {
+                              //  debugger
+                              const size = e.currentTarget.files[0].size
+                              const name = e.currentTarget.files[0].name
+                              const content = await blobToBuffer(e.currentTarget.files[0])
+                              //TODO verify correct format
+                              this.setState({ input: { name, size, content }, page: 'editor' })
+                            }
 
-      </div>
-      <div className="file-path-wrapper">
-        <input className="file-path validate" type="text"/>
-      </div>
-    </div>
-  </form>
+                          }}></input>
+
+                        </div>
+                        <div className="file-path-wrapper">
+                          <input className="file-path validate" type="text" />
+                        </div>
+                      </div>
+                    </form>
 
 
-                   {/* <input type="file" onChange={async e=>{
+                    {/* <input type="file" onChange={async e=>{
                      if(e.currentTarget.files && e.currentTarget.files.length){
                       //  debugger
                        const size = e.currentTarget.files[0].size
@@ -73,7 +73,7 @@ export class LoadImage extends AbstractComponent {
                      }
                      
                    }}></input> */}
-                   </div>
+                  </div>
                   {/* <div className="light">From URL: <input type="text"></input></div> */}
                 </div>
               </div>
@@ -95,7 +95,7 @@ export class LoadImage extends AbstractComponent {
                   <h5 className="center">From Internet</h5>
                   <div className="light">Image Url
                   <input type="text"></input>
-                   <button>PASTE</button></div>
+                    <button>PASTE</button></div>
                   <p>(TODO: take into a count that many sites won't allow to use their images directly, you might have to download it)</p>
                   {/* <p className="light">Download the result as a vector graphic in SVG, PDF, EPS formats. 100% Free and locally in your computer, without any third party server!</p> */}
                 </div>

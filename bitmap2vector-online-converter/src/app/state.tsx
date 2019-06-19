@@ -1,15 +1,14 @@
-import { convert } from './convert'
-import { SVG2PNGOptions, BufferClass, PNG2SVGOptions, urlToBase64 } from 'svg-png-converter';
-import { RemoveProperties } from 'misc-utils-of-mine-generic';
-import { lisa_png } from './debug/panda_png';
+import { RemoveProperties } from 'misc-utils-of-mine-generic'
+import { BufferClass, PNG2SVGOptions, urlToBase64 } from 'svg-png-converter'
+import { lisa_png } from './debug/panda_png'
 
 export interface State {
   error?: Error | undefined;
   input: Image
   output: Image
-  page: 'home'|'loadImage'|'editor'|'download'
-    editorTracer: 'imagetracer'|'potrace',
-    options: RemoveProperties<PNG2SVGOptions, 'input'>
+  page: 'home' | 'loadImage' | 'editor' | 'download'
+  editorTracer: 'imagetracer' | 'potrace',
+  options: RemoveProperties<PNG2SVGOptions, 'input'>
   // potraceEasyOptions: PotraceEasyOptions
 }
 
@@ -19,13 +18,13 @@ export async function getInitialState(): Promise<State> {
     page: 'home',
     editorTracer: 'imagetracer',
     input: {
-      size: lisa_png.length, 
-      content: BufferClass.from(urlToBase64(lisa_png), 'base64'), 
+      size: lisa_png.length,
+      content: BufferClass.from(urlToBase64(lisa_png), 'base64'),
       name: 'lisa.png'
     },
     output: {
       size: 0,
-      content: BufferClass.from(''), 
+      content: BufferClass.from(''),
       name: 'unnamed.png.svg',
     },
     options: {
