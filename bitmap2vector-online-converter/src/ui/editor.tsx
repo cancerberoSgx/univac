@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { base64ToUrl, PNG2SVGOptions } from 'svg-png-converter'
-import { createImage } from '../app/convert'
+import { createImage, prepareDownload } from '../app/convert'
 import { AbstractComponent } from './component'
 
 declare const M: any
@@ -142,9 +142,4 @@ export class Editor extends AbstractComponent {
     Object.assign(this.state.options, s)
     await createImage(this.state.input)
   }
-}
-
-export function prepareDownload(){
-
-  this.setState({page: 'download'})     
 }

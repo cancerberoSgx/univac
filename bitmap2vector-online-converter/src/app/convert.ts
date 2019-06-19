@@ -1,7 +1,8 @@
-import { png2svg } from 'svg-png-converter'
+import { png2svg, optimizeSvg } from 'svg-png-converter'
 import { BaseCreateImageOptions } from '../ui/common/uiUtil'
 import { Image } from './state'
 import { getStore } from './store'
+import { sleep } from 'misc-utils-of-mine-generic';
 
 export async function convert(e: Image) {
   const output = await png2svg({
@@ -30,3 +31,12 @@ export async function createImage(options: createImageOptions) {
   })
 }
 
+
+
+export async function prepareDownload(){
+  getStore().setState({page: 'download',optimizing: true})
+  await sleep(10)
+  const out = await optimizeSvg(getStore().getState().output.content.toString(), true)
+  await sleep(10)  
+  getStore().setState({page: 'download',output: {...getStore().getState().output, content: Buffer.from(out)},optimizing: false})
+}
