@@ -15,6 +15,7 @@ Also, checkout this app build with this library to transform bitmap to SVG onlin
    * It does good job with cartoons / logos etc
    * photos / realistic images need to be configured using the options since they output could be large in size.
  * Supports browsers and node.js (Same JavaScript API). 
+ * `--optimize` optimizes SVG output files with [svgo](https://github.com/svg/svgo/)
  * Command Line interface.
  * Uses [fabricjs](http://fabricjs.com/) to rasterize SVG documents into PNG/JPEG,.
  * Uses [potrace](https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter) and [bitmap2vector](https://www.npmjs.com/package/bitmap2vector) to convert PNG/JPEG bitmap images to SVG vector graphics with flexible options to control output size / quality. 
@@ -25,29 +26,33 @@ Also, checkout this app build with this library to transform bitmap to SVG onlin
 npm install svg-png-converter
 ```
 
-## JavaScript API Examples
+## svg2png
 
-### svg2png
+ * Accept several type of input objects: string, Buffer, typedArrays, DataUrls, Globs, etc
 
+ * In the browser, Buffer is emulated with [Buffer](https://www.npmjs.com/package/buffer) so the same API and implementation works both on it and Node.js.
 
-#### From Buffer to Buffer
+### JavaScript API examples
 
-(In the browser buffer are instances of UInt8Array, supported thanks to https://www.npmjs.com/package/buffer)
+#### Example 1
+
+Pass a Buffer as input, and receive a Buffer as output with a JPEG image content.
 
 ```ts
 import {svg2png} from 'svg-png-converter'
 
-let s = await svg2png({ 
+let outputBuffer = await svg2png({ 
   input: readFileSync('./ss/foo.svg'), 
-  encoding: 'raw', 
+  encoding: 'buffer', 
   format: 'jpeg',
-  output: 'outputFolder'
 })
-writeFileSync("tmp25.png", s)
+writeFileSync("tmp25.jpg", outputBuffer)
 ```
 
 
-#### From literal SVG string to DataUrl, custom size and quality jpeg
+### Example 2
+
+Transform a literal SVG string to a DataUrl containing JPEG with custom size and quality jpeg
 
 ```ts
 import {svg2png} from 'svg-png-converter'
@@ -75,9 +80,9 @@ let s = await svg2png({
 ```
 
 
-### svg2png
+## png2svg
 
-#### Introduction
+### Image Tracers
 
 Transforming a bitmap image to a vector document is not straight forward. .This library accomplish that using different [](image tracing) implementations and options to configure them. Right now it support the following "tracers" (some comments about each): 
 
@@ -91,18 +96,27 @@ Transforming a bitmap image to a vector document is not straight forward. .This 
   * Has options to remove noise, control quality, etc. Has options to add iterations for color posterization but is not simple / requires manual work.
   * (IMO) Potrace generated shapes are better / cleaner so if only monochromatic output is needed this could be better than the other tracers.
 
+### SVG Optimization
 
+ * passing `--optimize` minify output SVG with [svgo](https://github.com/svg/svgo/). This is THE svg optimization tool which has as dependency and runs in the browser.
+
+
+### JavaScript API
+
+Convert a .gif file using `imagetracer` implementation, limiting output number of colors to 16, not rendering segments smaller than 4
 
 ```ts
-import {png2svg} from 'svg-png-converter'
+import { png2svg } from 'svg-png-converter'
 
 const result = await png2svg({ 
   tracer: 'imagetracer', 
-  input: readFileSync('test/assets/tmp2.png') 
+  optimize: true,
+  input: readFileSync('test/assets/tmp2.`gif`') ,
+  numberofcolors: 24, 
+  pathomit: 1,
 })
 writeFileSync("tmp25.png", s)
 ```
-
 
 
 TODO
@@ -127,7 +141,11 @@ png2svg --input foo.jpeg > tmp.svg
 
 ## Options
 
+TODO
+
 See [types.ts](src/types.ts). Options apply both to JavaScript API and CLI.
+
+
 
 ## Status / TODO
 

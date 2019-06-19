@@ -2,9 +2,9 @@ import { bitmap2vector } from 'bitmap2vector'
 import { isNode } from 'misc-utils-of-mine-generic'
 import { isBase64, urlToBase64 } from "./base64"
 import { blobToBuffer, BufferClass, typedArrayToBuffer } from './buffer'
+import { optimizeSvg } from './optimizeSvg'
 import { potracePosterize } from './potrace'
 import { PNG2SVGOptions, PotraceTraceOptions } from './types'
-const SVGO = require('svgo')
 
 /**
  * Converts a PNG bitmap image to a SVG vector graphics. Other input supported besides PNG/SVG are JPEG and
@@ -75,133 +75,8 @@ async function dispatchOptimizeSvg(options: PNG2SVGOptions, data: string) {
   if (!options.optimize) {
     return data
   }
-  // console.log(data);
-
-  const svgo = new SVGO(svgoOptions)
-
-  const before = data.length
-  const result = await svgo.optimize(data, { path: 'foo.svg' })
-  options.debug && console.log('SVG OUTPUT SHRINK IN ' + ((before) / result.data.length) + '%')
-  if (result.data) {
-    // console.log(result.data);    
-    return result.data
-  }
-  else {
-    options.debug && console.error(`Error while optimizing svg `, result)
-    return data
-
-  }
+  const result = await optimizeSvg(data, options.debug)
+  return result
 }
 
 
-const svgoOptions = {
-  full: true,
-  multipass: true,
-  precision: 1,
-  plugins: [
-    {
-      moveElemsAttrsToGroup: true,
-    },
-    {
-      moveGroupAttrsToElems: true,
-    },
-    {
-      collapseGroups: true,
-    },
-    {
-      mergePaths: true,
-    },
-    {
-      convertShapeToPath: true,
-    },
-    {
-      sortAttrs: true,
-    },
-    {
-      cleanupEnableBackground: true,
-    },
-    {
-      cleanupIDs: true,
-    },
-    {
-      cleanupNumericValues: true,
-    },
-    {
-      convertStyleToAttrs: true,
-    },
-    {
-      convertTransform: true,
-    },
-    {
-      removeComments: true,
-    },
-    {
-      removeDesc: true,
-    },
-    {
-      removeEmptyAttrs: true,
-    },
-    {
-      removeEmptyText: true,
-    },
-    {
-      removeEmptyContainers: true,
-    },
-    {
-      removeViewBox: false,
-    },
-    {
-      removeUnknownsAndDefaults: true,
-    },
-    {
-      removeUselessStrokeAndFill: true,
-    },
-    { convertColors: true },
-    // { removeAttributesBySelector: true },
-    { removeHiddenElems: true },
-    { removeUselessStrokeAndFill: true },
-    { convertPathData: true },
-    { removeAttrs: true },
-    { removeMetadata: true },
-    { removeViewBox: true },
-    { convertShapeToPath: true },
-    { removeComments: true },
-    { removeNonInheritableGroupAttrs: true },
-    { removeXMLNS: true },
-    { addAttributesToSVGElement: true },
-    { removeOffCanvasPaths: true },
-    { removeXMLProcInst: true },
-    { addClassesToSVGElement: true },
-    { convertTransform: true },
-    { removeDimensions: true },
-    { removeRasterImages: true },
-    { reusePaths: true },
-    { cleanupAttrs: true },
-    { inlineStyles: true },
-    { removeDoctype: true },
-    { removeScriptElement: true },
-    { sortAttrs: true },
-    { cleanupEnableBackground: true },
-    { mergePaths: true },
-    { removeEditorsNSData: true },
-    { removeStyleElement: true },
-    { sortDefsChildren: true },
-    { cleanupIDs: true },
-    { minifyStyles: true },
-    { removeElementsByAttr: true },
-    { removeTitle: true },
-    { cleanupListOfValues: true },
-    { moveElemsAttrsToGroup: true },
-    { removeEmptyAttrs: true },
-    { removeUnknownsAndDefaults: true },
-    { cleanupNumericValues: true },
-    { moveGroupAttrsToElems: true },
-    { removeEmptyContainers: true },
-    { removeUnusedNS: true },
-    { collapseGroups: true },
-    { prefixIds: true },
-    { removeEmptyText: true },
-    { removeUselessDefs: true },
-
-  ]
-}

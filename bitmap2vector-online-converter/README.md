@@ -1,17 +1,15 @@
 
 [Playground](https://cancerberosgx.github.io/demos/bitmap2vector-online-converter) (WIP) 
 
-## TODO :
-- [ ] 
-- [ ] remove embedded example files and add them as static files.
+## TODO :r
 - [ ] download current images and transformations as zip files. or store images in FS and put settings in url
 - [ ] switch between output/input images so we can perform png=>svg=> png multiple times to see if degrades or improves. Also a mechanism to perform this N times.
 - [ ] add svgo browser - user can prevent optimization with a param - by default is done
 - [x] load images form external urls and remove most of the testing ones or request them
-
+r
 ## Ideas
 
- * add ImageMagic to measure differenc e
+ * add ImageMagic to measure difference
  * idea: a general preprocessing ImageMagic/jimp filter - for example edge detection, scale. Perhaps jimp already support these
 
 <!-- 

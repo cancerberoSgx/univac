@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { base64ToUrl } from 'svg-png-converter'
-import { PNG2SVGOptions } from 'svg-png-converter/dist/src/types'
+import { base64ToUrl, PNG2SVGOptions } from 'svg-png-converter'
 import { createImage } from '../app/convert'
 import { AbstractComponent } from './component'
 
@@ -120,7 +119,7 @@ export class Editor extends AbstractComponent {
 
               <div>
                 <a href="#" onClick={e => {
-                  this.setState({page: 'download'})                  
+                  prepareDownload()             
                   // var blob = new Blob([this.state.output.content], { type: 'image/svg+xml;charset=utf-8' })
                   // FileSaver.saveAs(blob, this.state.output.name)
                 }}>
@@ -143,4 +142,9 @@ export class Editor extends AbstractComponent {
     Object.assign(this.state.options, s)
     await createImage(this.state.input)
   }
+}
+
+export function prepareDownload(){
+
+  this.setState({page: 'download'})     
 }

@@ -19,7 +19,7 @@ export interface State {
 export async function getInitialState(): Promise<State> {
   return {
     error: undefined,
-    page: 'editor',
+    page: 'home',
     editorTracer: 'imagetracer',
     input: {
       size: lisa_png.length,
