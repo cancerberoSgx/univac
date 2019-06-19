@@ -1,19 +1,21 @@
 import * as React from 'react'
 import { ForkRibbon } from './common/forkRibbon'
-import { loadUrl } from './common/uiUtil'
+import {  UrlStateManager } from "./common/urlState";
 import { AbstractComponent } from './component'
 import { Editor } from './editor'
 import { Header } from './header'
 import { Home } from './home'
 import { LoadImage } from './loadImage'
 import './styles.css'
+import { Download } from './download';
+
 
 export class App extends AbstractComponent {
+  urlState: UrlStateManager|undefined
   componentDidMount() {
-    const editorContainer = document.getElementById("editor-container")!
-    setTimeout(() => {
-      loadUrl()
-    }, 100)
+    if(!this.urlState){
+      this.urlState = new UrlStateManager()
+    }
   }
 
   render() {
@@ -22,6 +24,7 @@ export class App extends AbstractComponent {
       {this.state.page === 'home' ? <Home /> : ''}
       {this.state.page === 'loadImage' ? <LoadImage /> : ''}
       {this.state.page === 'editor' ? <Editor /> : ''}
+      {this.state.page === 'download' ? <Download /> : ''}
       <ForkRibbon />
     </div>
   }

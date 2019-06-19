@@ -39,6 +39,12 @@ export interface PNG2SVGOptions extends BaseOptions, RemoveProperties<PotracePos
     */
   input: Buffer | string | Uint8Array | Blob;
 
+  /**
+   * If true, png2svg will run optimization before returning the generated SVG code to the user. 
+   * The idea is to reduce its size and currently the tool being executed is svgo( generally 
+   * reduces 40%-50%) svg size but it could take some time to execute, particularly with large input.
+   */
+  optimize?: boolean
 }
 
 export interface BaseOptions {

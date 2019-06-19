@@ -30,7 +30,9 @@
     "@types/js-base64": "^2.3.1",
     "@types/node": "^12.0.7",
     "ava": "^2.0.0",
+    "babel-polyfill": "^6.26.0",
     "file-type": "^11.1.0",
+    "primitive": "github:Easonzero/primitive",
     "ts-node": "^8.2.0",
     "ts-refactor": "0.0.6",
     "typescript": "^3.5.1"
@@ -44,7 +46,8 @@
     "js-base64": "^2.5.1",
     "minimist": "^1.2.0",
     "misc-utils-of-mine-generic": "^0.2.8",
-    "potrace": "git+https://github.com/cancerberoSgx/node-potrace.git",
+    "potrace": "github:cancerberoSgx/node-potrace",
+    "svgo": "github:cancerberoSgx/svgo#browser",
     "typedarray-to-buffer": "^3.1.5"
   },
   "keywords": [

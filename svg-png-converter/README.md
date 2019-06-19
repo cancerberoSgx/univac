@@ -4,32 +4,33 @@
 
 Checkout [Project Playground](https://cancerberosgx.github.io/demos/svg-png-converter/playground/) to test converting SVG images to PNG and back again using different configurations. 
 
-Checkout End User App to transform bitmaps to vector images Powered by this project.
+Also, checkout this app build with this library to transform bitmap to SVG online: 
+[bitmap2vector](https://cancerberosgx.github.io/demos/bitmap2vector-online-converter) (WIP) 
 
 ## Summary
 
- * Convert SVG to PNG or JPEG.
- * Convert PNG/JPEG to SVG. produced SVG is one path, that resembles the original image relatively well and ,
-   and in a relative small output length.
+ * Convert SVG to PNG / JPEG
+ * Convert PNG/JPEG to SVG. 
+   * produced SVG are paths that resembles the original image relatively well and in a relative small output length.
+   * It does good job with cartoons / logos etc
+   * photos / realistic images need to be configured using the options since they output could be large in size.
  * Supports browsers and node.js (Same JavaScript API). 
  * Command Line interface.
  * Uses [fabricjs](http://fabricjs.com/) to rasterize SVG documents into PNG/JPEG,.
- * Uses [potrace](https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter) to convert PNG/JPEG bitmap images to SVG vector graphics. 
+ * Uses [potrace](https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter) and [bitmap2vector](https://www.npmjs.com/package/bitmap2vector) to convert PNG/JPEG bitmap images to SVG vector graphics with flexible options to control output size / quality. 
 
-## Usage
-
-### Install
+## Install
 
 ```sh
 npm install svg-png-converter
 ```
 
-### JavaScript API Examples
+## JavaScript API Examples
 
-#### svg2png
+### svg2png
 
 
-##### From Buffer to Buffer
+#### From Buffer to Buffer
 
 (In the browser buffer are instances of UInt8Array, supported thanks to https://www.npmjs.com/package/buffer)
 
@@ -46,7 +47,7 @@ writeFileSync("tmp25.png", s)
 ```
 
 
-##### From literal SVG string to DataUrl, custom size and quality jpeg
+#### From literal SVG string to DataUrl, custom size and quality jpeg
 
 ```ts
 import {svg2png} from 'svg-png-converter'
@@ -74,7 +75,35 @@ let s = await svg2png({
 ```
 
 
-#### svg2png
+### svg2png
+
+#### Introduction
+
+Transforming a bitmap image to a vector document is not straight forward. .This library accomplish that using different [](image tracing) implementations and options to configure them. Right now it support the following "tracers" (some comments about each): 
+
+ * [bitmap2vector](https://www.npmjs.com/package/bitmap2vector) 
+  * Support color output and does good job preserving the original colors by default
+  * has multiple settings to configure output quality, size, colors, noise, etc.
+ 
+ * [potrace](https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter) 
+  * Supports only monochromatic color  output (configurable). 
+  * Does a good job preserving edges/shapes and color contrast / light. 
+  * Has options to remove noise, control quality, etc. Has options to add iterations for color posterization but is not simple / requires manual work.
+  * (IMO) Potrace generated shapes are better / cleaner so if only monochromatic output is needed this could be better than the other tracers.
+
+
+
+```ts
+import {png2svg} from 'svg-png-converter'
+
+const result = await png2svg({ 
+  tracer: 'imagetracer', 
+  input: readFileSync('test/assets/tmp2.png') 
+})
+writeFileSync("tmp25.png", s)
+```
+
+
 
 TODO
 
@@ -89,6 +118,7 @@ svg-png-converter --input " > tmp.svg
 ```
 
 #### png2svg
+
 ```sh
 png2svg --input "some/**/*.png" --output vectors 
 png2svg --input foo.jpeg > tmp.svg
@@ -99,13 +129,24 @@ png2svg --input foo.jpeg > tmp.svg
 
 See [types.ts](src/types.ts). Options apply both to JavaScript API and CLI.
 
-## Status
+## Status / TODO
 
 - [x] Node.js API and tests
 - [x] CLI
 - [x] Browser
 - [x] CLI tests
 - [ ] browser tests
+- [ ] Make sure we are using Potrace latest forks and not the original one.
+- [ ] add https://github.com/cancerberoSgx/svgo
+
+
+## Ideas
+
+- [ ] This is another library to rasterize svgs DOM based and fast: https://github.com/canvg/canvg - we could support also that as an alternative to fabric and measure
+- [ ] switch between output/input images so we can perform png=>svg=> png multiple times to see if degrades or improves. Also a mechanism to perform this N times.
+ * add ImageMagic to measure differenc e
+ * idea: a general preprocessing ImageMagic/jimp filter - for example edge detection, scale. Perhaps jimp already support these
+
 
 ## Why?
 
@@ -136,7 +177,4 @@ geometric primitives:
  Many of them supports JavaScript and this one in particular supports both node.js and browsers:
  https://github.com/tooolbox/node-potrace, and that's what this project uses to transform SVG to bitmaps. 
 
-## TODO
-
- * This is another library to rasterize svgs DOM based and fast: https://github.com/canvg/canvg
- * adapt bitmap2vector to use the other lib.
+ It also uses bitmap2vector that is a facade over 

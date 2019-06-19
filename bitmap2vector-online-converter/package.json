@@ -45,7 +45,8 @@
     "misc-utils-of-mine-generic": "^0.2.10",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "svg-png-converter": "file:../svg-png-converter"
+    "svg-png-converter": "file:../svg-png-converter",
+    "svgo": "github:cancerberoSgx/svgo#browser"
   },
   "repository": {
     "type": "git",

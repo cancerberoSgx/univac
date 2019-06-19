@@ -1,20 +1,20 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { svg2png } from '../../src/svg2png'
 
-async function base55() {
-  writeFileSync('tmp.txt', readFileSync('/Users/sebastiangurin/Downloads/Down_the_Rabbit_Hole.png').toString('base64'))
-}
-base55()
+// async function base55() {
+//   writeFileSync('tmp.txt', readFileSync('/Users/sebastiangurin/Downloads/Down_the_Rabbit_Hole.png').toString('base64'))
+// }
+// base55()
 
-async function test22() {
-  let s = await svg2png({
-    input: readFileSync('test/assets/tmp2.svg'),
-    encoding: 'buffer',
-    format: 'png',
-  })
-  writeFileSync('test/assets/tmp25.png.buffer', s)
-  writeFileSync("tmp25.png", s)
-}
+// async function test22() {
+//   let s = await svg2png({
+//     input: readFileSync('test/assets/tmp2.svg'),
+//     encoding: 'buffer',
+//     format: 'png',
+//   })
+//   writeFileSync('test/assets/tmp25.png.buffer', s)
+//   writeFileSync("tmp25.png", s)
+// }
 // test22()
 // function fabricTest() {
 //   var canvas = new fabric.Canvas('c')

@@ -1,7 +1,7 @@
 import { getFileExtension, getFileNameFromUrl } from 'misc-utils-of-mine-generic'
 import * as React from 'react'
 import { blobToBuffer, PNG2SVGOptions, SVG2PNGOptions } from 'svg-png-converter'
-import { convert, createImage } from '../../app/convert'
+import { createImage } from '../../app/convert'
 import { State } from '../../app/state'
 import fileType = require('file-type')
 
@@ -20,30 +20,6 @@ export function isDesktop() {
 export const Space = () => (
   <span style={{ marginRight: '0.5em' }}></span>
 )
-
-
-export function createUrl() {
-  const s = {
-    code: ''//getCodeEditorText(),
-  }
-  const b = btoa(JSON.stringify(s))
-  window.location.hash = '#state=' + b
-}
-
-export async function loadUrl(url = window.location.hash) {
-  if (window.location.hash.includes('state=')) {
-    const d = url.split('state=')[1]
-    const { imageUrl, options } = JSON.parse(atob(d)) as { imageUrl: string, options: SVG2PNGOptions | PNG2SVGOptions }
-    const member = (options as any).svg2png || (options as any).png2svg
-    if (!member) {
-      throw new Error('Cannot retrieve image document options from url. aborting')
-    }
-    const doc = { ...options, ...{ input: (options as any).svg2png ? (options as any).input : (options as any).png2svg } }
-    const result = await convert(doc as any)
-  } else {
-  }
-}
-
 
 export async function fetchAsBuffer(url: string, headers?: Headers) {
   var options: RequestInit = {

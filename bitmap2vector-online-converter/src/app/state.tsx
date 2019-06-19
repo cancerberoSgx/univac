@@ -2,20 +2,24 @@ import { RemoveProperties } from 'misc-utils-of-mine-generic'
 import { BufferClass, PNG2SVGOptions, urlToBase64 } from 'svg-png-converter'
 import { lisa_png } from './debug/panda_png'
 
+export type Page = 'home' | 'loadImage' | 'editor' | 'download'
+export type EditorOptions = RemoveProperties<PNG2SVGOptions, 'input'>
+export type EditorTracer = 'imagetracer' | 'potrace'
+
 export interface State {
   error?: Error | undefined;
   input: Image
   output: Image
-  page: 'home' | 'loadImage' | 'editor' | 'download'
-  editorTracer: 'imagetracer' | 'potrace',
-  options: RemoveProperties<PNG2SVGOptions, 'input'>
-  // potraceEasyOptions: PotraceEasyOptions
+  page: Page
+  editorTracer: EditorTracer
+  options: EditorOptions
+  optimizing: boolean
 }
 
 export async function getInitialState(): Promise<State> {
   return {
     error: undefined,
-    page: 'home',
+    page: 'editor',
     editorTracer: 'imagetracer',
     input: {
       size: lisa_png.length,
@@ -27,31 +31,26 @@ export async function getInitialState(): Promise<State> {
       content: BufferClass.from(''),
       name: 'unnamed.png.svg',
     },
+    optimizing: false,
     options: {
-      tracer: 'potrace',
-      steps: 4, background: '#ffffff', color: '#000000', turdSize: 3
+      tracer: 'imagetracer',
+      steps: 4, 
+      background: '#ffffff', 
+      color: '#000000', 
+      turdSize: 3,
+      ltres: 1,
+      qtres: 1,
+      pathomit: 8,
+      rightangleenhance: false,
+      numberofcolors: 16,
+      mincolorratio: 0,
+      scale: 1
     },
-    // potraceEasyOptions: {
-    //   steps: 4,
-    //   background: '#ffffff',
-    //   foreground: '#000000',
-    //   smallest: 2
-    // }
   }
 }
 
 export interface Image {
   size: number
-  // outputSize?: number
-  // outputName?: string
   name: string
   content: Buffer
-  // options: SVG2PNGOptions
 }
-
-// interface PotraceEasyOptions {
-//   background: string|-1
-//   foreground: string
-//   steps: 1|2|3|4
-//   smallest: number
-// }
