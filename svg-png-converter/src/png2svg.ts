@@ -1,9 +1,9 @@
+import { bitmap2vector } from 'bitmap2vector'
 import { isNode } from 'misc-utils-of-mine-generic'
 import { isBase64, urlToBase64 } from "./base64"
 import { blobToBuffer, BufferClass, typedArrayToBuffer } from './buffer'
 import { potracePosterize } from './potrace'
 import { PNG2SVGOptions, PotraceTraceOptions } from './types'
-
 /**
  * Converts a PNG bitmap image to a SVG vector graphics. Other input supported besides PNG/SVG are JPEG and
  * BMP. Notice that the output SVG won't respect image colors and only will be monochrome. If no --color
@@ -43,16 +43,18 @@ export async function png2svg(options: PNG2SVGOptions) {
     }
     (options as PotraceTraceOptions).optCurve = options.noCurveOptimization !== false
     options.debug && console.log(`Options: ${JSON.stringify({ ...options, input: null })}`)
-    return await potracePosterize(buffer, options)
+    return { content: await potracePosterize(buffer, options) }
   }
 
   else {
     try {
-      var Tracer = require('imagetracerjs')
-      const outputContent = await Tracer.tracePngToSvg(buffer, options) 
+      // var Tracer = require('imagetracerjs')
+
+      const outputContent = await bitmap2vector({ ...options, input: buffer })// Tracer.tracePngToSvg(buffer, options) 
       return outputContent
     } catch (error) {
-      console.error('ERROR tracePngToSvg', error)
+      console.error('ERROR PngToSvg', error, error.stack)
+      throw error
     }
   }
 }

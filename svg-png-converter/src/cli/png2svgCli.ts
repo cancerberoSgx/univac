@@ -31,7 +31,7 @@ export async function png2svgCli(o: PNG2SVGOptions) {
           writeFileSync(file, result.content)
         }
         else {
-          process.stdout.write(result.content || '')
+          process.stdout.write(result.content && result.content.toString() || '')
         }
       } catch (error) {
         console.error('ERROR while rendering file ' + input.name)

@@ -8,7 +8,24 @@
 @media only screen and (min-width: 993px) {
   .container {
     width: 100%;
-    margin: 0.5em 1em;
+    padding: 0.5em 1em;
     max-width: 100%;
   }
+}
+#logo-container, #logo-container *  {
+  height: 90%;
+}
+#logo-container {
+  padding: 0 0 0 0.5em;
+}
+@media only screen and (min-width: 601px){
+nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
+    height: 3em;
+    line-height: 2em;
+
+}
+}
+
+.header .brand-logo {
+  max-height: 1em;
 }

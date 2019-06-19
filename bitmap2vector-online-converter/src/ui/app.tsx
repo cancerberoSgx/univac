@@ -17,7 +17,7 @@ export class App extends AbstractComponent {
   }
 
   render() {
-    return <div  >
+    return <div  className="container">
       <Header />
       {this.state.page === 'home' ? <Home/> : ''}
       {this.state.page === 'loadImage' ? <LoadImage/> : ''}

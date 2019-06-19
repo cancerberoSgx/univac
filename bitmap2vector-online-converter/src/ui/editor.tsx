@@ -10,17 +10,13 @@ export class Editor extends AbstractComponent {
     return (
 
       <div className="container">
-
-
         <div className="row">
           <div className="col s8 push-s4">
             <div className="row">
               <div className="col s6">
               <div>{Math.round(this.state.input.size/1000)}KB</div>
-
                 <img src={base64ToUrl(this.state.input.content.toString('base64'), 'image/png')} />
               </div>
-
               <div className="col s6">
               <div>{Math.round(this.state.output.size/1000)}KB</div>
                 <div dangerouslySetInnerHTML={{ __html: this.state.output.content.toString() }}></div>

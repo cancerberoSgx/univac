@@ -8,15 +8,15 @@ export class Home extends AbstractComponent {
 
       <>
         <div className="container">
-          <br />
-          <h1 className="header center orange-text">Bitmap to Vector</h1>
+          <h1 className="header center orange-text darken-2">Bitmap to Vector</h1>
           <div className="row center">
-            <h5 className="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+            <h5 className="header col s12">Transform your images to Vector Graphics. </h5>
+            <p>No servers, 100% in your browser running <a   href="https://www.npmjs.com/package/svg-png-converter" ><img style={{paddingTop: '14px'}}src="https://img.shields.io/badge/open%20source-software-blue.svg"></img>
+    </a> . And mor importantly, 100% <strong>free</strong> as in <i>"free beer"</i>. Enjoy!</p>
           </div>
           <div className="row center">
-            <a href="#" onClick={e => this.setState({ page: 'loadImage' })} className="btn-large waves-effect waves-light orange">Get Started</a>
+            <a href="#" onClick={e => this.setState({ page: 'loadImage' })} className="btn-large waves-effect waves-light orange">Get Started !</a>
           </div>
-          <br />
         </div>
 
         <div className="container">

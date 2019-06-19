@@ -59,6 +59,7 @@ function printHelp() {
 Usage: 
 
 image-tracer --input "foo/imgs/**/*.png" --output bar/imgs-svg
+bitmap2vector --input "that.jpg" --blurdelta 40 > that.jpg.svg
 
 Options:
 

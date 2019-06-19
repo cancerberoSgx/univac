@@ -21,10 +21,10 @@ export async function convert(e: Image) {
       input: e.content, 
     })
   // }
-  e.size = e.content.length
+
   // getStore().getState().output.size = (output || '').length
   // getStore().getState().output.name= getStore().getState().output.name|| getFileNameFromUrl(e.content) || e.name + '.' + (getStore().getState().options.format )
-  return output || ''
+  return output  
 }
 
 // let svg2pngOptions: SVG2PNGOptions
@@ -52,8 +52,8 @@ export async function createImage(options: createImageOptions) {
     // options: { ...png2svgOptions, input: options.dataUrl },
     // ...options.extra
   }
-  const content = await convert(input)
-  const output =  {name: 'output.svg', content , size: content.length} 
+  const result = await convert(input)
+  const output =  {name: 'output.svg', content: Buffer.from(result.content) , size: result.content.length} 
   // const nextState = 
   getStore().setState({
     input,

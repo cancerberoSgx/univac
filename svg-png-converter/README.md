@@ -2,7 +2,9 @@
 
 ## Playground
 
-Checkout [Project Playground](https://cancerberosgx.github.io/demos/svg-png-converter/playground/) to  test converting SVG images to PNG and back again using different configurations. 
+Checkout [Project Playground](https://cancerberosgx.github.io/demos/svg-png-converter/playground/) to test converting SVG images to PNG and back again using different configurations. 
+
+Checkout End User App to transform bitmaps to vector images Powered by this project.
 
 ## Summary
 
@@ -137,3 +139,4 @@ geometric primitives:
 ## TODO
 
  * This is another library to rasterize svgs DOM based and fast: https://github.com/canvg/canvg
+ * adapt bitmap2vector to use the other lib.
