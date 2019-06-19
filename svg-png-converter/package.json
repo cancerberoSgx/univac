@@ -38,7 +38,7 @@
     "typescript": "^3.5.1"
   },
   "dependencies": {
-    "bitmap2vector": "file:../bitmap2vector/bitmap2vector",
+    "bitmap2vector": "0.0.3",
     "blob-to-buffer": "^1.2.8",
     "buffer": "^5.2.1",
     "fabric": "^3.1.0",

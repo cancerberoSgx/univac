@@ -1,5 +1,3 @@
-import { readFileSync, writeFileSync } from 'fs'
-import { svg2png } from '../../src/svg2png'
 
 // async function base55() {
 //   writeFileSync('tmp.txt', readFileSync('/Users/sebastiangurin/Downloads/Down_the_Rabbit_Hole.png').toString('base64'))

@@ -48,27 +48,27 @@ async function dispatchPotrace(options: PNG2SVGOptions, buffer: Buffer) {
 async function resolveInput(options: PNG2SVGOptions) {
   let buffer: Buffer | undefined
   if (BufferClass.isBuffer(options.input)) {
-    buffer = options.input;
+    buffer = options.input
   }
   else if (!isNode() && typeof Blob !== 'undefined' && options.input instanceof Blob) {
-    buffer = await blobToBuffer(options.input);
+    buffer = await blobToBuffer(options.input)
   }
   else if (typeof options.input === 'string' && options.input.startsWith('data:')) {
-    buffer = BufferClass.from(urlToBase64(options.input), 'base64');
+    buffer = BufferClass.from(urlToBase64(options.input), 'base64')
   }
   else if (typeof options.input === 'string' && isBase64(options.input)) {
-    buffer = BufferClass.from(Base64.atob(options.input), 'binary');
+    buffer = BufferClass.from(Base64.atob(options.input), 'binary')
   }
   else if (typeof options.input === 'string') {
-    buffer = BufferClass.from(options.input, 'binary');
+    buffer = BufferClass.from(options.input, 'binary')
   }
   else if (options.input instanceof Uint8Array && !BufferClass.isBuffer(options.input)) {
-    buffer = typedArrayToBuffer(options.input);
+    buffer = typedArrayToBuffer(options.input)
   }
   if (!buffer) {
-    throw new Error('Invalid input option, must be one of Buffer|Uint8Array|Blob|data-url string|binary string');
+    throw new Error('Invalid input option, must be one of Buffer|Uint8Array|Blob|data-url string|binary string')
   }
-  return buffer;
+  return buffer
 }
 
 async function dispatchOptimizeSvg(options: PNG2SVGOptions, data: string) {
@@ -99,109 +99,109 @@ const svgoOptions = {
   multipass: true,
   precision: 1,
   plugins: [
-  {
-    moveElemsAttrsToGroup: true,
-  },
-  {
-    moveGroupAttrsToElems: true,
-  },
-  {
-    collapseGroups: true,
-  },
-  {
-    mergePaths: true,
-  },
-  {
-    convertShapeToPath: true,
-  },
-  {
-    sortAttrs: true,
-  },
-  {
-    cleanupEnableBackground: true,
-  },
-  {
-    cleanupIDs: true,
-  },
-  {
-    cleanupNumericValues: true,
-  },
-  {
-    convertStyleToAttrs: true,
-  },
-  {
-    convertTransform: true,
-  },
-  {
-    removeComments: true,
-  },
-  {
-    removeDesc: true,
-  },
-  {
-    removeEmptyAttrs: true,
-  },
-  {
-    removeEmptyText: true,
-  },
-  {
-    removeEmptyContainers: true,
-  },
-  {
-    removeViewBox: false,
-  },
-  {
-    removeUnknownsAndDefaults: true,
-  },
-  {
-    removeUselessStrokeAndFill: true,
-  },
-  { convertColors: true },
-  // { removeAttributesBySelector: true },
-  { removeHiddenElems: true },
-  { removeUselessStrokeAndFill: true },
-  { convertPathData: true },
-  { removeAttrs: true },
-  { removeMetadata: true },
-  { removeViewBox: true },
-  { convertShapeToPath: true },
-  { removeComments: true },
-  { removeNonInheritableGroupAttrs: true },
-  { removeXMLNS: true },
-  { addAttributesToSVGElement: true },
-  { removeOffCanvasPaths: true },
-  { removeXMLProcInst: true },
-  { addClassesToSVGElement: true },
-  { convertTransform: true },
-  { removeDimensions: true },
-  { removeRasterImages: true },
-  { reusePaths: true },
-  { cleanupAttrs: true },
-  { inlineStyles: true },
-  { removeDoctype: true },
-  { removeScriptElement: true },
-  { sortAttrs: true },
-  { cleanupEnableBackground: true },
-  { mergePaths: true },
-  { removeEditorsNSData: true },
-  { removeStyleElement: true },
-  { sortDefsChildren: true },
-  { cleanupIDs: true },
-  { minifyStyles: true },
-  { removeElementsByAttr: true },
-  { removeTitle: true },
-  { cleanupListOfValues: true },
-  { moveElemsAttrsToGroup: true },
-  { removeEmptyAttrs: true },
-  { removeUnknownsAndDefaults: true },
-  { cleanupNumericValues: true },
-  { moveGroupAttrsToElems: true },
-  { removeEmptyContainers: true },
-  { removeUnusedNS: true },
-  { collapseGroups: true },
-  { prefixIds: true },
-  { removeEmptyText: true },
-  { removeUselessDefs: true },
+    {
+      moveElemsAttrsToGroup: true,
+    },
+    {
+      moveGroupAttrsToElems: true,
+    },
+    {
+      collapseGroups: true,
+    },
+    {
+      mergePaths: true,
+    },
+    {
+      convertShapeToPath: true,
+    },
+    {
+      sortAttrs: true,
+    },
+    {
+      cleanupEnableBackground: true,
+    },
+    {
+      cleanupIDs: true,
+    },
+    {
+      cleanupNumericValues: true,
+    },
+    {
+      convertStyleToAttrs: true,
+    },
+    {
+      convertTransform: true,
+    },
+    {
+      removeComments: true,
+    },
+    {
+      removeDesc: true,
+    },
+    {
+      removeEmptyAttrs: true,
+    },
+    {
+      removeEmptyText: true,
+    },
+    {
+      removeEmptyContainers: true,
+    },
+    {
+      removeViewBox: false,
+    },
+    {
+      removeUnknownsAndDefaults: true,
+    },
+    {
+      removeUselessStrokeAndFill: true,
+    },
+    { convertColors: true },
+    // { removeAttributesBySelector: true },
+    { removeHiddenElems: true },
+    { removeUselessStrokeAndFill: true },
+    { convertPathData: true },
+    { removeAttrs: true },
+    { removeMetadata: true },
+    { removeViewBox: true },
+    { convertShapeToPath: true },
+    { removeComments: true },
+    { removeNonInheritableGroupAttrs: true },
+    { removeXMLNS: true },
+    { addAttributesToSVGElement: true },
+    { removeOffCanvasPaths: true },
+    { removeXMLProcInst: true },
+    { addClassesToSVGElement: true },
+    { convertTransform: true },
+    { removeDimensions: true },
+    { removeRasterImages: true },
+    { reusePaths: true },
+    { cleanupAttrs: true },
+    { inlineStyles: true },
+    { removeDoctype: true },
+    { removeScriptElement: true },
+    { sortAttrs: true },
+    { cleanupEnableBackground: true },
+    { mergePaths: true },
+    { removeEditorsNSData: true },
+    { removeStyleElement: true },
+    { sortDefsChildren: true },
+    { cleanupIDs: true },
+    { minifyStyles: true },
+    { removeElementsByAttr: true },
+    { removeTitle: true },
+    { cleanupListOfValues: true },
+    { moveElemsAttrsToGroup: true },
+    { removeEmptyAttrs: true },
+    { removeUnknownsAndDefaults: true },
+    { cleanupNumericValues: true },
+    { moveGroupAttrsToElems: true },
+    { removeEmptyContainers: true },
+    { removeUnusedNS: true },
+    { collapseGroups: true },
+    { prefixIds: true },
+    { removeEmptyText: true },
+    { removeUselessDefs: true },
 
   ]
 }
