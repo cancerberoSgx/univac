@@ -9,6 +9,7 @@ import { serial } from './util'
 export async function traceImage(options: CliOptions) {
   preconditions(options)
   options.debug && console.log(`CLI Options: ${JSON.stringify({ ...options, input: null })}`)
+  // console.log( typeof options.input === 'string' ? glob(options.input).filter(existsSync) : []);
   const input = (typeof options.input === 'string' ? glob(options.input).filter(existsSync) : [])
     .map(f => ({
       name: f,
@@ -23,7 +24,7 @@ export async function traceImage(options: CliOptions) {
   await serial(input.map(input => async () => {
     try {
       options.debug && console.log('Rendering ' + input.name)
-      const { content } = await bitmap2vector(options)
+      const { content } = await bitmap2vector({ ...options, input: input.content })
       if (options.output) {
         const outputFilePath = join(options.output, basename(input.name + '.' + (options.format || 'svg')))
         writeFileSync(outputFilePath, content)
@@ -32,8 +33,8 @@ export async function traceImage(options: CliOptions) {
         process.stdout.write(content)
       }
     } catch (error) {
-      console.error('ERROR while rendering file ' + input.name)
-      console.error(error)
+      console.error('ERROR while rendering file ' + input)
+      console.error(error, error.stack)
     }
   }))
 }
@@ -79,9 +80,9 @@ Options:
 * --linefilter: boolean: Enable or disable line filter for noise reduction. Default value: false.
 * --scale: number: Every coordinate will be multiplied with this, to scale the SVG. Default value: 1.
 * --roundcoords: number: rounding coordinates to a given decimal place. 1 means rounded to 1 decimal place like 7.3 ; 3 means rounded to 3 places, like 7.356. Default value: 1.
-* --viewbox: boolean: Enable or disable SVG viewbox. Default value: false.
+* --viewbox: boolean: Enable or disable SVG view-box. Default value: false.
 * --desc: boolean: Enable or disable SVG descriptions. Default value: false.
 * --blurradius: number: Set this to 1..5 for selective Gaussian blur preprocessing. Default value: 0.
-* --blurdelta: number: RGBA delta treshold for selective Gaussian blur preprocessing. Default value: 20.
-  `)
+* --blurdelta: number: RGBA delta threshold for selective Gaussian blur preprocessing. Default value: 20.
+`)
 }
