@@ -1,7 +1,7 @@
 {
-  "name": "svg-png-converter",
-  "version": "0.0.7",
-  "description": "Convert SVG/PNG and back, both in browser and node.js. JavaScript API and Command Line",
+  "name": "geometrizer-js",
+  "version": "0.0.1",
+  "description": "Geometrizer JavaScript API from official geometrizer-haxe JavaScript target build",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "bin": {
@@ -25,52 +25,31 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/fabric": "^2.6.16",
-    "@types/glob": "^7.1.1",
-    "@types/js-base64": "^2.3.1",
     "@types/node": "^12.0.8",
     "ava": "^2.1.0",
-    "babel-polyfill": "^6.26.0",
-    "file-type": "^12.0.0",
-    "primitive": "github:Easonzero/primitive",
     "ts-node": "^8.3.0",
     "ts-refactor": "0.0.6",
     "typescript": "^3.5.2"
   },
-  "dependencies": {
-    "bitmap2vector": "0.0.3",
-    "blob-to-buffer": "^1.2.8",
-    "buffer": "^5.2.1",
-    "fabric": "^3.1.0",
-    "glob": "^7.1.4",
-    "js-base64": "^2.5.1",
-    "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.10",
-    "potrace": "github:cancerberoSgx/node-potrace",
-    "svgo": "github:cancerberoSgx/svgo#browser",
-    "typedarray-to-buffer": "^3.1.5"
-  },
+  "dependencies": {},
   "keywords": [
-    "SVG",
-    "PNG",
-    "JPEG",
-    "raster",
-    "rasterize",
-    "render",
-    "node",
-    "browser"
+    "geometrizer",
+    "JavaScript",
+    "browser",
+    "Node.js",
+    "API"
   ],
   "author": {
     "name": "Sebastian Gurin",
     "email": "sebastigurin@gmail.com",
     "url": "http://sgurin.com"
   },
-  "homepage": "https://www.npmjs.com/package/svg-png-converter",
+  "homepage": "https://www.npmjs.com/package/geometrizer-js",
   "repository": {
     "type": "git",
     "url": "https://github.com/cancerberoSgx/univac.git"
   },
   "bugs": {
-    "url": "https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter"
+    "url": "https://github.com/cancerberoSgx/univac/tree/master/geometrizer-js"
   }
 }
