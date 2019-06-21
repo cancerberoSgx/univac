@@ -1,12 +1,22 @@
 import test from 'ava';
-import {shape, runner} from '../src'
+import {ImageRunner, ShapeTypes, Bitmap} from '../src'
 
-test('should export class runner.ImageRunner', async t => {
-  t.true(typeof runner.ImageRunner.prototype.constructor==='function')
-  // t.notThrows(()=>new runner.ImageRunner())
-  console.log(shape);
-  
+test('should export class ImageRunner', async t => {
+  t.deepEqual(typeof ImageRunner.prototype.constructor, 'function')
+  t.deepEqual(typeof ImageRunner.prototype.step, 'function')
 })
-// test('should export shape.ShapeTypes', async t => {
-  // t.true(typeof runner.ImageRunner.prototype.constructor==='function')
+
+test('should export enum ShapeTypes', async t => {
+  t.deepEqual(ShapeTypes.RECTANGLE, 0)
+  t.deepEqual(ShapeTypes.CIRCLE, 5)
+})
+
+test('should export class Bitmap', async t => {
+  t.deepEqual(typeof Bitmap.prototype.constructor, 'function')
+  t.deepEqual(typeof Bitmap.createFromRawBytes, 'function')
+})
+
+// test('should export class Bitmap', async t => {
+//   t.deepEqual(typeof Bitmap.prototype.constructor, 'function')
+//   t.deepEqual(typeof Bitmap.createFromRawBytes, 'function')
 // })
