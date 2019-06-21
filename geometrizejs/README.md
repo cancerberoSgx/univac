@@ -20,15 +20,16 @@ This example uses [jimp](TODO) to load images which supports formats both in nod
 ```js
 
 import Jimp from 'jimp'
-import { Bitmap, ImageRunner, ShapeTypes, SvgExporter } from '../src'
+import { Bitmap, ImageRunner, ShapeTypes, SvgExporter } from 'geometrizejs'
 
 (async () => {  
 
+  // load png/jpeg/gif,bmp/tiff image from url, file path or Buffer using jimp:
   const image = await Jimp.read('test/assets/logo.png')
   const bitmap = Bitmap.createFromRawBytes(image.bitmap.width, image.bitmap.height, image.bitmap.data)
   const runner = new ImageRunner(bitmap)
   const options = {
-    shapeTypes: [ShapeTypes.CIRCLE],
+    shapeTypes: [ShapeTypes.CIRCLE, ShapeTypes.TRIANGLE],
     candidateShapesPerStep: 50,
     shapeMutationsPerStep: 100,
     alpha: 128
@@ -43,10 +44,10 @@ import { Bitmap, ImageRunner, ShapeTypes, SvgExporter } from '../src'
     svgData.join('\n') + 
     SvgExporter.getSvgNodeClose()
 
-  // in node.js write output in file
+  // in node.js:
   writeFileSync('output.svg', svg)
 
-  // or in the browser, create a SVGElement
+  // in the browser:
   document.getElementById('svg-container').innerHTML = svg
 
 })()
@@ -67,3 +68,5 @@ haxe build-js-target.hxml
 ```
 
 That should generate `geometrize-haxe/build/geometrize.js` which should be copied to this project's `src` folder.
+
+Finally include [geometrize-haxe license](https://raw.githubusercontent.com/Tw1ddle/geometrize-haxe/master/LICENSE) in a `/*! */` comment at the beginning of the file.

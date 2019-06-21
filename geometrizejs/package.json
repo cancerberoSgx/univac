@@ -1,6 +1,6 @@
 {
   "name": "geometrizejs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Geometrize JavaScript API. Generated from geometrize-haxe library directly. Zero dependencies. No implementation, just typings. For node.js and browsers.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
