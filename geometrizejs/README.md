@@ -7,7 +7,7 @@
  * for node.js and browsers.
  * TypeScript typings
  * Zero dependencies.
- * No implementation, just typings of generated JavaScript library.
+ * No implementation, just typings for generated JavaScript library.
 
 ## Usage
 
@@ -15,15 +15,15 @@
 npm install --save geometrizejs
 ```
 
-This example uses [jimp](TODO) to load images supporting several formats, node.js and browsers.
+This example uses [jimp](TODO) to load images which supports formats both in node.js and browsers. Nevertheless any library can be used, such as [pngjs](TODO).
 
 ```js
 
 import Jimp from 'jimp'
 import { Bitmap, ImageRunner, ShapeTypes, SvgExporter } from '../src'
 
-(async ()=>{  
-  
+(async () => {  
+
   const image = await Jimp.read('test/assets/logo.png')
   const bitmap = Bitmap.createFromRawBytes(image.bitmap.width, image.bitmap.height, image.bitmap.data)
   const runner = new ImageRunner(bitmap)
@@ -38,7 +38,10 @@ import { Bitmap, ImageRunner, ShapeTypes, SvgExporter } from '../src'
   for (let i = 0; i < iterations; i++) {
     svgData.push(SvgExporter.exportShapes(runner.step(options)))
   }
-  const svg = SvgExporter.getSvgPrelude() + SvgExporter.getSvgNodeOpen(bitmap.width, bitmap.height) + svgData.join('\n') + SvgExporter.getSvgNodeClose()
+  const svg = SvgExporter.getSvgPrelude() + 
+    SvgExporter.getSvgNodeOpen(bitmap.width, bitmap.height) + 
+    svgData.join('\n') + 
+    SvgExporter.getSvgNodeClose()
 
   // in node.js write output in file
   writeFileSync('output.svg', svg)
@@ -63,4 +66,4 @@ cd geometrize-haxe
 haxe build-js-target.hxml
 ```
 
-That should generate `geometrize-haxe/build/geometrize.js` which should be copied to this projects src folder.
+That should generate `geometrize-haxe/build/geometrize.js` which should be copied to this project's `src` folder.
