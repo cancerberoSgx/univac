@@ -1,4 +1,4 @@
-import { ShapeTypes } from "./shapeTypes";
+import { ShapeTypes } from "./shapeTypes"
 
 /**
  * Encapsulates the parameters that may be passed to an image runner.

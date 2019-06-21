@@ -1,5 +1,5 @@
-import test from 'ava';
-import {ImageRunner, ShapeTypes, Bitmap, SvgExporter, ShapeJsonExporter} from '../src'
+import test from 'ava'
+import { Bitmap, ImageRunner, ShapeJsonExporter, ShapeTypes, SvgExporter } from '../src'
 
 test('should export class ImageRunner', async t => {
   t.deepEqual(typeof ImageRunner.prototype.constructor, 'function')

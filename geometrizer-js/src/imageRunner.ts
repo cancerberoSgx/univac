@@ -1,6 +1,6 @@
-import { ImageRunnerOptions } from './imageRunnerOptions';
-import { ShapeResult, Model } from './model';
-import { Bitmap } from "./bitmap";
+import { Bitmap } from "./bitmap"
+import { ImageRunnerOptions } from './imageRunnerOptions'
+import { Model, ShapeResult } from './model'
 
 export interface ImageRunnerConstructor {
   /**
@@ -26,9 +26,9 @@ interface ImageRunner {
    */
   step(options: ImageRunnerOptions): Array<ShapeResult>;
 
-  	/**
-	 * Gets the current bitmap with the shapes drawn on it.
-	 * @return	The current bitmap.
-	 */
-	getImageData():Bitmap
+  /**
+ * Gets the current bitmap with the shapes drawn on it.
+ * @return	The current bitmap.
+ */
+  getImageData(): Bitmap
 }
