@@ -28,7 +28,7 @@
     "ts-node": "^8.3.0",
     "typescript": "^3.5.2"
   },
-  "homepage": "https://www.npmjs.com/package/svg-png-converter/univac/bitmap2vector-cli",
+  "homepage": "https://www.npmjs.com/package/bitmap2vector-cli",
   "dependencies": {
     "bitmap2vector": "0.0.3",
     "glob": "^7.1.4",

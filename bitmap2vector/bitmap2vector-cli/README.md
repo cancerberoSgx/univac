@@ -1,5 +1,7 @@
 # bitmap2vector
 
+[Repository](https://www.npmjs.com/package/bitmap2vector-cli). 
+
 ## Install
 
 ```sg

@@ -11,10 +11,5 @@ log2.txt
 /package
 .vscode
 test-browser-outdir
+playground
 tmp*
-.antlr
-grammar-graph
-universal-svg-rasterizer
-doc
-.antlr
-geometrizer-js-cli

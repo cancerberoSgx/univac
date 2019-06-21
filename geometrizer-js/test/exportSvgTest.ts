@@ -7,7 +7,7 @@ test('should export SVG', async t => {
   const bitmap = Bitmap.createFromRawBytes(image.bitmap.width, image.bitmap.height, image.bitmap.data)
   const runner = new ImageRunner(bitmap)
   const options = {
-    shapeTypes: [ShapeTypes.CIRCLE], // TODO: from enum
+    shapeTypes: [ShapeTypes.CIRCLE], 
     candidateShapesPerStep: 50,
     shapeMutationsPerStep: 100,
     alpha: 128

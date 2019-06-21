@@ -180,8 +180,11 @@ export class Editor extends AbstractComponent {
             <div className="row">
 
               <div className="col s6">
-                <a href="">{this.state.input.name} - {Math.round(this.state.input.size / 1000)}KB</a>
-                <img src={base64ToUrl(this.state.input.content.toString('base64'), 'image/png')} />
+               <a href="">{this.state.input.name} - {Math.round(this.state.input.size / 1000)}KB</a>
+                <ReactPanZoom zoom={1.5}>
+                  <img src={base64ToUrl(this.state.input.content.toString('base64'), 'image/png')} />
+                  </ReactPanZoom>
+
               </div>
 
 
@@ -194,16 +197,13 @@ export class Editor extends AbstractComponent {
                     // FileSaver.saveAs(blob, this.state.output.name)
                   }}>
                     {this.state.output.name}
-                  </a>
-
+                  </a> 
+                    <div>{Math.round(this.state.output.size / 1000)}KB</div>
                   <ReactPanZoom zoom={1.5}>
 
-                    <img src="some/src/for/image.png" />
-
-                    <div>{Math.round(this.state.output.size / 1000)}KB</div>
                     <div dangerouslySetInnerHTML={{ __html: this.state.output.content.toString() }}></div>
+                    </ReactPanZoom>
 
-                  </ReactPanZoom>
 
                 </div>
 
