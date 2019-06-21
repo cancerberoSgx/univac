@@ -17,4 +17,4 @@ grammar-graph
 universal-svg-rasterizer
 doc
 .antlr
-geometrizer-js-cli
+geometrizejs-cli
