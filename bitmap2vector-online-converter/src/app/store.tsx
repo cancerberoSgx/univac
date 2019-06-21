@@ -2,7 +2,7 @@ import { Emitter } from 'misc-utils-of-mine-generic'
 import { State } from './state'
 
 export interface StoreEvent { oldState: State, partial: Partial<State>, newState: State }
-export type StoreListener = {onStoreEvent(e: StoreEvent):void}
+export type StoreListener = { onStoreEvent(e: StoreEvent): void }
 class Store extends Emitter<StoreEvent> {
 
   constructor(protected state: State) {

@@ -1,19 +1,19 @@
 import * as React from 'react'
 import { ForkRibbon } from './common/forkRibbon'
-import {  UrlStateManager } from "./common/urlState";
+import { UrlStateManager } from "./common/urlState"
 import { AbstractComponent } from './component'
+import { Download } from './download'
 import { Editor } from './editor'
 import { Header } from './header'
 import { Home } from './home'
 import { LoadImage } from './loadImage'
 import './styles.css'
-import { Download } from './download';
 
 
 export class App extends AbstractComponent {
-  urlState: UrlStateManager|undefined
+  urlState: UrlStateManager | undefined
   componentDidMount() {
-    if(!this.urlState){
+    if (!this.urlState) {
       this.urlState = new UrlStateManager()
     }
   }

@@ -1,11 +1,13 @@
 # svg-png-converter
 
+[Repository](https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter).
+
 ## Playground
 
 Checkout [Project Playground](https://cancerberosgx.github.io/demos/svg-png-converter/playground/) to test converting SVG images to PNG and back again using different configurations. 
 
 Also, checkout this app build with this library to transform bitmap to SVG online: 
-[bitmap2vector](https://cancerberosgx.github.io/demos/bitmap2vector-online-converter) (WIP) 
+[bitmap2vector](https://cancerberosgx.github.io/demos/bitmap2vector-converter) (WIP) 
 
 ## Summary
 

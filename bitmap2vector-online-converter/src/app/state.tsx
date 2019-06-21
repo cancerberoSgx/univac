@@ -34,9 +34,9 @@ export async function getInitialState(): Promise<State> {
     optimizing: false,
     options: {
       tracer: 'imagetracer',
-      steps: 4, 
-      background: '#ffffff', 
-      color: '#000000', 
+      steps: 4,
+      background: '#ffffff',
+      color: '#000000',
       turdSize: 3,
       ltres: 1,
       qtres: 1,

@@ -1,7 +1,8 @@
 
 [Playground](https://cancerberosgx.github.io/demos/bitmap2vector-online-converter) (WIP) 
 
-## TODO :r
+## TODO :
+- [ ] image zoom
 - [ ] download current images and transformations as zip files. or store images in FS and put settings in url
 - [ ] switch between output/input images so we can perform png=>svg=> png multiple times to see if degrades or improves. Also a mechanism to perform this N times.
 - [ ] add svgo browser - user can prevent optimization with a param - by default is done
@@ -11,7 +12,9 @@ r
 
  * add ImageMagic to measure difference
  * idea: a general preprocessing ImageMagic/jimp filter - for example edge detection, scale. Perhaps jimp already support these
-
+ * https://react-compare-image.yuuniworks.com/
+ * https://react-intense.bryce.io/
+ 
 <!-- 
 
 
