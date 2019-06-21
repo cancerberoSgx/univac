@@ -27,6 +27,7 @@
   "license": "MIT",
   "devDependencies": {
     "ava": "^2.1.0",
+    "jimp": "^0.6.4",
     "ts-node": "^8.3.0",
     "ts-refactor": "0.0.6",
     "typescript": "^3.5.2"

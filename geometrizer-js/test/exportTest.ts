@@ -33,8 +33,3 @@ test('should export class ShapeJsonExporter', async t => {
   t.deepEqual(typeof ShapeJsonExporter.exportShapes, 'function')
   t.deepEqual(typeof ShapeJsonExporter.exportShape, 'function')
 })
-
-// test('should export class Bitmap', async t => {
-//   t.deepEqual(typeof Bitmap.prototype.constructor, 'function')
-//   t.deepEqual(typeof Bitmap.createFromRawBytes, 'function')
-// })

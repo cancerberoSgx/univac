@@ -38,7 +38,7 @@ export declare class Bitmap {
 	 * @param	bytes	The byte data to fill the bitmap with, must be width * height * depth long.
 	 * @return	The new bitmap.
 	 */
-  static createFromRawBytes(w: number, h: number, bytes: Array<number>): Bitmap
+  static createFromRawBytes(w: number, h: number, bytes: number[]|Buffer): Bitmap
 
 	/**
 	 * Gets a pixel at the given coordinate.
