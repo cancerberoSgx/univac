@@ -40,3 +40,4 @@ render-dot
 svg-png-converter
 /tmp*
 .cache
+build

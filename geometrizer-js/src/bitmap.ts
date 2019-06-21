@@ -4,10 +4,12 @@ import { TODO } from './util'
  * Helper class for working with bitmap data.
  */
 export declare class Bitmap {
+
 	/**
 	 * The width of the bitmap.
 	 */
   width: number
+
 	/**
 	 * The height of the bitmap.
 	 */
@@ -38,7 +40,7 @@ export declare class Bitmap {
 	 * @param	bytes	The byte data to fill the bitmap with, must be width * height * depth long.
 	 * @return	The new bitmap.
 	 */
-  static createFromRawBytes(w: number, h: number, bytes: number[]|Buffer): Bitmap
+  static createFromRawBytes(w: number, h: number, bytes: number[] | Buffer): Bitmap
 
 	/**
 	 * Gets a pixel at the given coordinate.

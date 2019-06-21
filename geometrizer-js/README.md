@@ -29,4 +29,4 @@ cd geometrize-haxe
 haxe build-js-target.hxml
 ```
 
-That should generate `geometrize-haxe/build/geometrize.js`
+That should generate `geometrize-haxe/build/geometrize.js` which should be copied to this projects src folder.
