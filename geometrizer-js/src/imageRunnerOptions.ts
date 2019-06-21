@@ -1,5 +1,8 @@
 import { ShapeTypes } from "./shapeTypes";
 
+/**
+ * Encapsulates the parameters that may be passed to an image runner.
+ */
 export interface ImageRunnerOptions {
   /**
    * The types of shapes to use when generating the image.

@@ -1,11 +1,14 @@
 # geometrizer-js
 
+[Repository](https://github.com/cancerberoSgx/univac/tree/master/geometrizer-js).
+
  * [geometrize](https://www.geometrize.co.uk/) JavaScript API.
  * Generated directly from [official geometrize-haxe](https://github.com/Tw1ddle/geometrize-haxe) code.
  * for node.js and browsers.
- * minimal - zero-dependencies.
  * TypeScript typings
- * see https://github.com/Tw1ddle/geometrize-haxe/pull/15
+ * Zero dependencies.
+ * No implementation, just typings of generated JavaScript library.
+ * See https://github.com/Tw1ddle/geometrize-haxe/pull/15
 
 ## Usage
 
@@ -26,4 +29,4 @@ cd geometrize-haxe
 haxe build-js-target.hxml
 ```
 
-That should generate geometrize-haxe/build/geometrize.js
+That should generate `geometrize-haxe/build/geometrize.js`

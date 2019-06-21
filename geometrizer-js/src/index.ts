@@ -1,31 +1,15 @@
-import { ImageRunnerConstructor } from './runner';
+import { ImageRunnerConstructor } from './imageRunner';
 import { Bitmap as BitmapClass } from './bitmap';
+import {SvgExporter as SvgExporterClass} from './svgExporter'
+import {ShapeJsonExporter as ShapeJsonExporterClass} from './shapeJsonExporter'
 
 const {geometrize} = require('./geometrize')
 
 export const ImageRunner = geometrize.runner.ImageRunner as ImageRunnerConstructor
 export const Bitmap = geometrize.bitmap.Bitmap as typeof BitmapClass 
+export const SvgExporter = geometrize.exporter.SvgExporter as typeof SvgExporterClass
+export const ShapeJsonExporter = geometrize.exporter.ShapeJsonExporter as typeof ShapeJsonExporterClass
 
 export {ShapeTypes} from './shapeTypes'
 export {ImageRunnerOptions} from './imageRunnerOptions'
-// export {Bitmap} from './bitmap'
-
-
-
-
-// export const shape = geometrize.shape as Shape
-// export default require('./geometrize') as Geometrize
-// interface Geometrize {
-//   shape: Shape
-//   exporter: Exporter
-//   bitmap: {Bitmap: {}}
-//   runner: Runner
-// }
-
-// interface Runner {ImageRunner: typeof ImageRunner}
-// declare class ImageRunner {}
-// interface Shape{ShapeType: ShapeType}
-// interface Exporter {ShapeJsonExporter: ShapeJsonExporter, SvgExporter: SvgExporter}
-// interface SvgExporter {}
-// interface ShapeJsonExporter {}
-// type ShapeType = {}
+export {ShapeResult, Model} from './model'
