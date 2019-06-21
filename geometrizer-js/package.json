@@ -4,10 +4,6 @@
   "description": "Geometrizer JavaScript API from official geometrizer-haxe JavaScript target build",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
-  "bin": {
-    "png2svg": "bin/png2svg.js",
-    "svg2png": "bin/svg2png.js"
-  },
   "scripts": {
     "test": "npm run build && ava",
     "test-browser": "exit 0; npx ava test-browser/*Test.ts",
