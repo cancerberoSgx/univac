@@ -1,0 +1,17 @@
+node_modules
+dist
+.cache
+docs
+.DS_Store
+*.tgz
+.nyc_output
+coverage
+typescript-ast-query-editor/src/queryAst/tsLibraries
+log2.txt
+/package
+.vscode
+test-browser-outdir
+tmp.?*
+.antlr
+grammar-graph
+/tmp*

@@ -1,0 +1,51 @@
+{
+  "name": "geometrizejs",
+  "version": "0.0.4",
+  "description": "Geometrize JavaScript API. Generated from geometrize-haxe library directly. Zero dependencies. No implementation, just typings. For node.js and browsers.",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "test": "npm run build && ava",
+    "test-browser": "exit 0; npx ava test-browser/*Test.ts",
+    "test-js": "npm run build && npx ava ./dist/test/*Test.js",
+    "test-watch": "ava -w",
+    "prepare": "npm run build",
+    "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
+    "clean": "rm -rf tmp* dist",
+    "build": "npm run clean && npx tsc && npm run copy",
+    "copy": "cp src/geometrize.js dist/src",
+    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "lint": "npm run organizeImports && npm run format",
+    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run test-browser",
+    "all-publish": "npm run all && git commit -a -m \"version patch\" && npm version patch && npm publish"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^2.1.0",
+    "jimp": "^0.6.4",
+    "ts-node": "^8.3.0",
+    "ts-refactor": "0.0.6",
+    "typescript": "^3.5.2"
+  },
+  "keywords": [
+    "geometrize",
+    "JavaScript",
+    "browser",
+    "Node.js",
+    "API"
+  ],
+  "author": {
+    "name": "Sebastian Gurin",
+    "email": "sebastigurin@gmail.com",
+    "url": "http://sgurin.com"
+  },
+  "homepage": "https://www.npmjs.com/package/geometrizejs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/univac.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/univac/tree/master/geometrizejs"
+  }
+}
