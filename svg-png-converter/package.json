@@ -1,6 +1,6 @@
 {
   "name": "svg-png-converter",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Convert SVG/PNG and back, both in browser and node.js. JavaScript API and Command Line",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -25,17 +25,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/fabric": "^2.6.14",
+    "@types/fabric": "^2.6.16",
     "@types/glob": "^7.1.1",
     "@types/js-base64": "^2.3.1",
-    "@types/node": "^12.0.7",
-    "ava": "^2.0.0",
+    "@types/node": "^12.0.8",
+    "ava": "^2.1.0",
     "babel-polyfill": "^6.26.0",
-    "file-type": "^11.1.0",
+    "file-type": "^12.0.0",
     "primitive": "github:Easonzero/primitive",
-    "ts-node": "^8.2.0",
+    "ts-node": "^8.3.0",
     "ts-refactor": "0.0.6",
-    "typescript": "^3.5.1"
+    "typescript": "^3.5.2"
   },
   "dependencies": {
     "bitmap2vector": "0.0.3",
@@ -45,7 +45,7 @@
     "glob": "^7.1.4",
     "js-base64": "^2.5.1",
     "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.8",
+    "misc-utils-of-mine-generic": "^0.2.10",
     "potrace": "github:cancerberoSgx/node-potrace",
     "svgo": "github:cancerberoSgx/svgo#browser",
     "typedarray-to-buffer": "^3.1.5"
