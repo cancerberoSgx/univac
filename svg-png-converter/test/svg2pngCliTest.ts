@@ -1,6 +1,7 @@
 import test from 'ava'
 import { execSync } from 'child_process'
-import { readdirSync } from 'fs'
+import { readdirSync, readFileSync } from 'fs'
+import fileType from 'file-type'
 
 test('--help', async t => {
   const result = execSync('node bin/svg2png.js --help', { stdio: 'pipe' }).toString()
@@ -15,12 +16,13 @@ test('error on no --input', async t => {
 
 test('should accept globs and output folder', async t => {
   const result = execSync('rm -rf tmp; mkdir -p tmp; node bin/svg2png.js --input "test/**/*2.svg" --output tmp', { stdio: 'pipe' }).toString()
-  t.deepEqual(readdirSync('tmp'), ['tmp2.svg.png'])
+  t.deepEqual(fileType(readFileSync('tmp/tmp2.svg.png')), { ext: 'png', mime: 'image/png' })
 })
 
 test('should write given format', async t => {
   const result = execSync('rm -rf tmp; mkdir -p tmp; node bin/svg2png.js --input "test/**/*2.svg" --output tmp --format jpeg', { stdio: 'pipe' }).toString()
-  t.deepEqual(readdirSync('tmp'), ['tmp2.svg.jpeg'])
+  t.deepEqual(fileType(readFileSync('tmp/tmp2.svg.jpeg')), { ext: 'jpg', mime: 'image/jpeg' })
+
 })
 
 // test('should get code from --input', async t => {

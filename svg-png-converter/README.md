@@ -176,14 +176,14 @@ See [types.ts](src/types.ts). Options apply both to JavaScript API and CLI.
 
 
 ## Status / TODO
-
+- [ ] cli: use mujer for optimizing and remove this implementation
+- [ ] browser tests
+- [ ] Make sure we are using Potrace latest forks and not the original one.
+- [x] add https://github.com/cancerberoSgx/svgo
 - [x] Node.js API and tests
 - [x] CLI
 - [x] Browser
 - [x] CLI tests
-- [ ] browser tests
-- [ ] Make sure we are using Potrace latest forks and not the original one.
-- [ ] add https://github.com/cancerberoSgx/svgo
 
 
 ## Ideas

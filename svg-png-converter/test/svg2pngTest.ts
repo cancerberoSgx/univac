@@ -1,5 +1,4 @@
 import test from 'ava'
-// const fileType = require('file-type')
 import fileType from 'file-type'
 import { readFileSync, writeFileSync } from 'fs'
 import { svg2png } from '../src'
