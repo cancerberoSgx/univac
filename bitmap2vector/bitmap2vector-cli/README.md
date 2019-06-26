@@ -6,11 +6,11 @@
 <!-- toc -->
 
 - [Summary](#summary)
-  * [Install](#install)
-  * [Usage](#usage)
-  * [Options](#options)
-  * [TODO](#todo)
-  * [Related Projects](#related-projects)
+- [Install](#install)
+- [Usage](#usage)
+- [Options](#options)
+- [TODO](#todo)
+- [Related Projects](#related-projects)
 
 <!-- tocstop -->
 

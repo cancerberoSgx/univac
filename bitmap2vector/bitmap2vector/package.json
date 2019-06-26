@@ -1,6 +1,6 @@
 {
   "name": "bitmap2vector",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "https://github.com/jankovicsandras/imagetracerjs with TypeScript API and support for PNG, JPEG, GIF, BMP, TIFF both in browser and Node.js",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",

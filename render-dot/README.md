@@ -1,5 +1,13 @@
 # render-dot
 
+## Contents
+
+<!-- toc -->
+
+<!-- tocstop -->
+
+## Summary 
+
 Renders [Graphviz](http://www.graphviz.org) .dot files to svg, png, and other format, using different graph engines like dot, neato, virco, etc. 
 
 Based on Graphviz [Emscripten](http://kripken.github.io/emscripten-site/ port [viz.js](https://github.com/mdaines/viz.js) library.
