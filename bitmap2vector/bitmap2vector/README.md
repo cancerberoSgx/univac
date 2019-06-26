@@ -1,6 +1,28 @@
-This is [imagetracerjs](https://github.com/jankovicsandras/imagetracerjs) with support for PNG, JPEG, GIF, BMP, TIFF and other input formats, Node.js and Browser API. TypeScript type definitions. 
+# bitmap2vector
+
+## Contents
+
+<!-- toc -->
+
+- [Summary](#summary)
+- [Install](#install)
+- [Usage](#usage)
+- [Options](#options)
+- [Examples](#examples)
+- [Related](#related)
+- [TODO](#todo)
+
+<!-- tocstop -->
+
+## Summary 
+
+ * Convert bitmap images like PNG, JPEG, GIF, BMP, TIFF to SVG vector graphics using the image tracer implementation [imagetracerjs](https://github.com/jankovicsandras/imagetracerjs) 
+ * JavaScript API for Node.js and Browser API. 
+ * TypeScript type definitions. 
+ * [Command Line interface](https://www.npmjs.com/package/bitmap2vector-cli)
 
 ## Install 
+
 ```sh
 npm install bitmap2vector
 ```

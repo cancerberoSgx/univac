@@ -1,6 +1,24 @@
-# bitmap2vector
+# bitmap2vector-cli
 
-[Repository](https://www.npmjs.com/package/bitmap2vector-cli). 
+ 
+## Contents
+
+<!-- toc -->
+
+- [Summary](#summary)
+  * [Install](#install)
+  * [Usage](#usage)
+  * [Options](#options)
+  * [TODO](#todo)
+  * [Related Projects](#related-projects)
+
+<!-- tocstop -->
+
+## Summary 
+
+ * Command line interface for [bitmap2vector Command Line interface](https://www.npmjs.com/package/bitmap2vector)
+ * Convert bitmap images like PNG, JPEG, GIF, BMP, TIFF to SVG vector graphics using the image tracer implementation [imagetracerjs](https://github.com/jankovicsandras/imagetracerjs)  
+ * Supports all bitmap2vector options, file globs, output folders, and more.
 
 ## Install
 
