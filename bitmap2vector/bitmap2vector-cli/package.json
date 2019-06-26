@@ -1,6 +1,6 @@
 {
   "name": "bitmap2vector-cli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Command line interface for bitmap2vector: raster image tracer and vectorizer, bitmap to SVG converter",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",

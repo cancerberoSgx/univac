@@ -4,6 +4,15 @@
 
 <!-- toc -->
 
+- [Summary](#summary)
+- [Usage](#usage)
+  * [Install](#install)
+  * [JavaScript](#javascript)
+  * [Command Line](#command-line)
+- [Options](#options)
+- [Status](#status)
+- [Road map](#road-map)
+
 <!-- tocstop -->
 
 ## Summary 

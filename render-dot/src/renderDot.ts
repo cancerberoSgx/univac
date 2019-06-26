@@ -4,14 +4,15 @@ import { Options } from './types'
 
 export async function renderDot(options: Options) {
   try {
-    options.debug && console.log('renderDot options', options)    
+    options.debug && console.log('renderDot options', options)
     if (!options.format || !['jpeg', 'png', 'gif'].includes(options.format)) {
       return await getLibrary().renderString(options.input, options)
     }
     else {
-      const input = await getLibrary().renderString(options.input, 
-        { ...options, format: 'svg' 
-      })
+      const input = await getLibrary().renderString(options.input,
+        {
+          ...options, format: 'svg'
+        })
       let s = await svg2png({
         ...options,
         input,
