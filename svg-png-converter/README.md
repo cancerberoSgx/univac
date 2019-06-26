@@ -1,6 +1,31 @@
 # svg-png-converter
 
-[Repository](https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter).
+## Contents
+
+<!-- toc -->
+
+- [Playground](#playground)
+- [Summary](#summary)
+- [Install](#install)
+- [svg2png](#svg2png)
+  * [JavaScript API examples](#javascript-api-examples)
+    + [Example 1](#example-1)
+  * [Example 2](#example-2)
+- [png2svg](#png2svg)
+  * [Image Tracers](#image-tracers)
+  * [SVG Optimization](#svg-optimization)
+  * [JavaScript API](#javascript-api)
+  * [Command Line examples](#command-line-examples)
+    + [svg2png](#svg2png-1)
+    + [png2svg](#png2svg-1)
+- [Options](#options)
+- [Status / TODO](#status--todo)
+- [Ideas](#ideas)
+- [Why?](#why)
+  * [Why another SVG rasterize library?](#why-another-svg-rasterize-library)
+  * [Why a library to convert bitmaps to SVG ?](#why-a-library-to-convert-bitmaps-to-svg-)
+
+<!-- tocstop -->
 
 ## Playground
 
@@ -11,6 +36,7 @@ Also, checkout this app build with this library to transform bitmap to SVG onlin
 
 ## Summary
 
+ * [Repository](https://github.com/cancerberoSgx/univac/tree/master/svg-png-converter).
  * Convert SVG to PNG / JPEG
  * Convert PNG/JPEG to SVG. 
    * produced SVG are paths that resembles the original image relatively well and in a relative small output length.
@@ -197,4 +223,4 @@ geometric primitives:
  Many of them supports JavaScript and this one in particular supports both node.js and browsers:
  https://github.com/tooolbox/node-potrace, and that's what this project uses to transform SVG to bitmaps. 
 
- It also uses bitmap2vector that is a facade over 
+ It also uses bitmap2vector that is a facade over
