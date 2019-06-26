@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs'
 import { sync as glob } from 'glob'
 import { serial } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
@@ -12,6 +12,7 @@ export async function png2svgCli(o: PNG2SVGOptions) {
     o.debug && console.log(`CLI Options: ${JSON.stringify({ ...o, input: null })}`)
 
     const input = (typeof o.input === 'string' ? glob(o.input).filter(existsSync) : [])
+      .filter(f => statSync(f).isFile())
       .map(f => ({
         name: f,
         content: readFileSync(f)

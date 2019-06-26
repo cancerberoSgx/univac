@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync } from 'fs'
 import { sync as glob } from 'glob'
 import { serial, sleep } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
@@ -17,7 +17,7 @@ export async function cliMain(o: CliOptions) {
 
     const files = glob(o.input).filter(existsSync)
 
-    const input = files.map(f => ({
+    const input = files.filter(f=>statSync(f).isFile()).map(f => ({
       name: f,
       content: readFileSync(f).toString()
     }))

@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs'
 import { sync as glob } from 'glob'
 import { serial } from 'misc-utils-of-mine-generic'
 import { basename, join } from 'path'
@@ -14,13 +14,15 @@ export async function svg2pngCli(o: SVG2PNGOptions) {
 
     const files = typeof o.input === 'string' ? glob(o.input).filter(existsSync) : [o.input]
 
-    const input = (files as any).length ? (files as (string | Buffer)[]).map(f => ({
-      name: typeof f === 'string' ? f : 'input.svg',
-      content: typeof f === 'string' ? readFileSync(f) : f
-    })) : [{
-      name: 'input.svg',
-      content: typeof o.input === 'string' ? BufferClass.from(o.input) : o.input
-    }]
+    const input = (files as any).length ? (files as (string | Buffer)[])
+      .filter(f => statSync(f).isFile())
+      .map(f => ({
+        name: typeof f === 'string' ? f : 'input.svg',
+        content: typeof f === 'string' ? readFileSync(f) : f
+      })) : [{
+        name: 'input.svg',
+        content: typeof o.input === 'string' ? BufferClass.from(o.input) : o.input
+      }]
 
     if (o.output && !existsSync(o.output)) {
       mkdirSync(o.output, { recursive: true })

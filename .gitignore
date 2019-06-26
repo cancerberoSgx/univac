@@ -17,5 +17,3 @@ grammar-graph
 universal-svg-rasterizer
 doc
 .antlr
-geometrizejs-cli
-geometrizejs

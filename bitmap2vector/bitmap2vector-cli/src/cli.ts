@@ -1,6 +1,6 @@
 
 import { bitmap2vector } from 'bitmap2vector'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync } from 'fs'
 import { sync as glob } from 'glob'
 import { basename, join } from 'path'
 import { CliOptions } from './types'
@@ -11,6 +11,7 @@ export async function traceImage(options: CliOptions) {
   options.debug && console.log(`CLI Options: ${JSON.stringify({ ...options, input: null })}`)
   // console.log( typeof options.input === 'string' ? glob(options.input).filter(existsSync) : []);
   const input = (typeof options.input === 'string' ? glob(options.input).filter(existsSync) : [])
+  .filter(f=>statSync(f).isFile())
     .map(f => ({
       name: f,
       content: readFileSync(f)
