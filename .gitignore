@@ -17,3 +17,4 @@ grammar-graph
 universal-svg-rasterizer
 doc
 .antlr
+json-query

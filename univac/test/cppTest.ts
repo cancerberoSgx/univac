@@ -1,86 +1,90 @@
 import test from 'ava'
-import { removeWhites } from 'misc-utils-of-mine-generic'
 import { printNode } from '../src'
 import { parseAstOrThrow } from '../src/parseAst'
 import { Language, Node } from '../src/types'
+import { getPackageJsonFolder } from '../src/util/misc'
 
 let result: Node
 test.before(async t => {
   result = await parseAstOrThrow({
     input: `
-#include <iostream.h>
-main()
+using namespace emscripten;
+using namespace cv;
+
+namespace binding_utils
 {
-  cout << "Hello World!";
-  return 0;
+  template<typename classT, typename enumT>
+  static inline typename std::underlying_type<enumT>::type classT::* underlying_ptr(enumT classT::* enum_ptr)
+  {
+      return reinterpret_cast<typename std::underlying_type<enumT>::type classT::*>(enum_ptr);
+  }
+
+  template<typename T>
+  emscripten::val matData(const cv::Mat& mat)
+  {
+      return emscripten::val(emscripten::memory_view<T>((mat.total()*mat.elemSize())/sizeof(T),
+                              (T*)mat.data));
+  }
 }
-class C {
-  public:
-    int a;
-    operator int() const;
-    virtual ~Foo();
-}; 
-typedef int X;
-struct S {
-  union {
-    int i;
-  } U;
+
+EMSCRIPTEN_BINDINGS(testBinding) {
+  function("Canny", select_overload<void(const cv::Mat&, cv::Mat&, double, double, int, bool)>(&Wrappers::Canny_wrapper));
+
+  emscripten::class_<cv::CalibrateRobertson ,base<CalibrateCRF>>("CalibrateRobertson")
+    .function("getThreshold", select_overload<float()const>(&cv::CalibrateRobertson::getThreshold), pure_virtual())
+    .function("getRadiance", select_overload<Mat()const>(&cv::CalibrateRobertson::getRadiance), pure_virtual())
+    .function("setThreshold", select_overload<void(cv::CalibrateRobertson&,float)>(&Wrappers::CalibrateRobertson_setThreshold_wrapper), pure_virtual())
+    .function("setMaxIter", select_overload<void(cv::CalibrateRobertson&,int)>(&Wrappers::CalibrateRobertson_setMaxIter_wrapper), pure_virtual())
+    .constructor(select_overload<Ptr<CalibrateRobertson>(int,float)>(&Wrappers::_createCalibrateRobertson_wrapper))
+    .constructor(select_overload<Ptr<CalibrateRobertson>(int)>(&Wrappers::_createCalibrateRobertson_wrapper_1))
+    .constructor(select_overload<Ptr<CalibrateRobertson>()>(&Wrappers::_createCalibrateRobertson_wrapper_2))
+    .function("getMaxIter", select_overload<int()const>(&cv::CalibrateRobertson::getMaxIter), pure_virtual())
+    .smart_ptr<Ptr<cv::CalibrateRobertson>>("Ptr<CalibrateRobertson>");
 };
-void f() {
-  int x;
-  static int y;
-  thread_local int z;
-}
-int a;
     `,
     language: Language.cpp,
-    debug: true,
     omitPosition: true,
-    text: true
+    text: true,
+    basePath: getPackageJsonFolder() + '/dist/static/'
   })!
   t.true(!!result)
 })
 
 test('should parse', async t => {
-  t.is(result.children.length, 1)
+  t.is(result.children.length, 5)
 })
 
 test('JSON stringify', async t => {
   t.notThrows(() => JSON.stringify(result))
+//  writeFileSync('tmp.json', JSON.stringify(result, null, 2))
 })
 
-test('should report syntax errors to given listener', async t => {
-  await parseAstOrThrow({
-    input: 'jo jo jo',
-    language: Language.cpp,
-    debug: true,
-    errorListener: {
-      syntaxError(a, b, c, d, msg) {
-        t.true(msg.includes(`no viable alternative at input`), msg)
-      }
-    }
-  })
-})
+// test.todo('should report syntax errors to given listener')
+// // , async t => {
+// //   await parseAstOrThrow({
+// //     input: 'jo jo jo',
+// //     language: Language.cpp,
+// //     errorListener: {
+// //       syntaxError(a, b, c, d, msg) {
+// //         t.true(msg.includes(`no viable alternative at input`), msg)
+// //       }
+// //     }
+// //   })
+// // })
 
-// TODO: should be similar to https://clang.llvm.org/doxygen/group__CINDEX.html#gaaccc432245b4cd9f2d470913f9ef0013
-test('generate correct ast', async t => {
-  const o = printNode({
-    node: result
-  })
-  // writeFileSync('tmp.txt', o)
-  const expected = [`<storageclassspecifier text="thread_local">`, `<storageclassspecifier text="static">`, `<simpletypespecifier text="void">`, `<classkey text="struct">
-  </classkey> <classheadname text="S">
-    <classname text="S">`, `  <simpledeclaration text="typedefintX;">
-    <declspecifierseq text="typedefint">
-      <declspecifier text="typedef">
-      </declspecifier> <declspecifierseq text="int">
-        <declspecifier text="int">`, ` <declaratorid text="operatorint">
-        <unqualifiedid text="operatorint">
-          <conversionfunctionid text="operatorint">
-            <conversiontypeid text="int">
-              <typespecifierseq text="int">
-                <typespecifier text="int">
-                  <trailingtypespecifier text="int">
-                    <simpletypespecifier text="int">`, ``, ``, ``]
-  expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))
-})
+// test('generate correct ast', async t => {
+//   const o = printNode({
+//     node: result
+//   })
+//   writeFileSync('tmp.txt', o)
+//   const expected = [`<type_identifier text="__darwin_size_t">
+// </type_identifier> <= text="=">
+//   </=> <scoped_type_identifier text="::std::os::raw::c_ulong">
+//     <scoped_identifier text="::std::os::raw">
+//       <scoped_identifier text="::std::os">
+//         <scoped_identifier text="::std">
+//           <:: text="::">
+//           </::> <identifier text="std">
+//           </identifier>`]
+//   expected.forEach(e => t.true(removeWhites(o).includes(removeWhites(e)), e))
+// })

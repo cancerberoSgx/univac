@@ -45,10 +45,11 @@
     "typescript": "^3.5.1"
   },
   "dependencies": {
-    "web-tree-sitter": "^0.15.6",
     "antlr4": "^4.7.2",
     "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.8"
+    "misc-utils-of-mine-generic": "^0.2.8",
+    "tree-sitter-cpp": "^0.15.0",
+    "web-tree-sitter": "^0.15.6"
   },
   "keywords": [
     "typescript",

@@ -9,6 +9,10 @@ rm -rf tree-sitter-rust.wasm
 npx tree-sitter build-wasm node_modules/tree-sitter-rust 
 mv tree-sitter-rust.wasm src/tree-sitter-parser
 
+rm -rf tree-sitter-cpp.wasm
+npx tree-sitter build-wasm node_modules/tree-sitter-cpp 
+mv tree-sitter-cpp.wasm src/tree-sitter-parser
+
 rm -rf tree-sitter-bash.wasm
 npx tree-sitter build-wasm node_modules/tree-sitter-bash 
 mv tree-sitter-bash.wasm src/tree-sitter-parser

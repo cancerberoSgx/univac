@@ -67,6 +67,7 @@ THis is a very new project, WIP, this is the current status:
  * tests to make sure it runs in the browser
  * C language
  * Golang
+ * C++
  * scala
  * ruby
  * java
@@ -85,7 +86,7 @@ THis is a very new project, WIP, this is the current status:
  * Basic Playground
  * playground improved with many examples, syntax hihgiling,different kind of ast viewers.
  * antlr4 grammar
- * c++ grammar 
+ * c++ grammar (cppAntlr) - slow
  * introduced second kind of parser : tree-sitting. These return a "real" ast - not visitor. 
    * declared adaptor interfaces
    * visitor is now  a normalizer Normalizer

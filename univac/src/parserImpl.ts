@@ -1,7 +1,7 @@
 import { Lexer, Parser } from 'antlr4'
 import { getAbnfImpl } from './impl/abnf'
 import { getAntlr4Impl } from './impl/antlr4'
-import { getCppImpl } from './impl/cpp'
+import { getCppImpl } from './impl/cppAntlr'
 import { getGolangImpl } from './impl/golang'
 import { getScssImpl } from './impl/scss'
 import { getSExpressionImpl } from './impl/sexpression'
@@ -65,6 +65,11 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
     return {
       treeSitterParser: 'tree-sitter-rust.wasm'
     }
+  }  
+  else if (language === 'cpp') {
+    return {
+      treeSitterParser: 'tree-sitter-cpp.wasm'
+    }
   }
   else if (language === 'bash') {
     return {
@@ -82,7 +87,7 @@ export async function getParserImpl(language: Language): Promise<ParserImpl> {
   else if (language === 'julia') {
     return getJuliaImpl()
   }
-  else if (language === 'cpp') {
+  else if (language === 'cppAntlr') {
     return getCppImpl()
   }
   else if (language === 'antlr4') {

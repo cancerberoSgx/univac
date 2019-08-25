@@ -68,6 +68,7 @@ export enum Language {
   'less' = 'less',
   'wat' = 'wat',
   'cpp' = 'cpp',
+  'cppAntlr' = 'cppAntlr',
   'antlr4' = 'antlr4',
   'rust' = 'rust',
   'sexpression' = 'sexpression',

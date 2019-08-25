@@ -52,7 +52,7 @@ test.todo('should report syntax errors to given listener')
 // , async t => {
 //   await parseAstOrThrow({
 //     input: 'jo jo jo',
-//     language: Language.cpp,
+//     language: Language.rust,
 //     errorListener: {
 //       syntaxError(a, b, c, d, msg) {
 //         t.true(msg.includes(`no viable alternative at input`), msg)
