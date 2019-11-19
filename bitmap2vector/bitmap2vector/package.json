@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "imagetracerjs": "git+https://github.com/jankovicsandras/imagetracerjs.git",
-    "jimp": "^0.6.4",
+    "jimp": "^0.8.5",
     "node-fetch": "^2.6.0"
   },
   "keywords": [],
