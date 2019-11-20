@@ -23,9 +23,9 @@ export async function cliMain(o: Options) {
 }
 
 function preconditions(options: CliOptions) {
-  if (options.output) {
-    options.output = (options.output as any).split(',') as any
-  }
+  //   if (options.output) {
+  //   options.output = (options.output as any).split(',') as any
+  // }
   if (options.help) {
     printHelp()
     process.exit(0)
