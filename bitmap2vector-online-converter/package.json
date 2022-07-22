@@ -41,7 +41,7 @@
   "dependencies": {
     "@ajainarayanan/react-pan-zoom": "0.0.3",
     "file-saver": "^2.0.2",
-    "file-type": "^11.1.0",
+    "file-type": "^16.5.4",
     "materialize-css": "^1.0.0-rc.2",
     "misc-utils-of-mine-generic": "^0.2.10",
     "react": "^16.8.6",
