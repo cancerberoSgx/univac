@@ -44,7 +44,7 @@
     "babel-polyfill": "^6.26.0",
     "cytoscape": "^3.7.0",
     "cytoscape-even-parent": "^1.1.1",
-    "d3": "^5.9.2",
+    "d3": "^7.6.1",
     "d3-hierarchy": "^1.1.8",
     "file-saver": "^2.0.2",
     "misc-utils-of-mine-generic": "^0.2.7",
