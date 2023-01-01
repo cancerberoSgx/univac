@@ -36,7 +36,7 @@
     "babel-polyfill": "^6.26.0",
     "http-server": "^0.11.1",
     "p-queue": "^6.0.2",
-    "parcel": "^1.12.3",
+    "parcel": "^2.8.2",
     "primitive": "git+https://github.com/Easonzero/primitive.git",
     "ts-refactor": "0.0.6",
     "typescript": "^3.5.2",
